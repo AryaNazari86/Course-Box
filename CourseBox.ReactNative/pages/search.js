@@ -4,7 +4,7 @@ import { golbalStyles } from "../shared/globalStyle";
 
 export default function Search() {
     const [courses, setCourses] = useState([
-        { title: 'Math' },
+        { title: 'Math', key: '1' },
     ])
     const [searchValue, setSearchValue] = useState('');
     return (
@@ -14,9 +14,11 @@ export default function Search() {
                 onChangeText={(value) => { setSearchValue(value); }}
             />
             <FlatList
-                data={courses}
+                data={courses.filter((item) => searchValue == item.title)}
                 renderItem={({ item }) => (
-                    TouchableOpacity
+                    <TouchableOpacity>
+                        <Text>{item.title}</Text>
+                    </TouchableOpacity>
                 )}
             />
         </View>
