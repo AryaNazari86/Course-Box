@@ -6,7 +6,7 @@ export default function Search() {
     const [courses, setCourses] = useState([
         { title: 'Math', key: '1' },
     ])
-    const [searchValue, setSearchValue] = useState('');
+    const [searchValue, setSearchValue] = useState(' ');
     return (
         <View>
             <TextInput
@@ -14,12 +14,20 @@ export default function Search() {
                 onChangeText={(value) => { setSearchValue(value); }}
             />
             <FlatList
-                data={courses.filter((item) => searchValue == item.title)}
-                renderItem={({ item }) => (
-                    <TouchableOpacity>
-                        <Text>{item.title}</Text>
-                    </TouchableOpacity>
-                )}
+                data={courses.filter((item) => {
+                    for (var i = 0; i <= (item.title.length - searchValue.length); i++) {
+                        if (item.title.slice(i, i + searchValue.length) == searchValue) {
+                            return (true);
+                        }
+                    }
+                })}
+                renderItem={({ item }) => {
+                    return (
+                        <TouchableOpacity>
+                            <Text>{item.title}</Text>
+                        </TouchableOpacity>
+                    )
+                }}
             />
         </View>
     )
