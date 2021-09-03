@@ -19,6 +19,10 @@ export const golbalStyles = StyleSheet.create({
         width: '85%',
         height: 40,
         marginTop: 40,
-        marginBottom: 20
+        marginBottom: 20,
+    },
+    TitleText: {
+        fontSize: 24,
+        fontWeight: 'bold'
     }
 });
