@@ -1,11 +1,24 @@
-import React from "react";
-import { StyleSheet, View, Text } from 'react-native';
+import React, { useState } from "react";
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, FlatList } from 'react-native';
 import { golbalStyles } from "../shared/globalStyle";
 
 export default function Search() {
+    const [courses, setCourses] = useState([
+        { title: 'Math' },
+    ])
+    const [searchValue, setSearchValue] = useState('');
     return (
         <View>
-            <Text>Profile Screen</Text>
+            <TextInput
+                placeholder='Search...'
+                onChangeText={(value) => { setSearchValue(value); }}
+            />
+            <FlatList
+                data={courses}
+                renderItem={({ item }) => (
+                    TouchableOpacity
+                )}
+            />
         </View>
     )
 }
