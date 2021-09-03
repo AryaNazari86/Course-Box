@@ -7,7 +7,7 @@ import Search from './pages/search';
 
 export default function App() {
   return (
-    <Profile accountName='Ilia Soleymani' />
+    <Profile accountName='Ilia Soleymani' accountCoursesVal='3' accountFollowersVal='567K' accountParticipatedVal='36' />
   );
 }
 
