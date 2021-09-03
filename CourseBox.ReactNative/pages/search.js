@@ -4,14 +4,20 @@ import { golbalStyles } from "../shared/globalStyle";
 
 export default function Search() {
     const [courses, setCourses] = useState([
-        { title: 'Math', key: '1' },
+        { title: 'Minus', category: 'Math', author: 'Arya', views: '1', likes: '1', description: 'something ...', key: '1' },
+        { title: 'Minus', category: 'Math', author: 'Arya', views: '1', likes: '1', description: 'something ...', key: '2' }
     ])
     const [searchValue, setSearchValue] = useState(' ');
+    const [categorySearchValue, setCategorySearchValue] = useState({
+        Math: true
+    });
+    const [visible, setVisible] = useState(false)
     return (
-        <View>
+        <View style={styles.container}>
             <TextInput
                 placeholder='Search...'
                 onChangeText={(value) => { setSearchValue(value); }}
+                style={golbalStyles.input}
             />
             <FlatList
                 data={courses.filter((item) => {
@@ -23,8 +29,12 @@ export default function Search() {
                 })}
                 renderItem={({ item }) => {
                     return (
-                        <TouchableOpacity>
+                        <TouchableOpacity style={golbalStyles.courses}>
                             <Text>{item.title}</Text>
+                            <Text>{item.category}</Text>
+                            <Text>{item.author}</Text>
+                            <Text>{item.views}</Text>
+                            <Text>{item.likes}</Text>
                         </TouchableOpacity>
                     )
                 }}
@@ -32,3 +42,11 @@ export default function Search() {
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        alignItems: 'center',
+        backgroundColor: '#E5E5E5',
+    }
+})
