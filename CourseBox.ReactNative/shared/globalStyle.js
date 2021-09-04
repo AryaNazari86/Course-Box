@@ -11,9 +11,9 @@ export const globalStyles = StyleSheet.create({
     },
     headerText: {
         top: 10,
-        fontSize: 30,
+        fontSize: 25,
         fontWeight: 'bold',
-        color: '#E5E5E5',
+        color: '#14213D',
         textAlign: 'center',
         marginTop: 35,
     },
@@ -38,7 +38,7 @@ export const globalStyles = StyleSheet.create({
         marginBottom: 15,
         width: '85%',
         height: 50,
-        color: 'red',
+        color: 'blue',
     },
     TitleText: {
         fontSize: 24,
