@@ -1,7 +1,7 @@
 import { StyleSheet, Dimensions } from "react-native";
 export const globalStyles = StyleSheet.create({
     headerContainer: {
-        marginBottom: 40,
+        marginBottom: 10,
         backgroundColor: '#E5E5E5',
     },
     headerDetails: {
@@ -10,6 +10,7 @@ export const globalStyles = StyleSheet.create({
         height: 70,
     },
     headerText: {
+        top: 10,
         fontSize: 30,
         fontWeight: 'bold',
         color: '#E5E5E5',
