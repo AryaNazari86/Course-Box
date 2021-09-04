@@ -7,7 +7,7 @@ import Header from '../shared/header';
 export default function Search() {
     const [courses, setCourses] = useState([
         { title: 'Cheating', category: 'Math', author: 'Arya', participants: '100', likes: '1', description: 'something ...', image: require(`../assets/Images/_111434467_gettyimages-1143489763.jpg`), key: '1' },
-        { title: 'Hacking', category: 'Physics', author: 'Ilia', participants: '10', likes: '1', description: 'something ...', image: require(`../assets/Images/_111434467_gettyimages-1143489763.jpg`), key: '2' }
+        { title: 'Hacking', category: 'Physics', author: 'Ilia', participants: '10', likes: '1', description: 'something ...', image: require(`../assets/Images/_111434467_gettyimages-1143489763.jpg`), key: '2' },
     ])
     const [searchValue, setSearchValue] = useState('');
     const [category, setCategory] = useState([
@@ -95,8 +95,8 @@ export default function Search() {
                         })}
                     </ScrollView>
 
-                    <FlatList
-                        data={(courses.filter((item) => {
+                    <ScrollView>
+                        {(courses.filter((item) => {
                             for (var i = 0; i <= (item.title.length - searchValue.length); i++) {
                                 if (item.title.slice(i, i + searchValue.length) == searchValue) {
                                     return (true);
@@ -110,15 +110,14 @@ export default function Search() {
                             else {
                                 return false;
                             }
-                        })}
-                        renderItem={({ item }) => {
+                        }).map((item) => {
                             return (
                                 <TouchableOpacity style={globalStyles.courses}>
                                     <Text>{item.title}</Text>
                                 </TouchableOpacity>
                             )
-                        }}
-                    />
+                        })}
+                    </ScrollView>
                 </View >
             </View>
         </TouchableWithoutFeedback>
