@@ -7,12 +7,12 @@ export default function Header({ title }) {
     return (
         <View style={globalStyles.headerContainer}>
             <View style={globalStyles.headerSvgCurve}>
-                <View style={{ backgroundColor: '#FCA311', height: 120 }}>
+                <View style={{ backgroundColor: '#FCA311', height: 80 }}>
                     <Svg
-                        height="90%"
+                        height="130%"
                         width="110%"
                         viewBox="0 0 1440 320"
-                        style={{ position: 'absolute', top: 90 }}
+                        style={{ position: 'absolute', top: 50 }}
                     >
                         <Path
                             fill="#FCA311"

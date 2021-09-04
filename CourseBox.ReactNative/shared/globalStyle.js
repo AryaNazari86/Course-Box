@@ -1,12 +1,12 @@
 import { StyleSheet, Dimensions } from "react-native";
 export const globalStyles = StyleSheet.create({
     headerContainer: {
-        marginBottom: 20,
+        marginBottom: 40,
     },
     headerDetails: {
         alignItems: 'center',
         justifyContent: 'center',
-        height: 120,
+        height: 80,
     },
     headerText: {
         fontSize: 30,
