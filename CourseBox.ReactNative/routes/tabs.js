@@ -9,13 +9,13 @@ export default function TabComponent() {
 
     const [index, setIndex] = useState(0);
     const [routes] = useState([
-        { key: 'profile', title: 'Profile', icon: 'account-circle' },
         { key: 'search', title: 'Search', icon: 'magnify' },
+        { key: 'profile', title: 'Profile', icon: 'account-circle' },
     ]);
 
     const renderScene = BottomNavigation.SceneMap({
-        profile: Profile,
         search: Search,
+        profile: Profile,
     });
 
     return (
