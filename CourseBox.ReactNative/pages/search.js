@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, View, Text, TouchableOpacity, FlatList } from 'react-native';
 import { globalStyles } from "../shared/globalStyle";
 import { Chip, TextInput } from 'react-native-paper';
+import Header from '../shared/header';
 
 export default function Search() {
     const [courses, setCourses] = useState([
@@ -17,7 +18,6 @@ export default function Search() {
     const [selectedCategory, setSelectedCategory] = useState('All');
     return (
         <View style={styles.container}>
-
             <TextInput
                 mode='outlined'
                 label='Search...'
