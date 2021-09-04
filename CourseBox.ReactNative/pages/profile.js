@@ -1,8 +1,15 @@
-import React from "react";
-import { StyleSheet, View, Text, Image } from 'react-native';
+import React, { useState } from "react";
+import { StyleSheet, View, Text, Image, FlatList } from 'react-native';
 import { globalStyles } from "../shared/globalStyle";
 
 export default function Profile({ accountName, accountPicture, accountCoursesVal, accountFollowersVal, accountParticipatedVal, profileAccountDescription }) {
+
+    const [madeCourses, setMadeCourses] = useState([
+        { courseTitle: 'Javascript Beginner Course', key: 1 },
+        { courseTitle: 'Javascript Beginner Course', key: 2 },
+        { courseTitle: 'Javascript Beginner Course', key: 3 },
+    ])
+
     return (
         // How to use:
 
@@ -42,6 +49,22 @@ export default function Profile({ accountName, accountPicture, accountCoursesVal
                     <Text style={styles.profileDetailText}>{accountParticipatedVal}</Text>
                     <Text style={styles.profileDetailText}>Participated</Text>
                 </View>
+            </View>
+
+            {/* Made Courses */}
+            <View style={styles.madeCoursesHeader}>
+                <Text style={styles.madeCoursesText}>Made Courses</Text>
+                <FlatList
+                    data={madeCourses}
+                    renderItem={({ item }) => {
+                        return (
+                            <View style={styles.coursesBox}>
+                                <Image source={require('../assets/Images/_111434467_gettyimages-1143489763.jpg')} style={styles.courseImage}></Image>
+                                <Text style={styles.courseText}>{item.courseTitle}</Text>
+                            </View>
+                        )
+                    }}
+                />
             </View>
 
         </View>
@@ -85,5 +108,39 @@ const styles = StyleSheet.create({
     profileDetailText: {
         textAlign: 'center',
         fontSize: 17,
+    },
+
+
+    madeCoursesText: {
+        fontSize: 20,
+        paddingTop: 30,
+    },
+    madeCoursesHeader: {
+        alignSelf: 'center',
+        alignItems: 'center',
+    },
+    coursesBox: {
+        borderRadius: 6,
+        elevation: 3,
+        backgroundColor: '#fff',
+        shadowOffset: { width: 1, height: 1 },
+        shadowColor: '#333',
+        shadowOpacity: 0.3,
+        shadowRadius: 2,
+        marginHorizontal: 4,
+        marginVertical: 6,
+        alignItems: 'center',
+        width: 250,
+        height: 150,
+    },
+    courseImage: {
+        width: 225,
+        height: 100,
+        marginTop: 10,
+    },
+    courseText: {
+        marginTop: 10,
+
     }
+
 });
