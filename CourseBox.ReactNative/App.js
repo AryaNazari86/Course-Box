@@ -1,13 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Header from './shared/header';
-import Profile from './pages/profile';
-import Search from './pages/search';
+import { StyleSheet } from 'react-native';
+import Tabs from './routes/tabs';
 
 export default function App() {
   return (
-    <Profile />
+    <Tabs />
   );
 }
 
