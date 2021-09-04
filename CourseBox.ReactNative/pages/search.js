@@ -18,6 +18,7 @@ export default function Search() {
     const [selectedCategory, setSelectedCategory] = useState('All');
     return (
         <View style={styles.container}>
+            <Header title='Search' />
             <TextInput
                 mode='outlined'
                 label='Search...'
