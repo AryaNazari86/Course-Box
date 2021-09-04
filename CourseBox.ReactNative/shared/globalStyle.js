@@ -6,7 +6,7 @@ export const globalStyles = StyleSheet.create({
     headerDetails: {
         alignItems: 'center',
         justifyContent: 'center',
-        height: 80,
+        height: 70,
     },
     headerText: {
         fontSize: 30,
