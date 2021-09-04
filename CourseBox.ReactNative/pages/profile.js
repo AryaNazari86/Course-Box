@@ -8,7 +8,7 @@ export default function Profile({ accountName, accountPicture, accountCoursesVal
             {/* Account Name And Icon Header */}
             <View style={styles.profileAccountHeader}>
                 <Image source={require('../assets/Images/Default_Profile_Img.png')} style={styles.profileAccountImage}></Image>
-                <Text style={{ ...styles.profileAccountName, ...globalStylesStyles.TitleText }}>{accountName}</Text>
+                <Text style={{ ...styles.profileAccountName, ...globalStyles.TitleText }}>{accountName}</Text>
             </View>
 
             {/* Account Details */}
