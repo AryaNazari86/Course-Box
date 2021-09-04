@@ -1,5 +1,24 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 export const globalStyles = StyleSheet.create({
+    headerContainer: {
+        marginBottom: 20,
+    },
+    headerDetails: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: 120,
+    },
+    headerText: {
+        fontSize: 30,
+        fontWeight: 'bold',
+        color: '#E5E5E5',
+        textAlign: 'center',
+        marginTop: 35,
+    },
+    headerSvgCurve: {
+        position: 'absolute',
+        width: Dimensions.get('window').width,
+    },
     tabBar: {
         backgroundColor: '#14213D',
     },

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, Image, FlatList } from 'react-native';
 import { globalStyles } from "../shared/globalStyle";
+import Header from "../shared/header";
 
 export default function Profile({ accountName, accountPicture, accountCoursesVal, accountFollowersVal, accountParticipatedVal, profileAccountDescription }) {
 
@@ -22,6 +23,7 @@ export default function Profile({ accountName, accountPicture, accountCoursesVal
 
 
         <View>
+            <Header title="Profile" />
             {/* Account Name And Icon Header */}
             <View style={styles.profileAccountHeader}>
                 <Image source={require('../assets/Images/Default_Profile_Img.png')} style={styles.profileAccountImage}></Image>

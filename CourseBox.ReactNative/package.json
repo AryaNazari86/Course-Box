@@ -21,7 +21,8 @@
     "react-native-screens": "~3.4.0",
     "react-native-web": "~0.13.12",
     "strict-uri-encode": "^2.0.0",
-    "yet": "^0.1.0"
+    "yet": "^0.1.0",
+    "react-native-svg": "12.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"
