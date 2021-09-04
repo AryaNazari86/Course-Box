@@ -2,13 +2,22 @@ import React, { useState } from "react";
 import { StyleSheet, View, Text, Image, FlatList } from 'react-native';
 import { globalStyles } from "../shared/globalStyle";
 
-export default function Profile({ accountName, accountPicture, accountCoursesVal, accountFollowersVal, accountParticipatedVal, profileAccountDescription }) {
+export default function Profile() {
 
     const [madeCourses, setMadeCourses] = useState([
         { courseTitle: 'Javascript Beginner Course', key: 1 },
         { courseTitle: 'Javascript Beginner Course', key: 2 },
         { courseTitle: 'Javascript Beginner Course', key: 3 },
     ])
+
+
+    // Made localy for now
+    const accountName = 'Ilia Soleymani';
+    const profileAccountDescription = 'This is an account Description!!!';
+
+    const accountCoursesVal = 3;
+    const accountFollowersVal = '53k';
+    const accountParticipatedVal = 8;
 
     return (
         // How to use:
@@ -21,22 +30,23 @@ export default function Profile({ accountName, accountPicture, accountCoursesVal
         //      />
 
 
-        <View>
+
+        < View >
             {/* Account Name And Icon Header */}
-            <View style={styles.profileAccountHeader}>
+            < View style={styles.profileAccountHeader} >
                 <Image source={require('../assets/Images/Default_Profile_Img.png')} style={styles.profileAccountImage}></Image>
                 <Text style={{ ...styles.profileAccountName, ...globalStyles.TitleText }}>{accountName}</Text>
 
-            </View>
+            </View >
 
             {/* Account Description */}
-            <View style={styles.profileDescriptionHeader}>
+            < View style={styles.profileDescriptionHeader} >
                 <Text style={styles.profileDescriptionText}>{profileAccountDescription}</Text>
 
-            </View>
+            </View >
 
             {/* Account Details */}
-            <View style={styles.profileDetailHeader}>
+            < View style={styles.profileDetailHeader} >
                 <View>
                     <Text style={styles.profileDetailText}>{accountCoursesVal}</Text>
                     <Text style={styles.profileDetailText}>Courses</Text>
@@ -49,10 +59,10 @@ export default function Profile({ accountName, accountPicture, accountCoursesVal
                     <Text style={styles.profileDetailText}>{accountParticipatedVal}</Text>
                     <Text style={styles.profileDetailText}>Participated</Text>
                 </View>
-            </View>
+            </View >
 
             {/* Made Courses */}
-            <View style={styles.madeCoursesHeader}>
+            < View style={styles.madeCoursesHeader} >
                 <Text style={styles.madeCoursesText}>Made Courses</Text>
                 <FlatList
                     data={madeCourses}
@@ -65,9 +75,9 @@ export default function Profile({ accountName, accountPicture, accountCoursesVal
                         )
                     }}
                 />
-            </View>
+            </View >
 
-        </View>
+        </View >
     )
 }
 
