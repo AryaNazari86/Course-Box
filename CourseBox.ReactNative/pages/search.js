@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, FlatList } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, FlatList } from 'react-native';
 import { globalStyles } from "../shared/globalStyle";
-import { Chip } from 'react-native-paper';
+import { Chip, TextInput } from 'react-native-paper';
 
 export default function Search() {
     const [courses, setCourses] = useState([
@@ -19,7 +19,8 @@ export default function Search() {
         <View style={styles.container}>
 
             <TextInput
-                placeholder='Search...'
+                mode='outlined'
+                label='Search...'
                 onChangeText={(value) => { setSearchValue(value); }}
                 style={globalStyles.input}
             />
