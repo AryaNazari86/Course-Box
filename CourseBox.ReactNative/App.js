@@ -1,11 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import Tabs from './routes/tabs';
+import Profile from './pages/profile';
+import Search from './pages/search';
+// import Tabs from './routes/tabs';
 
 export default function App() {
   return (
-    <Tabs />
+    <Profile accountName='Ilia Soleymani'
+      accountCoursesVal='3'
+      accountFollowersVal='567K'
+      accountParticipatedVal='36'
+      profileAccountDescription='This is an account Description!!!'
+    />
   );
 }
 
