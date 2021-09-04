@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text } from 'react-native';
-import { golbalStyles } from "../shared/globalStyle";
+import { globalStyles } from "../shared/globalStyle";
 
 export default function Header() {
     return (

@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text, Image } from 'react-native';
-import { golbalStyles } from "../shared/globalStyle";
+import { globalStyles } from "../shared/globalStyle";
 
 export default function Profile({ accountName, accountPicture, accountCoursesVal, accountFollowersVal, accountParticipatedVal }) {
     return (
@@ -8,7 +8,7 @@ export default function Profile({ accountName, accountPicture, accountCoursesVal
             {/* Account Name And Icon Header */}
             <View style={styles.profileAccountHeader}>
                 <Image source={require('../assets/Images/Default_Profile_Img.png')} style={styles.profileAccountImage}></Image>
-                <Text style={{ ...styles.profileAccountName, ...golbalStyles.TitleText }}>{accountName}</Text>
+                <Text style={{ ...styles.profileAccountName, ...globalStylesStyles.TitleText }}>{accountName}</Text>
             </View>
 
             {/* Account Details */}

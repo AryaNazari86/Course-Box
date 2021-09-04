@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, FlatList } from 'react-native';
-import { golbalStyles } from "../shared/globalStyle";
+import { globalStyles } from "../shared/globalStyle";
 
 export default function Search() {
     const [courses, setCourses] = useState([
@@ -17,7 +17,7 @@ export default function Search() {
             <TextInput
                 placeholder='Search...'
                 onChangeText={(value) => { setSearchValue(value); }}
-                style={golbalStyles.input}
+                style={globalStyles.input}
             />
             <FlatList
                 data={courses.filter((item) => {
