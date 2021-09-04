@@ -1,38 +1,32 @@
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import React, { useState } from 'react';
+import { BottomNavigation, Text } from 'react-native-paper';
 import Profile from '../pages/profile';
 import Search from '../pages/search';
 import { globalStyles } from '../shared/globalStyle';
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-
-const Tab = createBottomTabNavigator();
 
 
-const Tabs = () => {
+export default function TabComponent() {
+
+    const [index, setIndex] = useState(0);
+    const [routes] = useState([
+        { key: 'profile', title: 'Profile', icon: 'account-circle' },
+        { key: 'search', title: 'Search', icon: 'magnify' },
+    ]);
+
+    const renderScene = BottomNavigation.SceneMap({
+        profile: Profile,
+        search: Search,
+    });
+
     return (
-        <NavigationContainer>
-            <Tab.Navigator
-                screenOptions={({ route }) => ({
-                    tabBarShowLabel: false,
-                    tabBarActiveTintColor: '#FCA311',
-                    tabBarInactiveTintColor: '#6f83ad',
-                    tabBarStyle: globalStyles.tabBar,
-                })}>
-                <Tab.Screen name="Profile" component={Profile} options={{
-                    tabBarIcon: ({ focused }) => (
-                        <MaterialCommunityIcons name={focused ? 'account-box' : 'account-box-outline'} size={30} color={focused ? '#FCA311' : '#6f83ad'} />
-                    )
-                }} />
-                <Tab.Screen name="Search" component={Search} options={{
-                    tabBarIcon: ({ focused }) => (
-                        <MaterialCommunityIcons name={focused ? 'card-search' : 'card-search-outline'} size={30} color={focused ? '#FCA311' : '#6f83ad'} />
-                    ),
-                }} />
-                
-            </Tab.Navigator>
-        </NavigationContainer >
+        <BottomNavigation
+            navigationState={{ index, routes }}
+            onIndexChange={setIndex}
+            renderScene={renderScene}
+            sceneAnimationEnabled={true}
+            activeColor="#fca311"
+            inactiveColor="#E5E5E5"
+            barStyle={globalStyles.tabBar}
+        />
     );
 };
-
-export default Tabs;
