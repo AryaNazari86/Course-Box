@@ -2,6 +2,7 @@ import { StyleSheet, Dimensions } from "react-native";
 export const globalStyles = StyleSheet.create({
     headerContainer: {
         marginBottom: 40,
+        backgroundColor: '#E5E5E5',
     },
     headerDetails: {
         alignItems: 'center',
