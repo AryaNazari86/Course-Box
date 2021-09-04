@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 export const globalStyles = StyleSheet.create({
     tabBar: {
-        height: 50,
+        height: 40,
         elevation: 5,
         shadowColor: '#E5E5E5',
         shadowOffset: {

@@ -14,21 +14,22 @@ const Tabs = () => {
         <NavigationContainer>
             <Tab.Navigator
                 screenOptions={({ route }) => ({
-                    tabBarShowLabel: true,
+                    tabBarShowLabel: false,
                     tabBarActiveTintColor: '#FCA311',
-                    tabBarInactiveTintColor: '#E5E5E5',
+                    tabBarInactiveTintColor: '#6f83ad',
                     tabBarStyle: globalStyles.tabBar,
                 })}>
                 <Tab.Screen name="Profile" component={Profile} options={{
                     tabBarIcon: ({ focused }) => (
-                        <MaterialCommunityIcons name={focused ? 'account-box' : 'account-box-outline'} size={focused ? 30 : 25} color={focused ? '#FCA311' : '#E5E5E5'} />
+                        <MaterialCommunityIcons name={focused ? 'account-box' : 'account-box-outline'} size={30} color={focused ? '#FCA311' : '#6f83ad'} />
                     )
                 }} />
                 <Tab.Screen name="Search" component={Search} options={{
                     tabBarIcon: ({ focused }) => (
-                        <MaterialCommunityIcons name={focused ? 'card-search' : 'card-search-outline'} size={focused ? 30 : 25} color={focused ? '#FCA311' : '#E5E5E5'} />
+                        <MaterialCommunityIcons name={focused ? 'card-search' : 'card-search-outline'} size={30} color={focused ? '#FCA311' : '#6f83ad'} />
                     ),
                 }} />
+                
             </Tab.Navigator>
         </NavigationContainer >
     );
