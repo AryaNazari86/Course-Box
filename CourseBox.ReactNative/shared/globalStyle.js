@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-export const golbalStyles = StyleSheet.create({
+export const globalStyles = StyleSheet.create({
     tabBar: {
         height: 50,
         elevation: 5,
