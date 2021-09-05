@@ -28,9 +28,9 @@ export default function Profile() {
     const profilePageValues = {
         accountName: 'Ilia soleymani',
         profileAccountDescription: 'This is an account Description!!!',
-        accountCoursesVal: 4,
+        accountCoursesVal: '4',
         accountFollowersVal: '63',
-        accountParticipatedVal: 4,
+        accountParticipatedVal: '4',
         userName: 'Ilia'
     }
 
