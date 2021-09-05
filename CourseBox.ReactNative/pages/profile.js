@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, View, Text, Image, FlatList, ScrollView, SafeAreaView } from 'react-native';
 import { globalStyles } from "../shared/globalStyle";
 import Header from '../shared/header';
+import CourseBox from "../components/courseBox";
 
 export default function Profile() {
 
@@ -21,7 +22,7 @@ export default function Profile() {
     ])
 
 
-    // Made localy for now
+    // Profile Page Variables
     const accountName = 'Ilia Soleymani';
     const profileAccountDescription = 'This is an account Description!!!';
 
@@ -30,17 +31,8 @@ export default function Profile() {
     const accountParticipatedVal = 8;
 
     return (
-        // How to use:
-
-        //     <Profile accountName='Ilia Soleymani'
-        //          accountCoursesVal='3'
-        //          accountFollowersVal='567K'
-        //          accountParticipatedVal='36'
-        //          profileAccountDescription='This is an account Description!!!'
-        //      />
-
-
         <View>
+            {/* Header */}
             <Header title="Profile" />
             < ScrollView >
 
@@ -59,14 +51,17 @@ export default function Profile() {
 
                 {/* Account Details */}
                 < View style={styles.profileDetailHeader} >
+                    {/* Ammount of made courses */}
                     <View>
                         <Text style={styles.profileDetailText}>{accountCoursesVal}</Text>
                         <Text style={styles.profileDetailText}>Courses</Text>
                     </View>
+                    {/* Ammount of followers */}
                     <View style={styles.profileDetail}>
                         <Text style={styles.profileDetailText}>{accountFollowersVal}</Text>
                         <Text style={styles.profileDetailText}>Followers</Text>
                     </View>
+                    {/* Ammount of made participated courses */}
                     <View style={styles.profileDetail}>
                         <Text style={styles.profileDetailText}>{accountParticipatedVal}</Text>
                         <Text style={styles.profileDetailText}>Participated</Text>
@@ -77,6 +72,7 @@ export default function Profile() {
                 < View style={styles.madeCoursesHeader} >
                     <Text style={styles.madeCoursesText}>Made Courses</Text>
                     <View style={styles.madeCoursesList}>
+                        {/* Made courses list */}
                         {madeCourses.map((item, index) => (
                             <View style={styles.coursesBox}>
                                 <Image source={require('../assets/Images/_111434467_gettyimages-1143489763.jpg')} style={styles.courseImage}></Image>
@@ -91,6 +87,7 @@ export default function Profile() {
                 < View style={styles.madeCoursesHeader} >
                     <Text style={styles.madeCoursesText}>Participated Courses</Text>
                     <View style={styles.madeCoursesList}>
+                        {/* Participated course list */}
                         {participatedCourses.map((item, index) => (
                             <View style={styles.coursesBox}>
                                 <Image source={require('../assets/Images/_111434467_gettyimages-1143489763.jpg')} style={styles.courseImage}></Image>
@@ -104,7 +101,8 @@ export default function Profile() {
 
 
                 {/* Empty Spacer */}
-                <Text style={styles.emptySpaces}>dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd</Text>
+                <Text style={styles.emptySpaces}>Empty</Text>
+                <Text style={styles.emptySpaces}>Empty</Text>
 
             </ScrollView >
         </View>
@@ -112,6 +110,7 @@ export default function Profile() {
 }
 
 const styles = StyleSheet.create({
+    // * Profile name and image
     profileAccountImage: {
         width: 80,
         height: 80
@@ -125,7 +124,7 @@ const styles = StyleSheet.create({
         paddingLeft: 20
     },
 
-
+    // * Profile Description
     profileDescriptionHeader: {
         alignItems: 'center',
         flexDirection: 'row',
@@ -136,7 +135,7 @@ const styles = StyleSheet.create({
         fontSize: 13
     },
 
-
+    // * Profile Description
     profileDetailHeader: {
         flexDirection: 'row',
         alignSelf: 'center',
@@ -150,7 +149,7 @@ const styles = StyleSheet.create({
         fontSize: 17,
     },
 
-
+    // * Courses
     madeCoursesText: {
         fontSize: 20,
         paddingTop: 30,
