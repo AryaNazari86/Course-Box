@@ -22,6 +22,7 @@ export const globalStyles = StyleSheet.create({
     courseImage: {
         width: 225,
         height: 100,
+        borderRadius: 6,
     },
     coursesBox: {
         borderRadius: 6,
