@@ -3,10 +3,10 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import Profile from './pages/profile';
 import Search from './pages/search';
-import TabComponent from './routes/tabs';
+import Tab from './routes/tabs';
 
 export default function App() {
   return (
-    <TabComponent />
+    <Tab />
   );
 }

@@ -1,11 +1,28 @@
 import React from "react";
-import { View, Text } from 'react-native'
+import { Appbar } from "react-native-paper";
 import { globalStyles } from "../shared/globalStyle";
 
-export default function Header({ title }) {
+export default function Header({ title, subtitle, backButton, backAction }) {
+    if (backButton) {
+        return (
+            <Appbar.Header style={globalStyles.header}>
+                <Appbar.BackAction onPress={() => backAction} />
+                <Appbar.Content
+                    title={title}
+                    subtitle={subtitle}
+                    color="#14213D"
+                    titleStyle={globalStyles.headerTitle}
+                    subtitleStyle={globalStyles.headerSubtitle} />
+            </Appbar.Header>);
+    }
     return (
-        <View>
-            
-        </View>
-    )
+        <Appbar.Header style={globalStyles.header} statusBarHeight="30">
+            <Appbar.Content
+                title={title}
+                subtitle={subtitle}
+                color="#14213D"
+                titleStyle={globalStyles.headerTitle}
+                subtitleStyle={globalStyles.headerSubtitle} />
+        </Appbar.Header>
+    );
 }

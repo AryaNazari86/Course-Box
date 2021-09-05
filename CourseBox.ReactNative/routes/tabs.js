@@ -5,19 +5,20 @@ import Search from '../pages/search';
 import { globalStyles } from '../shared/globalStyle';
 
 
-export default function TabComponent() {
-
+export default function Tab() {
+    // The index of each tab.
     const [index, setIndex] = useState(0);
+    // Configuring each tab.
     const [routes] = useState([
         { key: 'search', title: 'Search', icon: 'magnify' },
         { key: 'profile', title: 'Profile', icon: 'account-circle' },
     ]);
-
+    // Setting the page of each tab.
     const renderScene = BottomNavigation.SceneMap({
         search: Search,
         profile: Profile,
     });
-
+    // Return a BottomNavigation component that renders tabs.
     return (
         <BottomNavigation
             navigationState={{ index, routes }}
