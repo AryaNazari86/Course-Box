@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, View, Text, Image, FlatList, ScrollView, SafeAreaView } from 'react-native';
 import { globalStyles } from "../shared/globalStyle";
 import Header from '../shared/header';
+import CourseBox from "../components/courseBox";
 
 export default function Profile() {
 

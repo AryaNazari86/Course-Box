@@ -1,13 +1,17 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, TouchableOpacity, FlatList, TouchableWithoutFeedback, Keyboard, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Image, TouchableWithoutFeedback, Keyboard, ScrollView } from 'react-native';
 import { globalStyles } from "../shared/globalStyle";
 import { Chip, TextInput } from 'react-native-paper';
 import Header from '../shared/header';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import CourseBox from "../components/courseBox";
 
 export default function Search() {
     const [courses, setCourses] = useState([
-        { title: 'Cheating', category: 'Math', author: 'Arya', participants: '100', likes: '1', description: 'something ...', image: require(`../assets/Images/_111434467_gettyimages-1143489763.jpg`), key: '1' },
-        { title: 'Hacking', category: 'Physics', author: 'Ilia', participants: '10', likes: '1', description: 'something ...', image: require(`../assets/Images/_111434467_gettyimages-1143489763.jpg`), key: '2' },
+        { title: 'Dribbling', category: 'Sports', author: '@Arya', participants: '100', likes: '99', description: 'something ...', image: require(`../assets/Images/_111434467_gettyimages-1143489763.jpg`), key: '1' },
+        { title: 'Hacking', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/_111434467_gettyimages-1143489763.jpg`), key: '2' },
+        { title: 'Hacking', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/_111434467_gettyimages-1143489763.jpg`), key: '3' },
+        { title: 'Hacking', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/_111434467_gettyimages-1143489763.jpg`), key: '4' },
     ])
     const [coursesToSearch, setCoursesToSearch] = useState(courses);
     const filterCourses = () => {
@@ -27,7 +31,7 @@ export default function Search() {
             }
         }))
     }
-    const categorySearch = () => {
+    const categorySearch = (item) => {
         if (item.selected == false) {
             var newSelectedArray = [];
             for (var i = 0; i < category.length; i++) {
@@ -76,9 +80,8 @@ export default function Search() {
     const [searchValue, setSearchValue] = useState('');
     const [category, setCategory] = useState([
         { name: 'All', selected: true, key: '1' },
-        { name: 'Physics', selected: false, key: '2' },
-        { name: 'Math', selected: false, key: '3' },
-
+        { name: 'Sports', selected: false, key: '2' },
+        { name: 'Programming', selected: false, key: '3' },
     ]);
     const [selectedCategory, setSelectedCategory] = useState('All');
     return (
@@ -108,7 +111,7 @@ export default function Search() {
                                     mode='flat'
                                     style={styles.chip}
                                     selected={item.selected}
-                                    onPress={categorySearch}
+                                    onPress={() => categorySearch(item)}
                                 >
                                     {item.name}
                                 </Chip>)
@@ -118,9 +121,9 @@ export default function Search() {
                     <ScrollView>
                         {filterCourses().map((item) => {
                             return (
-                                <TouchableOpacity style={globalStyles.courses}>
-                                    <Text>{item.title}</Text>
-                                </TouchableOpacity>
+                                <CourseBox
+                                    item={item}
+                                />
                             )
                         })}
                     </ScrollView>
