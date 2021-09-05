@@ -8,7 +8,7 @@ export default function Profile() {
 
     // * The list of user's made courses
     const [madeCourses, setMadeCourses] = useState([
-        { title: 'Hacking', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/hacking_course.jpg`), key: '2' },
+        { title: 'Hacking', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/messi.jpeg`), key: '2' },
         { title: 'Javascript Beginner Course', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/Javascript_Course.png`), key: '3' },
         { title: 'HTML Beginner Course', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/HTML_Course.jpeg`), key: '4' },
         { title: 'CSS Beginner Course', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/CSS_Course.png`), key: '5' }, ,
@@ -28,9 +28,9 @@ export default function Profile() {
     const profilePageValues = {
         accountName: 'Ilia soleymani',
         profileAccountDescription: 'This is an account Description!!!',
-        accountCoursesVal: 4,
+        accountCoursesVal: '4',
         accountFollowersVal: '63',
-        accountParticipatedVal: 4,
+        accountParticipatedVal: '4',
         userName: 'Ilia'
     }
 
