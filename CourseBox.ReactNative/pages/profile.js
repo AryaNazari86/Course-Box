@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, Image, FlatList } from 'react-native';
+import { StyleSheet, View, Text, Image, FlatList, ScrollView, SafeAreaView } from 'react-native';
 import { globalStyles } from "../shared/globalStyle";
 import Header from '../shared/header';
 
@@ -31,55 +31,52 @@ export default function Profile() {
         //      />
 
 
-
-        < View >
+        <View>
             <Header title="Profile" />
-            {/* Account Name And Icon Header */}
-            < View style={styles.profileAccountHeader} >
-                <Image source={require('../assets/Images/Default_Profile_Img.png')} style={styles.profileAccountImage}></Image>
-                <Text style={{ ...styles.profileAccountName, ...globalStyles.TitleText }}>{accountName}</Text>
+            < ScrollView >
 
-            </View >
+                {/* Account Name And Icon Header */}
+                < View style={styles.profileAccountHeader} >
+                    <Image source={require('../assets/Images/Default_Profile_Img.png')} style={styles.profileAccountImage}></Image>
+                    <Text style={{ ...styles.profileAccountName, ...globalStyles.TitleText }}>{accountName}</Text>
 
-            {/* Account Description */}
-            < View style={styles.profileDescriptionHeader} >
-                <Text style={styles.profileDescriptionText}>{profileAccountDescription}</Text>
+                </View >
 
-            </View >
+                {/* Account Description */}
+                < View style={styles.profileDescriptionHeader} >
+                    <Text style={styles.profileDescriptionText}>{profileAccountDescription}</Text>
 
-            {/* Account Details */}
-            < View style={styles.profileDetailHeader} >
-                <View>
-                    <Text style={styles.profileDetailText}>{accountCoursesVal}</Text>
-                    <Text style={styles.profileDetailText}>Courses</Text>
-                </View>
-                <View style={styles.profileDetail}>
-                    <Text style={styles.profileDetailText}>{accountFollowersVal}</Text>
-                    <Text style={styles.profileDetailText}>Followers</Text>
-                </View>
-                <View style={styles.profileDetail}>
-                    <Text style={styles.profileDetailText}>{accountParticipatedVal}</Text>
-                    <Text style={styles.profileDetailText}>Participated</Text>
-                </View>
-            </View >
+                </View >
 
-            {/* Made Courses */}
-            < View style={styles.madeCoursesHeader} >
-                <Text style={styles.madeCoursesText}>Made Courses</Text>
-                <FlatList
-                    data={madeCourses}
-                    renderItem={({ item }) => {
-                        return (
-                            <View style={styles.coursesBox}>
-                                <Image source={require('../assets/Images/_111434467_gettyimages-1143489763.jpg')} style={styles.courseImage}></Image>
-                                <Text style={styles.courseText}>{item.courseTitle}</Text>
-                            </View>
-                        )
-                    }}
-                />
-            </View >
+                {/* Account Details */}
+                < View style={styles.profileDetailHeader} >
+                    <View>
+                        <Text style={styles.profileDetailText}>{accountCoursesVal}</Text>
+                        <Text style={styles.profileDetailText}>Courses</Text>
+                    </View>
+                    <View style={styles.profileDetail}>
+                        <Text style={styles.profileDetailText}>{accountFollowersVal}</Text>
+                        <Text style={styles.profileDetailText}>Followers</Text>
+                    </View>
+                    <View style={styles.profileDetail}>
+                        <Text style={styles.profileDetailText}>{accountParticipatedVal}</Text>
+                        <Text style={styles.profileDetailText}>Participated</Text>
+                    </View>
+                </View >
 
-        </View >
+                {/* Made Courses */}
+                < View style={styles.madeCoursesHeader} >
+                    <Text style={styles.madeCoursesText}>Made Courses</Text>
+                    {madeCourses.map((item, index) => (
+                        <View style={styles.coursesBox}>
+                            <Image source={require('../assets/Images/_111434467_gettyimages-1143489763.jpg')} style={styles.courseImage}></Image>
+                            <Text style={styles.courseText}>{item.courseTitle}</Text>
+                        </View>
+                    ))}
+                </View >
+
+            </ScrollView >
+        </View>
     )
 }
 
