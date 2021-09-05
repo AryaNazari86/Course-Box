@@ -3,6 +3,7 @@ import { Appbar } from "react-native-paper";
 import { globalStyles } from "../shared/globalStyle";
 
 export default function Header({ title, subtitle, backButton = false, backAction }) {
+    // If there is a back button for navigating to the previous screen:
     if (backButton) {
         return (
             <Appbar.Header style={globalStyles.header}>
@@ -16,6 +17,7 @@ export default function Header({ title, subtitle, backButton = false, backAction
             </Appbar.Header>
         );
     }
+    // If there isn't a back button for navigating to the previous screen:
     return (
         <Appbar.Header style={globalStyles.header}>
             <Appbar.Content
