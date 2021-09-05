@@ -67,13 +67,21 @@ export default function Profile() {
                 {/* Made Courses */}
                 < View style={styles.madeCoursesHeader} >
                     <Text style={styles.madeCoursesText}>Made Courses</Text>
-                    {madeCourses.map((item, index) => (
-                        <View style={styles.coursesBox}>
-                            <Image source={require('../assets/Images/_111434467_gettyimages-1143489763.jpg')} style={styles.courseImage}></Image>
-                            <Text style={styles.courseText}>{item.courseTitle}</Text>
-                        </View>
-                    ))}
+                    <View style={styles.madeCoursesList}>
+                        {madeCourses.map((item, index) => (
+                            <View style={styles.coursesBox}>
+                                <Image source={require('../assets/Images/_111434467_gettyimages-1143489763.jpg')} style={styles.courseImage}></Image>
+                                <Text style={styles.courseText}>{item.courseTitle}</Text>
+                            </View>
+                        ))}
+
+                    </View>
                 </View >
+
+
+
+                {/* Empty Spacer */}
+                <Text style={styles.emptySpaces}>dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd</Text>
 
             </ScrollView >
         </View>
@@ -127,6 +135,10 @@ const styles = StyleSheet.create({
     madeCoursesHeader: {
         alignSelf: 'center',
         alignItems: 'center',
+        flex: 1,
+    },
+    madeCoursesList: {
+        flex: 1
     },
     coursesBox: {
         borderRadius: 6,
@@ -150,6 +162,11 @@ const styles = StyleSheet.create({
     courseText: {
         marginTop: 10,
 
+    },
+
+    emptySpaces: {
+        opacity: 0,
+        fontSize: 30,
     }
 
 });
