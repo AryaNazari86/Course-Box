@@ -2,7 +2,7 @@ import React from "react";
 import { Appbar } from "react-native-paper";
 import { globalStyles } from "../shared/globalStyle";
 
-export default function Header({ title, subtitle, backButton, backAction }) {
+export default function Header({ title, subtitle, backButton = false, backAction }) {
     if (backButton) {
         return (
             <Appbar.Header style={globalStyles.header}>
@@ -13,10 +13,11 @@ export default function Header({ title, subtitle, backButton, backAction }) {
                     color="#14213D"
                     titleStyle={globalStyles.headerTitle}
                     subtitleStyle={globalStyles.headerSubtitle} />
-            </Appbar.Header>);
+            </Appbar.Header>
+        );
     }
     return (
-        <Appbar.Header style={globalStyles.header} statusBarHeight="30">
+        <Appbar.Header style={globalStyles.header}>
             <Appbar.Content
                 title={title}
                 subtitle={subtitle}

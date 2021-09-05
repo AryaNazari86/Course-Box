@@ -13,6 +13,7 @@ export const globalStyles = StyleSheet.create({
     headerSubtitle: {
         color: '#14213D',
         textAlign: 'center',
+        fontFamily: 'roboto-light'
     },
     tabBar: {
         backgroundColor: '#14213D',
