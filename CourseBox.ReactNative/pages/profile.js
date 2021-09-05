@@ -25,14 +25,14 @@ export default function Profile() {
 
 
     // Profile Page Variables
-    const accountName = 'Ilia Soleymani';
-    const profileAccountDescription = 'This is an account Description!!!';
-
-    const accountCoursesVal = 3;
-    const accountFollowersVal = '53k';
-    const accountParticipatedVal = 8;
-
-    const userName = 'IAmIlia';
+    const profilePageValues = {
+        accountName: 'Ilia soleymani',
+        profileAccountDescription: 'This is an account Description!!!',
+        accountCoursesVal: 4,
+        accountFollowersVal: '63',
+        accountParticipatedVal: 4,
+        userName: 'Ilia'
+    }
 
     return (
         <View>
@@ -43,19 +43,19 @@ export default function Profile() {
                 {/* Account Name And Icon Header */}
                 < View style={styles.profileAccountHeader} >
                     <Image source={require('../assets/Images/Default_Profile_Img.png')} style={styles.profileAccountImage}></Image>
-                    <Text style={{ ...styles.profileAccountName, ...globalStyles.TitleText }}>{accountName}</Text>
+                    <Text style={{ ...styles.profileAccountName, ...globalStyles.TitleText }}>{profilePageValues.accountName}</Text>
 
                 </View >
 
                 {/* Username */}
                 <View style={styles.userName}>
                     <Text style={styles.userName}>@</Text>
-                    <Text style={styles.userName}>{userName}</Text>
+                    <Text style={styles.userName}>{profilePageValues.userName}</Text>
                 </View>
 
                 {/* Account Description */}
                 < View style={styles.profileDescriptionHeader} >
-                    <Text style={styles.profileDescriptionText}>{profileAccountDescription}</Text>
+                    <Text style={styles.profileDescriptionText}>{profilePageValues.profileAccountDescription}</Text>
 
                 </View >
 
@@ -63,17 +63,17 @@ export default function Profile() {
                 < View style={styles.profileDetailHeader} >
                     {/* Ammount of made courses */}
                     <View>
-                        <Text style={styles.profileDetailText}>{accountCoursesVal}</Text>
+                        <Text style={styles.profileDetailText}>{profilePageValues.accountCoursesVal}</Text>
                         <Text style={styles.profileDetailText}>Courses</Text>
                     </View>
                     {/* Ammount of followers */}
                     <View style={styles.profileDetail}>
-                        <Text style={styles.profileDetailText}>{accountFollowersVal}</Text>
+                        <Text style={styles.profileDetailText}>{profilePageValues.accountFollowersVal}</Text>
                         <Text style={styles.profileDetailText}>Followers</Text>
                     </View>
                     {/* Ammount of made participated courses */}
                     <View style={styles.profileDetail}>
-                        <Text style={styles.profileDetailText}>{accountParticipatedVal}</Text>
+                        <Text style={styles.profileDetailText}>{profilePageValues.accountParticipatedVal}</Text>
                         <Text style={styles.profileDetailText}>Participated</Text>
                     </View>
                 </View >
