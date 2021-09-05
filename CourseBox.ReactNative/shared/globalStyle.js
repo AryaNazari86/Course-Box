@@ -8,7 +8,8 @@ export const globalStyles = StyleSheet.create({
     headerTitle: {
         color: '#14213D',
         textAlign: 'center',
-        fontFamily: 'roboto-bold'
+        fontFamily: 'roboto-bold',
+        fontSize: 26,
     },
     headerSubtitle: {
         color: '#14213D',
