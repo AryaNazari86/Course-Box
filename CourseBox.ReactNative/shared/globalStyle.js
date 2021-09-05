@@ -78,7 +78,6 @@ export const globalStyles = StyleSheet.create({
     },
     TitleText: {
         fontSize: 24,
-        fontWeight: 'bold'
     },
     emptySpacer: {
         marginTop: 75,
