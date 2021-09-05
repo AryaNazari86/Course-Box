@@ -5,10 +5,19 @@ import Header from '../shared/header';
 
 export default function Profile() {
 
+    // * The list of user's made courses
     const [madeCourses, setMadeCourses] = useState([
         { courseTitle: 'Javascript Beginner Course', key: 1 },
-        { courseTitle: 'Javascript Beginner Course', key: 2 },
-        { courseTitle: 'Javascript Beginner Course', key: 3 },
+        { courseTitle: 'HTML Beginner Course', key: 2 },
+        { courseTitle: 'CSS Beginner Course', key: 3 },
+    ])
+
+    // * The list of user's participated courses
+
+    const [participatedCourses, setParticipatedCourses] = useState([
+        { courseTitle: 'Python Beginner Course', key: 1 },
+        { courseTitle: 'Java Beginner Course', key: 2 },
+        { courseTitle: 'Golang Beginner Course', key: 3 },
     ])
 
 
@@ -69,6 +78,20 @@ export default function Profile() {
                     <Text style={styles.madeCoursesText}>Made Courses</Text>
                     <View style={styles.madeCoursesList}>
                         {madeCourses.map((item, index) => (
+                            <View style={styles.coursesBox}>
+                                <Image source={require('../assets/Images/_111434467_gettyimages-1143489763.jpg')} style={styles.courseImage}></Image>
+                                <Text style={styles.courseText}>{item.courseTitle}</Text>
+                            </View>
+                        ))}
+
+                    </View>
+                </View >
+
+                {/* Participated Courses */}
+                < View style={styles.madeCoursesHeader} >
+                    <Text style={styles.madeCoursesText}>Participated Courses</Text>
+                    <View style={styles.madeCoursesList}>
+                        {participatedCourses.map((item, index) => (
                             <View style={styles.coursesBox}>
                                 <Image source={require('../assets/Images/_111434467_gettyimages-1143489763.jpg')} style={styles.courseImage}></Image>
                                 <Text style={styles.courseText}>{item.courseTitle}</Text>
