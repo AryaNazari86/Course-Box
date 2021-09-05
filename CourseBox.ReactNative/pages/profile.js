@@ -113,8 +113,10 @@ export default function Profile() {
 const styles = StyleSheet.create({
     // * Profile name and image
     profileAccountImage: {
-        width: 80,
-        height: 80
+        width: 125,
+        height: 125,
+        borderRadius: 100,
+        marginBottom: 10,
     },
     profileAccountHeader: {
         paddingTop: 40,
@@ -122,8 +124,6 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     profileAccountName: {
-        paddingLeft: 20,
-
         fontFamily: 'roboto-bold'
     },
 
