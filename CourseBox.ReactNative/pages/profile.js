@@ -30,6 +30,8 @@ export default function Profile() {
     const accountFollowersVal = '53k';
     const accountParticipatedVal = 8;
 
+    const userName = 'IAmIlia';
+
     return (
         <View>
             {/* Header */}
@@ -42,6 +44,12 @@ export default function Profile() {
                     <Text style={{ ...styles.profileAccountName, ...globalStyles.TitleText }}>{accountName}</Text>
 
                 </View >
+
+                {/* Username */}
+                <View style={styles.userName}>
+                    <Text style={styles.userName}>@</Text>
+                    <Text style={styles.userName}>{userName}</Text>
+                </View>
 
                 {/* Account Description */}
                 < View style={styles.profileDescriptionHeader} >
@@ -114,7 +122,16 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     profileAccountName: {
-        paddingLeft: 20
+        paddingLeft: 20,
+
+        fontFamily: 'roboto-bold'
+    },
+
+    // * Username
+    userName: {
+        flexDirection: 'row',
+        alignSelf: 'center',
+        fontFamily: 'roboto-light'
     },
 
     // * Profile Description
