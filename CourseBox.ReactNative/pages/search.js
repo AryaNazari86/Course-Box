@@ -17,8 +17,11 @@ export default function Search() {
     const filterCourses = () => {
         return (courses.filter((item) => {
             for (var i = 0; i <= (item.title.length - searchValue.length); i++) {
-                if (item.title.slice(i, i + searchValue.length).toLowerCase == searchValue.toLowerCase) {
+                if (item.title.slice(i, i + searchValue.length).toLowerCase() == searchValue.toLowerCase()) {
                     return (true);
+                }
+                else {
+                    return (false);
                 }
             }
         }).filter((item) => {

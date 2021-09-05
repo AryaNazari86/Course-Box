@@ -16,7 +16,7 @@ export default function CourseBox({ item }) {
             <Chip style={globalStyles.courseCategory}>{item.category}</Chip>
             <View style={globalStyles.courseLines}>
                 <Text style={globalStyles.courseAuthor}>{item.author}</Text>
-                <MaterialCommunityIcons name='thumb-up' size={15} color="black" style={globalStyles.courseIcons} />
+                <MaterialCommunityIcons name='thumb-up' size={15} color="#14213D" style={globalStyles.courseIcons} />
                 <Text style={globalStyles.courseNumData}>{item.likes}</Text>
             </View>
         </TouchableOpacity>
