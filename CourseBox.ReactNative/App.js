@@ -19,7 +19,7 @@ export default function App() {
       <Tab />
     );
   }
-  else{
+  else {
     return (
       <AppLoading
         startAsync={getFonts}

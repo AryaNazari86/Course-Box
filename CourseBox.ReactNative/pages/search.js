@@ -8,10 +8,10 @@ import CourseBox from "../components/courseBox";
 
 export default function Search() {
     const [courses, setCourses] = useState([
-        { title: 'Dribbling', category: 'Sports', author: '@Arya', participants: '100', likes: '99', description: 'something ...', image: require(`../assets/Images/_111434467_gettyimages-1143489763.jpg`), key: '1' },
-        { title: 'Hacking', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/_111434467_gettyimages-1143489763.jpg`), key: '2' },
-        { title: 'Hacking', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/_111434467_gettyimages-1143489763.jpg`), key: '3' },
-        { title: 'Hacking', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/_111434467_gettyimages-1143489763.jpg`), key: '4' },
+        { title: 'Dribbling', category: 'Sports', author: '@Arya', participants: '100', likes: '99', description: 'something ...', image: require(`../assets/Images/_111434467_gettyimages-1143489763.jpg`), key: 1 },
+        { title: 'Hacking', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/_111434467_gettyimages-1143489763.jpg`), key: 2 },
+        { title: 'Hacking', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/_111434467_gettyimages-1143489763.jpg`), key: 3 },
+        { title: 'Hacking', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/_111434467_gettyimages-1143489763.jpg`), key: 4 },
     ])
     const [coursesToSearch, setCoursesToSearch] = useState(courses);
     const filterCourses = () => {
@@ -90,35 +90,36 @@ export default function Search() {
         >
             <View>
                 <Header title='Search' />
-                <View style={styles.container}>
+                <ScrollView>
 
-                    <TextInput
-                        mode='outlined'
-                        label='Search'
-                        onChangeText={(value) => { setSearchValue(value); }}
-                        style={globalStyles.input}
-                        left={<TextInput.Icon name="magnify" style={styles.searchIcon} />}
-                        theme={{
-                            colors: {
-                                primary: '#14213D'
-                            }
-                        }}
-                    />
-                    <ScrollView horizontal={true} >
-                        {category.map((item) => {
-                            return (
-                                <Chip
-                                    mode='flat'
-                                    style={styles.chip}
-                                    selected={item.selected}
-                                    onPress={() => categorySearch(item)}
-                                >
-                                    {item.name}
-                                </Chip>)
-                        })}
-                    </ScrollView>
+                    <View style={styles.container}>
 
-                    <ScrollView>
+                        <TextInput
+                            mode='outlined'
+                            label='Search'
+                            onChangeText={(value) => { setSearchValue(value); }}
+                            style={globalStyles.input}
+                            left={<TextInput.Icon name="magnify" style={styles.searchIcon} />}
+                            theme={{
+                                colors: {
+                                    primary: '#14213D'
+                                }
+                            }}
+                        />
+                        <ScrollView horizontal={true} >
+                            {category.map((item) => {
+                                return (
+                                    <Chip
+                                        mode='flat'
+                                        style={styles.chip}
+                                        selected={item.selected}
+                                        onPress={() => categorySearch(item)}
+                                    >
+                                        {item.name}
+                                    </Chip>)
+                            })}
+                        </ScrollView>
+
                         {filterCourses().map((item) => {
                             return (
                                 <CourseBox
@@ -126,8 +127,10 @@ export default function Search() {
                                 />
                             )
                         })}
-                    </ScrollView>
-                </View >
+
+                        <Text style={globalStyles.emptySpacer}>Code Rangers®</Text>
+                    </View >
+                </ScrollView>
             </View>
         </TouchableWithoutFeedback >
 

@@ -8,17 +8,17 @@ export default function Profile() {
 
     // * The list of user's made courses
     const [madeCourses, setMadeCourses] = useState([
-        { courseTitle: 'Javascript Beginner Course', key: 1 },
-        { courseTitle: 'HTML Beginner Course', key: 2 },
-        { courseTitle: 'CSS Beginner Course', key: 3 },
+        { title: 'Hacking', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/_111434467_gettyimages-1143489763.jpg`), key: 1 },
+        { title: 'Hacking', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/_111434467_gettyimages-1143489763.jpg`), key: 2 },
+        { title: 'Hacking', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/_111434467_gettyimages-1143489763.jpg`), key: 3 },
     ])
 
     // * The list of user's participated courses
 
     const [participatedCourses, setParticipatedCourses] = useState([
-        { courseTitle: 'Python Beginner Course', key: 1 },
-        { courseTitle: 'Java Beginner Course', key: 2 },
-        { courseTitle: 'Golang Beginner Course', key: 3 },
+        { title: 'Hacking', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/_111434467_gettyimages-1143489763.jpg`), key: 1 },
+        { title: 'Hacking', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/_111434467_gettyimages-1143489763.jpg`), key: 2 },
+        { title: 'Hacking', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/_111434467_gettyimages-1143489763.jpg`), key: 3 },
     ])
 
 
@@ -74,10 +74,7 @@ export default function Profile() {
                     <View style={styles.madeCoursesList}>
                         {/* Made courses list */}
                         {madeCourses.map((item, index) => (
-                            <View style={styles.coursesBox}>
-                                <Image source={require('../assets/Images/_111434467_gettyimages-1143489763.jpg')} style={styles.courseImage}></Image>
-                                <Text style={styles.courseText}>{item.courseTitle}</Text>
-                            </View>
+                            <CourseBox item={item} />
                         ))}
 
                     </View>
@@ -89,10 +86,7 @@ export default function Profile() {
                     <View style={styles.madeCoursesList}>
                         {/* Participated course list */}
                         {participatedCourses.map((item, index) => (
-                            <View style={styles.coursesBox}>
-                                <Image source={require('../assets/Images/_111434467_gettyimages-1143489763.jpg')} style={styles.courseImage}></Image>
-                                <Text style={styles.courseText}>{item.courseTitle}</Text>
-                            </View>
+                            <CourseBox item={item} />
                         ))}
 
                     </View>
@@ -101,8 +95,7 @@ export default function Profile() {
 
 
                 {/* Empty Spacer */}
-                <Text style={styles.emptySpaces}>Empty</Text>
-                <Text style={styles.emptySpaces}>Empty</Text>
+                <Text style={globalStyles.emptySpacer}>Code Rangers®</Text>
 
             </ScrollView >
         </View>
@@ -162,33 +155,7 @@ const styles = StyleSheet.create({
     madeCoursesList: {
         flex: 1
     },
-    coursesBox: {
-        borderRadius: 6,
-        elevation: 3,
-        backgroundColor: '#fff',
-        shadowOffset: { width: 1, height: 1 },
-        shadowColor: '#333',
-        shadowOpacity: 0.3,
-        shadowRadius: 2,
-        marginHorizontal: 4,
-        marginVertical: 6,
-        alignItems: 'center',
-        width: 250,
-        height: 150,
-    },
-    courseImage: {
-        width: 225,
-        height: 100,
-        marginTop: 10,
-    },
-    courseText: {
-        marginTop: 10,
 
-    },
 
-    emptySpaces: {
-        opacity: 0,
-        fontSize: 30,
-    }
 
 });
