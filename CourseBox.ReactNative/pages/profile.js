@@ -126,14 +126,14 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     profileAccountName: {
-        fontFamily: 'roboto-bold'
+        fontFamily: 'rubik-bold'
     },
 
     // * Username
     userName: {
         flexDirection: 'row',
         alignSelf: 'center',
-        fontFamily: 'roboto-light'
+        fontFamily: 'rubik-light'
     },
 
     // * Profile Description
