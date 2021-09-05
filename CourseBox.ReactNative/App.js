@@ -4,9 +4,9 @@ import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 
 const getFonts = () => Font.loadAsync({
-  'roboto-bold': require('./assets/Fonts/Roboto-Bold.ttf'),
-  'roboto-light': require('./assets/Fonts/Roboto-Light.ttf'),
-  'roboto-regular': require('./assets/Fonts/Roboto-Regular.ttf'),
+  'rubik-bold': require('./assets/Fonts/Rubik-Bold.ttf'),
+  'rubik-light': require('./assets/Fonts/Rubik-Light.ttf'),
+  'rubik-regular': require('./assets/Fonts/Rubik-Regular.ttf'),
 });
 
 export default function App() {

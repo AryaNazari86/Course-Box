@@ -8,13 +8,13 @@ export const globalStyles = StyleSheet.create({
     headerTitle: {
         color: '#14213D',
         textAlign: 'center',
-        fontFamily: 'roboto-bold',
+        fontFamily: 'rubik-light',
         fontSize: 26,
     },
     headerSubtitle: {
         color: '#14213D',
         textAlign: 'center',
-        fontFamily: 'roboto-light'
+        fontFamily: 'rubik-light'
     },
     tabBar: {
         backgroundColor: '#14213D',
