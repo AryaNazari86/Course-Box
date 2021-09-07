@@ -3,6 +3,9 @@ import Tab from './routes/tabs';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 
+// Test Pages
+import SignUp from './pages/signup';
+
 const getFonts = () => Font.loadAsync({
   'rubik-bold': require('./assets/Fonts/Rubik-Bold.ttf'),
   'rubik-light': require('./assets/Fonts/Rubik-Light.ttf'),
