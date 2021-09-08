@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 export default function CoursePreview() {
     var course = {
@@ -37,12 +37,13 @@ export default function CoursePreview() {
             {course.content.map(
                 (item) => {
                     return (
-
-                        <View>
+                        <View style={styles.subject}>
                             {/* Subject's title */}
-                            <Text>{item.title}</Text>
+                            <View style={styles.subjectTitle}>
+                                <Text style={styles.subjectTitleText}>{item.title}</Text>
+                            </View>
                             {/* Lessons of the subject  */}
-                            <View>
+                            <View style={styles.subjectLessons}>
                                 {item.content.map(
                                     (item) => {
                                         {/* Each lesson of the subject  */ }
@@ -62,3 +63,21 @@ export default function CoursePreview() {
         </View >
     )
 }
+
+const styles = StyleSheet.create({
+    subject: {
+
+    },
+    subjectTitle: {
+        borderTopWidth: 1,
+        borderBottomWidth: 1,
+        borderTopColor: 'red',
+        borderBottomColor: 'red',
+    },
+    subjectTitleText: {
+        alignSelf: 'center',
+    },
+    subjectLessons: {
+        flexDirection: 'row',
+    }
+})
