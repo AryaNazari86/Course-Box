@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
 
 export default function CoursePreview() {
     var course = {
@@ -13,21 +14,24 @@ export default function CoursePreview() {
         content: [
             {
                 title: 'Low Dribble', content: [
-                    { title: 'how to' },
-                    { title: 'some examples' }
-                ]
+                    { title: 'how to', color: 'red' },
+                    { title: 'examples', color: 'red' }
+                ],
+                color: 'red'
             },
             {
                 title: 'Speed Dribble', content: [
-                    { title: 'how to' },
-                    { title: 'some examples' }
-                ]
+                    { title: 'how to', color: 'blue' },
+                    { title: 'examples', color: 'blue' }
+                ],
+                color: 'blue'
             },
             {
                 title: 'Change-of-pace Dribble', content: [
-                    { title: 'how to' },
-                    { title: 'some examples' }
-                ]
+                    { title: 'how to', color: 'green' },
+                    { title: 'examples', color: 'green' }
+                ],
+                color: 'green'
             },
         ],
         key: '1'
@@ -39,8 +43,8 @@ export default function CoursePreview() {
                     return (
                         <View style={styles.subject}>
                             {/* Subject's title */}
-                            <View style={styles.subjectTitle}>
-                                <Text style={styles.subjectTitleText}>{item.title}</Text>
+                            <View style={{ ...styles.subjectTitle, borderColor: item.color }}>
+                                <Text style={{ ...styles.subjectTitleText, color: item.color }}>{item.title}</Text>
                             </View>
                             {/* Lessons of the subject  */}
                             <View style={styles.subjectLessons}>
@@ -48,9 +52,11 @@ export default function CoursePreview() {
                                     (item) => {
                                         {/* Each lesson of the subject  */ }
                                         return (
-                                            <TouchableOpacity>
+                                            <TouchableOpacity style={{ ...styles.lesson, borderColor: item.color }}>
+                                                {/* lesson's icon */}
+                                                <MaterialIcons name="class" size={50} color={item.color} style={styles.lessonIcon} />
                                                 {/* lesson's title */}
-                                                <Text>{item.title}</Text>
+                                                <Text style={{ ...styles.lessonTitleText, color: item.color }}>{item.title}</Text>
                                             </TouchableOpacity>
                                         )
                                     }
@@ -66,18 +72,35 @@ export default function CoursePreview() {
 
 const styles = StyleSheet.create({
     subject: {
-
+        marginVertical: 15,
+        marginHorizontal: 30,
     },
     subjectTitle: {
-        borderTopWidth: 1,
-        borderBottomWidth: 1,
-        borderTopColor: 'red',
-        borderBottomColor: 'red',
+        borderWidth: 1,
+        borderRadius: 20,
+
     },
     subjectTitleText: {
         alignSelf: 'center',
+        fontSize: 25,
     },
     subjectLessons: {
         flexDirection: 'row',
+    },
+    lesson: {
+        borderWidth: 1,
+        marginHorizontal: 5,
+        marginTop: 10,
+        borderRadius: 20,
+        height: 100,
+        width: 100,
+    },
+    lessonTitleText: {
+        marginBottom: 10,
+        alignSelf: 'center',
+        top: 20,
+    },
+    lessonIcon: {
+        alignSelf: 'center',
     }
 })
