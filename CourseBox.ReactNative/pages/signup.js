@@ -68,13 +68,16 @@ export default function SignUp() {
                     <Text style={{ marginTop: 10, opacity: 0, }}>Code Rangers®</Text>
                     <View style={styles.acceptTos}>
                         <Text style={styles.acceptTos}>By signing up you accept the </Text>
-                        <Text style={{ ...styles.acceptTos, ...globalStyles.highlitedText }}>Terms of service </Text>
-
+                        <TouchableOpacity>
+                            <Text style={globalStyles.highlitedText}>Terms of service </Text>
+                        </TouchableOpacity>
 
                     </View>
                     <View style={styles.acceptTos2}>
                         <Text style={styles.acceptTos}>and </Text>
-                        <Text style={globalStyles.highlitedText}>Privacy Policy</Text>
+                        <TouchableOpacity>
+                            <Text style={globalStyles.highlitedText}>Privacy Policy</Text>
+                        </TouchableOpacity>
                     </View>
                     {/* Sign Up Button */}
                     <Text style={{ marginTop: 20, opacity: 0, }}>Code Rangers®</Text>
@@ -84,7 +87,9 @@ export default function SignUp() {
 
                     <View style={{ ...styles.signInContainer, ...styles.haveAccount }}>
                         <Text>Already have an account? </Text>
-                        <Text style={globalStyles.highlitedText}>Sign In</Text>
+                        <TouchableOpacity>
+                            <Text style={globalStyles.highlitedText}>Sign In</Text>
+                        </TouchableOpacity>
                     </View>
 
                     <Text style={globalStyles.emptySpacer}>Code Rangers®</Text>

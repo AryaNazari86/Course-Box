@@ -19,7 +19,9 @@ export default function App() {
   if (fontsLoaded) {
     return (
       // Renders Tab Navigation.
-      <Tab />
+      // <Tab />
+      // ! Delete this beforce commit
+      <SignUp />
     );
   }
   else {
