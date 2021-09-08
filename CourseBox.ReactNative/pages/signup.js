@@ -168,6 +168,6 @@ const styles = StyleSheet.create({
     signInContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingTop: 100,
+        paddingTop: 140,
     },
 });

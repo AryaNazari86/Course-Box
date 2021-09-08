@@ -5,6 +5,7 @@ import AppLoading from 'expo-app-loading';
 
 // Test Pages
 import SignUp from './pages/signup';
+import SignIn from './pages/signin';
 import CoursePreview from './pages/coursePreview';
 
 const getFonts = () => Font.loadAsync({
@@ -20,9 +21,7 @@ export default function App() {
   if (fontsLoaded) {
     return (
       // Renders Tab Navigation.
-      // <Tab />
-      // ! Delete this before commit
-      <SignUp />
+      <Tab />
     );
   }
   else {
