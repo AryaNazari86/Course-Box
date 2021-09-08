@@ -5,6 +5,7 @@ import AppLoading from 'expo-app-loading';
 
 // Test Pages
 import SignUp from './pages/signup';
+import CoursePreview from './pages/coursePreview';
 
 const getFonts = () => Font.loadAsync({
   'rubik-bold': require('./assets/Fonts/Rubik-Bold.ttf'),
@@ -21,7 +22,7 @@ export default function App() {
       // Renders Tab Navigation.
       // <Tab />
       // ! Delete this beforce commit
-      <SignUp />
+      <CoursePreview />
     );
   }
   else {
