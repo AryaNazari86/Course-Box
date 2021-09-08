@@ -37,23 +37,28 @@ export default function CoursePreview() {
             {course.content.map(
                 (item) => {
                     return (
+
                         <View>
+                            {/* Subject's title */}
                             <Text>{item.title}</Text>
+                            {/* Lessons of the subject  */}
                             <View>
                                 {item.content.map(
                                     (item) => {
+                                        {/* Each lesson of the subject  */ }
                                         return (
                                             <TouchableOpacity>
+                                                {/* lesson's title */}
                                                 <Text>{item.title}</Text>
                                             </TouchableOpacity>
                                         )
                                     }
                                 )}
                             </View>
-                        </View>
+                        </View >
                     )
                 }
             )}
-        </View>
+        </View >
     )
 }
