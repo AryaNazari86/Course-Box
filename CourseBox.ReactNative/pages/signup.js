@@ -13,6 +13,7 @@ export default function SignUp() {
     return (
         <TouchableWithoutFeedback
             onPress={Keyboard.dismiss}
+            style={styles.container}
         >
             <View>
                 {/* Header */}
@@ -73,7 +74,7 @@ export default function SignUp() {
                         </TouchableOpacity>
 
                     </View>
-                    <View style={styles.acceptTos2}>
+                    <View style={styles.acceptTos}>
                         <Text style={styles.acceptTos}>and </Text>
                         <TouchableOpacity>
                             <Text style={globalStyles.highlitedText}>Privacy Policy</Text>
@@ -85,7 +86,7 @@ export default function SignUp() {
                         <Text style={styles.signUpText}>Sign Up</Text>
                     </TouchableOpacity>
 
-                    <View style={{ ...styles.signInContainer, ...styles.haveAccount }}>
+                    <View style={styles.signInContainer}>
                         <Text>Already have an account? </Text>
                         <TouchableOpacity>
                             <Text style={globalStyles.highlitedText}>Sign In</Text>
@@ -101,9 +102,12 @@ export default function SignUp() {
 }
 
 const styles = StyleSheet.create({
+    // Container of page
     container: {
         alignItems: 'center',
     },
+
+    // The text input
     input: {
         paddingHorizontal: 8,
         paddingVertical: 6,
@@ -112,6 +116,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontFamily: 'rubik-regular'
     },
+    // The view covering the text input
     textInputView: {
         borderWidth: 1,
         borderRadius: 50,
@@ -121,6 +126,8 @@ const styles = StyleSheet.create({
         height: 50,
         backgroundColor: 'white'
     },
+    // * Kept for possible future use
+    // ! Delete if design accepted
     profileAccountImage: {
         width: 125,
         height: 125,
@@ -128,6 +135,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         marginTop: 100,
     },
+    // The confirm Button
     signUpButton: {
         backgroundColor: '#41CD7D',
         width: 330,
@@ -136,33 +144,30 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
+    // The text of confirm button
     signUpText: {
         fontSize: 25,
         color: 'white',
         fontFamily: 'rubik-bold'
     },
+    // Accept Tos Text
     acceptTos: {
         flexDirection: 'row',
         fontFamily: 'rubik-light'
     },
-    acceptTos2: {
-        flexDirection: 'row',
-        fontFamily: 'rubik-light',
-    },
+    // Header Title
+    // ! Delete if header component selected
     headerTitle: {
         fontSize: 35,
         paddingTop: 50,
         fontWeight: 'bold',
-        paddingLeft: 35,
-        fontFamily: 'rubik-bold'
+        fontFamily: 'rubik-bold',
+        alignSelf: 'center'
     },
-
+    // Have an cccount View
     signInContainer: {
         flexDirection: 'row',
-        alignItems: 'center'
-    },
-
-    haveAccount: {
+        alignItems: 'center',
         paddingTop: 100,
-    }
+    },
 });
