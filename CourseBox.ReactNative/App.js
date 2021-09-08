@@ -21,8 +21,8 @@ export default function App() {
     return (
       // Renders Tab Navigation.
       // <Tab />
-      // ! Delete this beforce commit
-      <CoursePreview />
+      // ! Delete this before commit
+      <SignUp />
     );
   }
   else {

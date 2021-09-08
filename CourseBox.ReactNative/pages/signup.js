@@ -108,9 +108,9 @@ const styles = StyleSheet.create({
         paddingHorizontal: 8,
         paddingVertical: 6,
         width: 330,
-        paddingLeft: 25,
-        fontSize: 20,
-        fontFamily: 'rubik-light'
+        paddingLeft: 20,
+        fontSize: 18,
+        fontFamily: 'rubik-regular'
     },
     textInputView: {
         borderWidth: 1,
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         marginTop: 20,
-        height: 55,
+        height: 50,
         backgroundColor: 'white'
     },
     profileAccountImage: {
@@ -163,6 +163,6 @@ const styles = StyleSheet.create({
     },
 
     haveAccount: {
-        paddingTop: 50,
+        paddingTop: 100,
     }
 });
