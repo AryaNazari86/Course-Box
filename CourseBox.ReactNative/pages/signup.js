@@ -15,13 +15,21 @@ export default function SignUp() {
             onPress={Keyboard.dismiss}
         >
             <View>
-                <View style={styles.container}>
-                    {/* Fake Profile Image */}
-                    <Image source={require("../assets/Images/Default_Profile_Img.png")} style={styles.profileAccountImage} />
+                {/* Header */}
 
+                {/* Way 1: */}
+                {/* <Image source={require("../assets/Images/Default_Profile_Img.png")} style={styles.profileAccountImage} /> */}
+
+                {/* Way 2: */}
+                {/* <Header /> */}
+
+                {/* Way 3 */}
+                <Text style={styles.headerTitle}>Sign Up</Text>
+
+                <View style={styles.container}>
                     {/* Username */}
                     <View style={styles.textInputView}>
-                        <MaterialIcons name="account-circle" size={44} color="black" style={{ paddingLeft: 5, }} />
+                        {/* <MaterialIcons name="account-circle" size={40} color="black" style={{ paddingLeft: 5, }} /> */}
                         <TextInput
                             style={styles.input}
                             placeholder='Username'
@@ -30,16 +38,17 @@ export default function SignUp() {
 
                     {/* Name */}
                     <View style={styles.textInputView}>
-                        <MaterialIcons name="account-circle" size={44} color="black" style={{ paddingLeft: 5, }} />
+                        {/* <MaterialIcons name="account-circle" size={40} color="black" style={{ paddingLeft: 5, }} /> */}
                         <TextInput
                             style={styles.input}
                             placeholder='Name'
+
                         />
                     </View>
 
                     {/* Email */}
                     <View style={styles.textInputView}>
-                        <MaterialIcons name="email" size={44} color="black" style={{ paddingLeft: 5, }} />
+                        {/* <MaterialIcons name="email" size={40} color="black" style={{ paddingLeft: 5, }} /> */}
                         <TextInput
                             style={styles.input}
                             placeholder='Email'
@@ -48,7 +57,7 @@ export default function SignUp() {
 
                     {/* Password */}
                     <View style={styles.textInputView}>
-                        <MaterialIcons name="vpn-key" size={44} color="black" style={{ paddingLeft: 5, }} />
+                        {/* <MaterialIcons name="vpn-key" size={40} color="black" style={{ paddingLeft: 5, }} /> */}
                         <TextInput
                             style={styles.input}
                             placeholder='Password'
@@ -56,7 +65,14 @@ export default function SignUp() {
                     </View>
 
                     {/* Accept the privacy policy */}
-                    <Text style={{ marginTop: 40, opacity: 0, }}>Code Rangers®</Text>
+                    <View style={styles.acceptTos}>
+                        <Text style={styles.acceptTos}>By signing up you accept the </Text>
+                        <Text style={styles.acceptTos}>Terms of service </Text>
+                        <Text style={styles.acceptTos}>and </Text>
+                        <Text style={styles.acceptTos}>Privacy Policy</Text>
+                    </View>
+                    {/* Sign Up Button */}
+                    <Text style={{ marginTop: 20, opacity: 0, }}>Code Rangers®</Text>
                     <TouchableOpacity style={styles.signUpButton}>
                         <Text style={styles.signUpText}>Sign Up</Text>
                     </TouchableOpacity>
@@ -76,14 +92,19 @@ const styles = StyleSheet.create({
     input: {
         paddingHorizontal: 8,
         paddingVertical: 6,
-        width: 250,
+        width: 330,
+        paddingLeft: 25,
+        fontSize: 20,
+        fontFamily: 'rubik-light'
     },
     textInputView: {
         borderWidth: 1,
-        borderRadius: 10,
+        borderRadius: 50,
         flexDirection: 'row',
         alignItems: 'center',
         marginTop: 20,
+        height: 55,
+        backgroundColor: 'white'
     },
     profileAccountImage: {
         width: 125,
@@ -93,15 +114,29 @@ const styles = StyleSheet.create({
         marginTop: 100,
     },
     signUpButton: {
-        backgroundColor: '#2CADFF',
-        width: 250,
-        height: 40,
-        borderRadius: 10,
+        backgroundColor: '#41CD7D',
+        width: 330,
+        height: 50,
+        borderRadius: 50,
         alignItems: 'center',
         justifyContent: 'center'
     },
     signUpText: {
         fontSize: 25,
-        color: 'white'
+        color: 'white',
+        fontFamily: 'rubik-bold'
+    },
+    acceptTos: {
+        flexDirection: 'row',
+        fontSize: 12,
+        paddingTop: 10,
+        fontFamily: 'rubik-light'
+    },
+    headerTitle: {
+        fontSize: 35,
+        paddingTop: 50,
+        fontWeight: 'bold',
+        paddingLeft: 35,
+        fontFamily: 'rubik-bold'
     }
 });
