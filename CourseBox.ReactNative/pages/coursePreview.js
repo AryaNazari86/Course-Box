@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import Header from '../shared/header';
 
 export default function CoursePreview() {
     var course = {
@@ -37,7 +38,9 @@ export default function CoursePreview() {
         key: '1'
     };
     return (
+
         <View>
+            <Header title={course.title} />
             {course.content.map(
                 (item) => {
                     return (
