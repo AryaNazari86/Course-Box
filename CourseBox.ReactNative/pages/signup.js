@@ -65,17 +65,27 @@ export default function SignUp() {
                     </View>
 
                     {/* Accept the privacy policy */}
+                    <Text style={{ marginTop: 10, opacity: 0, }}>Code Rangers®</Text>
                     <View style={styles.acceptTos}>
                         <Text style={styles.acceptTos}>By signing up you accept the </Text>
-                        <Text style={styles.acceptTos}>Terms of service </Text>
+                        <Text style={{ ...styles.acceptTos, ...globalStyles.highlitedText }}>Terms of service </Text>
+
+
+                    </View>
+                    <View style={styles.acceptTos2}>
                         <Text style={styles.acceptTos}>and </Text>
-                        <Text style={styles.acceptTos}>Privacy Policy</Text>
+                        <Text style={globalStyles.highlitedText}>Privacy Policy</Text>
                     </View>
                     {/* Sign Up Button */}
                     <Text style={{ marginTop: 20, opacity: 0, }}>Code Rangers®</Text>
                     <TouchableOpacity style={styles.signUpButton}>
                         <Text style={styles.signUpText}>Sign Up</Text>
                     </TouchableOpacity>
+
+                    <View style={{ ...styles.signInContainer, ...styles.haveAccount }}>
+                        <Text>Already have an account? </Text>
+                        <Text style={globalStyles.highlitedText}>Sign In</Text>
+                    </View>
 
                     <Text style={globalStyles.emptySpacer}>Code Rangers®</Text>
                 </View >
@@ -128,9 +138,11 @@ const styles = StyleSheet.create({
     },
     acceptTos: {
         flexDirection: 'row',
-        fontSize: 12,
-        paddingTop: 10,
         fontFamily: 'rubik-light'
+    },
+    acceptTos2: {
+        flexDirection: 'row',
+        fontFamily: 'rubik-light',
     },
     headerTitle: {
         fontSize: 35,
@@ -138,5 +150,14 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         paddingLeft: 35,
         fontFamily: 'rubik-bold'
+    },
+
+    signInContainer: {
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+
+    haveAccount: {
+        paddingTop: 50,
     }
 });

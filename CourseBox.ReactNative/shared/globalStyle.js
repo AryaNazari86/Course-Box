@@ -82,5 +82,8 @@ export const globalStyles = StyleSheet.create({
     emptySpacer: {
         marginTop: 75,
         opacity: 0,
+    },
+    highlitedText: {
+        color: '#399DFF',
     }
 });
