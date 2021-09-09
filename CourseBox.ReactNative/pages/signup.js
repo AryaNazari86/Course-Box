@@ -17,11 +17,11 @@ const ReviewSchema = yup.object({
     username: yup.string()
         .required()
         .max(10)
-        .min(3),
+        .min(4),
     name: yup.string()
         .required()
         .max(10)
-        .min(4),
+        .min(3),
     email: yup.string()
         .required()
         .min(5),
