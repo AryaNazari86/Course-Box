@@ -74,6 +74,8 @@ export default function SignUp({ makeUser }) {
                                 />
                             </View>
 
+                            <Text style={globalStyles.errorText}>{props.touched.username && props.errors.username}</Text>
+
                             {/* Name */}
                             <View style={styles.textInputView}>
                                 {/* <MaterialIcons name="account-circle" size={40} color="black" style={{ paddingLeft: 5, }} /> */}
@@ -85,6 +87,9 @@ export default function SignUp({ makeUser }) {
                                     onBlur={props.handleBlur('name')}
                                 />
                             </View>
+
+                            <Text style={globalStyles.errorText}>{props.touched.name && props.errors.name}</Text>
+
 
                             {/* Email */}
                             <View style={styles.textInputView}>
@@ -98,6 +103,8 @@ export default function SignUp({ makeUser }) {
                                 />
                             </View>
 
+                            <Text style={globalStyles.errorText}>{props.touched.email && props.errors.email}</Text>
+
                             {/* Password */}
                             <View style={styles.textInputView}>
                                 {/* <MaterialIcons name="vpn-key" size={40} color="black" style={{ paddingLeft: 5, }} /> */}
@@ -109,6 +116,8 @@ export default function SignUp({ makeUser }) {
                                     onBlur={props.handleBlur('password')}
                                 />
                             </View>
+
+                            <Text style={globalStyles.errorText}>{props.touched.password && props.errors.password}</Text>
 
                             {/* Accept the privacy policy */}
                             <Text style={{ marginTop: 10, opacity: 0, }}>Code Rangers®</Text>
@@ -169,7 +178,7 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         flexDirection: 'row',
         alignItems: 'center',
-        marginTop: 20,
+        marginTop: 10,
         height: 50,
         backgroundColor: 'white'
     },
