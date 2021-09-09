@@ -3,10 +3,35 @@ import { StyleSheet, View, Text, TouchableWithoutFeedback, Keyboard, TextInput, 
 import { globalStyles } from "../shared/globalStyle";
 import Header from '../shared/header';
 import { MaterialIcons } from '@expo/vector-icons';
-import CourseBox from "../components/courseBox";
-import CheckBox from "../components/Checkbox/checkbox";
+import { Formik } from "formik";
+import * as yup from 'yup';
 
-export default function SignUp() {
+// * Holds important values for the use of the function
+// const testFunc = () => {
+//     console.log("Hello")
+//   }
+
+{/* <SignUp makeUser={testFunc} /> */ }
+
+const ReviewSchema = yup.object({
+    username: yup.string()
+        .required()
+        .max(10)
+        .min(3),
+    name: yup.string()
+        .required()
+        .max(10)
+        .min(4),
+    email: yup.string()
+        .required()
+        .min(5),
+    password: yup.string()
+        .required()
+        .min(5)
+        .max(100)
+})
+
+export default function SignUp({ makeUser }) {
     // ! Don't enable yet
     // <Header title='Sign Up' />
 
@@ -27,74 +52,96 @@ export default function SignUp() {
                 {/* Way 3 */}
                 <Text style={styles.headerTitle}>Sign Up</Text>
 
-                <View style={styles.container}>
-                    {/* Username */}
-                    <View style={styles.textInputView}>
-                        {/* <MaterialIcons name="account-circle" size={40} color="black" style={{ paddingLeft: 5, }} /> */}
-                        <TextInput
-                            style={styles.input}
-                            placeholder='Username'
-                        />
-                    </View>
+                <Formik
+                    initialValues={{ username: '', name: '', email: '', password: '' }}
+                    validationSchema={ReviewSchema}
+                    onSubmit={(values, actions) => {
+                        makeUser(values);
+                        actions.resetForm();
+                    }}
+                >
+                    {(props) => (
+                        <View style={styles.container}>
+                            {/* Username */}
+                            <View style={styles.textInputView}>
+                                {/* <MaterialIcons name="account-circle" size={40} color="black" style={{ paddingLeft: 5, }} /> */}
+                                <TextInput
+                                    style={styles.input}
+                                    placeholder='Username'
+                                    onChangeText={props.handleChange('username')}
+                                    value={props.values.username}
+                                    onBlur={props.handleBlur('username')}
+                                />
+                            </View>
 
-                    {/* Name */}
-                    <View style={styles.textInputView}>
-                        {/* <MaterialIcons name="account-circle" size={40} color="black" style={{ paddingLeft: 5, }} /> */}
-                        <TextInput
-                            style={styles.input}
-                            placeholder='Name'
+                            {/* Name */}
+                            <View style={styles.textInputView}>
+                                {/* <MaterialIcons name="account-circle" size={40} color="black" style={{ paddingLeft: 5, }} /> */}
+                                <TextInput
+                                    style={styles.input}
+                                    placeholder='Name'
+                                    onChangeText={props.handleChange('name')}
+                                    value={props.values.name}
+                                    onBlur={props.handleBlur('name')}
+                                />
+                            </View>
 
-                        />
-                    </View>
+                            {/* Email */}
+                            <View style={styles.textInputView}>
+                                {/* <MaterialIcons name="email" size={40} color="black" style={{ paddingLeft: 5, }} /> */}
+                                <TextInput
+                                    style={styles.input}
+                                    placeholder='Email'
+                                    onChangeText={props.handleChange('email')}
+                                    value={props.values.email}
+                                    onBlur={props.handleBlur('email')}
+                                />
+                            </View>
 
-                    {/* Email */}
-                    <View style={styles.textInputView}>
-                        {/* <MaterialIcons name="email" size={40} color="black" style={{ paddingLeft: 5, }} /> */}
-                        <TextInput
-                            style={styles.input}
-                            placeholder='Email'
-                        />
-                    </View>
+                            {/* Password */}
+                            <View style={styles.textInputView}>
+                                {/* <MaterialIcons name="vpn-key" size={40} color="black" style={{ paddingLeft: 5, }} /> */}
+                                <TextInput
+                                    style={styles.input}
+                                    placeholder='Password'
+                                    onChangeText={props.handleChange('password')}
+                                    value={props.values.password}
+                                    onBlur={props.handleBlur('password')}
+                                />
+                            </View>
 
-                    {/* Password */}
-                    <View style={styles.textInputView}>
-                        {/* <MaterialIcons name="vpn-key" size={40} color="black" style={{ paddingLeft: 5, }} /> */}
-                        <TextInput
-                            style={styles.input}
-                            placeholder='Password'
-                        />
-                    </View>
+                            {/* Accept the privacy policy */}
+                            <Text style={{ marginTop: 10, opacity: 0, }}>Code Rangers®</Text>
+                            <View style={styles.acceptTos}>
+                                <Text style={styles.acceptTos}>By signing up you accept the </Text>
+                                <TouchableOpacity>
+                                    <Text style={globalStyles.highlitedText}>Terms of service </Text>
+                                </TouchableOpacity>
 
-                    {/* Accept the privacy policy */}
-                    <Text style={{ marginTop: 10, opacity: 0, }}>Code Rangers®</Text>
-                    <View style={styles.acceptTos}>
-                        <Text style={styles.acceptTos}>By signing up you accept the </Text>
-                        <TouchableOpacity>
-                            <Text style={globalStyles.highlitedText}>Terms of service </Text>
-                        </TouchableOpacity>
+                            </View>
+                            <View style={styles.acceptTos}>
+                                <Text style={styles.acceptTos}>and </Text>
+                                <TouchableOpacity>
+                                    <Text style={globalStyles.highlitedText}>Privacy Policy</Text>
+                                </TouchableOpacity>
+                            </View>
+                            {/* Sign Up Button */}
+                            <Text style={{ marginTop: 20, opacity: 0, }}>Code Rangers®</Text>
+                            <TouchableOpacity style={styles.signUpButton} onPress={props.handleSubmit}>
+                                <Text style={styles.signUpText}>Sign Up</Text>
+                            </TouchableOpacity>
 
-                    </View>
-                    <View style={styles.acceptTos}>
-                        <Text style={styles.acceptTos}>and </Text>
-                        <TouchableOpacity>
-                            <Text style={globalStyles.highlitedText}>Privacy Policy</Text>
-                        </TouchableOpacity>
-                    </View>
-                    {/* Sign Up Button */}
-                    <Text style={{ marginTop: 20, opacity: 0, }}>Code Rangers®</Text>
-                    <TouchableOpacity style={styles.signUpButton}>
-                        <Text style={styles.signUpText}>Sign Up</Text>
-                    </TouchableOpacity>
+                            <View style={styles.signInContainer}>
+                                <Text>Already have an account? </Text>
+                                <TouchableOpacity>
+                                    <Text style={globalStyles.highlitedText}>Sign In</Text>
+                                </TouchableOpacity>
+                            </View>
 
-                    <View style={styles.signInContainer}>
-                        <Text>Already have an account? </Text>
-                        <TouchableOpacity>
-                            <Text style={globalStyles.highlitedText}>Sign In</Text>
-                        </TouchableOpacity>
-                    </View>
-
-                    <Text style={globalStyles.emptySpacer}>Code Rangers®</Text>
-                </View >
+                            <Text style={globalStyles.emptySpacer}>Code Rangers®</Text>
+                        </View >
+                    )}
+                </Formik>
 
             </View>
         </TouchableWithoutFeedback >
