@@ -85,5 +85,11 @@ export const globalStyles = StyleSheet.create({
     },
     highlitedText: {
         color: '#399DFF',
+    },
+    errorText: {
+        color: 'crimson',
+        fontWeight: 'bold',
+        marginTop: 6,
+        textAlign: 'center'
     }
 });
