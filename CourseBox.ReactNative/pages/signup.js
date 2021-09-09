@@ -224,6 +224,6 @@ const styles = StyleSheet.create({
     signInContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingTop: 140,
+        paddingTop: 80,
     },
 });
