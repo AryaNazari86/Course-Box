@@ -3,8 +3,6 @@ import { StyleSheet, View, Text, TouchableWithoutFeedback, Keyboard, TextInput, 
 import { globalStyles } from "../../shared/globalStyle";
 import Header from '../../shared/header';
 import { MaterialIcons } from '@expo/vector-icons';
-import CourseBox from "../../components/courseBox";
-import CheckBox from "../../components/Checkbox/checkbox";
 import { Formik } from "formik";
 import * as yup from 'yup';
 
@@ -18,7 +16,7 @@ export default function ForgetPassword_Password() {
         setPass(val);
     }
 
-    const ReviewSchema = yup.object({
+    const passwordSchema = yup.object({
         password: yup.string()
             .required()
             .min(5)
@@ -42,17 +40,14 @@ export default function ForgetPassword_Password() {
                 {/* Header */}
 
                 {/* Way 1: */}
-                {/* <Image source={require("../assets/Images/Default_Profile_Img.png")} style={styles.profileAccountImage} /> */}
-
-                {/* Way 2: */}
                 {/* <Header /> */}
 
-                {/* Way 3 */}
+                {/* Way 2 */}
                 <Text style={styles.headerTitle}>Sign Up</Text>
 
                 <Formik
                     initialValues={{ password: '', confirmPassword: '' }}
-                    validationSchema={ReviewSchema}
+                    validationSchema={passwordSchema}
                     onSubmit={(values, actions) => {
                         makeUser(values);
                         actions.resetForm();
@@ -62,7 +57,6 @@ export default function ForgetPassword_Password() {
                         <View style={styles.container}>
                             {/* Password */}
                             <View style={styles.textInputView}>
-                                {/* <MaterialIcons name="vpn-key" size={40} color="black" style={{ paddingLeft: 5, }} /> */}
                                 <TextInput
                                     style={styles.input}
                                     placeholder='New Password'
@@ -76,7 +70,6 @@ export default function ForgetPassword_Password() {
 
                             {/* Confirm Password */}
                             <View style={styles.textInputView}>
-                                {/* <MaterialIcons name="vpn-key" size={40} color="black" style={{ paddingLeft: 5, }} /> */}
                                 <TextInput
                                     style={styles.input}
                                     placeholder='Confirm New Password'
@@ -87,14 +80,13 @@ export default function ForgetPassword_Password() {
                             </View>
 
                             <Text style={globalStyles.errorText}>{props.touched.confirmPassword && props.errors.confirmPassword}</Text>
-                            {/* Sign Up Button */}
-                            <Text style={{ marginTop: 20, opacity: 0, }}>Code Rangers®</Text>
-                            <TouchableOpacity style={styles.signUpButton} onPress={props.handleSubmit}>
-                                <Text style={styles.signUpText}>Continue</Text>
+                            {/* Continue Button */}
+                            <TouchableOpacity style={styles.continueButton} onPress={props.handleSubmit}>
+                                <Text style={styles.continueText}>Continue</Text>
                             </TouchableOpacity>
 
-                            <View style={styles.signInContainer}>
-                                <Text>Already have an account? </Text>
+                            <View style={styles.rememberYourPassword}>
+                                <Text>Remember your password? </Text>
                                 <TouchableOpacity>
                                     <Text style={globalStyles.highlitedText}>Sign In</Text>
                                 </TouchableOpacity>
@@ -135,26 +127,21 @@ const styles = StyleSheet.create({
         height: 50,
         backgroundColor: 'white'
     },
-    // The confirm Button
-    signUpButton: {
+    // The continue Button
+    continueButton: {
         backgroundColor: '#41CD7D',
         width: 330,
         height: 50,
         borderRadius: 50,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginTop: 20,
     },
-    // The text of confirm button
-    signUpText: {
+    // The text of continue button
+    continueText: {
         fontSize: 25,
         color: 'white',
         fontFamily: 'rubik-bold'
-    },
-    // Accept Tos Text
-    acceptTos: {
-        flexDirection: 'row',
-        fontFamily: 'rubik-light',
-        paddingTop: 20,
     },
     // Header Title
     // ! Delete if header component selected
@@ -163,12 +150,13 @@ const styles = StyleSheet.create({
         paddingTop: 50,
         fontWeight: 'bold',
         fontFamily: 'rubik-bold',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        marginBottom: 20,
     },
-    // Have an cccount View
-    signInContainer: {
+    // Remember your password
+    rememberYourPassword: {
         flexDirection: 'row',
         alignItems: 'center',
-        paddingTop: 420,
+        paddingTop: 330,
     },
 });

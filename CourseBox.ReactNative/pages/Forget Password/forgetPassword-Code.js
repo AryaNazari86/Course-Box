@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, TouchableWithoutFeedback, Keyboard, TextInput, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableWithoutFeedback, Keyboard, TextInput, TouchableOpacity } from 'react-native';
 import { globalStyles } from "../../shared/globalStyle";
 import Header from '../../shared/header';
 import { MaterialIcons } from '@expo/vector-icons';
-import CourseBox from "../../components/courseBox";
-import CheckBox from "../../components/Checkbox/checkbox";
 
 export default function ForgetPassword_Code() {
     // ! Don't enable yet
@@ -19,32 +17,27 @@ export default function ForgetPassword_Code() {
                 {/* Header */}
 
                 {/* Way 1: */}
-                {/* <Image source={require("../assets/Images/Default_Profile_Img.png")} style={styles.profileAccountImage} /> */}
-
-                {/* Way 2: */}
                 {/* <Header /> */}
 
-                {/* Way 3 */}
+                {/* Way 2 */}
                 <Text style={styles.headerTitle}>Recover Password</Text>
 
                 <View style={styles.container}>
-                    <Text style={styles.acceptTos}>Enter the code we sent to your email</Text>
-                    {/* Email */}
+                    <Text style={styles.normalText}>Enter the code we sent to your email</Text>
+                    {/* Code */}
                     <View style={styles.textInputView}>
-                        {/* <MaterialIcons name="email" size={40} color="black" style={{ paddingLeft: 5, }} /> */}
                         <TextInput
                             style={styles.input}
                             placeholder='Code'
                         />
                     </View>
 
-                    {/* Sign Up Button */}
-                    <Text style={{ marginTop: 20, opacity: 0, }}>Code Rangers®</Text>
+                    {/* Continue Button */}
                     <TouchableOpacity style={styles.signUpButton}>
                         <Text style={styles.signUpText}>Continue</Text>
                     </TouchableOpacity>
 
-                    <View style={styles.signInContainer}>
+                    <View style={styles.rememberPass}>
                         <Text>Remember your password? </Text>
                         <TouchableOpacity>
                             <Text style={globalStyles.highlitedText}>Sign In</Text>
@@ -84,23 +77,24 @@ const styles = StyleSheet.create({
         height: 50,
         backgroundColor: 'white'
     },
-    // The confirm Button
+    // The continue Button
     signUpButton: {
         backgroundColor: '#41CD7D',
         width: 330,
         height: 50,
         borderRadius: 50,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginTop: 20,
     },
-    // The text of confirm button
+    // The text of continue button
     signUpText: {
         fontSize: 25,
         color: 'white',
         fontFamily: 'rubik-bold'
     },
-    // Accept Tos Text
-    acceptTos: {
+    // Enter the code
+    normalText: {
         flexDirection: 'row',
         fontFamily: 'rubik-light',
         paddingTop: 20,
@@ -114,8 +108,8 @@ const styles = StyleSheet.create({
         fontFamily: 'rubik-bold',
         alignSelf: 'center'
     },
-    // Have an cccount View
-    signInContainer: {
+    // Remember Your password
+    rememberPass: {
         flexDirection: 'row',
         alignItems: 'center',
         paddingTop: 420,
