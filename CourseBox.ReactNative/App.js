@@ -27,10 +27,7 @@ export default function App() {
   if (fontsLoaded) {
     return (
       // Renders Tab Navigation.
-      // <Tab />
-
-      // ! Delete this before commit
-      <Navigator />
+      <Tab />
     );
   }
   else {
