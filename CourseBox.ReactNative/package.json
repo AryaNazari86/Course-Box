@@ -25,6 +25,7 @@
     "react-native-svg": "^12.1.1",
     "react-native-vector-icons": "^8.1.0",
     "react-native-web": "~0.13.12",
+    "react-navigation": "^4.4.4",
     "strict-uri-encode": "^2.0.0",
     "yet": "^0.1.0",
     "yup": "^0.32.9"
