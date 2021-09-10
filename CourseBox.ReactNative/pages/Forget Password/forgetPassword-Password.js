@@ -6,7 +6,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Formik } from "formik";
 import * as yup from 'yup';
 
-export default function ForgetPassword_Password() {
+export default function ForgetPassword_Password({ navigation }) {
     // ! Don't enable yet
     // <Header title='Recover Password' />
 
@@ -31,20 +31,17 @@ export default function ForgetPassword_Password() {
             })
     })
 
+    const signInPress = () => {
+        console.log('Hi')
+        navigation.navigate('SignIn')
+    }
+
     return (
         <TouchableWithoutFeedback
             onPress={Keyboard.dismiss}
             style={styles.container}
         >
             <View>
-                {/* Header */}
-
-                {/* Way 1: */}
-                {/* <Header /> */}
-
-                {/* Way 2 */}
-                <Text style={styles.headerTitle}>Sign Up</Text>
-
                 <Formik
                     initialValues={{ password: '', confirmPassword: '' }}
                     validationSchema={passwordSchema}
@@ -81,16 +78,9 @@ export default function ForgetPassword_Password() {
 
                             <Text style={globalStyles.errorText}>{props.touched.confirmPassword && props.errors.confirmPassword}</Text>
                             {/* Continue Button */}
-                            <TouchableOpacity style={styles.continueButton} onPress={props.handleSubmit}>
+                            <TouchableOpacity style={styles.continueButton} onPress={props.handleSubmit, signInPress}>
                                 <Text style={styles.continueText}>Continue</Text>
                             </TouchableOpacity>
-
-                            <View style={styles.rememberYourPassword}>
-                                <Text>Remember your password? </Text>
-                                <TouchableOpacity>
-                                    <Text style={globalStyles.highlitedText}>Sign In</Text>
-                                </TouchableOpacity>
-                            </View>
 
                             <Text style={globalStyles.emptySpacer}>Code Rangers®</Text>
                         </View >

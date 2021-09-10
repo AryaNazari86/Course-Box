@@ -4,9 +4,14 @@ import { globalStyles } from "../../shared/globalStyle";
 import Header from '../../shared/header';
 import { MaterialIcons } from '@expo/vector-icons';
 
-export default function ForgetPassword_Email() {
+export default function ForgetPassword_Email({ navigation }) {
     // ! Don't enable yet
     // <Header title='Recover Password' />
+
+    const pressHandler = () => {
+        console.log('Hi')
+        navigation.navigate('Code')
+    }
 
     return (
         <TouchableWithoutFeedback
@@ -14,14 +19,6 @@ export default function ForgetPassword_Email() {
             style={styles.container}
         >
             <View>
-                {/* Header */}
-
-                {/* Way 1: */}
-                {/* <Header /> */}
-
-                {/* Way 2 */}
-                <Text style={styles.headerTitle}>Recover Password</Text>
-
                 <View style={styles.container}>
 
                     {/* Email */}
@@ -34,15 +31,8 @@ export default function ForgetPassword_Email() {
 
                     {/* Continue Button */}
                     <TouchableOpacity style={styles.continueButton}>
-                        <Text style={styles.continueText}>Continue</Text>
+                        <Text style={styles.continueText} onPress={pressHandler}>Continue</Text>
                     </TouchableOpacity>
-
-                    <View style={styles.rememberPassword}>
-                        <Text>Remember your password? </Text>
-                        <TouchableOpacity>
-                            <Text style={globalStyles.highlitedText}>Sign In</Text>
-                        </TouchableOpacity>
-                    </View>
 
                     <Text style={globalStyles.emptySpacer}>Code Rangers®</Text>
                 </View >

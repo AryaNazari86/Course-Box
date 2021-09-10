@@ -6,9 +6,14 @@ import { MaterialIcons } from '@expo/vector-icons';
 import CourseBox from "../components/courseBox";
 import CheckBox from "../components/Checkbox/checkbox";
 
-export default function SignIn() {
+export default function SignIn({ navigation }) {
     // ! Don't enable yet
     // <Header title='Sign Up' />
+
+    const forgetPress = () => {
+        console.log('Hi')
+        navigation.navigate('Email')
+    }
 
     return (
         <TouchableWithoutFeedback
@@ -16,17 +21,6 @@ export default function SignIn() {
             style={styles.container}
         >
             <View>
-                {/* Header */}
-
-                {/* Way 1: */}
-                {/* <Image source={require("../assets/Images/Default_Profile_Img.png")} style={styles.profileAccountImage} /> */}
-
-                {/* Way 2: */}
-                {/* <Header /> */}
-
-                {/* Way 3 */}
-                <Text style={styles.headerTitle}>Sign In</Text>
-
                 <View style={styles.container}>
                     {/* ! Delete if username was not requires */}
                     {/* Username
@@ -59,7 +53,7 @@ export default function SignIn() {
                     <Text style={{ marginTop: 10, opacity: 0, }}>Code Rangers®</Text>
                     <View style={styles.acceptTos}>
                         <Text style={styles.acceptTos}>Did you </Text>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={forgetPress}>
                             <Text style={globalStyles.highlitedText}>Forget your password?</Text>
                         </TouchableOpacity>
 
@@ -69,13 +63,6 @@ export default function SignIn() {
                     <TouchableOpacity style={styles.signUpButton}>
                         <Text style={styles.signUpText}>Sign In</Text>
                     </TouchableOpacity>
-
-                    <View style={styles.signInContainer}>
-                        <Text>Don't have an account? </Text>
-                        <TouchableOpacity>
-                            <Text style={globalStyles.highlitedText}>Sign Up</Text>
-                        </TouchableOpacity>
-                    </View>
 
                     <Text style={globalStyles.emptySpacer}>Code Rangers®</Text>
                 </View >

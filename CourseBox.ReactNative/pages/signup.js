@@ -31,9 +31,14 @@ const ReviewSchema = yup.object({
         .max(100)
 })
 
-export default function SignUp({ makeUser }) {
+export default function SignUp({ makeUser, navigation }) {
     // ! Don't enable yet
     // <Header title='Sign Up' />
+
+    const signInPress = () => {
+        console.log('Hi')
+        navigation.navigate('SignIn')
+    }
 
     return (
         <TouchableWithoutFeedback
@@ -41,17 +46,6 @@ export default function SignUp({ makeUser }) {
             style={styles.container}
         >
             <View>
-                {/* Header */}
-
-                {/* Way 1: */}
-                {/* <Image source={require("../assets/Images/Default_Profile_Img.png")} style={styles.profileAccountImage} /> */}
-
-                {/* Way 2: */}
-                {/* <Header /> */}
-
-                {/* Way 3 */}
-                <Text style={styles.headerTitle}>Sign Up</Text>
-
                 <Formik
                     initialValues={{ username: '', name: '', email: '', password: '' }}
                     validationSchema={ReviewSchema}
@@ -142,7 +136,7 @@ export default function SignUp({ makeUser }) {
 
                             <View style={styles.signInContainer}>
                                 <Text>Already have an account? </Text>
-                                <TouchableOpacity>
+                                <TouchableOpacity onPress={signInPress}>
                                     <Text style={globalStyles.highlitedText}>Sign In</Text>
                                 </TouchableOpacity>
                             </View>
