@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Tab from './routes/tabs';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
+import 'react-native-gesture-handler';
 
 // Test Pages
 import SignUp from './pages/signup';
@@ -10,6 +11,8 @@ import CoursePreview from './pages/coursePreview';
 import ForgetPassword_Email from './pages/Forget Password/forgetPassword-Email';
 import ForgetPassword_Code from './pages/Forget Password/forgetPassword-Code';
 import ForgetPassword_Password from './pages/Forget Password/forgetPassword-Password';
+import Navigator from './routes/PasswordStack';
+
 
 const getFonts = () => Font.loadAsync({
   'rubik-bold': require('./assets/Fonts/Rubik-Bold.ttf'),
@@ -24,7 +27,10 @@ export default function App() {
   if (fontsLoaded) {
     return (
       // Renders Tab Navigation.
-      <Tab />
+      // <Tab />
+
+      // ! Delete this before commit
+      <Navigator />
     );
   }
   else {
