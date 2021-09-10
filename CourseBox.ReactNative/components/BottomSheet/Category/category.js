@@ -3,6 +3,7 @@ import { View, Text, ScrollView, FlatList } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import styles from './styles';
 import CourseBox from '../../courseBox';
+import { globalStyles } from "../../../shared/globalStyle";
 
 export default function Category({ category }) {
     // Get courses with that category from API.
@@ -27,6 +28,7 @@ export default function Category({ category }) {
             <View style={styles.content}>
                 <FlatList
                     data={courses}
+                    style={styles.list}
                     renderItem={({ item }) => (<CourseBox item={item} />)} />
             </View>
         </View>

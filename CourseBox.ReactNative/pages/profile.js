@@ -91,9 +91,9 @@ export default function Profile() {
                 </View >
 
                 {/* Participated Courses */}
-                < View style={styles.madeCoursesHeader} >
+                < View >
                     <Text style={styles.madeCoursesText}>Participated Courses</Text>
-                    <View style={styles.madeCoursesList}>
+                    <View>
                         {/* Participated course list */}
                         {participatedCourses.map((item, index) => (
                             <CourseBox item={item} />

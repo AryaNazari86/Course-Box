@@ -17,6 +17,9 @@ const styles = StyleSheet.create({
     },
     content: {
         alignItems: 'center',
+    },
+    list: {
+        paddingBottom: '500%',
     }
 });
 
