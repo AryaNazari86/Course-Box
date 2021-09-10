@@ -7,6 +7,9 @@ import AppLoading from 'expo-app-loading';
 import SignUp from './pages/signup';
 import SignIn from './pages/signin';
 import CoursePreview from './pages/coursePreview';
+import ForgetPassword_Email from './pages/Forget Password/forgetPassword-Email';
+import ForgetPassword_Code from './pages/Forget Password/forgetPassword-Code';
+import ForgetPassword_Password from './pages/Forget Password/forgetPassword-Password';
 
 const getFonts = () => Font.loadAsync({
   'rubik-bold': require('./assets/Fonts/Rubik-Bold.ttf'),
