@@ -48,7 +48,6 @@ export default function SignUp({ makeUser, navigation }) {
             style={styles.container}
         >
             <View>
-                <Header title='Sign Up' />
                 <Formik
                     initialValues={{ username: '', name: '', email: '', password: '' }}
                     validationSchema={ReviewSchema}
