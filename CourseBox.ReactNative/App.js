@@ -32,7 +32,7 @@ export default function App() {
   if (fontsLoaded) {
     return (
       // Renders Tab Navigation
-      <Tab />
+      <PassNavigator />
     );
   }
   else {

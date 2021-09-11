@@ -25,6 +25,7 @@ export default function SignIn({ navigation }) {
             style={styles.container}
         >
             <View>
+                <Header title='Sign In' backButton={true} backAction={() => navigation.goBack()} />
                 <View style={styles.container}>
                     {/* ! Delete if username was not requires */}
                     {/* Username
