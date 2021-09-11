@@ -6,7 +6,7 @@ import Header from '../shared/header';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import CourseBox from "../components/courseBox";
 
-export default function Search() {
+export default function Search({ navigation }) {
     const [courses, setCourses] = useState([
         { title: 'Dribbling', category: 'Sports', author: '@Arya', participants: '100', likes: '99', description: 'something ...', image: require(`../assets/Images/messi.jpeg`), key: '1' },
         { title: 'Hacking', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/hacking_course.jpg`), key: '2' },
@@ -83,7 +83,6 @@ export default function Search() {
             setCategory(newSelectedArray);
         }
     }
-
     const [searchValue, setSearchValue] = useState('');
     const [category, setCategory] = useState([
         { name: 'All', selected: true, key: '1' },
@@ -91,6 +90,9 @@ export default function Search() {
         { name: 'Programming', selected: false, key: '3' },
     ]);
     const [selectedCategory, setSelectedCategory] = useState('All');
+    const presshandler = (item) => {
+        navigation.push('CoursePreview', { item });
+    }
     return (
         <TouchableWithoutFeedback
             onPress={Keyboard.dismiss}
@@ -130,6 +132,7 @@ export default function Search() {
                         {filterCourses().map((item) => {
                             return (
                                 <CourseBox
+                                    pressHandler={pressHandler}
                                     item={item}
                                 />
                             )

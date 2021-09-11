@@ -12,7 +12,7 @@ import ForgetPassword_Email from './pages/Forget Password/forgetPassword-Email';
 import ForgetPassword_Code from './pages/Forget Password/forgetPassword-Code';
 import ForgetPassword_Password from './pages/Forget Password/forgetPassword-Password';
 import PassNavigator from './routes/PasswordStack';
-
+import coursePreviewStack from './routes/coursePreviewStack';
 
 const getFonts = () => Font.loadAsync({
   'rubik-bold': require('./assets/Fonts/Rubik-Bold.ttf'),
@@ -32,7 +32,7 @@ export default function App() {
   if (fontsLoaded) {
     return (
       // Renders Tab Navigation
-      <Tab />
+      <coursePreviewStack />
     );
   }
   else {
