@@ -46,10 +46,11 @@ export default function Home() {
             </View>
             <BottomSheet
                 ref={sheetRef}
-                snapPoints={[0, 450, 300]}
-                borderRadius={15}
-                renderHeader={BottomSheetHeader}
+                snapPoints={[0, 500, 300]}
+                renderHeader={() => <BottomSheetHeader category={selectedCategory} />}
                 renderContent={() => <BottomSheetCategory category={selectedCategory} />}
+                enabledInnerScrolling={true}
+                enabledContentGestureInteraction={false}
             />
         </View>
     );
