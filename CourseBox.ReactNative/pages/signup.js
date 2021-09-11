@@ -34,7 +34,9 @@ const ReviewSchema = yup.object({
 export default function SignUp({ makeUser, navigation }) {
     // ! Don't enable yet
     // <Header title='Sign Up' />
-
+    const signUpPress = () => {
+        navigation.navigate('Tab')
+    }
     const signInPress = () => {
         console.log('Hi')
         navigation.navigate('SignIn')
@@ -130,7 +132,7 @@ export default function SignUp({ makeUser, navigation }) {
                             </View>
                             {/* Sign Up Button */}
                             <Text style={{ marginTop: 20, opacity: 0, }}>Code Rangers®</Text>
-                            <TouchableOpacity style={styles.signUpButton} onPress={props.handleSubmit}>
+                            <TouchableOpacity style={styles.signUpButton} onPress={props.handleSubmit, signUpPress}>
                                 <Text style={styles.signUpText}>Sign Up</Text>
                             </TouchableOpacity>
 

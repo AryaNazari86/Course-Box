@@ -31,7 +31,7 @@ export default function App() {
 
   if (fontsLoaded) {
     return (
-      // Renders Tab Navigation.
+      // Renders Tab Navigation
       <Tab />
     );
   }

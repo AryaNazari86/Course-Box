@@ -10,6 +10,10 @@ export default function SignIn({ navigation }) {
     // ! Don't enable yet
     // <Header title='Sign Up' />
 
+    const signInPress = () => {
+        navigation.navigate('Tab')
+    }
+
     const forgetPress = () => {
         console.log('Hi')
         navigation.navigate('Email')
@@ -60,7 +64,7 @@ export default function SignIn({ navigation }) {
                     </View>
                     {/* Sign Up Button */}
                     <Text style={{ marginTop: 20, opacity: 0, }}>Code Rangers®</Text>
-                    <TouchableOpacity style={styles.signUpButton}>
+                    <TouchableOpacity style={styles.signUpButton} onPress={signInPress}>
                         <Text style={styles.signUpText}>Sign In</Text>
                     </TouchableOpacity>
 
