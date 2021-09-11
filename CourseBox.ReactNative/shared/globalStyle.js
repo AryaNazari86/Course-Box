@@ -7,7 +7,6 @@ export const globalStyles = StyleSheet.create({
     },
     headerTitle: {
         color: '#14213D',
-        textAlign: 'center',
         fontFamily: 'rubik-light',
         fontSize: 26,
     },

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, TouchableWithoutFeedback, Keyboard, TextInput, TouchableOpacity } from 'react-native';
 import { globalStyles } from "../../shared/globalStyle";
+import Header from '../../shared/header';
 export default function ForgetPassword_Code({ navigation }) {
     const passwordPress = () => {
         navigation.navigate('Password')
@@ -12,6 +13,8 @@ export default function ForgetPassword_Code({ navigation }) {
             style={styles.container}
         >
             <View>
+
+                <Header title='Forget Password' backButton={true} backAction={() => navigation.goBack()} />
                 <View style={styles.container}>
                     <Text style={styles.normalText}>Enter the code we sent to your email</Text>
                     {/* Code Input*/}

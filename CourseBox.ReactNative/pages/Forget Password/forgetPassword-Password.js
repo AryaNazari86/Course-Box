@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, TouchableWithoutFeedback, Keyboard, TextInput, Image, TouchableOpacity } from 'react-native';
 import { globalStyles } from "../../shared/globalStyle";
+import Header from '../../shared/header';
 import { Formik } from "formik";
 import * as yup from 'yup';
 
@@ -39,6 +40,8 @@ export default function ForgetPassword_Password({ navigation, goToUser }) {
             style={styles.container}
         >
             <View>
+
+            <Header title='Forget Password' backButton={true} backAction={() => navigation.goBack()} />
                 <Formik
                     initialValues={{ password: '', confirmPassword: '' }}
                     validationSchema={passwordSchema}

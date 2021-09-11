@@ -1,12 +1,20 @@
 import React, { useState, useRef } from "react";
 import { ScrollView, StyleSheet, View, TouchableWithoutFeedback, Text } from "react-native";
+
+// Header Imports
+import Header from '../shared/header';
+
+// Category Box Imports
+import CategoryBox from "../components/Categorybox/categorybox";
+
+// Bottom Sheet Imports
 import Animated from 'react-native-reanimated';
 import BottomSheet from 'reanimated-bottom-sheet';
-import Header from '../shared/header';
-import CategoryBox from "../components/Categorybox/categorybox";
 import BottomSheetHeader from "../components/BottomSheet/Header/header";
 import BottomSheetCategory from "../components/BottomSheet/Category/category";
 
+// Carousel Imports
+import SimpleCarousel from '../components/Carousel/SimpleCarousel/simple';
 
 export default function Home() {
     // Access bottom sheet using sheetRef.current;
@@ -26,6 +34,20 @@ export default function Home() {
     // Clicked CategoryId will be here.
     const [selectedCategory, setSelectedCategory] = useState(categories[0]);
 
+
+    // Get Newest Courses From API
+    const newestCourses = [
+        { title: 'Dribbling', category: 'Sports', author: '@Arya', participants: '100', likes: '99', description: 'something ...', image: require(`../assets/Images/messi.jpeg`), key: '1' },
+        { title: 'Hacking', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/hacking_course.jpg`), key: '2' },
+        { title: 'Javascript Beginner Course', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/Javascript_Course.png`), key: '3' },
+        { title: 'HTML Beginner Course', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/HTML_Course.jpeg`), key: '4' },
+        { title: 'CSS Beginner Course', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/CSS_Course.png`), key: '5' },
+        { title: 'PyQT5 Course', category: 'Programming', author: '@Arya', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/PyQT5_Course.jpeg`), key: '6' },
+        { title: 'C# Course', category: 'Programming', author: '@MHK', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/c-sharp-course.jpeg`), key: '7' },
+        { title: 'Soccer for beginners', category: 'Sports', author: '@Person', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/soccer_Course.jpeg`), key: '8' },
+    ];
+
+    // When user click on a category.
     const onCategoryClicked = (category) => {
         setSelectedCategory(category);
         if (bottomSheetRef != null) {
@@ -36,10 +58,13 @@ export default function Home() {
 
     return (
         <View style={styles.container}>
+
             <TouchableWithoutFeedback onPress={() => bottomSheetRef.current.snapTo(0)}>
                 <View style={styles.contentContainer}>
+
                     {/* Header */}
                     <Header title="Home" />
+
                     {/* Categories */}
                     <ScrollView
                         horizontal={true}
@@ -48,10 +73,15 @@ export default function Home() {
                             <CategoryBox category={item} onPress={() => onCategoryClicked(item)} />
                         ))}
                     </ScrollView>
+                    
+                    <SimpleCarousel courses={newestCourses} />
+
                     {/* When we open category bottom sheet, the screen will become dark. */}
                     <View style={[darkScreen, styles.darkScreen]}></View>
+
                 </View>
             </TouchableWithoutFeedback>
+
             <BottomSheet
                 ref={bottomSheetRef}
                 snapPoints={[0, '80%', '40%']}
@@ -61,6 +91,7 @@ export default function Home() {
                 enabledContentGestureInteraction={false}
                 onCloseEnd={() => setDarkScreen({ width: 0, height: 0 })}
             />
+
         </View>
     );
 }

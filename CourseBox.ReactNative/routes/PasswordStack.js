@@ -14,48 +14,38 @@ import Header from "../shared/header";
 const screens = {
     SignUp: {
         screen: SignUp,
-        navigationOptions: ({ navigation }) => {
-            return {
-                headerTitle: () => <Header title='Sign Up' />
-            }
+        navigationOptions: {
+            headerShown: false
         }
     },
     SignIn: {
         screen: SignIn,
-        navigationOptions: ({ navigation }) => {
-            return {
-                headerTitle: () => <Header title='Sign Up' backButton='true' />
-            }
+        navigationOptions: {
+            headerShown: false
         }
     },
     Tab: {
         screen: Tab,
         navigationOptions: {
-            headerShown: false,
+            headerShown: false
         }
     },
     Email: {
         screen: ForgetPassword_Email,
-        navigationOptions: ({ navigation }) => {
-            return {
-                headerTitle: () => <Header title='Sign Up' backButton='true' />
-            }
+        navigationOptions: {
+            headerShown: false
         }
     },
     Code: {
         screen: ForgetPassword_Code,
-        navigationOptions: ({ navigation }) => {
-            return {
-                headerTitle: () => <Header title='Sign Up' backButton='true' />
-            }
+        navigationOptions: {
+            headerShown: false
         }
     },
     Password: {
         screen: ForgetPassword_Password,
-        navigationOptions: ({ navigation }) => {
-            return {
-                headerTitle: () => <Header title='Sign Up' backButton='true' />
-            }
+        navigationOptions: {
+            headerShown: false
         }
     }
 }
