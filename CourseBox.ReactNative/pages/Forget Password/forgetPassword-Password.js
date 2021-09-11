@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, TouchableWithoutFeedback, Keyboard, TextInput, Image, TouchableOpacity } from 'react-native';
 import { globalStyles } from "../../shared/globalStyle";
-import Header from '../../shared/header';
-import { MaterialIcons } from '@expo/vector-icons';
 import { Formik } from "formik";
 import * as yup from 'yup';
 
-export default function ForgetPassword_Password({ navigation }) {
+export default function ForgetPassword_Password({ navigation, goToUser }) {
     // ! Don't enable yet
     // <Header title='Recover Password' />
 
@@ -35,7 +33,6 @@ export default function ForgetPassword_Password({ navigation }) {
         console.log('Hi')
         navigation.navigate('SignIn')
     }
-
     return (
         <TouchableWithoutFeedback
             onPress={Keyboard.dismiss}
@@ -46,7 +43,7 @@ export default function ForgetPassword_Password({ navigation }) {
                     initialValues={{ password: '', confirmPassword: '' }}
                     validationSchema={passwordSchema}
                     onSubmit={(values, actions) => {
-                        makeUser(values);
+                        goToUser(values);
                         actions.resetForm();
                     }}
                 >
@@ -78,7 +75,7 @@ export default function ForgetPassword_Password({ navigation }) {
 
                             <Text style={globalStyles.errorText}>{props.touched.confirmPassword && props.errors.confirmPassword}</Text>
                             {/* Continue Button */}
-                            <TouchableOpacity style={styles.continueButton} onPress={props.handleSubmit, signInPress}>
+                            <TouchableOpacity style={styles.continueButton} onPress={props.handleSubmit}>
                                 <Text style={styles.continueText}>Continue</Text>
                             </TouchableOpacity>
 
@@ -96,6 +93,7 @@ const styles = StyleSheet.create({
     // Container of page
     container: {
         alignItems: 'center',
+        paddingTop: 20,
     },
 
     // The text input
@@ -132,21 +130,5 @@ const styles = StyleSheet.create({
         fontSize: 25,
         color: 'white',
         fontFamily: 'rubik-bold'
-    },
-    // Header Title
-    // ! Delete if header component selected
-    headerTitle: {
-        fontSize: 35,
-        paddingTop: 50,
-        fontWeight: 'bold',
-        fontFamily: 'rubik-bold',
-        alignSelf: 'center',
-        marginBottom: 20,
-    },
-    // Remember your password
-    rememberYourPassword: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        paddingTop: 330,
     },
 });

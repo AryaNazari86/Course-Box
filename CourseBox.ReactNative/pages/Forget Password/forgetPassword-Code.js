@@ -1,15 +1,8 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, TouchableWithoutFeedback, Keyboard, TextInput, TouchableOpacity } from 'react-native';
 import { globalStyles } from "../../shared/globalStyle";
-import Header from '../../shared/header';
-import { MaterialIcons } from '@expo/vector-icons';
-
 export default function ForgetPassword_Code({ navigation }) {
-    // ! Don't enable yet
-    // <Header title='Recover Password' />
-
     const passwordPress = () => {
-        console.log('Hi')
         navigation.navigate('Password')
     }
 
@@ -21,7 +14,7 @@ export default function ForgetPassword_Code({ navigation }) {
             <View>
                 <View style={styles.container}>
                     <Text style={styles.normalText}>Enter the code we sent to your email</Text>
-                    {/* Code */}
+                    {/* Code Input*/}
                     <View style={styles.textInputView}>
                         <TextInput
                             style={styles.input}
@@ -30,11 +23,9 @@ export default function ForgetPassword_Code({ navigation }) {
                     </View>
 
                     {/* Continue Button */}
-                    <TouchableOpacity style={styles.signUpButton} onPress={passwordPress}>
-                        <Text style={styles.signUpText}>Continue</Text>
+                    <TouchableOpacity style={styles.continueButton} onPress={passwordPress}>
+                        <Text style={styles.continueText}>Continue</Text>
                     </TouchableOpacity>
-
-                    <Text style={globalStyles.emptySpacer}>Code Rangers®</Text>
                 </View >
 
             </View>
@@ -68,7 +59,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white'
     },
     // The continue Button
-    signUpButton: {
+    continueButton: {
         backgroundColor: '#41CD7D',
         width: 330,
         height: 50,
@@ -78,7 +69,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
     },
     // The text of continue button
-    signUpText: {
+    continueText: {
         fontSize: 25,
         color: 'white',
         fontFamily: 'rubik-bold'
@@ -88,20 +79,5 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         fontFamily: 'rubik-light',
         paddingTop: 20,
-    },
-    // Header Title
-    // ! Delete if header component selected
-    headerTitle: {
-        fontSize: 35,
-        paddingTop: 50,
-        fontWeight: 'bold',
-        fontFamily: 'rubik-bold',
-        alignSelf: 'center'
-    },
-    // Remember Your password
-    rememberPass: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        paddingTop: 420,
     },
 });

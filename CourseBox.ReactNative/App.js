@@ -11,7 +11,7 @@ import CoursePreview from './pages/coursePreview';
 import ForgetPassword_Email from './pages/Forget Password/forgetPassword-Email';
 import ForgetPassword_Code from './pages/Forget Password/forgetPassword-Code';
 import ForgetPassword_Password from './pages/Forget Password/forgetPassword-Password';
-import Navigator from './routes/PasswordStack';
+import PassNavigator from './routes/PasswordStack';
 
 
 const getFonts = () => Font.loadAsync({
@@ -19,6 +19,11 @@ const getFonts = () => Font.loadAsync({
   'rubik-light': require('./assets/Fonts/Rubik-Light.ttf'),
   'rubik-regular': require('./assets/Fonts/Rubik-Regular.ttf'),
 });
+
+// * A test function
+const testFunc = () => {
+  console.log('Test success!')
+}
 
 export default function App() {
   // When App Starts, fonts are not loaded.

@@ -1,15 +1,9 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, TouchableWithoutFeedback, Keyboard, TextInput, TouchableOpacity } from 'react-native';
 import { globalStyles } from "../../shared/globalStyle";
-import Header from '../../shared/header';
-import { MaterialIcons } from '@expo/vector-icons';
 
 export default function ForgetPassword_Email({ navigation }) {
-    // ! Don't enable yet
-    // <Header title='Recover Password' />
-
-    const pressHandler = () => {
-        console.log('Hi')
+    const codePress = () => {
         navigation.navigate('Code')
     }
 
@@ -21,7 +15,7 @@ export default function ForgetPassword_Email({ navigation }) {
             <View>
                 <View style={styles.container}>
 
-                    {/* Email */}
+                    {/* Email Input */}
                     <View style={styles.textInputView}>
                         <TextInput
                             style={styles.input}
@@ -31,10 +25,8 @@ export default function ForgetPassword_Email({ navigation }) {
 
                     {/* Continue Button */}
                     <TouchableOpacity style={styles.continueButton}>
-                        <Text style={styles.continueText} onPress={pressHandler}>Continue</Text>
+                        <Text style={styles.continueText} onPress={codePress}>Continue</Text>
                     </TouchableOpacity>
-
-                    <Text style={globalStyles.emptySpacer}>Code Rangers®</Text>
                 </View >
 
             </View>
@@ -67,7 +59,7 @@ const styles = StyleSheet.create({
         height: 50,
         backgroundColor: 'white'
     },
-    // The confirm Button
+    // The continue Button
     continueButton: {
         backgroundColor: '#41CD7D',
         width: 330,
@@ -82,20 +74,5 @@ const styles = StyleSheet.create({
         fontSize: 25,
         color: 'white',
         fontFamily: 'rubik-bold',
-    },
-    // Header Title
-    // ! Delete if header component selected
-    headerTitle: {
-        fontSize: 35,
-        paddingTop: 50,
-        fontWeight: 'bold',
-        fontFamily: 'rubik-bold',
-        alignSelf: 'center'
-    },
-    // Remeber Password
-    rememberPassword: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        paddingTop: 420,
     },
 });
