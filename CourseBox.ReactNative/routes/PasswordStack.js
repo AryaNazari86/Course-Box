@@ -13,10 +13,20 @@ import Header from "../shared/header";
 
 const screens = {
     SignUp: {
-        screen: SignUp
+        screen: SignUp,
+        navigationOptions: ({ navigation }) => {
+            return {
+                headerTitle: () => <Header title='Sign Up' />
+            }
+        }
     },
     SignIn: {
-        screen: SignIn
+        screen: SignIn,
+        navigationOptions: ({ navigation }) => {
+            return {
+                headerTitle: () => <Header title='Sign Up' backButton='true' />
+            }
+        }
     },
     Tab: {
         screen: Tab,
@@ -25,13 +35,28 @@ const screens = {
         }
     },
     Email: {
-        screen: ForgetPassword_Email
+        screen: ForgetPassword_Email,
+        navigationOptions: ({ navigation }) => {
+            return {
+                headerTitle: () => <Header title='Sign Up' backButton='true' />
+            }
+        }
     },
     Code: {
-        screen: ForgetPassword_Code
+        screen: ForgetPassword_Code,
+        navigationOptions: ({ navigation }) => {
+            return {
+                headerTitle: () => <Header title='Sign Up' backButton='true' />
+            }
+        }
     },
     Password: {
-        screen: ForgetPassword_Password
+        screen: ForgetPassword_Password,
+        navigationOptions: ({ navigation }) => {
+            return {
+                headerTitle: () => <Header title='Sign Up' backButton='true' />
+            }
+        }
     }
 }
 
