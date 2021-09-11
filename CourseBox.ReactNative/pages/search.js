@@ -90,7 +90,7 @@ export default function Search({ navigation }) {
         { name: 'Programming', selected: false, key: '3' },
     ]);
     const [selectedCategory, setSelectedCategory] = useState('All');
-    const presshandler = (item) => {
+    const pressHandler = (item) => {
         navigation.push('CoursePreview', { item });
     }
     return (
