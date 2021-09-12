@@ -13,6 +13,7 @@ import * as yup from 'yup';
 
 {/* <SignUp makeUser={testFunc} /> */ }
 
+// * Set of yup rules for the text input
 const ReviewSchema = yup.object({
     username: yup.string()
         .required()
@@ -32,19 +33,23 @@ const ReviewSchema = yup.object({
 })
 
 export default function SignUp({ makeUser, navigation }) {
-    // ! Don't enable yet
-    // <Header title='Sign Up' />
+
+    // * Go to the tab componnent
     const signUpPress = () => {
         navigation.navigate('Tab')
     }
+    // * Go to the sign in page
     const signInPress = () => {
         console.log('Hi')
         navigation.navigate('SignIn')
     }
 
+    // * The hide password state
     const [hidePass, setHidePass] = useState(true)
+    // * The hide password icon state
     const [hidePassIcon, setHidePassIcon] = useState('eye-off')
 
+    // * The function that toggles the visibility of password
     const hidePassFunc = () => {
         if (hidePass) {
             // Make false
@@ -76,7 +81,6 @@ export default function SignUp({ makeUser, navigation }) {
                         <View style={styles.container}>
                             {/* Username */}
                             <View style={styles.textInputView}>
-                                {/* <MaterialIcons name="account-circle" size={40} color="black" style={{ paddingLeft: 5, }} /> */}
                                 <TextInput
                                     style={styles.input}
                                     placeholder='Username'
@@ -90,7 +94,6 @@ export default function SignUp({ makeUser, navigation }) {
 
                             {/* Name */}
                             <View style={styles.textInputView}>
-                                {/* <MaterialIcons name="account-circle" size={40} color="black" style={{ paddingLeft: 5, }} /> */}
                                 <TextInput
                                     style={styles.input}
                                     placeholder='Name'

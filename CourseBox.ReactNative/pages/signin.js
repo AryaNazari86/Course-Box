@@ -42,18 +42,8 @@ export default function SignIn({ navigation }) {
             <View>
                 <Header title='Sign In' backButton={true} backAction={() => navigation.goBack()} />
                 <View style={styles.container}>
-                    {/* ! Delete if username was not requires */}
-                    {/* Username
-                    <View style={styles.textInputView}>
-                        <TextInput
-                            style={styles.input}
-                            placeholder='Username'
-                        />
-                    </View> */}
-
                     {/* Email */}
                     <View style={styles.textInputView}>
-                        {/* <MaterialIcons name="email" size={40} color="black" style={{ paddingLeft: 5, }} /> */}
                         <TextInput
                             style={styles.input}
                             placeholder='Email'
@@ -124,15 +114,6 @@ const styles = StyleSheet.create({
     hideIcon: {
         padding: 35,
     },
-    // * Kept for possible future use
-    // ! Delete if design accepted
-    profileAccountImage: {
-        width: 125,
-        height: 125,
-        borderRadius: 100,
-        marginBottom: 10,
-        marginTop: 100,
-    },
     // The confirm Button
     signUpButton: {
         backgroundColor: '#41CD7D',
@@ -152,15 +133,6 @@ const styles = StyleSheet.create({
     acceptTos: {
         flexDirection: 'row',
         fontFamily: 'rubik-light'
-    },
-    // Header Title
-    // ! Delete if header component selected
-    headerTitle: {
-        fontSize: 35,
-        paddingTop: 50,
-        fontWeight: 'bold',
-        fontFamily: 'rubik-bold',
-        alignSelf: 'center'
     },
     // Have an cccount View
     signInContainer: {
