@@ -18,7 +18,6 @@ import CoursesCarousel from '../components/Carousel/coursesCarousel';
 
 export default function Home({ navigation }) {
 
-
     // Access bottom sheet using sheetRef.current;
     const bottomSheetRef = useRef(null);
 
@@ -70,57 +69,61 @@ export default function Home({ navigation }) {
         }
     };
 
+    const closeBottomSheet = () => {
+        bottomSheetRef.current.snapTo(0);
+    };
+
     return (
         <View style={styles.container}>
             {/* Header */}
             <Header title="Home" backgroundColor="#fff" fontFamily="rubik-regular" height={60} />
 
-            <TouchableWithoutFeedback onPress={() => bottomSheetRef.current.snapTo(0)}>
+            {/* Content */}
+            <ScrollView
+                style={styles.contentContainer}
+                showsVerticalScrollIndicator={false}>
 
-                <ScrollView
-                    style={styles.contentContainer}
-                    showsVerticalScrollIndicator={false}>
+                <View style={styles.bgBlue}>
 
-                    <View style={styles.bgBlue}>
+                    {/* Categories */}
+                    <FlatList
+                        showsHorizontalScrollIndicator={false}
+                        style={styles.categoriesContainer}
+                        horizontal={true}
+                        data={categories}
+                        keyExtractor={(item) => item.categoryId.toString()}
+                        renderItem={({ item }) =>
+                            (<CategoryBox category={item} onPress={() => onCategoryClicked(item)} />)}
+                    />
 
-                        {/* Categories */}
-                        <FlatList
-                            showsHorizontalScrollIndicator={false}
-                            style={styles.categoriesContainer}
-                            horizontal={true}
-                            data={categories}
-                            keyExtractor={(item) => item.categoryId.toString()}
-                            renderItem={({ item }) =>
-                                (<CategoryBox category={item} onPress={() => onCategoryClicked(item)} />)}
-                        />
+                    <View style={styles.latestCoursesContainer}>
 
-                        <View style={styles.latestCoursesContainer}>
+                        <Text style={styles.latestCoursesTitle}>Latest Courses</Text>
 
-                            <Text style={styles.latestCoursesTitle}>Latest Courses</Text>
-
-                            {/* A carousel for showing the latest courses. */}
-                            <CoursesCarousel courses={latestCourses} navigation={navigation} dotesColor='#fca311' />
-
-                        </View>
-
-                        <View style={styles.popularCoursesContainer}>
-
-                            <Text style={styles.popularCoursesTitle}>Popular Courses</Text>
-
-                            {/* A carousel for showing the popular courses. */}
-                            <CoursesCarousel courses={popularCourses} navigation={navigation} dotesColor='#14213D' />
-
-                        </View>
+                        {/* A carousel for showing the latest courses. */}
+                        <CoursesCarousel courses={latestCourses} navigation={navigation} dotesColor='#fca311' />
 
                     </View>
 
-                    {/* When we open category bottom sheet, the screen will become dark. */}
-                    <View style={[darkScreen, styles.darkScreen]}></View>
+                    <View style={styles.popularCoursesContainer}>
 
-                </ScrollView>
+                        <Text style={styles.popularCoursesTitle}>Popular Courses</Text>
 
+                        {/* A carousel for showing the popular courses. */}
+                        <CoursesCarousel courses={popularCourses} navigation={navigation} dotesColor='#14213D' />
+
+                    </View>
+
+                </View>
+
+            </ScrollView>
+
+            {/* When we open category bottom sheet, the screen will become dark. */}
+            <TouchableWithoutFeedback onPress={() => closeBottomSheet()}>
+                <View style={[darkScreen, styles.darkScreen]}></View>
             </TouchableWithoutFeedback>
 
+            {/* Bottom Sheet for categories */}
             <BottomSheet
                 ref={bottomSheetRef}
                 snapPoints={[0, '80%', '40%']}
@@ -173,6 +176,7 @@ const styles = StyleSheet.create({
     },
     darkScreen: {
         position: 'absolute',
+        top: 0,
         backgroundColor: '#000',
         opacity: 0.4,
     }
