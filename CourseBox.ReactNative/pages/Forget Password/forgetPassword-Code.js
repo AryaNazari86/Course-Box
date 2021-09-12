@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, TouchableWithoutFeedback, Keyboard, TextInput, 
 import { globalStyles } from "../../shared/globalStyle";
 import Header from '../../shared/header';
 export default function ForgetPassword_Code({ navigation }) {
+    // * The function for going to forget password, reset password
     const passwordPress = () => {
         navigation.navigate('Password')
     }

@@ -4,6 +4,7 @@ import { globalStyles } from "../../shared/globalStyle";
 import Header from '../../shared/header';
 
 export default function ForgetPassword_Email({ navigation }) {
+    // * The function for going to the forget password code page
     const codePress = () => {
         navigation.navigate('Code')
     }
@@ -14,8 +15,8 @@ export default function ForgetPassword_Email({ navigation }) {
             style={styles.container}
         >
             <View>
-
-            <Header title='Forget Password' backButton={true} backAction={() => navigation.goBack()} />
+                {/* * The header */}
+                <Header title='Forget Password' backButton={true} backAction={() => navigation.goBack()} />
                 <View style={styles.container}>
 
                     {/* Email Input */}
