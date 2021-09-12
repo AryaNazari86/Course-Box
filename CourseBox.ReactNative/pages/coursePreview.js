@@ -3,42 +3,9 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import Header from '../shared/header';
 
-export default function CoursePreview({ navigation }) {
-    var course = {
-        title: 'Dribbling',
-        category: 'Sports',
-        author: '@Arya',
-        participants: '100',
-        likes: '99',
-        description: 'something ...',
-        image: require(`../assets/Images/messi.jpeg`),
-        content: [
-            {
-                title: 'Low Dribble', content: [
-                    { title: 'how to', color: 'red' },
-                    { title: 'examples', color: 'red' }
-                ],
-                color: 'red'
-            },
-            {
-                title: 'Speed Dribble', content: [
-                    { title: 'how to', color: 'blue' },
-                    { title: 'examples', color: 'blue' }
-                ],
-                color: 'blue'
-            },
-            {
-                title: 'Change-of-pace Dribble', content: [
-                    { title: 'how to', color: 'green' },
-                    { title: 'examples', color: 'green' }
-                ],
-                color: 'green'
-            },
-        ],
-        key: '1'
-    };
+export default function CoursePreview(props) {
+    const course = props.navigation.state.params.item;
     return (
-
         <View>
             <Header title={course.title} backButton={true} backAction={() => navigation.goBack()} />
             {course.content.map(

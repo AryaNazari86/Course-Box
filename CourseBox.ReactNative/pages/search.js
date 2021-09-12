@@ -5,7 +5,6 @@ import { Chip, TextInput } from 'react-native-paper';
 import Header from '../shared/header';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import CourseBox from "../components/courseBox";
-
 export default function Search({ navigation }) {
     const [courses, setCourses] = useState([
         { title: 'Dribbling', category: 'Sports', author: '@Arya', participants: '100', likes: '99', description: 'something ...', image: require(`../assets/Images/messi.jpeg`), key: '1' },
@@ -90,9 +89,7 @@ export default function Search({ navigation }) {
         { name: 'Programming', selected: false, key: '3' },
     ]);
     const [selectedCategory, setSelectedCategory] = useState('All');
-    const pressHandler = (item) => {
-        navigation.push('CoursePreview', { item });
-    }
+
     return (
         <TouchableWithoutFeedback
             onPress={Keyboard.dismiss}
@@ -132,7 +129,7 @@ export default function Search({ navigation }) {
                         {filterCourses().map((item) => {
                             return (
                                 <CourseBox
-                                    pressHandler={pressHandler}
+                                    navigation={navigation}
                                     item={item}
                                 />
                             )

@@ -5,12 +5,18 @@ import CoursePreview from '../pages/coursePreview';
 
 const screens = {
     Search: {
-        screen: Search
+        screen: Search,
+        navigationOptions: {
+            headerShown: false
+        }
     },
     CoursePreview: {
-        screen: CoursePreview
+        screen: CoursePreview,
+        navigationOptions: {
+            headerShown: false
+        }
     }
 }
-const CoursePreviewStack = createStackNavigator(screens);
+const HomeStack = createStackNavigator(screens);
 
-export default createAppContainer(CoursePreviewStack);
+export default createAppContainer(HomeStack);
