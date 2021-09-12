@@ -28,7 +28,8 @@ const screens = {
         screen: Tab,
         navigationOptions: {
             headerShown: false
-        }
+        },
+        headerLeft: () => null,
     },
     Email: {
         screen: ForgetPassword_Email,
