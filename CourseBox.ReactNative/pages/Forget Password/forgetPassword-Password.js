@@ -10,12 +10,7 @@ export default function ForgetPassword_Password({ navigation, goToUser }) {
     // ! Don't enable yet
     // <Header title='Recover Password' />
 
-    const [pass, setPass] = useState('');
-
-    const changePass = (val) => {
-        setPass(val);
-    }
-
+    // * Set of yup rules for the text input
     const PasswordSchema = yup.object({
         Password: yup.string()
             .required()
@@ -31,9 +26,12 @@ export default function ForgetPassword_Password({ navigation, goToUser }) {
             })
     })
 
+    // * The hide password state
     const [hidePass, setHidePass] = useState(true)
+    // * The hide password icon state
     const [hidePassIcon, setHidePassIcon] = useState('eye-off')
 
+    // * The function that toggles the visibility of password
     const hidePassFunc = () => {
         if (hidePass) {
             // Make false
@@ -46,9 +44,12 @@ export default function ForgetPassword_Password({ navigation, goToUser }) {
         }
     }
 
+    // * The hide confirm password state
     const [hidePass2, setHidePass2] = useState(true)
+    // * The hide confirm password icon state
     const [hidePassIcon2, setHidePassIcon2] = useState('eye-off')
 
+    // * The function that toggles the visibility of confirm password
     const hidePassFunc2 = () => {
         if (hidePass2) {
             // Make false
@@ -117,7 +118,8 @@ export default function ForgetPassword_Password({ navigation, goToUser }) {
 
                             <Text style={globalStyles.errorText}>{props.touched.confirmPassword && props.errors.confirmPassword}</Text>
                             {/* Continue Button */}
-                            <TouchableOpacity style={styles.continueButton} onPress={props.handleSubmit}>
+                            {/* TODO: Only allow user to continue if they meet the rules */}
+                            <TouchableOpacity style={styles.continueButton} onPress={props.handleSubmit, signInPress}>
                                 <Text style={styles.continueText}>Continue</Text>
                             </TouchableOpacity>
 
