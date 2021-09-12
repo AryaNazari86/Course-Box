@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, View, Text, TouchableWithoutFeedback, Keyboard, TextInput, Image, TouchableOpacity } from 'react-native';
 import { globalStyles } from "../shared/globalStyle";
 import Header from '../shared/header';
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import CourseBox from "../components/courseBox";
 import CheckBox from "../components/Checkbox/checkbox";
 
@@ -17,6 +17,21 @@ export default function SignIn({ navigation }) {
     const forgetPress = () => {
         console.log('Hi')
         navigation.navigate('Email')
+    }
+
+    const [hidePass, setHidePass] = useState(true)
+    const [hidePassIcon, setHidePassIcon] = useState('eye-off')
+
+    const hidePassFunc = () => {
+        if (hidePass) {
+            // Make false
+            setHidePass(false),
+                setHidePassIcon('eye-off')
+        } else {
+            // Make true
+            setHidePass(true),
+                setHidePassIcon('eye')
+        }
     }
 
     return (
@@ -47,11 +62,14 @@ export default function SignIn({ navigation }) {
 
                     {/* Password */}
                     <View style={styles.textInputView}>
-                        {/* <MaterialIcons name="vpn-key" size={40} color="black" style={{ paddingLeft: 5, }} /> */}
                         <TextInput
                             style={styles.input}
                             placeholder='Password'
+                            secureTextEntry={hidePass}
                         />
+                        <TouchableOpacity onPress={hidePassFunc}>
+                            <MaterialCommunityIcons name={hidePassIcon} size={30} color="black" style={styles.hideIcon} />
+                        </TouchableOpacity>
                     </View>
 
                     {/* Accept the privacy policy */}
@@ -87,7 +105,7 @@ const styles = StyleSheet.create({
     input: {
         paddingHorizontal: 8,
         paddingVertical: 6,
-        width: 330,
+        width: 250,
         paddingLeft: 20,
         fontSize: 18,
         fontFamily: 'rubik-regular'
@@ -100,7 +118,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 20,
         height: 50,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        width: 330,
+    },
+    hideIcon: {
+        padding: 35,
     },
     // * Kept for possible future use
     // ! Delete if design accepted

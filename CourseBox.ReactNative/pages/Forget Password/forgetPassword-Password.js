@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, View, Text, TouchableWithoutFeedback, Keyboard, TextInput, Image, TouchableOpacity } from 'react-native';
 import { globalStyles } from "../../shared/globalStyle";
 import Header from '../../shared/header';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Formik } from "formik";
 import * as yup from 'yup';
 
@@ -15,8 +16,8 @@ export default function ForgetPassword_Password({ navigation, goToUser }) {
         setPass(val);
     }
 
-    const passwordSchema = yup.object({
-        password: yup.string()
+    const PasswordSchema = yup.object({
+        Password: yup.string()
             .required()
             .min(5)
             .max(100),
@@ -30,6 +31,36 @@ export default function ForgetPassword_Password({ navigation, goToUser }) {
             })
     })
 
+    const [hidePass, setHidePass] = useState(true)
+    const [hidePassIcon, setHidePassIcon] = useState('eye-off')
+
+    const hidePassFunc = () => {
+        if (hidePass) {
+            // Make false
+            setHidePass(false)
+            setHidePassIcon('eye-off')
+        } else {
+            // Make true
+            setHidePass(true)
+            setHidePassIcon('eye')
+        }
+    }
+
+    const [hidePass2, setHidePass2] = useState(true)
+    const [hidePassIcon2, setHidePassIcon2] = useState('eye-off')
+
+    const hidePassFunc2 = () => {
+        if (hidePass2) {
+            // Make false
+            setHidePass2(false)
+            setHidePassIcon2('eye-off')
+        } else {
+            // Make true
+            setHidePass2(true)
+            setHidePassIcon2('eye')
+        }
+    }
+
     const signInPress = () => {
         console.log('Hi')
         navigation.navigate('SignIn')
@@ -41,10 +72,10 @@ export default function ForgetPassword_Password({ navigation, goToUser }) {
         >
             <View>
 
-            <Header title='Forget Password' backButton={true} backAction={() => navigation.goBack()} />
+                <Header title='Forget Password' backButton={true} backAction={() => navigation.goBack()} />
                 <Formik
-                    initialValues={{ password: '', confirmPassword: '' }}
-                    validationSchema={passwordSchema}
+                    initialValues={{ Password: '', confirmPassword: '' }}
+                    validationSchema={PasswordSchema}
                     onSubmit={(values, actions) => {
                         goToUser(values);
                         actions.resetForm();
@@ -57,13 +88,17 @@ export default function ForgetPassword_Password({ navigation, goToUser }) {
                                 <TextInput
                                     style={styles.input}
                                     placeholder='New Password'
-                                    onChangeText={props.handleChange('password')}
-                                    value={props.values.password}
-                                    onBlur={props.handleBlur('password')}
+                                    onChangeText={props.handleChange('Password')}
+                                    value={props.values.Password}
+                                    onBlur={props.handleBlur('Password')}
+                                    secureTextEntry={hidePass}
                                 />
+                                <TouchableOpacity onPress={hidePassFunc}>
+                                    <MaterialCommunityIcons name={hidePassIcon} size={30} color="black" style={styles.hideIcon} />
+                                </TouchableOpacity>
                             </View>
 
-                            <Text style={globalStyles.errorText}>{props.touched.password && props.errors.password}</Text>
+                            <Text style={globalStyles.errorText}>{props.touched.Password && props.errors.Password}</Text>
 
                             {/* Confirm Password */}
                             <View style={styles.textInputView}>
@@ -73,7 +108,11 @@ export default function ForgetPassword_Password({ navigation, goToUser }) {
                                     onChangeText={props.handleChange('confirmPassword')}
                                     value={props.values.confirmPassword}
                                     onBlur={props.handleBlur('confirmPassword')}
+                                    secureTextEntry={hidePass2}
                                 />
+                                <TouchableOpacity onPress={hidePassFunc2}>
+                                    <MaterialCommunityIcons name={hidePassIcon2} size={30} color="black" style={styles.hideIcon} />
+                                </TouchableOpacity>
                             </View>
 
                             <Text style={globalStyles.errorText}>{props.touched.confirmPassword && props.errors.confirmPassword}</Text>
@@ -103,7 +142,7 @@ const styles = StyleSheet.create({
     input: {
         paddingHorizontal: 8,
         paddingVertical: 6,
-        width: 330,
+        width: 250,
         paddingLeft: 20,
         fontSize: 18,
         fontFamily: 'rubik-regular'
@@ -116,7 +155,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 5,
         height: 50,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        width: 330,
+    },
+    hideIcon: {
+        padding: 35,
     },
     // The continue Button
     continueButton: {
