@@ -3,9 +3,9 @@ import { Appbar } from "react-native-paper";
 import { globalStyles } from "../shared/globalStyle";
 
 export default function Header({ title, backButton = false, backAction,
-     backgroundColor = '#fca311', textColor = '#14213D',
-      fontFamily = 'rubik-light', height = 45 }) {
-    
+    backgroundColor = '#fca311', textColor = '#14213D',
+    fontFamily = 'rubik-light', height = 45 }) {
+
     const titleAlignment = backAction ? 'left' : 'center';
 
     // If there is a back button for navigating to the previous screen:
@@ -16,7 +16,7 @@ export default function Header({ title, backButton = false, backAction,
                 <Appbar.Content
                     title={title}
                     color="#14213D"
-                    titleStyle={[{textAlign: titleAlignment, color: textColor, fontFamily: fontFamily}, globalStyles.headerTitle]} />
+                    titleStyle={[{ textAlign: titleAlignment, color: textColor, fontFamily: fontFamily }, globalStyles.headerTitle]} />
             </Appbar.Header>
         );
     }
@@ -27,7 +27,7 @@ export default function Header({ title, backButton = false, backAction,
             <Appbar.Content
                 title={title}
                 color="#14213D"
-                titleStyle={[{textAlign: titleAlignment, color: textColor, fontFamily: fontFamily}, globalStyles.headerTitle]} />
+                titleStyle={[{ textAlign: titleAlignment, color: textColor, fontFamily: fontFamily }, globalStyles.headerTitle]} />
         </Appbar.Header>
     );
 }
