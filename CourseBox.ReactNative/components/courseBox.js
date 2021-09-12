@@ -4,9 +4,9 @@ import { globalStyles } from "../shared/globalStyle";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Chip } from 'react-native-paper';
 
-export default function CourseBox({ item, pressHandler }) {
+export default function CourseBox({ navigation, item }) {
     return (
-        <TouchableOpacity style={globalStyles.coursesBox} onPress={() => pressHandler('CoursePreview', item)}>
+        <TouchableOpacity style={globalStyles.coursesBox} onPress={() => navigation.navigate('CoursePreview', { item })}>
             <Image source={item.image} style={globalStyles.courseImage}></Image>
             <View style={globalStyles.courseLines}>
                 <Text style={globalStyles.courseTitle}>{item.title}</Text>
