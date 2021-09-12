@@ -1,19 +1,13 @@
 import { StyleSheet } from "react-native";
 export const globalStyles = StyleSheet.create({
     header: {
-        backgroundColor: '#fca311',
-        height: 45,
         elevation: 0,
     },
     headerTitle: {
-        color: '#14213D',
-        fontFamily: 'rubik-light',
         fontSize: 26,
     },
     headerSubtitle: {
-        color: '#14213D',
         textAlign: 'center',
-        fontFamily: 'rubik-light'
     },
     tabBar: {
         backgroundColor: '#14213D',
