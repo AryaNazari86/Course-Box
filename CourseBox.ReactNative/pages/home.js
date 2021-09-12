@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { StyleSheet, View, TouchableWithoutFeedback, FlatList } from "react-native";
+import { StyleSheet, View, TouchableWithoutFeedback, FlatList, ScrollView, Text } from "react-native";
 
 // Header Imports
 import Header from '../shared/header';
@@ -14,10 +14,10 @@ import BottomSheetHeader from "../components/BottomSheet/Header/header";
 import BottomSheetCategory from "../components/BottomSheet/Category/category";
 
 // Carousel Imports
-import SimpleCarousel from '../components/Carousel/SimpleCarousel/simple';
+import CoursesCarousel from '../components/Carousel/coursesCarousel';
 
 export default function Home({ navigation }) {
-    
+
 
     // Access bottom sheet using sheetRef.current;
     const bottomSheetRef = useRef(null);
@@ -49,6 +49,18 @@ export default function Home({ navigation }) {
         { title: 'Soccer for beginners', category: 'Sports', author: '@Person', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/soccer_Course.jpeg`), key: '8' },
     ];
 
+    // Get Popular Courses From API
+    const popularCourses = [
+        { title: 'HTML Beginner Course', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/HTML_Course.jpeg`), key: '4' },
+        { title: 'CSS Beginner Course', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/CSS_Course.png`), key: '5' },
+        { title: 'PyQT5 Course', category: 'Programming', author: '@Arya', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/PyQT5_Course.jpeg`), key: '6' },
+        { title: 'C# Course', category: 'Programming', author: '@MHK', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/c-sharp-course.jpeg`), key: '7' },
+        { title: 'Soccer for beginners', category: 'Sports', author: '@Person', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/soccer_Course.jpeg`), key: '8' },
+        { title: 'Dribbling', category: 'Sports', author: '@Arya', participants: '100', likes: '99', description: 'something ...', image: require(`../assets/Images/messi.jpeg`), key: '1' },
+        { title: 'Hacking', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/hacking_course.jpg`), key: '2' },
+        { title: 'Javascript Beginner Course', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/Javascript_Course.png`), key: '3' },
+    ];
+
     // When user click on a category.
     const onCategoryClicked = (category) => {
         setSelectedCategory(category);
@@ -60,30 +72,53 @@ export default function Home({ navigation }) {
 
     return (
         <View style={styles.container}>
+            {/* Header */}
+            <Header title="Home" backgroundColor="#fff" fontFamily="rubik-regular" height={60} />
 
             <TouchableWithoutFeedback onPress={() => bottomSheetRef.current.snapTo(0)}>
-                <View style={styles.contentContainer}>
 
-                    {/* Header */}
-                    <Header title="Home" />
+                <ScrollView
+                    style={styles.contentContainer}
+                    showsVerticalScrollIndicator={false}>
 
-                    {/* Categories */}
-                    <FlatList
-                        style={styles.categoriesContainer}
-                        horizontal={true}
-                        data={categories}
-                        keyExtractor={(item) => item.categoryId.toString()}
-                        renderItem={({ item }) =>
-                            (<CategoryBox category={item} onPress={() => onCategoryClicked(item)} />)}
-                    />
-                    
-                    {/* A carousel for showing the latest courses. */}
-                    <SimpleCarousel courses={latestCourses} navigation={navigation} />
+                    <View style={styles.bgBlue}>
+
+                        {/* Categories */}
+                        <FlatList
+                            showsHorizontalScrollIndicator={false}
+                            style={styles.categoriesContainer}
+                            horizontal={true}
+                            data={categories}
+                            keyExtractor={(item) => item.categoryId.toString()}
+                            renderItem={({ item }) =>
+                                (<CategoryBox category={item} onPress={() => onCategoryClicked(item)} />)}
+                        />
+
+                        <View style={styles.latestCoursesContainer}>
+
+                            <Text style={styles.latestCoursesTitle}>Latest Courses</Text>
+
+                            {/* A carousel for showing the latest courses. */}
+                            <CoursesCarousel courses={latestCourses} navigation={navigation} dotesColor='#fca311' />
+
+                        </View>
+
+                        <View style={styles.popularCoursesContainer}>
+
+                            <Text style={styles.popularCoursesTitle}>Popular Courses</Text>
+
+                            {/* A carousel for showing the popular courses. */}
+                            <CoursesCarousel courses={popularCourses} navigation={navigation} dotesColor='#14213D' />
+
+                        </View>
+
+                    </View>
 
                     {/* When we open category bottom sheet, the screen will become dark. */}
                     <View style={[darkScreen, styles.darkScreen]}></View>
 
-                </View>
+                </ScrollView>
+
             </TouchableWithoutFeedback>
 
             <BottomSheet
@@ -107,8 +142,34 @@ const styles = StyleSheet.create({
     contentContainer: {
         flexDirection: 'column',
     },
+    bgBlue: {
+        backgroundColor: '#14213D',
+    },
     categoriesContainer: {
         flexDirection: 'row',
+    },
+    latestCoursesTitle: {
+        fontFamily: 'rubik-regular',
+        fontSize: 24,
+        textAlign: 'center',
+        color: '#FFF',
+        paddingBottom: 10,
+    },
+    latestCoursesContainer: {
+        paddingTop: 20,
+    },
+    popularCoursesTitle: {
+        fontFamily: 'rubik-regular',
+        fontSize: 24,
+        textAlign: 'center',
+        color: '#14213D',
+        paddingBottom: 10,
+    },
+    popularCoursesContainer: {
+        backgroundColor: '#E5E5E5',
+        paddingTop: 20,
+        borderTopLeftRadius: 25,
+        borderTopRightRadius: 25,
     },
     darkScreen: {
         position: 'absolute',
