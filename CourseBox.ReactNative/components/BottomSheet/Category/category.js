@@ -3,7 +3,7 @@ import { View, FlatList } from 'react-native';
 import styles from './styles';
 import CourseBox from '../../courseBox';
 
-export default function Category({ category }) {
+export default function Category({ category, navigation }) {
     // Get courses with that category from API.
     const courses = [
         { title: 'Dribbling', category: 'Sports', author: '@Arya', participants: '100', likes: '99', description: 'something ...', image: require(`../../../assets/Images/messi.jpeg`), key: '1' },
@@ -15,11 +15,16 @@ export default function Category({ category }) {
         { title: 'C# Course', category: 'Programming', author: '@MHK', participants: '10', likes: '10', description: 'something ...', image: require(`../../../assets/Images/c-sharp-course.jpeg`), key: '7' },
     ];
 
+    // When user cliked on a course
+    const pressHandler = (page, data) => {
+        navigation.push(page, data);
+    };
+
     return (
         <View style={[{ backgroundColor: category.categoryBgColor }, styles.content]}>
             <FlatList
                 data={courses}
-                renderItem={({ item }) => (<CourseBox item={item} />)} />
+                renderItem={({ item }) => (<CourseBox item={item} pressHandler={pressHandler} />)} />
         </View>
     );
 }

@@ -35,7 +35,6 @@ export const globalStyles = StyleSheet.create({
         marginVertical: 6,
         alignItems: 'center',
         width: 250,
-        flex: 1,
         padding: 15,
     },
     courseTitle: {

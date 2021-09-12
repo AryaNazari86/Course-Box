@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { ScrollView, StyleSheet, View, TouchableWithoutFeedback, Text } from "react-native";
+import { StyleSheet, View, TouchableWithoutFeedback, FlatList } from "react-native";
 
 // Header Imports
 import Header from '../shared/header';
@@ -16,7 +16,9 @@ import BottomSheetCategory from "../components/BottomSheet/Category/category";
 // Carousel Imports
 import SimpleCarousel from '../components/Carousel/SimpleCarousel/simple';
 
-export default function Home() {
+export default function Home({ navigation }) {
+    
+
     // Access bottom sheet using sheetRef.current;
     const bottomSheetRef = useRef(null);
 
@@ -35,8 +37,8 @@ export default function Home() {
     const [selectedCategory, setSelectedCategory] = useState(categories[0]);
 
 
-    // Get Newest Courses From API
-    const newestCourses = [
+    // Get Latest Courses From API
+    const latestCourses = [
         { title: 'Dribbling', category: 'Sports', author: '@Arya', participants: '100', likes: '99', description: 'something ...', image: require(`../assets/Images/messi.jpeg`), key: '1' },
         { title: 'Hacking', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/hacking_course.jpg`), key: '2' },
         { title: 'Javascript Beginner Course', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/Javascript_Course.png`), key: '3' },
@@ -66,15 +68,17 @@ export default function Home() {
                     <Header title="Home" />
 
                     {/* Categories */}
-                    <ScrollView
+                    <FlatList
+                        style={styles.categoriesContainer}
                         horizontal={true}
-                        style={styles.categoriesContainer}>
-                        {categories.map(item => (
-                            <CategoryBox category={item} onPress={() => onCategoryClicked(item)} />
-                        ))}
-                    </ScrollView>
+                        data={categories}
+                        keyExtractor={(item) => item.categoryId.toString()}
+                        renderItem={({ item }) =>
+                            (<CategoryBox category={item} onPress={() => onCategoryClicked(item)} />)}
+                    />
                     
-                    <SimpleCarousel courses={newestCourses} />
+                    {/* A carousel for showing the latest courses. */}
+                    <SimpleCarousel courses={latestCourses} navigation={navigation} />
 
                     {/* When we open category bottom sheet, the screen will become dark. */}
                     <View style={[darkScreen, styles.darkScreen]}></View>
@@ -86,7 +90,7 @@ export default function Home() {
                 ref={bottomSheetRef}
                 snapPoints={[0, '80%', '40%']}
                 renderHeader={() => <BottomSheetHeader category={selectedCategory} />}
-                renderContent={() => <BottomSheetCategory category={selectedCategory} />}
+                renderContent={() => <BottomSheetCategory category={selectedCategory} navigation={navigation} />}
                 enabledInnerScrolling={true}
                 enabledContentGestureInteraction={false}
                 onCloseEnd={() => setDarkScreen({ width: 0, height: 0 })}

@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import Header from '../shared/header';
 
-export default function CoursePreview() {
+export default function CoursePreview({ navigation }) {
     var course = {
         title: 'Dribbling',
         category: 'Sports',
@@ -40,7 +40,7 @@ export default function CoursePreview() {
     return (
 
         <View>
-            <Header title={course.title} />
+            <Header title={course.title} backButton={true} backAction={() => navigation.goBack()} />
             {course.content.map(
                 (item) => {
                     return (
