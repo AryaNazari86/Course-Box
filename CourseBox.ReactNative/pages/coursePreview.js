@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, ImageBackground } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import Header from '../shared/header';
 
@@ -30,7 +30,11 @@ export default function CoursePreview(props) {
                                                     {/* lesson's icon */}
                                                     <MaterialIcons name={item.icon} size={50} color={course.color} style={{ ...styles.qlIcon, borderColor: course.color }} />
                                                     {/* lesson's title */}
-                                                    <Text style={{ ...styles.qlTitleText, color: course.color }}>{item.title}</Text>
+                                                    <View>
+                                                        <ImageBackground source={{ uri: require('../assets/Images/title.png') }} resizeMode='cover' style={{ justifyContent: 'center', flex: 1, height: 100, width: 100 }}>
+                                                            <Text style={{ ...styles.qlTitleText, color: course.color }}>{item.title}</Text>
+                                                        </ImageBackground>
+                                                    </View>
                                                 </TouchableOpacity>
                                             )
                                         }
@@ -42,7 +46,7 @@ export default function CoursePreview(props) {
                     }
 
                 )}
-            </ScrollView>
+            </ScrollView >
         </View >
     )
 }
