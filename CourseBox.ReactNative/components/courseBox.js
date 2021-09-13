@@ -11,7 +11,7 @@ export default function CourseBox({ navigation, item }) {
 
     const likeAnimation = useRef(null);
 
-    const [likeOpacity, setLikeOpacity] = useState(0.7);
+    const [likeOpacity, setLikeOpacity] = useState(0.8);
 
     const playAnimation = () => {
         if (!isLiked) {

@@ -92,6 +92,15 @@ export default function Home({ navigation }) {
 
                     </View>
 
+                    <View style={styles.recommendedCoursesContainer}>
+
+                        <Text style={styles.recommendedCoursesTitle}>Recommended Courses</Text>
+
+                        {/* A carousel for showing the recommended courses. */}
+                        <CoursesCarousel courses={courses} navigation={navigation} dotesColor='#E5E5E5' />
+
+                    </View>
+
                 </View>
 
             </ScrollView>
@@ -151,6 +160,17 @@ const styles = StyleSheet.create({
         paddingTop: 20,
         borderTopLeftRadius: 25,
         borderTopRightRadius: 25,
+    },
+    recommendedCoursesTitle: {
+        fontFamily: 'rubik-regular',
+        fontSize: 24,
+        textAlign: 'center',
+        color: '#14213D',
+        paddingBottom: 10,
+    },
+    recommendedCoursesContainer: {
+        backgroundColor: '#fca311',
+        paddingTop: 20,
     },
     darkScreen: {
         position: 'absolute',
