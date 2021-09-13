@@ -6,9 +6,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Formik } from "formik";
 import * as yup from 'yup';
 
-export default function ForgetPassword_Password({ navigation, goToUser }) {
-    // ! Don't enable yet
-    // <Header title='Recover Password' />
+export default function ForgetPassword_Password({ navigation }) {
 
     // * Set of yup rules for the text input
     const PasswordSchema = yup.object({
@@ -20,10 +18,6 @@ export default function ForgetPassword_Password({ navigation, goToUser }) {
             .required()
             .min(5)
             .max(100)
-            .test('is-equal', "Passwords Don't match", (val) => {
-                // TODO: Return True if they are equal
-                return false;
-            })
     })
 
     // * The hide password state
@@ -78,7 +72,7 @@ export default function ForgetPassword_Password({ navigation, goToUser }) {
                     initialValues={{ Password: '', confirmPassword: '' }}
                     validationSchema={PasswordSchema}
                     onSubmit={(values, actions) => {
-                        goToUser(values);
+                        signInPress(values);
                         actions.resetForm();
                     }}
                 >
@@ -119,7 +113,7 @@ export default function ForgetPassword_Password({ navigation, goToUser }) {
                             <Text style={globalStyles.errorText}>{props.touched.confirmPassword && props.errors.confirmPassword}</Text>
                             {/* Continue Button */}
                             {/* TODO: Only allow user to continue if they meet the rules */}
-                            <TouchableOpacity style={styles.continueButton} onPress={props.handleSubmit, signInPress}>
+                            <TouchableOpacity style={styles.continueButton} onPress={props.handleSubmit}>
                                 <Text style={styles.continueText}>Continue</Text>
                             </TouchableOpacity>
 

@@ -3,12 +3,20 @@ import { StyleSheet, View, Text, TouchableWithoutFeedback, Keyboard, TextInput, 
 import { globalStyles } from "../shared/globalStyle";
 import Header from '../shared/header';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import CourseBox from "../components/courseBox";
-import CheckBox from "../components/Checkbox/checkbox";
+import { Formik } from "formik";
+import * as yup from 'yup';
 
 export default function SignIn({ navigation }) {
-    // ! Don't enable yet
-    // <Header title='Sign Up' />
+
+    const loginSchema = yup.object({
+        email: yup.string()
+            .required()
+            .min(4),
+        password: yup.string()
+            .required()
+            .min(5)
+            .max(100),
+    })
 
     const signInPress = () => {
         navigation.navigate('Tab')
@@ -41,44 +49,65 @@ export default function SignIn({ navigation }) {
         >
             <View>
                 <Header title='Sign In' backButton={true} backAction={() => navigation.goBack()} fontFamily="rubik-regular" height={60} />
-                <View style={styles.container}>
-                    {/* Email */}
-                    <View style={styles.textInputView}>
-                        <TextInput
-                            style={styles.input}
-                            placeholder='Email'
-                        />
-                    </View>
+                <Formik
+                    initialValues={{ code: '' }}
+                    validationSchema={loginSchema}
+                    onSubmit={(values, actions) => {
+                        signInPress(values);
+                        actions.resetForm();
+                    }}
+                >
+                    {(props) => (
+                        <View style={styles.container}>
+                            {/* Email */}
+                            <View style={styles.textInputView}>
+                                <TextInput
+                                    style={styles.input}
+                                    placeholder='Email'
+                                    onChangeText={props.handleChange('email')}
+                                    value={props.values.email}
+                                    onBlur={props.handleBlur('email')}
+                                />
+                            </View>
 
-                    {/* Password */}
-                    <View style={styles.textInputView}>
-                        <TextInput
-                            style={styles.input}
-                            placeholder='Password'
-                            secureTextEntry={hidePass}
-                        />
-                        <TouchableOpacity onPress={hidePassFunc}>
-                            <MaterialCommunityIcons name={hidePassIcon} size={30} color="black" style={styles.hideIcon} />
-                        </TouchableOpacity>
-                    </View>
+                            <Text style={globalStyles.errorText}>{props.touched.email && props.errors.email}</Text>
 
-                    {/* Accept the privacy policy */}
-                    <Text style={{ marginTop: 10, opacity: 0, }}>Code Rangers®</Text>
-                    <View style={styles.acceptTos}>
-                        <Text style={styles.acceptTos}>Did you </Text>
-                        <TouchableOpacity onPress={forgetPress}>
-                            <Text style={globalStyles.highlitedText}>Forget your password?</Text>
-                        </TouchableOpacity>
+                            {/* Password */}
+                            <View style={styles.textInputView}>
+                                <TextInput
+                                    style={styles.input}
+                                    placeholder='Password'
+                                    secureTextEntry={hidePass}
+                                    onChangeText={props.handleChange('password')}
+                                    value={props.values.password}
+                                    onBlur={props.handleBlur('password')}
+                                />
+                                <TouchableOpacity onPress={hidePassFunc}>
+                                    <MaterialCommunityIcons name={hidePassIcon} size={30} color="black" style={styles.hideIcon} />
+                                </TouchableOpacity>
+                            </View>
 
-                    </View>
-                    {/* Sign Up Button */}
-                    <Text style={{ marginTop: 20, opacity: 0, }}>Code Rangers®</Text>
-                    <TouchableOpacity style={styles.signUpButton} onPress={signInPress}>
-                        <Text style={styles.signUpText}>Sign In</Text>
-                    </TouchableOpacity>
+                            <Text style={globalStyles.errorText}>{props.touched.password && props.errors.password}</Text>
 
-                    <Text style={globalStyles.emptySpacer}>Code Rangers®</Text>
-                </View >
+                            {/* Accept the privacy policy */}
+                            <Text style={{ marginTop: 10, opacity: 0, }}>Code Rangers®</Text>
+                            <View style={styles.acceptTos}>
+                                <Text style={styles.acceptTos}>Did you </Text>
+                                <TouchableOpacity onPress={forgetPress}>
+                                    <Text style={globalStyles.highlitedText}>Forget your password?</Text>
+                                </TouchableOpacity>
+
+                            </View>
+                            {/* Sign Up Button */}
+                            <Text style={{ marginTop: 20, opacity: 0, }}>Code Rangers®</Text>
+                            <TouchableOpacity style={styles.signUpButton} onPress={props.handleSubmit}>
+                                <Text style={styles.signUpText}>Sign In</Text>
+                            </TouchableOpacity>
+
+                            <Text style={globalStyles.emptySpacer}>Code Rangers®</Text>
+                        </View >
+                    )}
+                </Formik>
 
             </View>
         </TouchableWithoutFeedback >
