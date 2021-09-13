@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import Header from '../shared/header';
 
@@ -8,7 +8,7 @@ export default function CoursePreview(props) {
     return (
         <View style={{ backgroundColor: '#fca311', flex: 1 }}>
             <Header title={course.title} backButton={true} backAction={() => props.navigation.goBack()} fontFamily="rubik-regular" height={60} />
-            <View >
+            <ScrollView >
                 {course.content.map(
                     (item) => {
                         return (
@@ -42,7 +42,7 @@ export default function CoursePreview(props) {
                     }
 
                 )}
-            </View>
+            </ScrollView>
         </View >
     )
 }
@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
     subjectTitleText: {
         alignSelf: 'center',
         fontSize: 25,
+        fontFamily: 'rubik-bold',
     },
     subjectQls: {
         flexDirection: 'row',
@@ -77,6 +78,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         alignSelf: 'center',
         top: 20,
+        fontFamily: 'rubik-bold',
     },
     qlIcon: {
         padding: 10,
