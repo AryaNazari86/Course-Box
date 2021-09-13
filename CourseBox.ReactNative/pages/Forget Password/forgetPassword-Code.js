@@ -2,11 +2,20 @@ import React, { useState } from "react";
 import { StyleSheet, View, Text, TouchableWithoutFeedback, Keyboard, TextInput, TouchableOpacity } from 'react-native';
 import { globalStyles } from "../../shared/globalStyle";
 import Header from '../../shared/header';
+import { Formik } from "formik";
+import * as yup from 'yup';
+
 export default function ForgetPassword_Code({ navigation }) {
     // * The function for going to forget password, reset password
     const passwordPress = () => {
         navigation.navigate('Password')
     }
+
+    const ForgetSchema = yup.object({
+        code: yup.string()
+            .required()
+            .min(4)
+    })
 
     return (
         <TouchableWithoutFeedback
@@ -16,22 +25,37 @@ export default function ForgetPassword_Code({ navigation }) {
             <View>
 
                 <Header title='Forget Password' backButton={true} backAction={() => navigation.goBack()} fontFamily="rubik-regular" height={60} />
-                <View style={styles.container}>
-                    <Text style={styles.normalText}>Enter the code we sent to your email</Text>
-                    {/* Code Input*/}
-                    <View style={styles.textInputView}>
-                        <TextInput
-                            style={styles.input}
-                            placeholder='Code'
-                        />
-                    </View>
+                <Formik
+                    initialValues={{ code: '' }}
+                    validationSchema={ForgetSchema}
+                    onSubmit={(values, actions) => {
+                        passwordPress(values);
+                        actions.resetForm();
+                    }}
+                >
+                    {(props) => (
+                        <View style={styles.container}>
+                            <Text style={styles.normalText}>Enter the code we sent to your email</Text>
+                            {/* Code Input*/}
+                            <View style={styles.textInputView}>
+                                <TextInput
+                                    style={styles.input}
+                                    placeholder='Code'
+                                    onChangeText={props.handleChange('code')}
+                                    value={props.values.code}
+                                    onBlur={props.handleBlur('code')}
+                                />
+                            </View>
 
-                    {/* Continue Button */}
-                    <TouchableOpacity style={styles.continueButton} onPress={passwordPress}>
-                        <Text style={styles.continueText}>Continue</Text>
-                    </TouchableOpacity>
-                </View >
+                            <Text style={globalStyles.errorText}>{props.touched.code && props.errors.code}</Text>
 
+                            {/* Continue Button */}
+                            <TouchableOpacity style={styles.continueButton} onPress={props.handleSubmit}>
+                                <Text style={styles.continueText}>Continue</Text>
+                            </TouchableOpacity>
+                        </View >
+                    )}
+                </Formik>
             </View>
         </TouchableWithoutFeedback >
     )

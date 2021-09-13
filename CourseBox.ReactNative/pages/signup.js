@@ -21,7 +21,7 @@ const ReviewSchema = yup.object({
         .min(4),
     name: yup.string()
         .required()
-        .max(10)
+        .max(30)
         .min(3),
     email: yup.string()
         .required()
