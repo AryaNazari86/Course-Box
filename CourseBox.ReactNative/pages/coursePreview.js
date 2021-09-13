@@ -13,8 +13,11 @@ export default function CoursePreview(props) {
                     return (
                         <View style={styles.subject}>
                             {/* Subject's title */}
-                            <View style={{ ...styles.subjectTitle, borderColor: item.color }}>
-                                <Text style={{ ...styles.subjectTitleText, color: item.color }}>{item.title}</Text>
+                            <View style={{ ...styles.subjectTitle, borderColor: course.color }}>
+                                {/* Icon */}
+                                <MaterialIcons name={item.icon} />
+                                {/* Text */}
+                                <Text style={{ ...styles.subjectTitleText, color: course.color }}>{item.title}</Text>
                             </View>
                             {/* Lessons of the subject  */}
                             <View style={styles.subjectLessons}>
@@ -22,11 +25,11 @@ export default function CoursePreview(props) {
                                     (item) => {
                                         {/* Each lesson of the subject  */ }
                                         return (
-                                            <TouchableOpacity style={{ ...styles.lesson, borderColor: item.color }}>
+                                            <TouchableOpacity style={{ ...styles.lesson, borderColor: course.color }}>
                                                 {/* lesson's icon */}
-                                                <MaterialIcons name="class" size={50} color={item.color} style={styles.lessonIcon} />
+                                                <MaterialIcons name={item.icon} size={50} color={course.color} style={styles.lessonIcon} />
                                                 {/* lesson's title */}
-                                                <Text style={{ ...styles.lessonTitleText, color: item.color }}>{item.title}</Text>
+                                                <Text style={{ ...styles.lessonTitleText, color: course.color }}>{item.title}</Text>
                                             </TouchableOpacity>
                                         )
                                     }
@@ -46,6 +49,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 30,
     },
     subjectTitle: {
+        alignSelf: 'center',
         borderWidth: 1,
         borderRadius: 20,
 
@@ -57,7 +61,7 @@ const styles = StyleSheet.create({
     subjectLessons: {
         flexDirection: 'row',
     },
-    lesson: {
+    ql: {
         borderWidth: 1,
         marginHorizontal: 5,
         marginTop: 10,
@@ -65,12 +69,12 @@ const styles = StyleSheet.create({
         height: 100,
         width: 100,
     },
-    lessonTitleText: {
+    qlTitleText: {
         marginBottom: 10,
         alignSelf: 'center',
         top: 20,
     },
-    lessonIcon: {
+    qlIcon: {
         alignSelf: 'center',
     }
 })
