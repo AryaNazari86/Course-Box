@@ -62,6 +62,9 @@ export const globalStyles = StyleSheet.create({
         alignItems: 'center',
         height: 20,
     },
+    courseLikeBtn: {
+        width: 20,
+    },
     input: {
         marginTop: 35,
         marginBottom: 15,

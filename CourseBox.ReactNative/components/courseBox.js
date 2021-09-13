@@ -1,10 +1,30 @@
-import React from "react";
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import React, { useRef, useState } from "react";
+import { View, Text, TouchableOpacity, Image, Pressable } from 'react-native';
 import { globalStyles } from "../shared/globalStyle";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Chip } from 'react-native-paper';
+import LottieView from 'lottie-react-native';
 
 export default function CourseBox({ navigation, item }) {
+    // If user likes this course. (Get this from api).
+    const [isLiked, setIsLiked] = useState(false);
+
+    const likeAnimation = useRef(null);
+
+    const [likeOpacity, setLikeOpacity] = useState(0.7);
+
+    const playAnimation = () => {
+        if (!isLiked) {
+            setIsLiked(true);
+            setLikeOpacity(1);
+            likeAnimation.current.play();
+        }
+        else {
+            setIsLiked(false);
+            setLikeOpacity(0.7);
+        }
+    };
+
     return (
         <TouchableOpacity style={globalStyles.coursesBox} onPress={() => navigation.navigate('CoursePreview', { item })}>
             <Image source={item.image} style={globalStyles.courseImage}></Image>
@@ -19,6 +39,23 @@ export default function CourseBox({ navigation, item }) {
                 <MaterialCommunityIcons name='thumb-up' size={15} color="#14213D" style={globalStyles.courseIcons} />
                 <Text style={globalStyles.courseNumData}>{item.likes}</Text>
             </View>
+            <Pressable onPress={() => playAnimation()}
+                style={{
+                    position: 'absolute',
+                    top: 0,
+                    right: 0,
+                }}>
+                <LottieView
+                    ref={likeAnimation}
+                    style={{
+                        width: 70,
+                        height: 70,
+                        opacity: likeOpacity
+                    }}
+                    loop={false}
+                    source={require('../assets/Animations/like.json')}
+                />
+            </Pressable>
         </TouchableOpacity>
     )
 }
