@@ -39,7 +39,7 @@ export default function CourseBox({ navigation, item }) {
                 <MaterialCommunityIcons name='thumb-up' size={15} color="#14213D" style={globalStyles.courseIcons} />
                 <Text style={globalStyles.courseNumData}>{item.likes}</Text>
             </View>
-            <Pressable 
+            <Pressable
                 onPress={() => playAnimation()}
                 style={globalStyles.courseLikeButton}>
                 <LottieView
