@@ -12,7 +12,6 @@ import ForgetPassword_Email from './pages/Forget Password/forgetPassword-Email';
 import ForgetPassword_Code from './pages/Forget Password/forgetPassword-Code';
 import ForgetPassword_Password from './pages/Forget Password/forgetPassword-Password';
 import PasswordNavigator from './routes/PasswordStack';
-import CoursePreviewStack from './routes/coursePreviewStack';
 import Search from './pages/search';
 const getFonts = () => Font.loadAsync({
   'rubik-bold': require('./assets/Fonts/Rubik-Bold.ttf'),

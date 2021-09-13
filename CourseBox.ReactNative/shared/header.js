@@ -24,7 +24,7 @@ export default function Header({ title, backButton = false, backAction,
                         ref={backAnimation}
                         style={globalStyles.headerBackAnimation}
                         loop={false}
-                        duration={1000}
+                        duration={700}
                         onAnimationFinish={() => backAction()}
                         source={require('../assets/Animations/back.json')}
                     />

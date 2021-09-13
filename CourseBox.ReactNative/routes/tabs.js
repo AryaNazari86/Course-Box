@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { BackHandler } from 'react-native';
 import { BottomNavigation } from 'react-native-paper';
 import Profile from '../pages/profile';
-import Search from '../pages/search';
 import HomeStack from '../routes/homeStack';
+import SearchStack from '../routes/searchStack';
 import { globalStyles } from '../shared/globalStyle';
 
 
@@ -19,15 +19,15 @@ export default function Tab() {
 
     // Configuring each tab.
     const [routes] = useState([
-        { key: 'home', title: 'Home', icon: 'home' },
         { key: 'search', title: 'Search', icon: 'magnify' },
+        { key: 'home', title: 'Home', icon: 'home' },
         { key: 'profile', title: 'Profile', icon: 'account-circle' },
     ]);
 
     // Setting the page of each tab.
     const renderScene = BottomNavigation.SceneMap({
+        search: SearchStack,
         home: HomeStack,
-        search: Search,
         profile: Profile,
     });
 
