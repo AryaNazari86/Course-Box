@@ -54,7 +54,7 @@ export default function Home({ navigation }) {
     return (
         <View style={styles.container}>
             {/* Header */}
-            <Header title="Home" backgroundColor="#fff" fontFamily="rubik-regular" height={60} />
+            <Header title="Home" fontFamily="rubik-regular" height={60} />
 
             {/* Content */}
             <ScrollView

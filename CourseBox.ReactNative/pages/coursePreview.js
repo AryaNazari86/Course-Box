@@ -7,7 +7,7 @@ export default function CoursePreview(props) {
     const course = props.navigation.state.params.item;
     return (
         <View>
-            <Header title={course.title} backButton={true} backAction={() => props.navigation.goBack()} backgroundColor="#fff" fontFamily="rubik-regular" height={60} />
+            <Header title={course.title} backButton={true} backAction={() => props.navigation.goBack()} fontFamily="rubik-regular" height={60} />
             {course.content.map(
                 (item) => {
                     return (

@@ -37,7 +37,7 @@ export default function Profile() {
     return (
         <View>
             {/* Header */}
-            <Header title="Profile" backgroundColor="#fff" fontFamily="rubik-regular" height={60} />
+            <Header title="Profile" fontFamily="rubik-regular" height={60} />
             < ScrollView >
 
                 {/* Account Name And Icon Header */}

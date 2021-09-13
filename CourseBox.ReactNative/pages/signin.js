@@ -40,7 +40,7 @@ export default function SignIn({ navigation }) {
             style={styles.container}
         >
             <View>
-                <Header title='Sign In' backButton={true} backAction={() => navigation.goBack()} backgroundColor="#fff" fontFamily="rubik-regular" height={60} />
+                <Header title='Sign In' backButton={true} backAction={() => navigation.goBack()} fontFamily="rubik-regular" height={60} />
                 <View style={styles.container}>
                     {/* Email */}
                     <View style={styles.textInputView}>

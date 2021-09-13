@@ -2,12 +2,15 @@ import { StyleSheet } from "react-native";
 export const globalStyles = StyleSheet.create({
     header: {
         elevation: 0,
+        backgroundColor: '#fff',
     },
     headerTitle: {
         fontSize: 26,
+        color: '#14213D',
     },
-    headerSubtitle: {
-        textAlign: 'center',
+    headerBackAnimation: {
+        width: 30,
+        height: 30,
     },
     tabBar: {
         backgroundColor: '#14213D',

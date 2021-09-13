@@ -1,33 +1,49 @@
-import React from "react";
+import React, { useRef } from "react";
+import { Pressable } from "react-native";
 import { Appbar } from "react-native-paper";
+import LottieView from 'lottie-react-native';
 import { globalStyles } from "../shared/globalStyle";
 
 export default function Header({ title, backButton = false, backAction,
-    backgroundColor = '#fca311', textColor = '#14213D',
     fontFamily = 'rubik-light', height = 45 }) {
+
+    const backAnimation = useRef(null);
+
+    const backButtonClicked = () => {
+        backAnimation.current.play();
+    };
 
     const titleAlignment = backAction ? 'left' : 'center';
 
     // If there is a back button for navigating to the previous screen:
     if (backButton) {
         return (
-            <Appbar.Header style={[{ backgroundColor: backgroundColor, height: height }, globalStyles.header]}>
-                <Appbar.BackAction onPress={backAction} />
+            <Appbar.Header style={[{ height: height }, globalStyles.header]}>
+                <Pressable onPress={() => backButtonClicked()}>
+                    <LottieView
+                        ref={backAnimation}
+                        style={globalStyles.headerBackAnimation}
+                        loop={false}
+                        duration={1000}
+                        onAnimationFinish={() => backAction()}
+                        source={require('../assets/Animations/back.json')}
+                    />
+                </Pressable>
                 <Appbar.Content
                     title={title}
                     color="#14213D"
-                    titleStyle={[{ textAlign: titleAlignment, color: textColor, fontFamily: fontFamily }, globalStyles.headerTitle]} />
+                    titleStyle={[{ textAlign: titleAlignment, fontFamily: fontFamily }, globalStyles.headerTitle]} />
             </Appbar.Header>
         );
     }
 
     // If there isn't a back button for navigating to the previous screen:
     return (
-        <Appbar.Header style={[{ backgroundColor: backgroundColor, height: height }, globalStyles.header]}>
+        <Appbar.Header style={[{ height: height }, globalStyles.header]}>
             <Appbar.Content
                 title={title}
                 color="#14213D"
-                titleStyle={[{ textAlign: titleAlignment, color: textColor, fontFamily: fontFamily }, globalStyles.headerTitle]} />
+                titleStyle={[{ textAlign: titleAlignment, fontFamily: fontFamily }, globalStyles.headerTitle]} />
         </Appbar.Header>
     );
 }
