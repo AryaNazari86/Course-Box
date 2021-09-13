@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { StyleSheet, View, Text, TouchableWithoutFeedback, Keyboard, TextInput, Image, TouchableOpacity } from 'react-native';
 import { globalStyles } from "../../shared/globalStyle";
 import Header from '../../shared/header';
@@ -7,6 +7,8 @@ import { Formik } from "formik";
 import * as yup from 'yup';
 
 export default function ForgetPassword_Password({ navigation }) {
+
+    const [password, setPassword] = useState('');
 
     // * Set of yup rules for the text input
     const PasswordSchema = yup.object({
@@ -18,6 +20,7 @@ export default function ForgetPassword_Password({ navigation }) {
             .required()
             .min(5)
             .max(100)
+            .oneOf([yup.ref('Password'), null], "Passwords don't match!")
     })
 
     // * The hide password state
