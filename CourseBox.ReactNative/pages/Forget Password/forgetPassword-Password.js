@@ -73,7 +73,7 @@ export default function ForgetPassword_Password({ navigation, goToUser }) {
         >
             <View>
 
-                <Header title='Forget Password' backButton={true} backAction={() => navigation.goBack()} />
+                <Header title='Forget Password' backButton={true} backAction={() => navigation.goBack()} backgroundColor="#fff" fontFamily="rubik-regular" height={60} />
                 <Formik
                     initialValues={{ Password: '', confirmPassword: '' }}
                     validationSchema={PasswordSchema}

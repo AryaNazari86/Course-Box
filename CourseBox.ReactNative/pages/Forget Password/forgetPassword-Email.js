@@ -16,7 +16,7 @@ export default function ForgetPassword_Email({ navigation }) {
         >
             <View>
                 {/* * The header */}
-                <Header title='Forget Password' backButton={true} backAction={() => navigation.goBack()} />
+                <Header title='Forget Password' backButton={true} backAction={() => navigation.goBack()} backgroundColor="#fff" fontFamily="rubik-regular" height={60} />
                 <View style={styles.container}>
 
                     {/* Email Input */}

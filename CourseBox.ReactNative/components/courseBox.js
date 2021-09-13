@@ -39,19 +39,12 @@ export default function CourseBox({ navigation, item }) {
                 <MaterialCommunityIcons name='thumb-up' size={15} color="#14213D" style={globalStyles.courseIcons} />
                 <Text style={globalStyles.courseNumData}>{item.likes}</Text>
             </View>
-            <Pressable onPress={() => playAnimation()}
-                style={{
-                    position: 'absolute',
-                    top: 0,
-                    right: 0,
-                }}>
+            <Pressable 
+                onPress={() => playAnimation()}
+                style={globalStyles.courseLikeButton}>
                 <LottieView
                     ref={likeAnimation}
-                    style={{
-                        width: 70,
-                        height: 70,
-                        opacity: likeOpacity
-                    }}
+                    style={[{ opacity: likeOpacity }, globalStyles.courseLikeAnimation]}
                     loop={false}
                     source={require('../assets/Animations/like.json')}
                 />

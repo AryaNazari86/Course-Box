@@ -15,7 +15,7 @@ export default function ForgetPassword_Code({ navigation }) {
         >
             <View>
 
-                <Header title='Forget Password' backButton={true} backAction={() => navigation.goBack()} />
+                <Header title='Forget Password' backButton={true} backAction={() => navigation.goBack()} backgroundColor="#fff" fontFamily="rubik-regular" height={60} />
                 <View style={styles.container}>
                     <Text style={styles.normalText}>Enter the code we sent to your email</Text>
                     {/* Code Input*/}
