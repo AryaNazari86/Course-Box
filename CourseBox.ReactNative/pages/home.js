@@ -16,6 +16,9 @@ import BottomSheetCategory from "../components/BottomSheet/Category/category";
 // Carousel Imports
 import CoursesCarousel from '../components/Carousel/coursesCarousel';
 
+// Courses Data
+import courses from '../data/courses';
+
 export default function Home({ navigation }) {
 
     // Access bottom sheet using sheetRef.current;
@@ -34,31 +37,6 @@ export default function Home({ navigation }) {
 
     // Clicked CategoryId will be here.
     const [selectedCategory, setSelectedCategory] = useState(categories[0]);
-
-
-    // Get Latest Courses From API
-    const latestCourses = [
-        { title: 'Dribbling', category: 'Sports', author: '@Arya', participants: '100', likes: '99', description: 'something ...', image: require(`../assets/Images/messi.jpeg`), key: '1' },
-        { title: 'Hacking', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/hacking_course.jpg`), key: '2' },
-        { title: 'Javascript Beginner Course', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/Javascript_Course.png`), key: '3' },
-        { title: 'HTML Beginner Course', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/HTML_Course.jpeg`), key: '4' },
-        { title: 'CSS Beginner Course', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/CSS_Course.png`), key: '5' },
-        { title: 'PyQT5 Course', category: 'Programming', author: '@Arya', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/PyQT5_Course.jpeg`), key: '6' },
-        { title: 'C# Course', category: 'Programming', author: '@MHK', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/c-sharp-course.jpeg`), key: '7' },
-        { title: 'Soccer for beginners', category: 'Sports', author: '@Person', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/soccer_Course.jpeg`), key: '8' },
-    ];
-
-    // Get Popular Courses From API
-    const popularCourses = [
-        { title: 'HTML Beginner Course', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/HTML_Course.jpeg`), key: '4' },
-        { title: 'CSS Beginner Course', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/CSS_Course.png`), key: '5' },
-        { title: 'PyQT5 Course', category: 'Programming', author: '@Arya', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/PyQT5_Course.jpeg`), key: '6' },
-        { title: 'C# Course', category: 'Programming', author: '@MHK', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/c-sharp-course.jpeg`), key: '7' },
-        { title: 'Soccer for beginners', category: 'Sports', author: '@Person', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/soccer_Course.jpeg`), key: '8' },
-        { title: 'Dribbling', category: 'Sports', author: '@Arya', participants: '100', likes: '99', description: 'something ...', image: require(`../assets/Images/messi.jpeg`), key: '1' },
-        { title: 'Hacking', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/hacking_course.jpg`), key: '2' },
-        { title: 'Javascript Beginner Course', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/Javascript_Course.png`), key: '3' },
-    ];
 
     // When user click on a category.
     const onCategoryClicked = (category) => {
@@ -101,7 +79,7 @@ export default function Home({ navigation }) {
                         <Text style={styles.latestCoursesTitle}>Latest Courses</Text>
 
                         {/* A carousel for showing the latest courses. */}
-                        <CoursesCarousel courses={latestCourses} navigation={navigation} dotesColor='#fca311' />
+                        <CoursesCarousel courses={courses} navigation={navigation} dotesColor='#fca311' />
 
                     </View>
 
@@ -110,7 +88,7 @@ export default function Home({ navigation }) {
                         <Text style={styles.popularCoursesTitle}>Popular Courses</Text>
 
                         {/* A carousel for showing the popular courses. */}
-                        <CoursesCarousel courses={popularCourses} navigation={navigation} dotesColor='#14213D' />
+                        <CoursesCarousel courses={courses} navigation={navigation} dotesColor='#14213D' />
 
                     </View>
 

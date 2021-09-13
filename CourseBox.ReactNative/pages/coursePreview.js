@@ -7,7 +7,7 @@ export default function CoursePreview(props) {
     const course = props.navigation.state.params.item;
     return (
         <View>
-            <Header title={course.title} backButton={true} backAction={() => navigation.goBack()} />
+            <Header title={course.title} backButton={true} backAction={() => props.navigation.goBack()} />
             {course.content.map(
                 (item) => {
                     return (

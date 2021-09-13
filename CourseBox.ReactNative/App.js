@@ -11,7 +11,7 @@ import CoursePreview from './pages/coursePreview';
 import ForgetPassword_Email from './pages/Forget Password/forgetPassword-Email';
 import ForgetPassword_Code from './pages/Forget Password/forgetPassword-Code';
 import ForgetPassword_Password from './pages/Forget Password/forgetPassword-Password';
-import PassNavigator from './routes/PasswordStack';
+import PasswordNavigator from './routes/PasswordStack';
 import CoursePreviewStack from './routes/coursePreviewStack';
 import Search from './pages/search';
 const getFonts = () => Font.loadAsync({
@@ -31,8 +31,7 @@ export default function App() {
 
   if (fontsLoaded) {
     return (
-      // Renders Tab Navigation
-      <CoursePreviewStack />
+      <PasswordNavigator />
     );
   }
   else {
