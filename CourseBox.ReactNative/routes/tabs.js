@@ -15,7 +15,7 @@ export default function Tab() {
     });
 
     // The index of each tab.
-    const [index, setIndex] = useState(0);
+    const [index, setIndex] = useState(1);
 
     // Configuring each tab.
     const [routes] = useState([
@@ -26,8 +26,8 @@ export default function Tab() {
 
     // Setting the page of each tab.
     const renderScene = BottomNavigation.SceneMap({
-        search: SearchStack,
         home: HomeStack,
+        search: SearchStack,
         profile: Profile,
     });
 
