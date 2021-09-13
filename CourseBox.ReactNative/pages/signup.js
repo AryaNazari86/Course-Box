@@ -73,7 +73,7 @@ export default function SignUp({ makeUser, navigation }) {
                     initialValues={{ username: '', name: '', email: '', password: '' }}
                     validationSchema={ReviewSchema}
                     onSubmit={(values, actions) => {
-                        makeUser(values);
+                        signUpPress(values);
                         actions.resetForm();
                     }}
                 >
@@ -154,7 +154,7 @@ export default function SignUp({ makeUser, navigation }) {
                             </View>
                             {/* Sign Up Button */}
                             <Text style={{ marginTop: 20, opacity: 0, }}>Code Rangers®</Text>
-                            <TouchableOpacity style={styles.signUpButton} onPress={props.handleSubmit, signUpPress}>
+                            <TouchableOpacity style={styles.signUpButton} onPress={props.handleSubmit}>
                                 <Text style={styles.signUpText}>Sign Up</Text>
                             </TouchableOpacity>
 
