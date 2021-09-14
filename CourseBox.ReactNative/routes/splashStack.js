@@ -1,8 +1,7 @@
 import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer } from "react-navigation";
-import React from "react";
-import { View } from "react-native";
 
+import Splash from "../pages/splash";
 import SignIn from "../pages/signin";
 import SignUp from "../pages/signup";
 import ForgetPassword_Email from "../pages/Forget Password/forgetPassword-Email";
@@ -11,8 +10,16 @@ import ForgetPassword_Password from "../pages/Forget Password/forgetPassword-Pas
 import Tab from "./tabs";
 import Header from "../shared/header";
 
-// * Screens of the forget password stack
+// * Screens of the splash stack
 const screens = {
+    // The sign up page
+    Splash: {
+        screen: Splash,
+        // Disables the stack header component
+        navigationOptions: {
+            headerShown: false
+        }
+    },
     // The sign up page
     SignUp: {
         screen: SignUp,
@@ -65,8 +72,8 @@ const screens = {
     }
 }
 
-// * Creates the password stack
-const PasswordStack = createStackNavigator(screens);
+// * Creates the splash stack
+const SplashStack = createStackNavigator(screens);
 
 // * Exports the stack
-export default createAppContainer(PasswordStack)
+export default createAppContainer(SplashStack)
