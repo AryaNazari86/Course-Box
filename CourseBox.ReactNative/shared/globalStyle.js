@@ -95,5 +95,10 @@ export const globalStyles = StyleSheet.create({
         fontWeight: 'bold',
         marginTop: 6,
         textAlign: 'center'
-    }
+    },
+    normalText: {
+        flexDirection: 'row',
+        fontFamily: 'rubik-light',
+        paddingTop: 20,
+    },
 });

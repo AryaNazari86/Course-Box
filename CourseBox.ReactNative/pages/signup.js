@@ -210,15 +210,6 @@ const styles = StyleSheet.create({
     hideIcon: {
         padding: 35,
     },
-    // * Kept for possible future use
-    // ! Delete if design accepted
-    profileAccountImage: {
-        width: 125,
-        height: 125,
-        borderRadius: 100,
-        marginBottom: 10,
-        marginTop: 100,
-    },
     // The confirm Button
     signUpButton: {
         backgroundColor: '#FCA311',
@@ -238,15 +229,6 @@ const styles = StyleSheet.create({
     acceptTos: {
         flexDirection: 'row',
         fontFamily: 'rubik-light'
-    },
-    // Header Title
-    // ! Delete if header component selected
-    headerTitle: {
-        fontSize: 35,
-        paddingTop: 50,
-        fontWeight: 'bold',
-        fontFamily: 'rubik-bold',
-        alignSelf: 'center'
     },
     // Have an cccount View
     signInContainer: {
