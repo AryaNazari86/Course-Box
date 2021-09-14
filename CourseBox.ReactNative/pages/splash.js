@@ -13,7 +13,7 @@ export default function Splash({ navigation, disconnected }) {
         if (navigation != null || navigation != undefined) {
             setTimeout(function () {
                 navigation.push('SignUp');
-            }, 5000);
+            }, 3000);
         }
     });
     return (
@@ -25,7 +25,7 @@ export default function Splash({ navigation, disconnected }) {
                 loop={true}
                 source={require('../assets/Animations/loader.json')}
             />
-            <Text style={styles.poweredBy}>Powered By Code Rangers</Text>
+            <Text style={styles.poweredBy}>Made By Code Rangers</Text>
             <Snackbar
                 style={styles.disconnected}
                 visible={disconnected}>

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { BackHandler } from 'react-native';
 import { BottomNavigation } from 'react-native-paper';
-import Profile from '../pages/profile';
 import HomeStack from '../routes/homeStack';
 import SearchStack from '../routes/searchStack';
 import { globalStyles } from '../shared/globalStyle';
+import profileStack from './profileStack';
 
 
 export default function Tab() {
@@ -28,7 +28,7 @@ export default function Tab() {
     const renderScene = BottomNavigation.SceneMap({
         home: HomeStack,
         search: SearchStack,
-        profile: Profile,
+        profile: profileStack,
     });
 
     // Return a BottomNavigation component that renders tabs.

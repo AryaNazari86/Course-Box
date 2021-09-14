@@ -4,7 +4,10 @@ import { globalStyles } from "../shared/globalStyle";
 import Header from '../shared/header';
 import CourseBox from "../components/courseBox";
 
-export default function Profile() {
+import CoursesCarousel from '../components/Carousel/coursesCarousel';
+import courses from "../data/courses";
+
+export default function Profile({ navigation }) {
 
     // * The list of user's made courses
     const [madeCourses, setMadeCourses] = useState([
@@ -81,25 +84,13 @@ export default function Profile() {
                 {/* Made Courses */}
                 < View style={styles.madeCoursesHeader} >
                     <Text style={styles.madeCoursesText}>Made Courses</Text>
-                    <View style={styles.madeCoursesList}>
-                        {/* Made courses list */}
-                        {madeCourses.map((item, index) => (
-                            <CourseBox item={item} />
-                        ))}
-
-                    </View>
+                    <CoursesCarousel courses={courses} navigation={navigation} dotesColor='#14213D' />
                 </View >
 
                 {/* Participated Courses */}
                 < View style={styles.madeCoursesHeader}>
                     <Text style={styles.madeCoursesText}>Participated Courses</Text>
-                    <View style={styles.madeCoursesList}>
-                        {/* Participated course list */}
-                        {participatedCourses.map((item, index) => (
-                            <CourseBox item={item} />
-                        ))}
-
-                    </View>
+                    <CoursesCarousel courses={courses} navigation={navigation} dotesColor='#14213D' />
                 </View >
 
 
@@ -165,11 +156,7 @@ const styles = StyleSheet.create({
     madeCoursesText: {
         fontSize: 20,
         paddingTop: 30,
-    },
-    madeCoursesHeader: {
-        alignSelf: 'center',
-        alignItems: 'center',
-        flex: 1,
+        textAlign: "center"
     },
     madeCoursesList: {
         flex: 1
