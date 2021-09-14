@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, ImageBackground } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import Header from '../shared/header';
+import { FAB } from 'react-native-paper';
 
 export default function CoursePreview(props) {
     const course = props.navigation.state.params.item;
@@ -14,11 +15,13 @@ export default function CoursePreview(props) {
                         return (
                             <View style={styles.subject}>
                                 {/* Subject's title */}
-                                <View style={{ ...styles.subjectTitle, borderColor: course.color }}>
+                                <View style={styles.subjectTitle}>
                                     {/* Icon */}
-                                    <MaterialIcons name={item.icon} size={100} color={course.color} style={styles.subjectIcon} />
+                                    <MaterialIcons name={item.icon} size={100} color='#14213D' style={styles.subjectIcon} />
                                     {/* Text */}
-                                    <Text style={{ ...styles.subjectTitleText, color: course.color }}>{item.title}</Text>
+                                    <ImageBackground source={require('../assets/Images/title.png')} resizeMode='cover' style={{ justifyContent: 'center', height: 100, width: 200 }}>
+                                        <Text style={styles.subjectTitleText}>{item.title}</Text>
+                                    </ImageBackground>
                                 </View>
                                 {/* Lessons of the subject  */}
                                 <View style={styles.subjectQls}>
@@ -26,15 +29,13 @@ export default function CoursePreview(props) {
                                         (item) => {
                                             {/* Each lesson of the subject  */ }
                                             return (
-                                                <TouchableOpacity style={{ ...styles.ql, borderColor: course.color }}>
+                                                <TouchableOpacity style={styles.ql}>
                                                     {/* lesson's icon */}
-                                                    <MaterialIcons name={item.icon} size={50} color={course.color} style={{ ...styles.qlIcon, borderColor: course.color }} />
-                                                    {/* lesson's title */}
-                                                    <View>
-                                                        <ImageBackground source={{ uri: require('../assets/Images/title.png') }} resizeMode='cover' style={{ justifyContent: 'center', flex: 1, height: 100, width: 100 }}>
-                                                            <Text style={{ ...styles.qlTitleText, color: course.color }}>{item.title}</Text>
-                                                        </ImageBackground>
+                                                    <View style={styles.qlIconOut}>
+                                                        <MaterialIcons name={item.icon} size={50} color='#14213D' style={{ ...styles.qlIconIn, backgroundColor: item.color }} />
                                                     </View>
+                                                    {/* lesson's title */}
+                                                    <Text style={styles.qlTitleText}>{item.title}</Text>
                                                 </TouchableOpacity>
                                             )
                                         }
@@ -46,7 +47,13 @@ export default function CoursePreview(props) {
                     }
 
                 )}
+
             </ScrollView >
+            <FAB
+                color='#fca311'
+                icon='information'
+                style={styles.infoButton}
+            />
         </View >
     )
 }
@@ -61,12 +68,13 @@ const styles = StyleSheet.create({
     },
     subjectTitle: {
         alignSelf: 'center',
-
+        borderColor: '#14213D',
     },
     subjectTitleText: {
         alignSelf: 'center',
         fontSize: 25,
         fontFamily: 'rubik-bold',
+        color: '#14213D',
     },
     subjectQls: {
         flexDirection: 'row',
@@ -77,17 +85,38 @@ const styles = StyleSheet.create({
         marginTop: 10,
         height: 100,
         width: 100,
+        borderColor: '#14213D',
     },
     qlTitleText: {
         marginBottom: 10,
         alignSelf: 'center',
         top: 20,
         fontFamily: 'rubik-bold',
+        color: '#14213D',
     },
-    qlIcon: {
-        padding: 10,
-        borderWidth: 5,
-        borderRadius: 40,
+    qlIconIn: {
+        padding: 8,
+        borderRadius: 33,
         alignSelf: 'center',
+        overflow: 'hidden',
+    },
+    qlIconOut: {
+        width: 85,
+        borderWidth: 4,
+        padding: 5,
+        borderRadius: 40,
+        borderColor: '#14213D',
+        overflow: 'hidden',
+    },
+    infoButton: {
+        left: 300,
+        bottom: 10,
+        width: 70,
+        height: 70,
+        borderRadius: 100,
+        backgroundColor: '#14213D',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
     }
 })
