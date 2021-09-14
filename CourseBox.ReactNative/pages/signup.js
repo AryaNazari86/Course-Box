@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
     },
     // The confirm Button
     signUpButton: {
-        backgroundColor: '#41CD7D',
+        backgroundColor: '#FCA311',
         width: 330,
         height: 50,
         borderRadius: 50,

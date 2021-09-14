@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     },
     // The continue Button
     continueButton: {
-        backgroundColor: '#41CD7D',
+        backgroundColor: '#FCA311',
         width: 330,
         height: 50,
         borderRadius: 50,
