@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, TouchableWithoutFeedback, Keyboard, TextInput, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableWithoutFeedback, Keyboard, TextInput, Image, TouchableOpacity, BackHandler } from 'react-native';
 import { globalStyles } from "../shared/globalStyle";
 import Header from '../shared/header';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -35,6 +35,11 @@ const ReviewSchema = yup.object({
 
 export default function SignUp({ makeUser, navigation }) {
     setStatusBarStyle('dark');
+    // If Back Button clicked close 
+    BackHandler.addEventListener('hardwareBackPress', () => {
+        BackHandler.exitApp();
+        return false;
+    });
     // * Go to the tab componnent
     const signUpPress = () => {
         navigation.navigate('Tab')

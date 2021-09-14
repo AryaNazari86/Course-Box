@@ -2,13 +2,19 @@ import React from 'react';
 import { InteractionManager, StyleSheet, Text, View } from 'react-native';
 import LottieView from 'lottie-react-native';
 import { setStatusBarStyle } from 'expo-status-bar';
+import { Snackbar } from 'react-native-paper';
 
-export default function Splash({ navigation }) {
+export default function Splash({ navigation, disconnected }) {
+    // Set status bar light.
     setStatusBarStyle('light');
+    // After page loaded, set timeout for going to signup page.
     InteractionManager.runAfterInteractions(() => {
-        setTimeout(function () {
-            navigation.push('SignUp');
-        }, 5000);
+        console.log(navigation);
+        if (navigation != null || navigation != undefined) {
+            setTimeout(function () {
+                navigation.push('SignUp');
+            }, 5000);
+        }
     });
     return (
         <View style={styles.container}>
@@ -20,6 +26,11 @@ export default function Splash({ navigation }) {
                 source={require('../assets/Animations/loader.json')}
             />
             <Text style={styles.poweredBy}>Powered By Code Rangers</Text>
+            <Snackbar
+                style={styles.disconnected}
+                visible={disconnected}>
+                You are disconnected. Please check your internet connection.
+            </Snackbar>
         </View>
     );
 }
@@ -39,6 +50,11 @@ const styles = StyleSheet.create({
     loader: {
         width: 200,
         height: 200,
+    },
+    disconnected: {
+        position: 'absolute',
+        bottom: 20,
+        backgroundColor: '#f50a29'
     },
     poweredBy: {
         position: 'absolute',
