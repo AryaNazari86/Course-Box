@@ -4,6 +4,9 @@ import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import 'react-native-gesture-handler';
 
+//Check Internet Connection
+import CheckConnection from './Network/checkConnection';
+
 // Test Pages
 import SignUp from './pages/signup';
 import SignIn from './pages/signin';
@@ -13,6 +16,11 @@ import ForgetPassword_Code from './pages/Forget Password/forgetPassword-Code';
 import ForgetPassword_Password from './pages/Forget Password/forgetPassword-Password';
 import SplashStack from './routes/splashStack';
 import Search from './pages/search';
+import { InteractionManager } from 'react-native';
+import { Snackbar } from 'react-native-paper';
+import Splash from './pages/splash';
+
+
 const getFonts = () => Font.loadAsync({
   'comfortaa-bold': require('./assets/Fonts/Comfortaa-Bold.ttf'),
   'comfortaa-light': require('./assets/Fonts/Comfortaa-Light.ttf'),
@@ -28,13 +36,28 @@ const testFunc = () => {
 }
 
 export default function App() {
+  // When app loaded, check internet.
+  InteractionManager.runAfterInteractions(() => {
+    CheckConnection(isConnected => setIsConnected(isConnected));
+  });
+
   // When App Starts, fonts are not loaded.
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
+  // When Internet disconnected, it's false.
+  const [isConnected, setIsConnected] = useState(false);
+
   if (fontsLoaded) {
-    return (
-      <SplashStack />
-    );
+    if (isConnected) {
+      return (
+        <SplashStack />
+      );
+    }
+    else{
+      return (
+        <Splash disconnected={true} />
+      );
+    }
   }
   else {
     return (
