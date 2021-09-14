@@ -14,12 +14,12 @@ export default function CoursePreview(props) {
                         return (
                             <View style={styles.subject}>
                                 {/* Subject's title */}
-                                <View style={{ ...styles.subjectTitle, borderColor: course.color }}>
+                                <View style={styles.subjectTitle}>
                                     {/* Icon */}
-                                    <MaterialIcons name={item.icon} size={100} color={course.color} style={styles.subjectIcon} />
+                                    <MaterialIcons name={item.icon} size={100} color='#14213D' style={styles.subjectIcon} />
                                     {/* Text */}
                                     <ImageBackground source={require('../assets/Images/title.png')} resizeMode='cover' style={{ justifyContent: 'center', height: 100, width: 200 }}>
-                                        <Text style={{ ...styles.subjectTitleText, color: course.color }}>{item.title}</Text>
+                                        <Text style={styles.subjectTitleText}>{item.title}</Text>
                                     </ImageBackground>
                                 </View>
                                 {/* Lessons of the subject  */}
@@ -28,13 +28,13 @@ export default function CoursePreview(props) {
                                         (item) => {
                                             {/* Each lesson of the subject  */ }
                                             return (
-                                                <TouchableOpacity style={{ ...styles.ql, borderColor: course.color }}>
+                                                <TouchableOpacity style={styles.ql}>
                                                     {/* lesson's icon */}
-                                                    <MaterialIcons name={item.icon} size={50} color={course.color} style={{ ...styles.qlIcon, borderColor: course.color }} />
+                                                    <MaterialIcons name={item.icon} size={50} color='#14213D' style={styles.qlIcon} />
                                                     {/* lesson's title */}
                                                     <View>
 
-                                                        <Text style={{ ...styles.qlTitleText, color: course.color }}>{item.title}</Text>
+                                                        <Text style={styles.qlTitleText}>{item.title}</Text>
 
                                                     </View>
                                                 </TouchableOpacity>
@@ -63,11 +63,13 @@ const styles = StyleSheet.create({
     },
     subjectTitle: {
         alignSelf: 'center',
+        borderColor: '#14213D',
     },
     subjectTitleText: {
         alignSelf: 'center',
         fontSize: 25,
         fontFamily: 'rubik-bold',
+        color: '#14213D',
     },
     subjectQls: {
         flexDirection: 'row',
@@ -78,12 +80,14 @@ const styles = StyleSheet.create({
         marginTop: 10,
         height: 100,
         width: 100,
+        borderColor: '#14213D'
     },
     qlTitleText: {
         marginBottom: 10,
         alignSelf: 'center',
         top: 20,
         fontFamily: 'rubik-bold',
+        color: '#14213D',
     },
     qlIcon: {
         padding: 10,
