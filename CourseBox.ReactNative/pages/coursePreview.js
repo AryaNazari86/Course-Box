@@ -18,7 +18,9 @@ export default function CoursePreview(props) {
                                     {/* Icon */}
                                     <MaterialIcons name={item.icon} size={100} color={course.color} style={styles.subjectIcon} />
                                     {/* Text */}
-                                    <Text style={{ ...styles.subjectTitleText, color: course.color }}>{item.title}</Text>
+                                    <ImageBackground source={require('../assets/Images/title.png')} resizeMode='cover' style={{ justifyContent: 'center', height: 100, width: 200 }}>
+                                        <Text style={{ ...styles.subjectTitleText, color: course.color }}>{item.title}</Text>
+                                    </ImageBackground>
                                 </View>
                                 {/* Lessons of the subject  */}
                                 <View style={styles.subjectQls}>
@@ -31,9 +33,9 @@ export default function CoursePreview(props) {
                                                     <MaterialIcons name={item.icon} size={50} color={course.color} style={{ ...styles.qlIcon, borderColor: course.color }} />
                                                     {/* lesson's title */}
                                                     <View>
-                                                        <ImageBackground source={{ uri: require('../assets/Images/title.png') }} resizeMode='cover' style={{ justifyContent: 'center', flex: 1, height: 100, width: 100 }}>
-                                                            <Text style={{ ...styles.qlTitleText, color: course.color }}>{item.title}</Text>
-                                                        </ImageBackground>
+
+                                                        <Text style={{ ...styles.qlTitleText, color: course.color }}>{item.title}</Text>
+
                                                     </View>
                                                 </TouchableOpacity>
                                             )
@@ -61,7 +63,6 @@ const styles = StyleSheet.create({
     },
     subjectTitle: {
         alignSelf: 'center',
-
     },
     subjectTitleText: {
         alignSelf: 'center',
