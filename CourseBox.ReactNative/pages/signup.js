@@ -5,6 +5,7 @@ import Header from '../shared/header';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Formik } from "formik";
 import * as yup from 'yup';
+import { setStatusBarStyle } from "expo-status-bar";
 
 // * Holds important values for the use of the function
 // const testFunc = () => {
@@ -33,7 +34,7 @@ const ReviewSchema = yup.object({
 })
 
 export default function SignUp({ makeUser, navigation }) {
-
+    setStatusBarStyle('dark');
     // * Go to the tab componnent
     const signUpPress = () => {
         navigation.navigate('Tab')

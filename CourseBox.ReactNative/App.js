@@ -11,9 +11,12 @@ import CoursePreview from './pages/coursePreview';
 import ForgetPassword_Email from './pages/Forget Password/forgetPassword-Email';
 import ForgetPassword_Code from './pages/Forget Password/forgetPassword-Code';
 import ForgetPassword_Password from './pages/Forget Password/forgetPassword-Password';
-import PasswordNavigator from './routes/PasswordStack';
+import SplashStack from './routes/splashStack';
 import Search from './pages/search';
 const getFonts = () => Font.loadAsync({
+  'comfortaa-bold': require('./assets/Fonts/Comfortaa-Bold.ttf'),
+  'comfortaa-light': require('./assets/Fonts/Comfortaa-Light.ttf'),
+  'comfortaa-regular': require('./assets/Fonts/Comfortaa-Regular.ttf'),
   'rubik-bold': require('./assets/Fonts/Rubik-Bold.ttf'),
   'rubik-light': require('./assets/Fonts/Rubik-Light.ttf'),
   'rubik-regular': require('./assets/Fonts/Rubik-Regular.ttf'),
@@ -30,7 +33,7 @@ export default function App() {
 
   if (fontsLoaded) {
     return (
-      <PasswordNavigator />
+      <SplashStack />
     );
   }
   else {
