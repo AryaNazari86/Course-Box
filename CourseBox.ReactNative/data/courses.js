@@ -5,24 +5,24 @@ var courses = [
                 title: 'Low Dribble',
                 icon: 'sports-soccer',
                 content: [
-                    { title: 'how to', icon: 'class' },
-                    { title: 'examples', icon: 'analytics' },
+                    { title: 'how to', icon: 'class', color: 'red' },
+                    { title: 'examples', icon: 'analytics', color: 'red' },
                 ],
             },
             {
                 title: 'Speed Dribble',
                 icon: 'sports-soccer',
                 content: [
-                    { title: 'how to', icon: 'class' },
-                    { title: 'examples', icon: 'analytics' },
+                    { title: 'how to', icon: 'class', color: 'red' },
+                    { title: 'examples', icon: 'analytics', color: 'red' },
                 ],
             },
             {
                 title: 'Change-of-pace Dribble',
                 icon: 'sports-soccer',
                 content: [
-                    { title: 'how to', icon: 'class' },
-                    { title: 'examples', icon: 'analytics' },
+                    { title: 'how to', icon: 'class', color: 'red' },
+                    { title: 'examples', icon: 'analytics', color: 'red' },
                 ],
             },
         ],

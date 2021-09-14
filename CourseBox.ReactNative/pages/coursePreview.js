@@ -30,13 +30,11 @@ export default function CoursePreview(props) {
                                             return (
                                                 <TouchableOpacity style={styles.ql}>
                                                     {/* lesson's icon */}
-                                                    <MaterialIcons name={item.icon} size={50} color='#14213D' style={styles.qlIcon} />
-                                                    {/* lesson's title */}
-                                                    <View>
-
-                                                        <Text style={styles.qlTitleText}>{item.title}</Text>
-
+                                                    <View style={styles.qlIconOut}>
+                                                        <MaterialIcons name={item.icon} size={50} color='#14213D' style={{ ...styles.qlIconIn, backgroundColor: item.color }} />
                                                     </View>
+                                                    {/* lesson's title */}
+                                                    <Text style={styles.qlTitleText}>{item.title}</Text>
                                                 </TouchableOpacity>
                                             )
                                         }
@@ -80,7 +78,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         height: 100,
         width: 100,
-        borderColor: '#14213D'
+        borderColor: '#14213D',
     },
     qlTitleText: {
         marginBottom: 10,
@@ -89,10 +87,18 @@ const styles = StyleSheet.create({
         fontFamily: 'rubik-bold',
         color: '#14213D',
     },
-    qlIcon: {
-        padding: 10,
-        borderWidth: 5,
-        borderRadius: 40,
+    qlIconIn: {
+        padding: 8,
+        borderRadius: 33,
         alignSelf: 'center',
+        overflow: 'hidden',
+    },
+    qlIconOut: {
+        width: 85,
+        borderWidth: 4,
+        padding: 5,
+        borderRadius: 40,
+        borderColor: '#14213D',
+        overflow: 'hidden',
     }
 })
