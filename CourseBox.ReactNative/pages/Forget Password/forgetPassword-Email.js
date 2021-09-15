@@ -25,7 +25,7 @@ export default function ForgetPassword_Email({ navigation }) {
         >
             <View>
                 {/* * The header */}
-                <Header title='Forget Password' backButton={true} backAction={() => navigation.goBack()}  height={60} />
+                <Header title='Forget Password' backButton={true} backAction={() => navigation.goBack()} height={60} />
                 <Formik
                     initialValues={{ email: '' }}
                     validationSchema={ForgetSchema}
