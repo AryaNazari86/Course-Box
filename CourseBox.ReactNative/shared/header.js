@@ -5,7 +5,7 @@ import LottieView from 'lottie-react-native';
 import { globalStyles } from "../shared/globalStyle";
 
 export default function Header({ title, backButton = false, backAction,
-    fontFamily = 'rubik-light', height = 45 }) {
+    fontFamily = 'comfortaa-bold', height = 45 }) {
 
     const backAnimation = useRef(null);
 
@@ -19,7 +19,8 @@ export default function Header({ title, backButton = false, backAction,
     if (backButton) {
         return (
             <Appbar.Header style={[{ height: height }, globalStyles.header]}>
-                <Pressable onPress={() => backButtonClicked()}>
+                <Pressable onPress={() => backButtonClicked()}
+                style={{paddingTop: 8}}>
                     <LottieView
                         ref={backAnimation}
                         style={globalStyles.headerBackAnimation}

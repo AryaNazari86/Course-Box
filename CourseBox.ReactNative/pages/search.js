@@ -87,7 +87,7 @@ export default function Search({ navigation }) {
             onPress={Keyboard.dismiss}
         >
             <View>
-                <Header title='Search' fontFamily="rubik-regular" height={60} />
+                <Header title='Search'  height={60} />
                 <ScrollView>
 
                     <View style={styles.container}>
