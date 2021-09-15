@@ -2,7 +2,7 @@ import React from 'react';
 import { View, FlatList } from 'react-native';
 import courses from '../../../data/courses';
 import styles from './styles';
-import CourseBox from '../../courseBox';
+import CourseBox from '../../CourseBox/courseBox';
 
 export default function Category({ category, navigation }) {
     return (

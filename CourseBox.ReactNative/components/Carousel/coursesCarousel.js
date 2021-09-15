@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Dimensions } from "react-native";
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import courses from '../../data/courses';
-import CourseBox from '../courseBox';
+import CourseBox from '../CourseBox/courseBox';
 import styles from "./styles";
 
 export default function CoursesCarousel({ courses, navigation, dotesColor }) {

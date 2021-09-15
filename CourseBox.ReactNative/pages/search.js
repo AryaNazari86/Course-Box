@@ -4,7 +4,7 @@ import { globalStyles } from "../shared/globalStyle";
 import { Chip, TextInput } from 'react-native-paper';
 import Header from '../shared/header';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import CourseBox from "../components/courseBox";
+import CourseBox from "../components/CourseBox/courseBox";
 import coursesData from "../data/courses";
 export default function Search({ navigation }) {
     const courses = coursesData;
