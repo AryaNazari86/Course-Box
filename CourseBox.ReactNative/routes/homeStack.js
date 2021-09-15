@@ -1,22 +1,22 @@
-import { createStackNavigator } from 'react-navigation-stack';
-import { createAppContainer } from 'react-navigation';
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
 import Home from '../pages/home';
 import CoursePreview from '../pages/coursePreview';
 
-const screens = {
-    Home: {
-        screen: Home,
-        navigationOptions: {
-            headerShown: false
-        }
-    },
-    CoursePreview: {
-        screen: CoursePreview,
-        navigationOptions: {
-            headerShown: false
-        }
-    }
-}
-const HomeStack = createStackNavigator(screens);
+const Stack = createStackNavigator();
 
-export default createAppContainer(HomeStack);
+export default function HomeStack() {
+    return (
+        <Stack.Navigator
+            screenOptions={({ route, navigation }) => ({
+                headerMode: 'none'
+            })}>
+            <Stack.Screen
+                name="Home"
+                component={Home} />
+            <Stack.Screen
+                name="CoursePreview"
+                component={CoursePreview} />
+        </Stack.Navigator>
+    );
+}

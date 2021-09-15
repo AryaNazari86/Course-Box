@@ -1,46 +1,56 @@
-import React, { useState } from 'react';
-import { BackHandler } from 'react-native';
-import { BottomNavigation } from 'react-native-paper';
-import HomeStack from '../routes/homeStack';
-import SearchStack from '../routes/searchStack';
+import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import HomeStack from './homeStack';
+import SearchStack from './searchStack';
+import ProfileStack from './profileStack';
 import { globalStyles } from '../shared/globalStyle';
-import profileStack from './profileStack';
+import { Image } from 'react-native';
 
 
-export default function Tab() {
-    // If Back Button clicked close 
-    BackHandler.addEventListener('hardwareBackPress', () => {
-        BackHandler.exitApp();
-        return false;
-    });
+const Tab = createBottomTabNavigator();
 
-    // The index of each tab.
-    const [index, setIndex] = useState(1);
-
-    // Configuring each tab.
-    const [routes] = useState([
-        { key: 'search', title: 'Search', icon: 'magnify' },
-        { key: 'home', title: 'Home', icon: 'home' },
-        { key: 'profile', title: 'Profile', icon: 'account-circle' },
-    ]);
-
-    // Setting the page of each tab.
-    const renderScene = BottomNavigation.SceneMap({
-        home: HomeStack,
-        search: SearchStack,
-        profile: profileStack,
-    });
-
-    // Return a BottomNavigation component that renders tabs.
-    return (
-        <BottomNavigation
-            navigationState={{ index, routes }}
-            onIndexChange={setIndex}
-            renderScene={renderScene}
-            sceneAnimationEnabled={true}
-            activeColor="#fca311"
-            inactiveColor="#E5E5E5"
-            barStyle={globalStyles.tabBar}
-        />
-    );
-};
+export default function Tabs() {
+  return (
+    <Tab.Navigator
+      initialRouteName="HomeStack"
+      screenOptions={{
+        tabBarStyle: globalStyles.tabBar,
+        headerShown: false
+      }}>
+      <Tab.Screen
+        name="SearchStack"
+        component={SearchStack}
+        options={{
+          tabBarShowLabel: false,
+          tabBarIcon: ({ focused }) => {
+            const icon = focused
+              ? require('../assets/Icons/search-focused.png')
+              : require('../assets/Icons/search.png');
+            return <Image style={{ height: 50, width: 50 }} source={icon} />;
+          }
+        }} />
+      <Tab.Screen name="HomeStack"
+        component={HomeStack}
+        options={{
+          tabBarShowLabel: false,
+          tabBarIcon: ({ focused }) => {
+            const icon = focused
+              ? require('../assets/Icons/house-focused.png')
+              : require('../assets/Icons/house.png');
+            return <Image style={{ height: 50, width: 50 }} source={icon} />;
+          }
+        }} />
+      <Tab.Screen name="ProfileStack"
+        component={ProfileStack}
+        options={{
+          tabBarShowLabel: false,
+          tabBarIcon: ({ focused }) => {
+            const icon = focused
+              ? require('../assets/Icons/user-focused.png')
+              : require('../assets/Icons/user.png');
+            return <Image style={{ height: 50, width: 50 }} source={icon} />;
+          }
+        }} />
+    </Tab.Navigator>
+  );
+}

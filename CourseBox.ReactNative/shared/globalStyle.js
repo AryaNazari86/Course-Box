@@ -13,7 +13,7 @@ export const globalStyles = StyleSheet.create({
         height: 50,
     },
     tabBar: {
-        backgroundColor: '#14213D',
+        height: 70,
     },
     courseImage: {
         width: 225,

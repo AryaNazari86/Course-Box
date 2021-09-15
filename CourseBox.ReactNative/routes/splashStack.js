@@ -1,79 +1,42 @@
-import { createStackNavigator } from "react-navigation-stack";
-import { createAppContainer } from "react-navigation";
-
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
 import Splash from "../pages/splash";
 import SignIn from "../pages/signin";
 import SignUp from "../pages/signup";
 import ForgetPassword_Email from "../pages/Forget Password/forgetPassword-Email";
 import ForgetPassword_Code from "../pages/Forget Password/forgetPassword-Code";
 import ForgetPassword_Password from "../pages/Forget Password/forgetPassword-Password";
-import Tab from "./tabs";
-import Header from "../shared/header";
+import Tabs from "./tabs";
 
-// * Screens of the splash stack
-const screens = {
-    // The sign up page
-    Splash: {
-        screen: Splash,
-        // Disables the stack header component
-        navigationOptions: {
-            headerShown: false
-        }
-    },
-    // The sign up page
-    SignUp: {
-        screen: SignUp,
-        // Disables the stack header component
-        navigationOptions: {
-            headerShown: false
-        }
-    },
-    // The sign in page
-    SignIn: {
-        screen: SignIn,
-        // Disables the stack header component
-        navigationOptions: {
-            headerShown: false
-        }
-    },
-    // The tab componnent
-    Tab: {
-        screen: Tab,
-        // Disables the stack header component
-        navigationOptions: {
-            headerShown: false
-        },
-        // ? Disables going back
-        headerLeft: () => null,
-    },
-    // The forget password email page
-    Email: {
-        screen: ForgetPassword_Email,
-        // Disables the stack header component
-        navigationOptions: {
-            headerShown: false
-        }
-    },
-    // The forget password code page
-    Code: {
-        screen: ForgetPassword_Code,
-        // Disables the stack header component
-        navigationOptions: {
-            headerShown: false
-        }
-    },
-    // The forget password reset password page
-    Password: {
-        screen: ForgetPassword_Password,
-        // Disables the stack header component
-        navigationOptions: {
-            headerShown: false
-        }
-    }
+const Stack = createStackNavigator();
+
+export default function SplashStack() {
+    return (
+        <Stack.Navigator
+            screenOptions={({ route, navigation }) => ({
+                headerMode: 'none'
+            })}>
+            <Stack.Screen
+                name="Splash"
+                component={Splash} />
+            <Stack.Screen
+                name="SignUp"
+                component={SignUp} />
+            <Stack.Screen
+                name="SignIn"
+                component={SignIn} />
+            <Stack.Screen
+                name="Tab"
+                component={Tabs} />
+            <Stack.Screen
+                name="Email"
+                component={ForgetPassword_Email} />
+            <Stack.Screen
+                name="Code"
+                component={ForgetPassword_Code} />
+            <Stack.Screen
+                name="Password"
+                component={ForgetPassword_Password} />
+        </Stack.Navigator>
+    );
 }
-
-// * Creates the splash stack
-const SplashStack = createStackNavigator(screens);
-
-// * Exports the stack
-export default createAppContainer(SplashStack)

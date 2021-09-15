@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Tab from './routes/tabs';
+import { NavigationContainer } from '@react-navigation/native';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import 'react-native-gesture-handler';
@@ -50,10 +50,12 @@ export default function App() {
   if (fontsLoaded) {
     if (isConnected) {
       return (
-        <SplashStack />
+        <NavigationContainer>
+          <SplashStack />
+        </NavigationContainer>
       );
     }
-    else{
+    else {
       return (
         <Splash disconnected={true} />
       );
