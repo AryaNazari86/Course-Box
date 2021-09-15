@@ -26,7 +26,7 @@ export default function Tabs() {
             const icon = focused
               ? require('../assets/Icons/search-focused.png')
               : require('../assets/Icons/search.png');
-            return <Image style={{ height: 50, width: 50 }} source={icon} />;
+            return <Image style={{ height: 40, width: 40 }} source={icon} />;
           }
         }} />
       <Tab.Screen name="HomeStack"
@@ -37,7 +37,7 @@ export default function Tabs() {
             const icon = focused
               ? require('../assets/Icons/house-focused.png')
               : require('../assets/Icons/house.png');
-            return <Image style={{ height: 50, width: 50 }} source={icon} />;
+            return <Image style={{ height: 40, width: 40 }} source={icon} />;
           }
         }} />
       <Tab.Screen name="ProfileStack"
@@ -48,7 +48,7 @@ export default function Tabs() {
             const icon = focused
               ? require('../assets/Icons/user-focused.png')
               : require('../assets/Icons/user.png');
-            return <Image style={{ height: 50, width: 50 }} source={icon} />;
+            return <Image style={{ height: 40, width: 40 }} source={icon} />;
           }
         }} />
     </Tab.Navigator>
