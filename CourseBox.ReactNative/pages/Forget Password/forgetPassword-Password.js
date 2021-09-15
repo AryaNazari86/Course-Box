@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { StyleSheet, View, Text, TouchableWithoutFeedback, Keyboard, TextInput, Image, TouchableOpacity } from 'react-native';
 import { globalStyles } from "../../shared/globalStyle";
 import Header from '../../shared/header';
@@ -70,7 +70,7 @@ export default function ForgetPassword_Password({ navigation }) {
         >
             <View>
 
-                <Header title='Forget Password' backButton={true} backAction={() => navigation.goBack()}  height={60} />
+                <Header title='Forget Password' backButton={true} backAction={() => navigation.goBack()} height={60} />
                 <Formik
                     initialValues={{ Password: '', confirmPassword: '' }}
                     validationSchema={PasswordSchema}

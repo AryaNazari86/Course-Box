@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, TouchableWithoutFeedback, Keyboard, TextInput, Image, TouchableOpacity, BackHandler } from 'react-native';
+import { StyleSheet, View, Text, TouchableWithoutFeedback, Keyboard, TextInput, TouchableOpacity, BackHandler } from 'react-native';
 import { globalStyles } from "../shared/globalStyle";
 import Header from '../shared/header';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -74,7 +74,7 @@ export default function SignUp({ makeUser, navigation }) {
             style={styles.container}
         >
             <View>
-                <Header title='Sign Up'  height={60} />
+                <Header title='Sign Up' height={60} />
                 <Formik
                     initialValues={{ username: '', name: '', email: '', password: '' }}
                     validationSchema={ReviewSchema}

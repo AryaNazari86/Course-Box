@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, TouchableWithoutFeedback, Keyboard, TextInput, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableWithoutFeedback, Keyboard, TextInput, TouchableOpacity } from 'react-native';
 import { globalStyles } from "../shared/globalStyle";
 import Header from '../shared/header';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -48,7 +48,7 @@ export default function SignIn({ navigation }) {
             style={styles.container}
         >
             <View>
-                <Header title='Sign In' backButton={true} backAction={() => navigation.goBack()}  height={60} />
+                <Header title='Sign In' backButton={true} backAction={() => navigation.goBack()} height={60} />
                 <Formik
                     initialValues={{ code: '' }}
                     validationSchema={loginSchema}

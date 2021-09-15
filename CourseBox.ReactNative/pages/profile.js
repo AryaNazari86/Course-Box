@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { StyleSheet, View, Text, Image, FlatList, ScrollView, SafeAreaView } from 'react-native';
 import { globalStyles } from "../shared/globalStyle";
 import Header from '../shared/header';
-import CourseBox from "../components/CourseBox/courseBox";
 
 import CoursesCarousel from '../components/Carousel/coursesCarousel';
 import courses from "../data/courses";
@@ -40,7 +39,7 @@ export default function Profile({ navigation }) {
     return (
         <View>
             {/* Header */}
-            <Header title="Profile"  height={60} />
+            <Header title="Profile" height={60} />
             < ScrollView >
 
                 {/* Account Name And Icon Header */}
