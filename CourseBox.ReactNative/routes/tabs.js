@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { StyleSheet, Image, InteractionManager, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import LottieView from 'lottie-react-native';
+
 import HomeStack from './homeStack';
 import SearchStack from './searchStack';
 import ProfileStack from './profileStack';
 import { globalStyles } from '../shared/globalStyle';
+// Lottie Animation
+import LottieView from 'lottie-react-native';
 
 const Tab = createBottomTabNavigator();
 
@@ -66,26 +68,14 @@ export default function Tabs() {
   }
   else {
     return (
-      <View style={styles.loaderContainer}>
+      <View style={globalStyles.loaderContainer}>
         <LottieView
           autoPlay={true}
           loop={true}
-          style={styles.loader}
+          style={globalStyles.loader}
           source={require('../assets/Animations/loader2.json')}
         />
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  loaderContainer: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  loader: {
-    width: 200,
-    height: 200,
-  }
-});

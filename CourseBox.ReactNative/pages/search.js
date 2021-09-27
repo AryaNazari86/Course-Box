@@ -1,12 +1,22 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, TouchableOpacity, Image, TouchableWithoutFeedback, Keyboard, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, InteractionManager, TouchableWithoutFeedback, Keyboard, ScrollView } from 'react-native';
 import { globalStyles } from "../shared/globalStyle";
 import { Chip, TextInput } from 'react-native-paper';
 import Header from '../shared/header';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import CourseBox from "../components/CourseBox/courseBox";
 import coursesData from "../data/courses";
+// Lottie Library
+import LottieView from 'lottie-react-native';
+
 export default function Search({ navigation }) {
+    // If loaded is false, show a loader.
+    const [loaded, setLoaded] = useState(false);
+
+    // When app loads this function is called.
+    InteractionManager.runAfterInteractions(function () {
+        setLoaded(true);
+    });
     const courses = coursesData;
     const [coursesToSearch, setCoursesToSearch] = useState(courses);
     const filterCourses = () => {
@@ -82,58 +92,75 @@ export default function Search({ navigation }) {
     ]);
     const [selectedCategory, setSelectedCategory] = useState('All');
 
-    return (
-        <TouchableWithoutFeedback
-            onPress={Keyboard.dismiss}
-        >
-            <View>
-                <Header title='Search'  height={60} />
-                <ScrollView>
 
-                    <View style={styles.container}>
+    if (loaded) {
 
-                        <TextInput
-                            mode='outlined'
-                            label='Search'
-                            onChangeText={(value) => { setSearchValue(value); }}
-                            style={globalStyles.input}
-                            left={<TextInput.Icon name="magnify" style={styles.searchIcon} />}
-                            theme={{
-                                colors: {
-                                    primary: '#14213D'
-                                }
-                            }}
-                        />
-                        <ScrollView horizontal={true} >
-                            {category.map((item) => {
+        return (
+            <TouchableWithoutFeedback
+                onPress={Keyboard.dismiss}
+            >
+                <View>
+                    <Header title='Search' height={60} />
+                    <ScrollView>
+
+                        <View style={styles.container}>
+
+                            <TextInput
+                                mode='outlined'
+                                label='Search'
+                                onChangeText={(value) => { setSearchValue(value); }}
+                                style={globalStyles.input}
+                                left={<TextInput.Icon name="magnify" style={styles.searchIcon} />}
+                                theme={{
+                                    colors: {
+                                        primary: '#14213D'
+                                    }
+                                }}
+                            />
+                            <ScrollView horizontal={true} >
+                                {category.map((item) => {
+                                    return (
+                                        <Chip
+                                            mode='flat'
+                                            style={styles.chip}
+                                            selected={item.selected}
+                                            onPress={() => categorySearch(item)}
+                                        >
+                                            {item.name}
+                                        </Chip>)
+                                })}
+                            </ScrollView>
+
+                            {filterCourses().map((item) => {
                                 return (
-                                    <Chip
-                                        mode='flat'
-                                        style={styles.chip}
-                                        selected={item.selected}
-                                        onPress={() => categorySearch(item)}
-                                    >
-                                        {item.name}
-                                    </Chip>)
+                                    <CourseBox
+                                        navigation={navigation}
+                                        item={item}
+                                    />
+                                )
                             })}
-                        </ScrollView>
 
-                        {filterCourses().map((item) => {
-                            return (
-                                <CourseBox
-                                    navigation={navigation}
-                                    item={item}
-                                />
-                            )
-                        })}
+                            <Text style={globalStyles.emptySpacer}>Code Rangers®</Text>
+                        </View >
+                    </ScrollView>
+                </View>
+            </TouchableWithoutFeedback >
 
-                        <Text style={globalStyles.emptySpacer}>Code Rangers®</Text>
-                    </View >
-                </ScrollView>
+        );
+
+    }
+    else {
+        return (
+            <View style={globalStyles.loaderContainer}>
+                <LottieView
+                    autoPlay={true}
+                    loop={true}
+                    style={globalStyles.loader}
+                    source={require('../assets/Animations/loader2.json')}
+                />
             </View>
-        </TouchableWithoutFeedback >
-
-    )
+        );
+    }
 }
 
 const styles = StyleSheet.create({

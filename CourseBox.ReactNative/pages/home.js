@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { StyleSheet, View, TouchableWithoutFeedback, FlatList, ScrollView, Text } from "react-native";
+import { StyleSheet, View, TouchableWithoutFeedback, FlatList, ScrollView, Text, InteractionManager } from "react-native";
 
 // Header Imports
 import Header from '../shared/header';
@@ -19,7 +19,19 @@ import CoursesCarousel from '../components/Carousel/coursesCarousel';
 // Courses Data
 import courses from '../data/courses';
 
+// Lottie Library
+import LottieView from 'lottie-react-native';
+// Global Styles
+import { globalStyles } from "../shared/globalStyle";
+
 export default function Home({ navigation }) {
+    // If loaded is false, show a loader.
+    const [loaded, setLoaded] = useState(false);
+
+    // When app loads this function is called.
+    InteractionManager.runAfterInteractions(function () {
+        setLoaded(true);
+    });
 
     // Access bottom sheet using sheetRef.current;
     const bottomSheetRef = useRef(null);
@@ -50,79 +62,94 @@ export default function Home({ navigation }) {
     const closeBottomSheet = () => {
         bottomSheetRef.current.snapTo(0);
     };
+    if (loaded) {
 
-    return (
-        <View style={styles.container}>
-            {/* Header */}
-            <Header title="Home" height={60} />
+        return (
+            <View style={styles.container}>
+                {/* Header */}
+                <Header title="Home" height={60} />
 
-            {/* Content */}
-            <ScrollView
-                style={styles.contentContainer}
-                showsVerticalScrollIndicator={false}>
+                {/* Content */}
+                <ScrollView
+                    style={styles.contentContainer}
+                    showsVerticalScrollIndicator={false}>
 
-                <View style={styles.bgBlue}>
+                    <View style={styles.bgBlue}>
 
-                    {/* Categories */}
-                    <FlatList
-                        showsHorizontalScrollIndicator={false}
-                        style={styles.categoriesContainer}
-                        horizontal={true}
-                        data={categories}
-                        keyExtractor={(item) => item.categoryId.toString()}
-                        renderItem={({ item }) =>
-                            (<CategoryBox category={item} onPress={() => onCategoryClicked(item)} />)}
-                    />
+                        {/* Categories */}
+                        <FlatList
+                            showsHorizontalScrollIndicator={false}
+                            style={styles.categoriesContainer}
+                            horizontal={true}
+                            data={categories}
+                            keyExtractor={(item) => item.categoryId.toString()}
+                            renderItem={({ item }) =>
+                                (<CategoryBox category={item} onPress={() => onCategoryClicked(item)} />)}
+                        />
 
-                    <View style={styles.latestCoursesContainer}>
+                        <View style={styles.latestCoursesContainer}>
 
-                        <Text style={styles.latestCoursesTitle}>Latest Courses</Text>
+                            <Text style={styles.latestCoursesTitle}>Latest Courses</Text>
 
-                        {/* A carousel for showing the latest courses. */}
-                        <CoursesCarousel courses={courses} navigation={navigation} dotesColor='#fca311' />
+                            {/* A carousel for showing the latest courses. */}
+                            <CoursesCarousel courses={courses} navigation={navigation} dotesColor='#fca311' />
+
+                        </View>
+
+                        <View style={styles.popularCoursesContainer}>
+
+                            <Text style={styles.popularCoursesTitle}>Popular Courses</Text>
+
+                            {/* A carousel for showing the popular courses. */}
+                            <CoursesCarousel courses={courses} navigation={navigation} dotesColor='#14213D' />
+
+                        </View>
+
+                        <View style={styles.recommendedCoursesContainer}>
+
+                            <Text style={styles.recommendedCoursesTitle}>Recommended Courses</Text>
+
+                            {/* A carousel for showing the recommended courses. */}
+                            <CoursesCarousel courses={courses} navigation={navigation} dotesColor='#E5E5E5' />
+
+                        </View>
 
                     </View>
 
-                    <View style={styles.popularCoursesContainer}>
+                </ScrollView>
 
-                        <Text style={styles.popularCoursesTitle}>Popular Courses</Text>
+                {/* When we open category bottom sheet, the screen will become dark. */}
+                <TouchableWithoutFeedback onPress={() => closeBottomSheet()}>
+                    <View style={[darkScreen, styles.darkScreen]}></View>
+                </TouchableWithoutFeedback>
 
-                        {/* A carousel for showing the popular courses. */}
-                        <CoursesCarousel courses={courses} navigation={navigation} dotesColor='#14213D' />
+                {/* Bottom Sheet for categories */}
+                <BottomSheet
+                    ref={bottomSheetRef}
+                    snapPoints={[0, '80%', '40%']}
+                    renderHeader={() => <BottomSheetHeader category={selectedCategory} />}
+                    renderContent={() => <BottomSheetCategory category={selectedCategory} navigation={navigation} />}
+                    enabledInnerScrolling={true}
+                    enabledContentGestureInteraction={false}
+                    onCloseEnd={() => setDarkScreen({ width: 0, height: 0 })}
+                />
 
-                    </View>
+            </View>
+        );
 
-                    <View style={styles.recommendedCoursesContainer}>
-
-                        <Text style={styles.recommendedCoursesTitle}>Recommended Courses</Text>
-
-                        {/* A carousel for showing the recommended courses. */}
-                        <CoursesCarousel courses={courses} navigation={navigation} dotesColor='#E5E5E5' />
-
-                    </View>
-
-                </View>
-
-            </ScrollView>
-
-            {/* When we open category bottom sheet, the screen will become dark. */}
-            <TouchableWithoutFeedback onPress={() => closeBottomSheet()}>
-                <View style={[darkScreen, styles.darkScreen]}></View>
-            </TouchableWithoutFeedback>
-
-            {/* Bottom Sheet for categories */}
-            <BottomSheet
-                ref={bottomSheetRef}
-                snapPoints={[0, '80%', '40%']}
-                renderHeader={() => <BottomSheetHeader category={selectedCategory} />}
-                renderContent={() => <BottomSheetCategory category={selectedCategory} navigation={navigation} />}
-                enabledInnerScrolling={true}
-                enabledContentGestureInteraction={false}
-                onCloseEnd={() => setDarkScreen({ width: 0, height: 0 })}
-            />
-
-        </View>
-    );
+    }
+    else {
+        return (
+            <View style={globalStyles.loaderContainer}>
+                <LottieView
+                    autoPlay={true}
+                    loop={true}
+                    style={globalStyles.loader}
+                    source={require('../assets/Animations/loader2.json')}
+                />
+            </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({

@@ -1,12 +1,21 @@
 import React, { useState } from "react";
-import { StyleSheet, View, Text, Image, FlatList, ScrollView, SafeAreaView } from 'react-native';
+import { StyleSheet, View, Text, Image, FlatList, ScrollView, InteractionManager } from 'react-native';
 import { globalStyles } from "../shared/globalStyle";
 import Header from '../shared/header';
 
 import CoursesCarousel from '../components/Carousel/coursesCarousel';
 import courses from "../data/courses";
+// Lottie Library
+import LottieView from 'lottie-react-native';
 
 export default function Profile({ navigation }) {
+    // If loaded is false, show a loader.
+    const [loaded, setLoaded] = useState(false);
+
+    // When app loads this function is called.
+    InteractionManager.runAfterInteractions(function () {
+        setLoaded(true);
+    });
 
     // * The list of user's made courses
     const [madeCourses, setMadeCourses] = useState([
@@ -36,70 +45,85 @@ export default function Profile({ navigation }) {
         userName: 'Ilia'
     }
 
-    return (
-        <View>
-            {/* Header */}
-            <Header title="Profile" height={60} />
-            < ScrollView >
 
-                {/* Account Name And Icon Header */}
-                < View style={styles.profileAccountHeader} >
-                    <Image source={require('../assets/Images/Default_Profile_Img.png')} style={styles.profileAccountImage}></Image>
-                    <Text style={{ ...styles.profileAccountName, ...globalStyles.TitleText }}>{profilePageValues.accountName}</Text>
+    if (loaded) {
+        return (
+            <View>
+                {/* Header */}
+                <Header title="Profile" height={60} />
+                < ScrollView >
 
-                </View >
+                    {/* Account Name And Icon Header */}
+                    < View style={styles.profileAccountHeader} >
+                        <Image source={require('../assets/Images/Default_Profile_Img.png')} style={styles.profileAccountImage}></Image>
+                        <Text style={{ ...styles.profileAccountName, ...globalStyles.TitleText }}>{profilePageValues.accountName}</Text>
 
-                {/* Username */}
-                <View style={styles.userName}>
-                    <Text style={styles.userName}>@</Text>
-                    <Text style={styles.userName}>{profilePageValues.userName}</Text>
-                </View>
+                    </View >
 
-                {/* Account Description */}
-                < View style={styles.profileDescriptionHeader} >
-                    <Text style={styles.profileDescriptionText}>{profilePageValues.profileAccountDescription}</Text>
-
-                </View >
-
-                {/* Account Details */}
-                < View style={styles.profileDetailHeader} >
-                    {/* Ammount of made courses */}
-                    <View>
-                        <Text style={styles.profileDetailText}>{profilePageValues.accountCoursesVal}</Text>
-                        <Text style={styles.profileDetailText}>Courses</Text>
+                    {/* Username */}
+                    <View style={styles.userName}>
+                        <Text style={styles.userName}>@</Text>
+                        <Text style={styles.userName}>{profilePageValues.userName}</Text>
                     </View>
-                    {/* Ammount of followers */}
-                    <View style={styles.profileDetail}>
-                        <Text style={styles.profileDetailText}>{profilePageValues.accountFollowersVal}</Text>
-                        <Text style={styles.profileDetailText}>Followers</Text>
-                    </View>
-                    {/* Ammount of made participated courses */}
-                    <View style={styles.profileDetail}>
-                        <Text style={styles.profileDetailText}>{profilePageValues.accountParticipatedVal}</Text>
-                        <Text style={styles.profileDetailText}>Participated</Text>
-                    </View>
-                </View >
 
-                {/* Made Courses */}
-                < View style={styles.madeCoursesHeader} >
-                    <Text style={styles.madeCoursesText}>Made Courses</Text>
-                    <CoursesCarousel courses={courses} navigation={navigation} dotesColor='#14213D' />
-                </View >
+                    {/* Account Description */}
+                    < View style={styles.profileDescriptionHeader} >
+                        <Text style={styles.profileDescriptionText}>{profilePageValues.profileAccountDescription}</Text>
 
-                {/* Participated Courses */}
-                < View style={styles.madeCoursesHeader}>
-                    <Text style={styles.madeCoursesText}>Participated Courses</Text>
-                    <CoursesCarousel courses={courses} navigation={navigation} dotesColor='#14213D' />
-                </View >
+                    </View >
+
+                    {/* Account Details */}
+                    < View style={styles.profileDetailHeader} >
+                        {/* Ammount of made courses */}
+                        <View>
+                            <Text style={styles.profileDetailText}>{profilePageValues.accountCoursesVal}</Text>
+                            <Text style={styles.profileDetailText}>Courses</Text>
+                        </View>
+                        {/* Ammount of followers */}
+                        <View style={styles.profileDetail}>
+                            <Text style={styles.profileDetailText}>{profilePageValues.accountFollowersVal}</Text>
+                            <Text style={styles.profileDetailText}>Followers</Text>
+                        </View>
+                        {/* Ammount of made participated courses */}
+                        <View style={styles.profileDetail}>
+                            <Text style={styles.profileDetailText}>{profilePageValues.accountParticipatedVal}</Text>
+                            <Text style={styles.profileDetailText}>Participated</Text>
+                        </View>
+                    </View >
+
+                    {/* Made Courses */}
+                    < View style={styles.madeCoursesHeader} >
+                        <Text style={styles.madeCoursesText}>Made Courses</Text>
+                        <CoursesCarousel courses={courses} navigation={navigation} dotesColor='#14213D' />
+                    </View >
+
+                    {/* Participated Courses */}
+                    < View style={styles.madeCoursesHeader}>
+                        <Text style={styles.madeCoursesText}>Participated Courses</Text>
+                        <CoursesCarousel courses={courses} navigation={navigation} dotesColor='#14213D' />
+                    </View >
 
 
 
-                {/* Empty Spacer */}
-                <Text style={globalStyles.emptySpacer}>Code Rangers®</Text>
+                    {/* Empty Spacer */}
+                    <Text style={globalStyles.emptySpacer}>Code Rangers®</Text>
 
-            </ScrollView >
-        </View>
-    )
+                </ScrollView >
+            </View>
+        );
+    }
+    else {
+        return (
+            <View style={globalStyles.loaderContainer}>
+                <LottieView
+                    autoPlay={true}
+                    loop={true}
+                    style={globalStyles.loader}
+                    source={require('../assets/Animations/loader2.json')}
+                />
+            </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({

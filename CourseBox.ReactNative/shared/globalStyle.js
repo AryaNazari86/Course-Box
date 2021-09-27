@@ -42,4 +42,13 @@ export const globalStyles = StyleSheet.create({
         fontFamily: 'rubik-light',
         paddingTop: 20,
     },
+    loaderContainer: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    loader: {
+        width: 200,
+        height: 200,
+    },
 });
