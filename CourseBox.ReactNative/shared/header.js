@@ -19,8 +19,7 @@ export default function Header({ title, backButton = false, backAction,
     if (backButton) {
         return (
             <Appbar.Header style={[{ height: height }, globalStyles.header]}>
-                <Pressable onPress={() => backButtonClicked()}
-                style={{paddingTop: 8}}>
+                <Pressable onPress={() => backButtonClicked()}>
                     <LottieView
                         ref={backAnimation}
                         style={globalStyles.headerBackAnimation}

@@ -2,11 +2,12 @@ import { StyleSheet } from "react-native";
 export const globalStyles = StyleSheet.create({
     header: {
         elevation: 0,
-        backgroundColor: '#fff',
+        backgroundColor: '#FCA311'
     },
     headerTitle: {
         fontSize: 26,
         color: '#14213D',
+        paddingBottom: 7,
     },
     headerBackAnimation: {
         width: 50,
@@ -14,6 +15,7 @@ export const globalStyles = StyleSheet.create({
     },
     tabBar: {
         height: 70,
+        backgroundColor: '#FCA311'
     },
     input: {
         marginTop: 35,

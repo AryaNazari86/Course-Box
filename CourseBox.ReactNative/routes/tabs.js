@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Image, InteractionManager, View } from 'react-native';
+import { StyleSheet, Image, InteractionManager, View, TouchableOpacity } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import HomeStack from './homeStack';
@@ -8,6 +8,7 @@ import ProfileStack from './profileStack';
 import { globalStyles } from '../shared/globalStyle';
 // Lottie Animation
 import LottieView from 'lottie-react-native';
+import { TouchableRipple } from 'react-native-paper';
 
 const Tab = createBottomTabNavigator();
 
@@ -26,7 +27,7 @@ export default function Tabs() {
         initialRouteName="HomeStack"
         screenOptions={{
           tabBarStyle: globalStyles.tabBar,
-          headerShown: false
+          headerShown: false,
         }}>
         <Tab.Screen
           name="SearchStack"
@@ -38,7 +39,8 @@ export default function Tabs() {
                 ? require('../assets/Icons/search-focused.png')
                 : require('../assets/Icons/search.png');
               return <Image style={{ height: 40, width: 40 }} source={icon} />;
-            }
+            },
+            tabBarButton: (props) => <TouchableRipple {...props} />
           }} />
         <Tab.Screen name="HomeStack"
           component={HomeStack}
@@ -49,7 +51,8 @@ export default function Tabs() {
                 ? require('../assets/Icons/house-focused.png')
                 : require('../assets/Icons/house.png');
               return <Image style={{ height: 40, width: 40 }} source={icon} />;
-            }
+            },
+            tabBarButton: (props) => <TouchableRipple {...props} />
           }} />
         <Tab.Screen name="ProfileStack"
           component={ProfileStack}
@@ -60,7 +63,8 @@ export default function Tabs() {
                 ? require('../assets/Icons/user-focused.png')
                 : require('../assets/Icons/user.png');
               return <Image style={{ height: 40, width: 40 }} source={icon} />;
-            }
+            },
+            tabBarButton: (props) => <TouchableRipple {...props} />
           }} />
       </Tab.Navigator>
     );

@@ -5,7 +5,7 @@ import Header from '../shared/header';
 import { FAB } from 'react-native-paper';
 
 export default function CoursePreview(props) {
-    const course = props.navigation.state.params.item;
+    const course = props.route.params.item;
     return (
         <View style={{ backgroundColor: '#fca311', flex: 1 }}>
             <Header title={course.title} backButton={true} backAction={() => props.navigation.goBack()}  height={60} />

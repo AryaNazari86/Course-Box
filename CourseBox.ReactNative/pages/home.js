@@ -55,7 +55,7 @@ export default function Home({ navigation }) {
         setSelectedCategory(category);
         if (bottomSheetRef != null) {
             bottomSheetRef.current.snapTo(1);
-            setDarkScreen({ width: '100%', height: '100%' })
+            setDarkScreen({ width: '100%', height: '100%' });
         }
     };
 
