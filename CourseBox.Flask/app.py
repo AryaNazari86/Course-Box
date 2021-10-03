@@ -1,5 +1,6 @@
-from flask import Flask, send_from_directory
+from flask import Flask, send_from_directory, request
 from flask_sqlalchemy import SQLAlchemy
+import os
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///coursebox.sqlite3'
@@ -41,8 +42,24 @@ class User(db.Model):
 
 
 def Change_Profile(userName, newAvatar):
-    # Get the username row
+    # Avatar upload directory
+    avatarUploadDirectory = "/Assets/Images/Avatar"
+
+    # Get the username rows
     userRow = User.query.filter_by(username=userName).first()
+
+    # Check if there is any subdirectories in the file name
+    if "/" in newAvatar:
+        abort(400, "no subdirectories allowed")
+
+    # TODO: Check if file name ends with .png or other image formats
+
+    # Upload the new avatar image
+    # TODO: Change image name to an id (so that two images with the same name wont make any problem as their name will be changed)
+    with open(os.path.join(avatarUploadDirectory, newAvatar), "wb") as fp:
+        fp.write(request.data)
+
+    # TODO: Get the direction of uploaded file
 
     # Set the avatar column of the row to newAvatar
     userRow.avatar = newAvatar
