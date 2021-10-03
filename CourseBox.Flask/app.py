@@ -1,10 +1,11 @@
-from flask import Flask
+from flask import Flask, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///coursebox.sqlite3'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
+
 
 class Course(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -14,7 +15,8 @@ class Course(db.Model):
     participants = db.Column(db.Integer)
     likes = db.Column(db.Integer)
     description = db.Column(db.Text)
-    
+
+
 class User(db.Model):
     _id = db.Column("id", db.Integer, primary_key=True, unique=True)
     username = db.Column(db.String(50), nullable=False, unique=True)
@@ -37,6 +39,16 @@ class User(db.Model):
         self.avatar = avatar
         self.register_date = register_date
 
+
+def Change_Profile(userName, newAvatar):
+    # Get the username row
+    userRow = User.query.filter_by(username=userName).first()
+
+    # Set the avatar column of the row to newAvatar
+    userRow.avatar = newAvatar
+
+    # Commit changes
+    db.session.commit()
 
 
 if __name__ == '__main__':
