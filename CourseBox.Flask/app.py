@@ -6,13 +6,7 @@ import uuid
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///coursebox.sqlite3'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config['UPLOAD_FOLDER'] = "/avatars"
 db = SQLAlchemy(app)
-
-USER_AVATAR_DIRECTORY = "/avatars"
-
-if not os.path.exists(USER_AVATAR_DIRECTORY):
-    os.makedirs(USER_AVATAR_DIRECTORY)
 
 
 class Course(db.Model):
@@ -53,16 +47,18 @@ class User(db.Model):
 def Change_Profile_Avatar():
     avatar = request.files['avatar']
     if avatar == None:
-        status_code = Response(status=400)
+        status_code = Response(status=400, response="")
+        return status_code
     allowed_extensions = [".png", ".jpeg", ".jpg", ".webp", ".ico", ".svg"]
     file_extension = os.path.splitext(avatar.filename)[-1]
     if allowed_extensions.__contains__(file_extension):
         avatar.save(os.path.join("avatars", str(
             uuid.uuid4()) + file_extension))
-        status_code = Response(status=200)
+        status_code = Response(status=200, response="")
+        return status_code
 
     else:
-        status_code = Response(status=400)
+        status_code = Response(status=400, response="")
         return status_code
 
 
