@@ -1,4 +1,4 @@
-from flask import Flask, send_from_directory, request
+from flask import Flask, abort, request, Response
 from flask_sqlalchemy import SQLAlchemy
 import os
 import uuid
@@ -6,7 +6,13 @@ import uuid
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///coursebox.sqlite3'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config['UPLOAD_FOLDER'] = "/avatars"
 db = SQLAlchemy(app)
+
+USER_AVATAR_DIRECTORY = "/avatars"
+
+if not os.path.exists(USER_AVATAR_DIRECTORY):
+    os.makedirs(USER_AVATAR_DIRECTORY)
 
 
 class Course(db.Model):
@@ -42,28 +48,22 @@ class User(db.Model):
         self.register_date = register_date
 
 
-APP_ROOT = os.path.dirname(os.path.abspath(__file__))
-
 
 # * Change the profile avatar
 @app.route("/ChangeProfileAvatar", methods=["POST"])
 def Change_Profile_Avatar():
-    target = os.path.join()
-    print(target)
-    if not os.path.isdir(target):
-        os.mkdir(target)
-    else:
-        print("Couldn't create upload directory: {}".format(target))
-    print(request.files.getlist("file"))
-    for upload in request.files.getlist("file"):
-        print(upload)
-        print("{} is the file name".format(upload.filename))
-        filename = upload.filename
-        destination = "/".join([target, str(uuid.uuid4())])
-        print("Accept incoming file:", filename)
-        print("Save it to:", destination)
-        upload.save(destination)
+    avatar = request.files['avatar']
+    if avatar == None:
+        status_code = Response(status=400)
+    allowed_extensions = [".png", ".jpeg", ".jpg", ".webp", ".ico", ".svg"]
+    file_extension = os.path.splitext(avatar.filename)[-1]
+    if allowed_extensions.__contains__(file_extension):
+        avatar.save(os.path.join("avatars", str(uuid.uuid4()) + file_extension))
+        status_code = Response(status=200)
 
+    else:
+        status_code = Response(status=400)
+	return status_code
 
 if __name__ == '__main__':
     db.create_all()
