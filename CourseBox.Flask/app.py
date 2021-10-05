@@ -48,7 +48,6 @@ class User(db.Model):
         self.register_date = register_date
 
 
-
 # * Change the profile avatar
 @app.route("/ChangeProfileAvatar", methods=["POST"])
 def Change_Profile_Avatar():
@@ -58,12 +57,14 @@ def Change_Profile_Avatar():
     allowed_extensions = [".png", ".jpeg", ".jpg", ".webp", ".ico", ".svg"]
     file_extension = os.path.splitext(avatar.filename)[-1]
     if allowed_extensions.__contains__(file_extension):
-        avatar.save(os.path.join("avatars", str(uuid.uuid4()) + file_extension))
+        avatar.save(os.path.join("avatars", str(
+            uuid.uuid4()) + file_extension))
         status_code = Response(status=200)
 
     else:
         status_code = Response(status=400)
-	return status_code
+        return status_code
+
 
 if __name__ == '__main__':
     db.create_all()
