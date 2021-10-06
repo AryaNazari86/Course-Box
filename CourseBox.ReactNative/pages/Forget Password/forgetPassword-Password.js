@@ -72,7 +72,7 @@ export default function ForgetPassword_Password({ navigation }) {
   return (
     <TouchableWithoutFeedback
       onPress={Keyboard.dismiss}
-      style={styles.container}
+      style={globalStyles.container}
     >
       <View>
         <Header
@@ -90,11 +90,11 @@ export default function ForgetPassword_Password({ navigation }) {
           }}
         >
           {(props) => (
-            <View style={styles.container}>
+            <View style={globalStyles.container}>
               {/* Password */}
-              <View style={styles.textInputView}>
+              <View style={globalStyles.textInputView}>
                 <TextInput
-                  style={styles.input}
+                  style={{ ...globalStyles.inputComp, ...styles.input }}
                   placeholder="New Password"
                   onChangeText={props.handleChange("Password")}
                   value={props.values.Password}
@@ -107,7 +107,7 @@ export default function ForgetPassword_Password({ navigation }) {
                     name={hidePassIcon}
                     size={30}
                     color="black"
-                    style={styles.hideIcon}
+                    style={globalStyles.hideIcon}
                   />
                 </TouchableOpacity>
               </View>
@@ -117,9 +117,9 @@ export default function ForgetPassword_Password({ navigation }) {
               </Text>
 
               {/* Confirm Password */}
-              <View style={styles.textInputView}>
+              <View style={globalStyles.textInputView}>
                 <TextInput
-                  style={styles.input}
+                  style={{ ...globalStyles.inputComp, ...styles.input }}
                   placeholder="Confirm New Password"
                   onChangeText={props.handleChange("confirmPassword")}
                   value={props.values.confirmPassword}
@@ -132,7 +132,7 @@ export default function ForgetPassword_Password({ navigation }) {
                     name={hidePassIcon2}
                     size={30}
                     color="black"
-                    style={styles.hideIcon}
+                    style={globalStyles.hideIcon}
                   />
                 </TouchableOpacity>
               </View>
@@ -143,10 +143,10 @@ export default function ForgetPassword_Password({ navigation }) {
               {/* Continue Button */}
               {/* TODO: Only allow user to continue if they meet the rules */}
               <TouchableOpacity
-                style={styles.continueButton}
+                style={globalStyles.button}
                 onPress={props.handleSubmit}
               >
-                <Text style={styles.continueText}>Continue</Text>
+                <Text style={globalStyles.buttonText}>Continue</Text>
               </TouchableOpacity>
 
               <Text style={globalStyles.emptySpacer}>Code Rangers®</Text>
@@ -159,50 +159,8 @@ export default function ForgetPassword_Password({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  // Container of page
-  container: {
-    alignItems: "center",
-    paddingTop: 20,
-    backgroundColor: "#EDF2F4",
-  },
-
   // The text input
   input: {
-    paddingHorizontal: 8,
-    paddingVertical: 6,
     width: 250,
-    paddingLeft: 20,
-    fontSize: 18,
-    fontFamily: "rubik-regular",
-  },
-  // The view covering the text input
-  textInputView: {
-    borderWidth: 1,
-    borderRadius: 50,
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 5,
-    height: 50,
-    backgroundColor: "#A8DADC",
-    width: 330,
-  },
-  hideIcon: {
-    padding: 35,
-  },
-  // The continue Button
-  continueButton: {
-    backgroundColor: "#EF233C",
-    width: 330,
-    height: 50,
-    borderRadius: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 20,
-  },
-  // The text of continue button
-  continueText: {
-    fontSize: 25,
-    color: "white",
-    fontFamily: "rubik-bold",
   },
 });

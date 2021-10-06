@@ -26,7 +26,7 @@ export default function ForgetPassword_Code({ navigation }) {
   return (
     <TouchableWithoutFeedback
       onPress={Keyboard.dismiss}
-      style={styles.container}
+      style={globalStyles.container}
     >
       <View>
         <Header
@@ -44,14 +44,14 @@ export default function ForgetPassword_Code({ navigation }) {
           }}
         >
           {(props) => (
-            <View style={styles.container}>
+            <View style={globalStyles.container}>
               <Text style={globalStyles.normalText}>
                 Enter the code we sent to your email
               </Text>
               {/* Code Input*/}
-              <View style={styles.textInputView}>
+              <View style={globalStyles.textInputView}>
                 <TextInput
-                  style={styles.input}
+                  style={globalStyles.inputComp}
                   placeholder="Code"
                   onChangeText={props.handleChange("code")}
                   value={props.values.code}
@@ -66,10 +66,10 @@ export default function ForgetPassword_Code({ navigation }) {
 
               {/* Continue Button */}
               <TouchableOpacity
-                style={styles.continueButton}
+                style={globalStyles.button}
                 onPress={props.handleSubmit}
               >
-                <Text style={styles.continueText}>Continue</Text>
+                <Text style={globalStyles.buttonText}>Continue</Text>
               </TouchableOpacity>
             </View>
           )}
@@ -79,52 +79,4 @@ export default function ForgetPassword_Code({ navigation }) {
   );
 }
 
-const styles = StyleSheet.create({
-  // Container of page
-  container: {
-    alignItems: "center",
-    backgroundColor: "#EDF2F4",
-  },
-
-  // The text input
-  input: {
-    paddingHorizontal: 8,
-    paddingVertical: 6,
-    width: 330,
-    paddingLeft: 20,
-    fontSize: 18,
-    fontFamily: "rubik-regular",
-  },
-  // The view covering the text input
-  textInputView: {
-    borderWidth: 1,
-    borderRadius: 50,
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 5,
-    height: 50,
-    backgroundColor: "#A8DADC",
-  },
-  // The continue Button
-  continueButton: {
-    backgroundColor: "#EF233C",
-    width: 330,
-    height: 50,
-    borderRadius: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 20,
-  },
-  // The text of continue button
-  continueText: {
-    fontSize: 25,
-    color: "white",
-    fontFamily: "rubik-bold",
-  },
-  // Enter the code
-  normalText: {
-    flexDirection: "row",
-    fontFamily: "rubik-light",
-    paddingTop: 20,
-  },
-});
+const styles = StyleSheet.create({});

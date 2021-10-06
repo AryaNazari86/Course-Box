@@ -3,12 +3,11 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 import uuid
 
-
-
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///coursebox.sqlite3'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
+
 
 class Course(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
@@ -32,6 +31,7 @@ class Course(db.Model):
         self.author_id = author_id
         self.image = image
 
+
 class CourseContent(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
     title = db.Column(db.String(200))
@@ -42,6 +42,7 @@ class CourseContent(db.Model):
         self.title = title
         self.icon = icon
         self.content = content
+
 
 class LessonContent(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
@@ -54,10 +55,12 @@ class LessonContent(db.Model):
         self.icon = icon
         self.color = color
 
+
 class CourseParticipant(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
     course_id = db.Column(db.Integer, db.ForeignKey('course.id'))
     participant_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
 
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
@@ -69,6 +72,7 @@ class Category(db.Model):
     def __init__(self, title, category_image):
         self.title = title
         self.category_image = category_image
+
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
@@ -113,7 +117,7 @@ def change_profile_avatar(user_id):
         user = User.query.filter_by(id=user_id).first()
         # Generate a random if for the image
         avatar_uid = uuid.uuid4()
-        # TODO: Get last avatar name
+        # Get last avatar name
         last_avatar = user.avatar
         # Save avatar image
         avatar.save(os.path.join("avatars", str(
@@ -125,9 +129,15 @@ def change_profile_avatar(user_id):
         user.avatar = str(avatar_uid) + file_extension
         # Commit changes
         db.session.commit()
-        # TODO: Delete the last avatar from images
+        # Delete the last avatar from images
         if last_avatar != "default.png":
-            os.remove(f"avatars/{last_avatar}")
+            if last_avatar == None:
+                # Return error
+                status_code = Response(
+                    status=400, response="Last User Avatar Was Not Found!")
+                return status_code
+            else:
+                os.remove(f"avatars/{last_avatar}")
 
         # Return sucessfull
         status_code = Response(status=200, response="Avatar Image Uploaded!")
@@ -138,6 +148,7 @@ def change_profile_avatar(user_id):
         status_code = Response(
             status=400, response="Uploaded File Must Be An Image!")
         return status_code
+
 
 @app.route("/SearchCourses/<search_value>/<category_id>", methods=['GET'])
 def search_course(search_value, category_id):

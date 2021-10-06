@@ -1,5 +1,9 @@
 import { StyleSheet } from "react-native";
 export const globalStyles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    backgroundColor: "#EDF2F4",
+  },
   header: {
     elevation: 0,
     backgroundColor: "#1D3557",
@@ -44,6 +48,11 @@ export const globalStyles = StyleSheet.create({
     fontFamily: "rubik-light",
     paddingTop: 20,
   },
+  buttonText: {
+    fontSize: 25,
+    color: "white",
+    fontFamily: "rubik-bold",
+  },
   loaderContainer: {
     flex: 1,
     alignItems: "center",
@@ -52,5 +61,36 @@ export const globalStyles = StyleSheet.create({
   loader: {
     width: 200,
     height: 200,
+  },
+  button: {
+    backgroundColor: "#EF233C",
+    width: 330,
+    height: 50,
+    borderRadius: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 20,
+  },
+  // The text input
+  inputComp: {
+    paddingHorizontal: 8,
+    paddingVertical: 6,
+    width: 330,
+    paddingLeft: 20,
+    fontSize: 18,
+    fontFamily: "rubik-regular",
+  },
+  // The view covering the text input
+  textInputView: {
+    borderWidth: 1,
+    borderRadius: 50,
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 5,
+    height: 50,
+    backgroundColor: "#A8DADC",
+  },
+  hideIcon: {
+    padding: 25,
   },
 });
