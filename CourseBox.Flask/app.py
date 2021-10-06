@@ -55,7 +55,7 @@ class User(db.Model):
     password_salt = db.Column(db.String, nullable=False)
     active_code = db.Column(db.String(10), nullable=False)
     is_active = db.Column(db.Boolean, nullable=False)
-    avatar = db.Column(db.String(200))
+    avatar = db.Column(db.String(200), unique=True)
     register_date = db.Column(db.DateTime, nullable=False)
     # Relations
     teachedCourses = db.relationship('Course', backref='author')
