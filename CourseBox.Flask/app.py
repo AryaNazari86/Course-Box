@@ -10,17 +10,36 @@ db = SQLAlchemy(app)
 
 
 class Course(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(20))
-    category = db.Column(db.String(20))
-    author = db.Column(db.String(20))
-    participants = db.Column(db.Integer)
+    id = db.Column(db.Integer, primary_key=True, unique=True)
+    title = db.Column(db.String(200), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    participantsCount = db.Column(db.Integer)
     likes = db.Column(db.Integer)
-    description = db.Column(db.Text)
+    # Relations
+    category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
+    def __init__(self, title, description, participantsCount, likes, category_id, author_id):
+        self.title = title
+        self.description = description
+        self.participantsCount = participantsCount
+        self.likes = likes
+        self.category_id = category_id
+        self.author_id = author_id
+
+class Category(db.Model):
+    id = db.Column(db.Integer, primary_key=True, unique=True)
+    title = db.Column(db.String(20), nullable=False)
+    category_image = db.Column(db.String(200))
+    # Relations
+    courses = db.relationship('Course', backref='category')
+  
+    def __init__(self, title, category_image):
+        self.title = title
+        self.category_image = category_image
 
 class User(db.Model):
-    _id = db.Column("id", db.Integer, primary_key=True, unique=True)
+    id = db.Column(db.Integer, primary_key=True, unique=True)
     username = db.Column(db.String(50), nullable=False, unique=True)
     email = db.Column(db.String(200), nullable=False, unique=True)
     password = db.Column(db.String(255), nullable=False)
@@ -29,6 +48,8 @@ class User(db.Model):
     is_active = db.Column(db.Boolean, nullable=False)
     avatar = db.Column(db.String(200))
     register_date = db.Column(db.DateTime, nullable=False)
+    # Relations
+    teachedCourses = db.relationship('Course', backref='author')
 
     def __init__(self, username, email, password, password_salt, active_code, is_active, avatar, register_date):
         self.username = username
@@ -42,7 +63,7 @@ class User(db.Model):
         self.register_date = register_date
 
 
-# * Change the profile avatar
+# Change the profile avatar
 @app.route("/ChangeProfileAvatar", methods=["POST"])
 def Change_Profile_Avatar():
     avatar = request.files['avatar']
@@ -60,7 +81,6 @@ def Change_Profile_Avatar():
     else:
         status_code = Response(status=400, response="")
         return status_code
-
 
 if __name__ == '__main__':
     db.create_all()
