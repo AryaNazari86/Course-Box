@@ -1,6 +1,4 @@
-from enum import unique
-from typing import Collection
-from flask import Flask, abort, request, Response, jsonify
+from flask import Flask, request, Response, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import os
 import uuid
@@ -33,6 +31,28 @@ class Course(db.Model):
         self.category_id = category_id
         self.author_id = author_id
         self.image = image
+
+class CourseContent(db.Model):
+    id = db.Column(db.Integer, primary_key=True, unique=True)
+    title = db.Column(db.String(200))
+    icon = db.Column(db.String(200))
+    content = db.relationship('LessonContent', backref='content')
+
+    def _init_(self, title, icon, content):
+        self.title = title
+        self.icon = icon
+        self.content = content
+
+class LessonContent(db.Model):
+    id = db.Column(db.Integer, primary_key=True, unique=True)
+    title = db.Column(db.String(200))
+    icon = db.Column(db.String(200))
+    color = db.Column(db.String(200))
+
+    def _init_(self, title, icon, color):
+        self.title = title
+        self.icon = icon
+        self.color = color
 
 class CourseParticipant(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
