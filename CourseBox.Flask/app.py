@@ -32,12 +32,10 @@ class Course(db.Model):
         self.author_id = author_id
         self.image = image
 
-
 class CourseParticipant(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
     course_id = db.Column(db.Integer, db.ForeignKey('course.id'))
     participant_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-
 
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
@@ -50,15 +48,6 @@ class Category(db.Model):
         self.title = title
         self.category_image = category_image
 
-@app.route("/SearchCourses/<search_value>/<category_id>", methods=['GET'])
-def search_course(search_value, category_id):
-    search_result = []
-    for i in Course.query.filter_by(category_id=category_id).all():
-        if search_value in i.title.to_lower():
-            search_result.append(i)
-
-    return jsonify(search_result)
-
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
     username = db.Column(db.String(50), nullable=False, unique=True)
@@ -68,7 +57,7 @@ class User(db.Model):
     active_code = db.Column(db.String(10), nullable=False)
     is_active = db.Column(db.Boolean, nullable=False)
     avatar = db.Column(db.String(200), unique=True)
-    register_date = db.Column(db.DateTime, nullable=False)
+    # register_date = db.Column(db.DateTime, nullable=False)
     # Relations
     teachedCourses = db.relationship('Course', backref='author')
     courses = db.relationship('CourseParticipant', backref='participant')
@@ -115,7 +104,8 @@ def Change_Profile_Avatar(user_id):
         # Commit changes
         db.session.commit()
         # TODO: Delete the last avatar from images
-        os.remove("Assets/Images/Avatar/{}".format(last_avatar))
+        if last_avatar != "default.png":
+            os.remove(f"avatars/{last_avatar}")
 
         # Return sucessfull
         status_code = Response(status=200, response="Avatar Image Uploaded!")
@@ -127,6 +117,14 @@ def Change_Profile_Avatar(user_id):
             status=400, response="Uploaded File Must Be An Image!")
         return status_code
 
+@app.route("/SearchCourses/<search_value>/<category_id>", methods=['GET'])
+def search_course(search_value, category_id):
+    search_result = []
+    for i in Course.query.filter_by(category_id=category_id).all():
+        if search_value in i.title.to_lower():
+            search_result.append(i)
+
+    return jsonify(search_result)
 
 
 if __name__ == '__main__':
