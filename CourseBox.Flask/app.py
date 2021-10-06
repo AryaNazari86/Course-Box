@@ -1,4 +1,5 @@
 from enum import unique
+from typing import Collection
 from flask import Flask, abort, request, Response, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import os
@@ -22,6 +23,7 @@ class Course(db.Model):
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     participants = db.relationship('CourseParticipant', backref='course')
+    content = db.relationship('CourseContent', backref='content')
 
     def __init__(self, title, description, participants_count, likes, category_id, author_id, image):
         self.title = title
@@ -76,7 +78,7 @@ class User(db.Model):
 
 # Change the profile avatar
 @app.route("/ChangeProfileAvatar/<user_id>", methods=["POST"])
-def Change_Profile_Avatar(user_id):
+def change_profile_avatar(user_id):
     avatar = request.files['avatar']
     if avatar == None:
         # Return error
