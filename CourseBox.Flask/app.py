@@ -1,4 +1,5 @@
 from enum import unique
+from typing import Collection
 from flask import Flask, abort, request, Response, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import os
@@ -22,6 +23,7 @@ class Course(db.Model):
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     participants = db.relationship('CourseParticipant', backref='course')
+    content = db.relationship('CourseContent', backref='content')
 
     def __init__(self, title, description, participants_count, likes, category_id, author_id, image):
         self.title = title
@@ -32,12 +34,32 @@ class Course(db.Model):
         self.author_id = author_id
         self.image = image
 
+class CourseContent(db.Model):
+    id = db.Column(db.Integer, primary_key=True, unique=True)
+    title = db.Column(db.String(200)
+    icon = db.Column(db.String(200))
+    content = db.relationship('LessonContent', backref='content')
+
+    def __init__(self, title, icon, content):
+        self.title = title
+        self.icon = icon
+        self.content = content
+
+class LessonContent(db.Model):
+    id = db.Column(db.Integer, primary_key=True, unique=True)
+    title = db.Column(db.String(200)
+    icon = db.Column(db.String(200))
+    color = db.Column(db.String(200))
+
+    def __init__(self, title, icon, color):
+        self.title = title
+        self.icon = icon
+        self.color = color
 
 class CourseParticipant(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
     course_id = db.Column(db.Integer, db.ForeignKey('course.id'))
     participant_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-
 
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
@@ -50,8 +72,7 @@ class Category(db.Model):
         self.title = title
         self.category_image = category_image
 
-@app.route("/SearchCourses/<search_value>/<category_id>", methods=['GET'])
-def search_course(search_value, category_id):
+
     search_result = []
     for i in Course.query.filter_by(category_id=category_id).all():
         if search_value in i.title.to_lower():
@@ -87,7 +108,7 @@ class User(db.Model):
 
 # Change the profile avatar
 @app.route("/ChangeProfileAvatar/<user_id>", methods=["POST"])
-def Change_Profile_Avatar(user_id):
+def change_profile_avatar(user_id):
     avatar = request.files['avatar']
     if avatar == None:
         # Return error
@@ -127,6 +148,8 @@ def Change_Profile_Avatar(user_id):
             status=400, response="Uploaded File Must Be An Image!")
         return status_code
 
+@app.route("/SearchCourses/<search_value>/<category_id>", methods=['GET'])
+def search_course(search_value, category_id):
 
 
 if __name__ == '__main__':
