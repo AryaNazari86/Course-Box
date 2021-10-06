@@ -13,19 +13,25 @@ class Course(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
     title = db.Column(db.String(200), nullable=False)
     description = db.Column(db.Text, nullable=False)
-    participantsCount = db.Column(db.Integer)
+    participants_count = db.Column(db.Integer)
     likes = db.Column(db.Integer)
     # Relations
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    participants = db.relationship('CourseParticipant', backref='course')
 
-    def __init__(self, title, description, participantsCount, likes, category_id, author_id):
+    def __init__(self, title, description, participants_count, likes, category_id, author_id):
         self.title = title
         self.description = description
-        self.participantsCount = participantsCount
+        self.participants_count = participants_count
         self.likes = likes
         self.category_id = category_id
         self.author_id = author_id
+
+class CourseParticipant(db.Model):
+    id = db.Column(db.Integer, primary_key=True, unique=True)
+    course_id = db.Column(db.Integer, db.ForeignKey('course.id'))
+    participant_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
@@ -50,6 +56,7 @@ class User(db.Model):
     register_date = db.Column(db.DateTime, nullable=False)
     # Relations
     teachedCourses = db.relationship('Course', backref='author')
+    courses = db.relationship('CourseParticipant', backref='participant')
 
     def __init__(self, username, email, password, password_salt, active_code, is_active, avatar, register_date):
         self.username = username
