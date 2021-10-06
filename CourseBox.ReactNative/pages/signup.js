@@ -69,7 +69,7 @@ export default function SignUp({ makeUser, navigation }) {
   return (
     <TouchableWithoutFeedback
       onPress={Keyboard.dismiss}
-      style={styles.container}
+      style={globalStyles.container}
     >
       <View>
         <Header title="Sign Up" height={60} />
@@ -82,11 +82,11 @@ export default function SignUp({ makeUser, navigation }) {
           }}
         >
           {(props) => (
-            <View style={styles.container}>
+            <View style={globalStyles.container}>
               {/* Username */}
-              <View style={styles.textInputView}>
+              <View style={globalStyles.textInputView}>
                 <TextInput
-                  style={styles.input}
+                  style={globalStyles.inputComp}
                   placeholder="Username"
                   onChangeText={props.handleChange("username")}
                   value={props.values.username}
@@ -100,9 +100,9 @@ export default function SignUp({ makeUser, navigation }) {
               </Text>
 
               {/* Name */}
-              <View style={styles.textInputView}>
+              <View style={globalStyles.textInputView}>
                 <TextInput
-                  style={styles.input}
+                  style={globalStyles.inputComp}
                   placeholder="Name"
                   onChangeText={props.handleChange("name")}
                   value={props.values.name}
@@ -116,10 +116,10 @@ export default function SignUp({ makeUser, navigation }) {
               </Text>
 
               {/* Email */}
-              <View style={styles.textInputView}>
+              <View style={globalStyles.textInputView}>
                 {/* <MaterialIcons name="email" size={40} color="black" style={{ paddingLeft: 5, }} /> */}
                 <TextInput
-                  style={styles.input}
+                  style={globalStyles.inputComp}
                   placeholder="Email"
                   onChangeText={props.handleChange("email")}
                   value={props.values.email}
@@ -133,9 +133,9 @@ export default function SignUp({ makeUser, navigation }) {
               </Text>
 
               {/* Password */}
-              <View style={styles.textInputView}>
+              <View style={globalStyles.textInputView}>
                 <TextInput
-                  style={styles.input}
+                  style={{ ...globalStyles.inputComp, ...styles.input }}
                   placeholder="Password"
                   onChangeText={props.handleChange("password")}
                   value={props.values.password}
@@ -148,7 +148,7 @@ export default function SignUp({ makeUser, navigation }) {
                     name={hidePassIcon}
                     size={30}
                     color="black"
-                    style={styles.hideIcon}
+                    style={globalStyles.hideIcon}
                   />
                 </TouchableOpacity>
               </View>
@@ -158,9 +158,8 @@ export default function SignUp({ makeUser, navigation }) {
               </Text>
 
               {/* Accept the privacy policy */}
-              <Text style={{ marginTop: 10, opacity: 0 }}>Code Rangers®</Text>
-              <View style={styles.acceptTos}>
-                <Text style={styles.acceptTos}>
+              <View style={globalStyles.normalAndHighlightContainer}>
+                <Text style={globalStyles.normalAndHighlightContainer}>
                   By signing up you accept the{" "}
                 </Text>
                 <TouchableOpacity>
@@ -169,29 +168,28 @@ export default function SignUp({ makeUser, navigation }) {
                   </Text>
                 </TouchableOpacity>
               </View>
-              <View style={styles.acceptTos}>
-                <Text style={styles.acceptTos}>and </Text>
+              <View style={globalStyles.normalAndHighlightContainer}>
+                <Text style={globalStyles.normalAndHighlightContainer}>
+                  and{" "}
+                </Text>
                 <TouchableOpacity>
                   <Text style={globalStyles.highlitedText}>Privacy Policy</Text>
                 </TouchableOpacity>
               </View>
               {/* Sign Up Button */}
-              <Text style={{ marginTop: 20, opacity: 0 }}>Code Rangers®</Text>
               <TouchableOpacity
-                style={styles.signUpButton}
+                style={globalStyles.button}
                 onPress={props.handleSubmit}
               >
-                <Text style={styles.signUpText}>Sign Up</Text>
+                <Text style={globalStyles.buttonText}>Sign Up</Text>
               </TouchableOpacity>
 
-              <View style={styles.signInContainer}>
+              <View style={globalStyles.normalAndHighlightContainer}>
                 <Text>Already have an account? </Text>
                 <TouchableOpacity onPress={signInPress}>
                   <Text style={globalStyles.highlitedText}>Sign In</Text>
                 </TouchableOpacity>
               </View>
-
-              <Text style={globalStyles.emptySpacer}>Code Rangers®</Text>
             </View>
           )}
         </Formik>
@@ -201,60 +199,8 @@ export default function SignUp({ makeUser, navigation }) {
 }
 
 const styles = StyleSheet.create({
-  // Container of page
-  container: {
-    alignItems: "center",
-    backgroundColor: "#EDF2F4",
-  },
-
   // The text input
   input: {
-    paddingHorizontal: 8,
-    paddingVertical: 6,
-    paddingLeft: 20,
-    fontSize: 18,
-    fontFamily: "rubik-regular",
     width: 250,
-    color: "black",
-  },
-  // The view covering the text input
-  textInputView: {
-    borderWidth: 1,
-    borderRadius: 50,
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 10,
-    height: 50,
-    backgroundColor: "#A8DADC",
-    width: 330,
-  },
-  hideIcon: {
-    padding: 35,
-  },
-  // The confirm Button
-  signUpButton: {
-    backgroundColor: "#EF233C",
-    width: 330,
-    height: 50,
-    borderRadius: 50,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  // The text of confirm button
-  signUpText: {
-    fontSize: 25,
-    color: "white",
-    fontFamily: "rubik-bold",
-  },
-  // Accept Tos Text
-  acceptTos: {
-    flexDirection: "row",
-    fontFamily: "rubik-light",
-  },
-  // Have an cccount View
-  signInContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingTop: 80,
   },
 });

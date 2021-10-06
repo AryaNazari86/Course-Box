@@ -148,8 +148,6 @@ export default function ForgetPassword_Password({ navigation }) {
               >
                 <Text style={globalStyles.buttonText}>Continue</Text>
               </TouchableOpacity>
-
-              <Text style={globalStyles.emptySpacer}>Code Rangers®</Text>
             </View>
           )}
         </Formik>

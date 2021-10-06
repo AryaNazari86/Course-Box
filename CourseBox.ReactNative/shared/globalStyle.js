@@ -70,6 +70,7 @@ export const globalStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 20,
+    marginBottom: 20,
   },
   // The text input
   inputComp: {
@@ -89,8 +90,13 @@ export const globalStyles = StyleSheet.create({
     marginTop: 5,
     height: 50,
     backgroundColor: "#A8DADC",
+    marginTop: 20,
   },
   hideIcon: {
     padding: 25,
+  },
+  normalAndHighlightContainer: {
+    flexDirection: "row",
+    fontFamily: "rubik-light",
   },
 });
