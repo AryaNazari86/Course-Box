@@ -78,27 +78,41 @@ class User(db.Model):
 def Change_Profile_Avatar(user_id):
     avatar = request.files['avatar']
     if avatar == None:
+        # Return error
         status_code = Response(status=400, response="")
         return status_code
+    # Image extensions
     allowed_extensions = [".png", ".jpeg", ".jpg", ".webp", ".ico", ".svg"]
     file_extension = os.path.splitext(avatar.filename)[-1]
+    # Check for image extension
     if allowed_extensions.__contains__(file_extension):
+        # Get user row
+        user = User.query.filter_by(id=user_id).first()
+        # Generate a random if for the image
         avatar_uid = uuid.uuid4()
+        # TODO: Get last avatar name
+        last_avatar = user.avatar
+        # Save avatar image
         avatar.save(os.path.join("avatars", str(
             avatar_uid) + file_extension))
-
-        user = User.query.filter_by(id=user_id).first()
         if user == None:
-            status_code = Response(status=400, response="")
+            status_code = Response(status=400, response="User Was Not Found!")
             return status_code
+        # Update avatar name in database
         user.avatar = str(avatar_uid) + file_extension
+        # Commit changes
         db.session.commit()
+        # TODO: Delete the last avatar from images
+        os.remove("Assets/Images/Avatar/{}".format(last_avatar))
 
-        status_code = Response(status=200, response="")
+        # Return sucessfull
+        status_code = Response(status=200, response="Avatar Image Uploaded!")
         return status_code
 
     else:
-        status_code = Response(status=400, response="")
+        # Return error
+        status_code = Response(
+            status=400, response="Uploaded File Must Be An Image!")
         return status_code
 
 
