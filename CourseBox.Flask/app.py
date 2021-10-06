@@ -1,13 +1,15 @@
-from flask import Flask, abort, request, Response
+from enum import unique
+from flask import Flask, abort, request, Response, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import os
 import uuid
+
+
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///coursebox.sqlite3'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
-
 
 class Course(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
@@ -15,18 +17,20 @@ class Course(db.Model):
     description = db.Column(db.Text, nullable=False)
     participants_count = db.Column(db.Integer)
     likes = db.Column(db.Integer)
+    image = db.Column(db.String(200), nullable=False, unique=True)
     # Relations
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     participants = db.relationship('CourseParticipant', backref='course')
 
-    def __init__(self, title, description, participants_count, likes, category_id, author_id):
+    def __init__(self, title, description, participants_count, likes, category_id, author_id, image):
         self.title = title
         self.description = description
         self.participants_count = participants_count
         self.likes = likes
         self.category_id = category_id
         self.author_id = author_id
+        self.image = image
 
 
 class CourseParticipant(db.Model):
@@ -46,6 +50,14 @@ class Category(db.Model):
         self.title = title
         self.category_image = category_image
 
+@app.route("/SearchCourses/<search_value>/<category_id>", methods=['GET'])
+def search_course(search_value, category_id):
+    search_result = []
+    for i in Course.query.filter_by(category_id=category_id).all():
+        if search_value in i.title.to_lower():
+            search_result.append(i)
+
+    return jsonify(search_result)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
