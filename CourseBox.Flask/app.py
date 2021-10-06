@@ -19,7 +19,7 @@ class Course(db.Model):
     # Relations
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    participants = db.relationship('CourseParticipant', backref='course')
+    participants = db.relationship('User', backref='courses')
     content = db.relationship('CourseContent', backref='content')
 
     def __init__(self, title, description, participants_count, likes, category_id, author_id, image):
@@ -54,12 +54,6 @@ class LessonContent(db.Model):
         self.title = title
         self.icon = icon
         self.color = color
-
-
-class CourseParticipant(db.Model):
-    id = db.Column(db.Integer, primary_key=True, unique=True)
-    course_id = db.Column(db.Integer, db.ForeignKey('course.id'))
-    participant_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
 class Category(db.Model):
