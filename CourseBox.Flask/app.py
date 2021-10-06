@@ -87,8 +87,11 @@ def Change_Profile_Avatar(user_id):
         avatar.save(os.path.join("avatars", str(
             avatar_uid) + file_extension))
 
-        user_id = User.query.filter_by(id=user_id).first()
-        user_id.avatar = str(avatar_uid) + file_extension
+        user = User.query.filter_by(id=user_id).first()
+        if user == None:
+            status_code = Response(status=400, response="")
+            return status_code
+        user.avatar = str(avatar_uid) + file_extension
         db.session.commit()
 
         status_code = Response(status=200, response="")
