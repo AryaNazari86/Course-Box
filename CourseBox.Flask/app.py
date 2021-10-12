@@ -80,7 +80,8 @@ class Course(db.Model):
     # Relations
     category_id = db.Column(db.Integer, db.ForeignKey('Category.id'))
     author_id = db.Column(db.Integer, db.ForeignKey('User.id'))
-    participants = db.relationship('Course', secondary='participants', backref='courses')
+    participants = db.relationship(
+        'Course', secondary='participants', backref='courses')
     content = db.relationship('CourseContent', backref='content')
 
     def __init__(self, title, description, participants_count, likes, category_id, author_id, image):
@@ -92,12 +93,17 @@ class Course(db.Model):
         self.author_id = author_id
         self.image = image
 
+
 participants = db.Table('participants',
-    db.Column('course_id', db.Integer, db.ForeignKey(Course.id), primary_key=True),
-    db.Column('user_id', db.Integer, db.ForeignKey(User.id), primary_key=True)
-)
+                        db.Column('course_id', db.Integer, db.ForeignKey(
+                            Course.id), primary_key=True),
+                        db.Column('user_id', db.Integer, db.ForeignKey(
+                            User.id), primary_key=True)
+                        )
 
 # Change the profile avatar
+
+
 @app.route("/ChangeProfileAvatar/<user_id>", methods=["POST"])
 def change_profile_avatar(user_id):
     avatar = request.files['avatar']
@@ -116,6 +122,21 @@ def change_profile_avatar(user_id):
         avatar_uid = uuid.uuid4()
         # Get last avatar name
         last_avatar = user.avatar
+
+        # File size limit
+        size_limit = "20mb"
+
+        #  Get file size
+        avatar.seek(0, os.SEEK_END)
+        avatar_size = avatar.tell()
+
+        # Check for file size
+        print(avatar_size)
+        if str(avatar_size) > size_limit:
+            status_code = Response(
+                status=400, response="Uploaded File Was Too Big!")
+            return status_code
+
         # Save avatar image
         avatar.save(os.path.join("avatars", str(
             avatar_uid) + file_extension))
@@ -127,14 +148,8 @@ def change_profile_avatar(user_id):
         # Commit changes
         db.session.commit()
         # Delete the last avatar from images
-        if last_avatar != "default.png":
-            if last_avatar == None:
-                # Return error
-                status_code = Response(
-                    status=400, response="Last User Avatar Was Not Found!")
-                return status_code
-            else:
-                os.remove(f"avatars/{last_avatar}")
+        if last_avatar != "default.png" and last_avatar != None:
+            os.remove(f"avatars/{last_avatar}")
 
         # Return sucessfull
         status_code = Response(status=200, response="Avatar Image Uploaded!")
