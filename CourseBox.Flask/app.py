@@ -2,35 +2,13 @@ from flask import Flask, request, Response, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import os
 import uuid
+import datetime
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///coursebox.sqlite3'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
-
-class CourseContent(db.Model):
-    id = db.Column(db.Integer, primary_key=True, unique=True)
-    title = db.Column(db.String(200))
-    icon = db.Column(db.String(200))
-    content = db.relationship('LessonContent', backref='content')
-
-    def _init_(self, title, icon, content):
-        self.title = title
-        self.icon = icon
-        self.content = content
-
-
-class LessonContent(db.Model):
-    id = db.Column(db.Integer, primary_key=True, unique=True)
-    title = db.Column(db.String(200))
-    icon = db.Column(db.String(200))
-    color = db.Column(db.String(200))
-
-    def _init_(self, title, icon, color):
-        self.title = title
-        self.icon = icon
-        self.color = color
 
 
 class Category(db.Model):
@@ -44,7 +22,6 @@ class Category(db.Model):
         self.title = title
         self.category_image = category_image
 
-
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
     username = db.Column(db.String(50), nullable=False, unique=True)
@@ -54,7 +31,7 @@ class User(db.Model):
     active_code = db.Column(db.String(10), nullable=False)
     is_active = db.Column(db.Boolean, nullable=False)
     avatar = db.Column(db.String(200), unique=True)
-    # register_date = db.Column(db.DateTime, nullable=False)
+    register_date = db.Column(db.DateTime, nullable=False)
     # Relations
     teachedCourses = db.relationship('Course', backref='author')
 
@@ -69,7 +46,6 @@ class User(db.Model):
         self.avatar = avatar
         self.register_date = register_date
 
-
 class Course(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
     title = db.Column(db.String(200), nullable=False)
@@ -78,10 +54,10 @@ class Course(db.Model):
     likes = db.Column(db.Integer)
     image = db.Column(db.String(200), nullable=False, unique=True)
     # Relations
-    category_id = db.Column(db.Integer, db.ForeignKey('Category.id'))
-    author_id = db.Column(db.Integer, db.ForeignKey('User.id'))
-    participants = db.relationship('Course', secondary='participants', backref='courses')
-    content = db.relationship('CourseContent', backref='content')
+    category_id = db.Column(db.Integer, db.ForeignKey(Category.id))
+    author_id = db.Column(db.Integer, db.ForeignKey(User.id))
+    participants = db.relationship('User', secondary='participants', backref='courses')
+    content = db.relationship('CourseContent', backref='course')
 
     def __init__(self, title, description, participants_count, likes, category_id, author_id, image):
         self.title = title
@@ -91,6 +67,33 @@ class Course(db.Model):
         self.category_id = category_id
         self.author_id = author_id
         self.image = image
+
+class CourseContent(db.Model):
+    id = db.Column(db.Integer, primary_key=True, unique=True)
+    title = db.Column(db.String(200))
+    icon = db.Column(db.String(200))
+    content = db.relationship('LessonContent', backref='course_content')
+    #Relations
+    course_id = db.Column(db.Integer, db.ForeignKey(Course.id))
+
+    def _init_(self, title, icon, content):
+        self.title = title
+        self.icon = icon
+        self.content = content
+
+class LessonContent(db.Model):
+    id = db.Column(db.Integer, primary_key=True, unique=True)
+    title = db.Column(db.String(200))
+    icon = db.Column(db.String(200))
+    color = db.Column(db.String(200))
+    #Relations
+    course_content_id = db.Column(db.Integer, db.ForeignKey(CourseContent.id))
+
+    def _init_(self, title, icon, color, course_content_id):
+        self.title = title
+        self.icon = icon
+        self.color = color
+        self.course_content_id = course_content_id
 
 participants = db.Table('participants',
     db.Column('course_id', db.Integer, db.ForeignKey(Course.id), primary_key=True),
@@ -156,7 +159,44 @@ def search_course(search_value, category_id):
 
     return jsonify(search_result)
 
-
+@app.route("/User/Register", methods=['POST'])
+def signup():
+    # try:
+    #     if request.is_json:
+    #         user = User(
+    #             username=request.json["username"],
+    #             email=request.json["email"],
+    #             password=request.json["password"],
+    #             password_salt=request.json["password_salt"],
+    #             active_code=str(uuid.uuid4()),
+    #             avatar="default.png",
+    #             is_active=False,
+    #             register_date=datetime.datetime.now()
+    #             )
+    #         db.session.add(user)
+    #         db.session.commit()
+    #         status_code = Response(status=200, response="Account Created!")
+    #         return status_code
+    #     status_code = Response(status=404, response="")
+    #     return status_code
+    # except:
+    #     status_code = Response(status=400, response="There is a problem with creating your account.")
+    #     return status_code
+    if request.is_json:
+            user = User(
+                username=request.json["username"],
+                email=request.json["email"],
+                password=request.json["password"],
+                password_salt=request.json["password_salt"],
+                active_code=str(uuid.uuid4()),
+                avatar="default.png",
+                is_active=False,
+                register_date=datetime.datetime.now()
+                )
+            db.session.add(user)
+            db.session.commit()
+            status_code = Response(status=200, response="Account Created!")
+            return status_code
 if __name__ == '__main__':
     db.create_all()
     app.run(debug=True)
