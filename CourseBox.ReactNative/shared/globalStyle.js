@@ -66,7 +66,7 @@ export const globalStyles = StyleSheet.create({
 
   // Used for highlited texts or links
   highlitedText: {
-    color: "#399DFF",
+    color: "#A8DADC",
   },
 
   // Used for showing errors
@@ -82,6 +82,7 @@ export const globalStyles = StyleSheet.create({
     flexDirection: "row",
     fontFamily: "rubik-light",
     paddingTop: 20,
+    color: '#A8DADC',
   },
 
   // Used for Normal texts on a black background
@@ -95,7 +96,7 @@ export const globalStyles = StyleSheet.create({
   // Text of the button
   buttonText: {
     fontSize: 25,
-    color: "white",
+    color: "#A8DADC",
     fontFamily: "rubik-bold",
   },
 
