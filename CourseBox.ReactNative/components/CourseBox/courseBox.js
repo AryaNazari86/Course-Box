@@ -31,8 +31,8 @@ export default function CourseBox({ navigation, item }) {
                 <View style={styles.courseBoxContent}>
                     <View style={styles.courseLines}>
                         <Text style={styles.courseTitle}>{item.title}</Text>
-                        <MaterialCommunityIcons name="account-group" size={18} color="#14213D" style={styles.courseIcons} />
-                        <Text style={[{ color: '#14213D' }, styles.courseNumData]}>{item.participants}</Text>
+                        <MaterialCommunityIcons name="account-group" size={18} color="white" style={styles.courseIcons} />
+                        <Text style={[{ color: 'white' }, styles.courseNumData]}>{item.participants}</Text>
                     </View>
                     <Chip style={styles.courseCategory}>{item.category}</Chip>
                     <View style={styles.courseLines}>

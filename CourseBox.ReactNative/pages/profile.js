@@ -191,7 +191,7 @@ export default function Profile({ navigation }) {
             <CoursesCarousel
               courses={courses}
               navigation={navigation}
-              dotesColor="#14213D"
+              dotesColor="#A8DADC"
             />
           </View>
 
@@ -201,7 +201,7 @@ export default function Profile({ navigation }) {
             <CoursesCarousel
               courses={courses}
               navigation={navigation}
-              dotesColor="#14213D"
+              dotesColor="#A8DADC"
             />
           </View>
 
@@ -239,6 +239,7 @@ const styles = StyleSheet.create({
   },
   profileAccountName: {
     fontFamily: "rubik-bold",
+    color: '#A8DADC',
   },
 
   // * Username
@@ -246,6 +247,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignSelf: "center",
     fontFamily: "rubik-light",
+    color: '#A8DADC',
   },
 
   // * Profile Description
@@ -257,6 +259,7 @@ const styles = StyleSheet.create({
   },
   profileDescriptionText: {
     fontSize: 13,
+    color: '#A8DADC',
   },
 
   // * Profile Description
@@ -271,6 +274,7 @@ const styles = StyleSheet.create({
   profileDetailText: {
     textAlign: "center",
     fontSize: 17,
+    color: '#A8DADC',
   },
 
   // * Courses
@@ -278,6 +282,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     paddingTop: 30,
     textAlign: "center",
+    color: '#A8DADC',
   },
   madeCoursesList: {
     flex: 1,
