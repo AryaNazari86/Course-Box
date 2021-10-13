@@ -33,7 +33,7 @@ class User(db.Model):
     avatar = db.Column(db.String(200), unique=True)
     register_date = db.Column(db.DateTime, nullable=False)
     # Relations
-    teachedCourses = db.relationship('Course', backref='author')
+    created_courses = db.relationship('Course', backref='creator')
 
     def __init__(self, username, email, password, password_salt, active_code, is_active, avatar, register_date):
         self.username = username
@@ -54,10 +54,17 @@ class Course(db.Model):
     likes = db.Column(db.Integer)
     image = db.Column(db.String(200), nullable=False, unique=True)
     # Relations
+<<<<<<< Updated upstream
     category_id = db.Column(db.Integer, db.ForeignKey(Category.id))
     author_id = db.Column(db.Integer, db.ForeignKey(User.id))
     participants = db.relationship('User', secondary='participants', backref='courses')
     content = db.relationship('CourseContent', backref='course')
+=======
+    category_id = db.Column(db.Integer, db.ForeignKey('Category.id'))
+    creator_id = db.Column(db.Integer, db.ForeignKey('User.id'))
+    participants = db.relationship('Course', secondary='participants', backref='courses')
+    content = db.relationship('CourseContent', backref='content')
+>>>>>>> Stashed changes
 
     def __init__(self, title, description, participants_count, likes, category_id, author_id, image):
         self.title = title
