@@ -159,10 +159,37 @@ def search_course(search_value, category_id):
 
     return jsonify(search_result)
 
+@app.route("/LatestCourses", methods=['GET'])
+def latest_courses():
+    all_courses = Course.query.filter_by().all()
+    all_courses.sort(key=lambda x: x.participants_count, reverse=True)
+
+    return jsonify(all_courses[0:6])
+
 @app.route("/User/Register", methods=['POST'])
 def signup():
-    try:
-        if request.is_json:
+    # try:
+    #     if request.is_json:
+    #         user = User(
+    #             username=request.json["username"],
+    #             email=request.json["email"],
+    #             password=request.json["password"],
+    #             password_salt=request.json["password_salt"],
+    #             active_code=str(uuid.uuid4()),
+    #             avatar="default.png",
+    #             is_active=False,
+    #             register_date=datetime.datetime.now()
+    #             )
+    #         db.session.add(user)
+    #         db.session.commit()
+    #         status_code = Response(status=200, response="Account Created!")
+    #         return status_code
+    #     status_code = Response(status=404, response="")
+    #     return status_code
+    # except:
+    #     status_code = Response(status=400, response="There is a problem with creating your account.")
+    #     return status_code
+    if request.is_json:
             user = User(
                 username=request.json["username"],
                 email=request.json["email"],
@@ -177,11 +204,6 @@ def signup():
             db.session.commit()
             status_code = Response(status=200, response="Account Created!")
             return status_code
-        status_code = Response(status=404, response="")
-        return status_code
-    except:
-        status_code = Response(status=400, response="There is a problem with creating your account.")
-        return status_code
 if __name__ == '__main__':
     db.create_all()
     app.run(debug=True)
