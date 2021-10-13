@@ -128,7 +128,7 @@ export default function Home({ navigation }) {
               <CoursesCarousel
                 courses={courses}
                 navigation={navigation}
-                dotesColor="#fca311"
+                dotesColor="#A8DADC"
               />
             </View>
 
@@ -152,7 +152,7 @@ export default function Home({ navigation }) {
               <CoursesCarousel
                 courses={courses}
                 navigation={navigation}
-                dotesColor="#E5E5E5"
+                dotesColor="#141D28"
               />
             </View>
           </View>
@@ -211,8 +211,8 @@ const styles = StyleSheet.create({
     fontFamily: "rubik-regular",
     fontSize: 24,
     textAlign: "center",
-    color: "#FFF",
     paddingBottom: 10,
+    color: '#A8DADC',
   },
   latestCoursesContainer: {
     paddingTop: 20,
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
     fontFamily: "rubik-regular",
     fontSize: 24,
     textAlign: "center",
-    color: "#14213D",
+    color: "#141D28",
     paddingBottom: 10,
   },
   popularCoursesContainer: {
@@ -231,10 +231,10 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 25,
   },
   recommendedCoursesTitle: {
+    color: '#141D28',
     fontFamily: "rubik-regular",
     fontSize: 24,
     textAlign: "center",
-    color: "#14213D",
     paddingBottom: 10,
   },
   recommendedCoursesContainer: {

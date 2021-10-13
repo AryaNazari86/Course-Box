@@ -1,19 +1,21 @@
 import { StyleSheet } from "react-native";
 export const globalStyles = StyleSheet.create({
   appBackground: {
-    backgroundColor: "red",
+    backgroundColor: "#141D28",
   },
 
   // Container of the page
   container: {
     alignItems: "center",
-    backgroundColor: "red",
+    backgroundColor: "#141D28",
   },
 
   // Header
   header: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#3D4751',
     elevation: 0,
-    backgroundColor: "#1D3557",
+    backgroundColor: "#141D28",
   },
 
   // Title of the header
@@ -31,8 +33,10 @@ export const globalStyles = StyleSheet.create({
 
   // Tabbar
   tabBar: {
-    height: 70,
-    backgroundColor: "#1D3557",
+    borderTopWidth: 1,
+    borderTopColor: '#3D4751',
+    height: 80,
+    backgroundColor: "#141D28",
   },
 
   // Used for react-native-paper inputs
