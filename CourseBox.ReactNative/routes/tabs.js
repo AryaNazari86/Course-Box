@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
-import { StyleSheet, Image, InteractionManager, View, TouchableOpacity } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  Image,
+  InteractionManager,
+  View,
+  TouchableOpacity,
+} from "react-native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import HomeStack from './homeStack';
-import SearchStack from './searchStack';
-import ProfileStack from './profileStack';
-import { globalStyles } from '../shared/globalStyle';
+import HomeStack from "./homeStack";
+import SearchStack from "./searchStack";
+import ProfileStack from "./profileStack";
+import { globalStyles } from "../shared/globalStyle";
 // Lottie Animation
-import LottieView from 'lottie-react-native';
-import { TouchableRipple } from 'react-native-paper';
+import LottieView from "lottie-react-native";
+import { TouchableRipple } from "react-native-paper";
 
 const Tab = createBottomTabNavigator();
 
@@ -28,7 +34,8 @@ export default function Tabs() {
         screenOptions={{
           tabBarStyle: globalStyles.tabBar,
           headerShown: false,
-        }}>
+        }}
+      >
         <Tab.Screen
           name="SearchStack"
           component={SearchStack}
@@ -36,48 +43,51 @@ export default function Tabs() {
             tabBarShowLabel: false,
             tabBarIcon: ({ focused }) => {
               const icon = focused
-                ? require('../assets/Icons/search-focused.png')
-                : require('../assets/Icons/search.png');
+                ? require("../assets/Icons/search-focused.png")
+                : require("../assets/Icons/search.png");
               return <Image style={{ height: 40, width: 40 }} source={icon} />;
             },
-            tabBarButton: (props) => <TouchableRipple {...props} />
-          }} />
-        <Tab.Screen name="HomeStack"
+            tabBarButton: (props) => <TouchableRipple {...props} />,
+          }}
+        />
+        <Tab.Screen
+          name="HomeStack"
           component={HomeStack}
           options={{
             tabBarShowLabel: false,
             tabBarIcon: ({ focused }) => {
               const icon = focused
-                ? require('../assets/Icons/house-focused.png')
-                : require('../assets/Icons/house.png');
+                ? require("../assets/Icons/house-focused.png")
+                : require("../assets/Icons/house.png");
               return <Image style={{ height: 40, width: 40 }} source={icon} />;
             },
-            tabBarButton: (props) => <TouchableRipple {...props} />
-          }} />
-        <Tab.Screen name="ProfileStack"
+            tabBarButton: (props) => <TouchableRipple {...props} />,
+          }}
+        />
+        <Tab.Screen
+          name="ProfileStack"
           component={ProfileStack}
           options={{
             tabBarShowLabel: false,
             tabBarIcon: ({ focused }) => {
               const icon = focused
-                ? require('../assets/Icons/user-focused.png')
-                : require('../assets/Icons/user.png');
+                ? require("../assets/Icons/user-focused.png")
+                : require("../assets/Icons/user.png");
               return <Image style={{ height: 40, width: 40 }} source={icon} />;
             },
-            tabBarButton: (props) => <TouchableRipple {...props} />
-          }} />
+            tabBarButton: (props) => <TouchableRipple {...props} />,
+          }}
+        />
       </Tab.Navigator>
     );
-
-  }
-  else {
+  } else {
     return (
       <View style={globalStyles.loaderContainer}>
         <LottieView
           autoPlay={true}
           loop={true}
           style={globalStyles.loader}
-          source={require('../assets/Animations/loader2.json')}
+          source={require("../assets/Animations/loader2.json")}
         />
       </View>
     );
