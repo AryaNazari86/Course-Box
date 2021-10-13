@@ -1,6 +1,6 @@
 from flask import Flask, request, Response, jsonify
 from flask_sqlalchemy import SQLAlchemy
-import os, uuid, datetime
+import os, uuid, datetime, jwt
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "C83D98E8-B23B-4325-A8F0-5C58106B9145"
@@ -46,7 +46,7 @@ class User(db.Model):
     email = db.Column(db.String(200), nullable=False, unique=True)
     password = db.Column(db.String(255), nullable=False)
     is_active = db.Column(db.Boolean, nullable=False)
-    avatar = db.Column(db.String(200), unique=True)
+    avatar = db.Column(db.String(200))
     register_date = db.Column(db.DateTime, nullable=False)
     # Relations
     created_courses = db.relationship('Course', backref='creator')
@@ -218,47 +218,12 @@ def login():
             if user == None:
                 status_code = Response(status=400, response="A User with this information doesn't exists.")
                 return status_code
-            token = jwt.encode({'id': user.id, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(month=1)}, app.config['SECRET_KEY'])  
-            return jsonify({'token' : token.decode('UTF-8')}) 
+            token = jwt.encode({'id': user.id, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(days=30)}, app.config['SECRET_KEY'])  
+            return jsonify({'token' : token})
     except:
         status_code = Response(status=400, response="There is a problem with server.")
         return status_code
-    # try:
-    #     if request.is_json:
-    #         user = User(
-    #             username=request.json["username"],
-    #             email=request.json["email"],
-    #             password=request.json["password"],
-    #             password_salt=request.json["password_salt"],
-    #             active_code=str(uuid.uuid4()),
-    #             avatar="default.png",
-    #             is_active=False,
-    #             register_date=datetime.datetime.now()
-    #             )
-    #         db.session.add(user)
-    #         db.session.commit()
-    #         status_code = Response(status=200, response="Account Created!")
-    #         return status_code
-    #     status_code = Response(status=404, response="")
-    #     return status_code
-    # except:
-    #     status_code = Response(status=400, response="There is a problem with creating your account.")
-    #     return status_code
-    if request.is_json:
-            user = User(
-                username=request.json["username"],
-                email=request.json["email"],
-                password=request.json["password"],
-                password_salt=request.json["password_salt"],
-                active_code=str(uuid.uuid4()),
-                avatar="default.png",
-                is_active=False,
-                register_date=datetime.datetime.now()
-                )
-            db.session.add(user)
-            db.session.commit()
-            status_code = Response(status=200, response="Account Created!")
-            return status_code
+
 if __name__ == '__main__':
     db.create_all()
     app.run(debug=True)
