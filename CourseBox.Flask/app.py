@@ -159,12 +159,18 @@ def search_course(search_value, category_id):
 
     return jsonify(search_result)
 
-@app.route("/LatestCourses", methods=['GET'])
-def latest_courses():
+@app.route("/PopularCourses", methods=['GET'])
+def popular_courses():
     all_courses = Course.query.filter_by().all()
     all_courses.sort(key=lambda x: x.participants_count, reverse=True)
 
     return jsonify(all_courses[0:6])
+
+@app.route("/LatestCourses", methods=['GET'])
+def latest_courses():
+    all_courses = Course.query.filter_by().all()
+
+    return jsonify(all_courses[-7:-1])
 
 @app.route("/User/Register", methods=['POST'])
 def signup():
