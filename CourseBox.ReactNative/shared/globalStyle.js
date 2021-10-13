@@ -13,7 +13,7 @@ export const globalStyles = StyleSheet.create({
   // Header
   header: {
     borderBottomWidth: 1,
-    borderBottomColor: '#3D4751',
+    borderBottomColor: "#3D4751",
     elevation: 0,
     backgroundColor: "#141D28",
   },
@@ -34,7 +34,7 @@ export const globalStyles = StyleSheet.create({
   // Tabbar
   tabBar: {
     borderTopWidth: 1,
-    borderTopColor: '#3D4751',
+    borderTopColor: "#3D4751",
     height: 80,
     backgroundColor: "#141D28",
   },
@@ -45,6 +45,8 @@ export const globalStyles = StyleSheet.create({
     marginBottom: 15,
     width: "85%",
     height: 50,
+    backgroundColor: "#161D28",
+    borderColor: "#3D4751",
   },
 
   // Used for Titles
@@ -66,7 +68,7 @@ export const globalStyles = StyleSheet.create({
 
   // Used for highlited texts or links
   highlitedText: {
-    color: "#A8DADC",
+    color: "#00A19D",
   },
 
   // Used for showing errors
@@ -82,7 +84,7 @@ export const globalStyles = StyleSheet.create({
     flexDirection: "row",
     fontFamily: "rubik-light",
     paddingTop: 20,
-    color: '#A8DADC',
+    color: "#A8DADC",
   },
 
   // Used for Normal texts on a black background
@@ -96,7 +98,7 @@ export const globalStyles = StyleSheet.create({
   // Text of the button
   buttonText: {
     fontSize: 25,
-    color: "#A8DADC",
+    color: "#141D28",
     fontFamily: "rubik-bold",
   },
 
@@ -115,7 +117,7 @@ export const globalStyles = StyleSheet.create({
 
   // Style of the button
   button: {
-    backgroundColor: "#EF233C",
+    backgroundColor: "#A1D1D3",
     width: 330,
     height: 50,
     borderRadius: 50,
@@ -133,6 +135,7 @@ export const globalStyles = StyleSheet.create({
     paddingLeft: 20,
     fontSize: 18,
     fontFamily: "rubik-regular",
+    color: "#A8DADC",
   },
 
   // The view covering the text input
@@ -143,8 +146,10 @@ export const globalStyles = StyleSheet.create({
     alignItems: "center",
     marginTop: 5,
     height: 50,
-    backgroundColor: "#A8DADC",
+    backgroundColor: "#161D28",
+    borderColor: "#3D4751",
     marginTop: 20,
+    color: "#A8DADC",
   },
 
   // Style of the button that hides password
@@ -156,5 +161,6 @@ export const globalStyles = StyleSheet.create({
   normalAndHighlightContainer: {
     flexDirection: "row",
     fontFamily: "rubik-light",
+    color: "#A8DADC",
   },
 });

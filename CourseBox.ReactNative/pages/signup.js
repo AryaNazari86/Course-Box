@@ -72,7 +72,7 @@ export default function SignUp({ makeUser, navigation }) {
       style={globalStyles.container}
     >
       <View style={globalStyles.container}>
-        <Header title="Sign Up" height={60} />
+        <Header title="Home" height={60} />
         <Formik
           initialValues={{ username: "", name: "", email: "", password: "" }}
           validationSchema={ReviewSchema}
@@ -93,6 +93,7 @@ export default function SignUp({ makeUser, navigation }) {
                   value={props.values.username}
                   onBlur={props.handleBlur("username")}
                   placeholderTextColor={"black"}
+                  placeholderTextColor="#A8DADC"
                 />
               </View>
 
@@ -109,6 +110,7 @@ export default function SignUp({ makeUser, navigation }) {
                   value={props.values.name}
                   onBlur={props.handleBlur("name")}
                   placeholderTextColor={"black"}
+                  placeholderTextColor="#A8DADC"
                 />
               </View>
 
@@ -126,6 +128,7 @@ export default function SignUp({ makeUser, navigation }) {
                   value={props.values.email}
                   onBlur={props.handleBlur("email")}
                   placeholderTextColor={"black"}
+                  placeholderTextColor="#A8DADC"
                 />
               </View>
 
@@ -143,12 +146,13 @@ export default function SignUp({ makeUser, navigation }) {
                   onBlur={props.handleBlur("password")}
                   secureTextEntry={hidePass}
                   placeholderTextColor={"black"}
+                  placeholderTextColor="#A8DADC"
                 />
                 <TouchableOpacity onPress={hidePassFunc}>
                   <MaterialCommunityIcons
                     name={hidePassIcon}
                     size={30}
-                    color="black"
+                    color="#A8DADC"
                     style={globalStyles.hideIcon}
                   />
                 </TouchableOpacity>
@@ -186,7 +190,9 @@ export default function SignUp({ makeUser, navigation }) {
               </TouchableOpacity>
 
               <View style={globalStyles.normalAndHighlightContainer}>
-                <Text>Already have an account? </Text>
+                <Text style={globalStyles.normalAndHighlightContainer}>
+                  Already have an account?{" "}
+                </Text>
                 <TouchableOpacity onPress={signInPress}>
                   <Text style={globalStyles.highlitedText}>Sign In</Text>
                 </TouchableOpacity>

@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     textAlign: "center",
     paddingBottom: 10,
-    color: '#A8DADC',
+    color: "#A8DADC",
   },
   latestCoursesContainer: {
     paddingTop: 20,
@@ -231,14 +231,14 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 25,
   },
   recommendedCoursesTitle: {
-    color: '#141D28',
+    color: "#141D28",
     fontFamily: "rubik-regular",
     fontSize: 24,
     textAlign: "center",
     paddingBottom: 10,
   },
   recommendedCoursesContainer: {
-    backgroundColor: "#EDF2F4",
+    backgroundColor: "#A8DADC",
     paddingTop: 20,
   },
   darkScreen: {

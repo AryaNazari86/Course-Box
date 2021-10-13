@@ -41,7 +41,7 @@ export default function Header({
     <Appbar.Header style={[{ height: height }, globalStyles.header]}>
       <Appbar.Content
         title={title}
-        color="#A8DADC"
+        color="#14213D"
         titleStyle={[
           { textAlign: titleAlignment, fontFamily: fontFamily },
           globalStyles.headerTitle,

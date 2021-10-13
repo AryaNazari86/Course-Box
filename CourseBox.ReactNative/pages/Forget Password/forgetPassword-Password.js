@@ -100,13 +100,13 @@ export default function ForgetPassword_Password({ navigation }) {
                   value={props.values.Password}
                   onBlur={props.handleBlur("Password")}
                   secureTextEntry={hidePass}
-                  placeholderTextColor={"black"}
+                  placeholderTextColor="#A8DADC"
                 />
                 <TouchableOpacity onPress={hidePassFunc}>
                   <MaterialCommunityIcons
                     name={hidePassIcon}
                     size={30}
-                    color="black"
+                    color="#A8DADC"
                     style={globalStyles.hideIcon}
                   />
                 </TouchableOpacity>
@@ -125,13 +125,13 @@ export default function ForgetPassword_Password({ navigation }) {
                   value={props.values.confirmPassword}
                   onBlur={props.handleBlur("confirmPassword")}
                   secureTextEntry={hidePass2}
-                  placeholderTextColor={"black"}
+                  placeholderTextColor="#A8DADC"
                 />
                 <TouchableOpacity onPress={hidePassFunc2}>
                   <MaterialCommunityIcons
                     name={hidePassIcon2}
                     size={30}
-                    color="black"
+                    color="#A8DADC"
                     style={globalStyles.hideIcon}
                   />
                 </TouchableOpacity>

@@ -56,7 +56,7 @@ export default function ForgetPassword_Code({ navigation }) {
                   onChangeText={props.handleChange("code")}
                   value={props.values.code}
                   onBlur={props.handleBlur("code")}
-                  placeholderTextColor={"black"}
+                  placeholderTextColor="#A8DADC"
                 />
               </View>
 

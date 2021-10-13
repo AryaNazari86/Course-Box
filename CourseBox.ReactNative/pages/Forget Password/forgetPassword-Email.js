@@ -54,7 +54,7 @@ export default function ForgetPassword_Email({ navigation }) {
                   onChangeText={props.handleChange("email")}
                   value={props.values.email}
                   onBlur={props.handleBlur("email")}
-                  placeholderTextColor={"black"}
+                  placeholderTextColor="#A8DADC"
                 />
               </View>
 

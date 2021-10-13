@@ -72,7 +72,7 @@ export default function SignIn({ navigation }) {
                   onChangeText={props.handleChange("email")}
                   value={props.values.email}
                   onBlur={props.handleBlur("email")}
-                  placeholderTextColor={"black"}
+                  placeholderTextColor="#A8DADC"
                 />
               </View>
 
@@ -89,13 +89,13 @@ export default function SignIn({ navigation }) {
                   onChangeText={props.handleChange("password")}
                   value={props.values.password}
                   onBlur={props.handleBlur("password")}
-                  placeholderTextColor={"black"}
+                  placeholderTextColor="#A8DADC"
                 />
                 <TouchableOpacity onPress={hidePassFunc}>
                   <MaterialCommunityIcons
                     name={hidePassIcon}
                     size={30}
-                    color="black"
+                    color="#A8DADC"
                     style={globalStyles.hideIcon}
                   />
                 </TouchableOpacity>
