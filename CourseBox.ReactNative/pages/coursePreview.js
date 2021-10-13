@@ -7,8 +7,8 @@ import { FAB } from 'react-native-paper';
 export default function CoursePreview(props) {
     const course = props.route.params.item;
     return (
-        <View style={{ backgroundColor: '#fca311', flex: 1 }}>
-            <Header title={course.title} backButton={true} backAction={() => props.navigation.goBack()}  height={60} />
+        <View style={{ backgroundColor: '#141D28', flex: 1 }}>
+            <Header title={course.title} backButton={true} backAction={() => props.navigation.goBack()} height={60} />
             <ScrollView >
                 {course.content.map(
                     (item) => {
@@ -17,11 +17,9 @@ export default function CoursePreview(props) {
                                 {/* Subject's title */}
                                 <View style={styles.subjectTitle}>
                                     {/* Icon */}
-                                    <MaterialIcons name={item.icon} size={100} color='#14213D' style={styles.subjectIcon} />
+                                    <MaterialIcons name={item.icon} size={100} color='#3D4751' style={styles.subjectIcon} />
                                     {/* Text */}
-                                    <ImageBackground source={require('../assets/Images/title.png')} resizeMode='cover' style={{ justifyContent: 'center', height: 100, width: 200 }}>
-                                        <Text style={styles.subjectTitleText}>{item.title}</Text>
-                                    </ImageBackground>
+                                    <Text style={styles.subjectTitleText}>{item.title}</Text>
                                 </View>
                                 {/* Lessons of the subject  */}
                                 <View style={styles.subjectQls}>
@@ -32,7 +30,7 @@ export default function CoursePreview(props) {
                                                 <TouchableOpacity style={styles.ql}>
                                                     {/* lesson's icon */}
                                                     <View style={styles.qlIconOut}>
-                                                        <MaterialIcons name={item.icon} size={50} color='#14213D' style={{ ...styles.qlIconIn, backgroundColor: item.color }} />
+                                                        <MaterialIcons name={item.icon} size={50} color='#3D4751' style={{ ...styles.qlIconIn, backgroundColor: item.color }} />
                                                     </View>
                                                     {/* lesson's title */}
                                                     <Text style={styles.qlTitleText}>{item.title}</Text>
@@ -50,7 +48,7 @@ export default function CoursePreview(props) {
 
             </ScrollView >
             <FAB
-                color='#fca311'
+                color='#A8DADC'
                 icon='information'
                 style={styles.infoButton}
             />
@@ -62,6 +60,10 @@ const styles = StyleSheet.create({
     subject: {
         marginVertical: 15,
         marginHorizontal: 30,
+        borderWidth: 3,
+        borderRadius: 50,
+        borderColor: '#3D4751',
+        paddingBottom: 10,
     },
     subjectIcon: {
         alignSelf: 'center',
@@ -74,7 +76,8 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         fontSize: 25,
         fontFamily: 'rubik-bold',
-        color: '#14213D',
+        color: '#A8DADC',
+        fontFamily: 'comfortaa-bold',
     },
     subjectQls: {
         flexDirection: 'row',
@@ -86,18 +89,17 @@ const styles = StyleSheet.create({
         height: 100,
         width: 100,
         borderColor: '#14213D',
+        alignItems: 'center',
     },
     qlTitleText: {
         marginBottom: 10,
         alignSelf: 'center',
-        top: 20,
-        fontFamily: 'rubik-bold',
-        color: '#14213D',
+        fontFamily: 'comfortaa-bold',
+        color: '#A8DADC',
     },
     qlIconIn: {
         padding: 8,
         borderRadius: 33,
-        alignSelf: 'center',
         overflow: 'hidden',
     },
     qlIconOut: {
@@ -105,7 +107,7 @@ const styles = StyleSheet.create({
         borderWidth: 4,
         padding: 5,
         borderRadius: 40,
-        borderColor: '#14213D',
+        borderColor: '#3D4751',
         overflow: 'hidden',
     },
     infoButton: {
@@ -114,7 +116,7 @@ const styles = StyleSheet.create({
         width: 70,
         height: 70,
         borderRadius: 100,
-        backgroundColor: '#14213D',
+        backgroundColor: '#3D4751',
         justifyContent: 'center',
         alignItems: 'center',
         position: 'absolute',
