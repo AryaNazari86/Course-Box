@@ -71,7 +71,7 @@ export default function SignUp({ makeUser, navigation }) {
       onPress={Keyboard.dismiss}
       style={globalStyles.container}
     >
-      <View>
+      <View style={globalStyles.container}>
         <Header title="Sign Up" height={60} />
         <Formik
           initialValues={{ username: "", name: "", email: "", password: "" }}
@@ -80,6 +80,7 @@ export default function SignUp({ makeUser, navigation }) {
             signUpPress(values);
             actions.resetForm();
           }}
+          style={globalStyles.container}
         >
           {(props) => (
             <View style={globalStyles.container}>
