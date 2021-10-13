@@ -1,9 +1,13 @@
 import { StyleSheet } from "react-native";
 export const globalStyles = StyleSheet.create({
+  appBackground: {
+    backgroundColor: "red",
+  },
+
   // Container of the page
   container: {
     alignItems: "center",
-    backgroundColor: "#EDF2F4",
+    backgroundColor: "red",
   },
 
   // Header

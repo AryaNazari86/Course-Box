@@ -105,7 +105,7 @@ export default function Home({ navigation }) {
           style={styles.contentContainer}
           showsVerticalScrollIndicator={false}
         >
-          <View style={styles.bgBlue}>
+          <View style={globalStyles.appBackground}>
             {/* Categories */}
             <FlatList
               showsHorizontalScrollIndicator={false}
