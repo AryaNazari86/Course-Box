@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         overflow: 'hidden',
         elevation: 3,
-        backgroundColor: '#fff',
+        backgroundColor: '#161D28',
         shadowOffset: { width: 1, height: 1 },
         shadowColor: '#333',
         shadowOpacity: 0.3,
@@ -18,6 +18,8 @@ const styles = StyleSheet.create({
         marginVertical: 6,
         alignItems: 'center',
         width: 250,
+        borderWidth: 2,
+        borderColor: '#3D4751'
     },
     courseBoxContent: {
         margin: 5,
@@ -26,12 +28,13 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         alignSelf: 'flex-start',
         flex: 1,
-        color: '#14213D',
+        color: 'white',
     },
     courseAuthor: {
         alignSelf: 'flex-start',
         flex: 1,
         fontStyle: 'italic',
+        color: 'white',
     },
     courseNumData: {
         alignSelf: 'flex-end',
