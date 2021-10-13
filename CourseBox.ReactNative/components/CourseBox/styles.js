@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         width: 250,
         borderWidth: 2,
-        borderColor: '#3D4751'
+        borderColor: '#3D4751',
     },
     courseBoxContent: {
         margin: 5,

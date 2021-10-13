@@ -1,15 +1,33 @@
 from flask import Flask, request, Response, jsonify
 from flask_sqlalchemy import SQLAlchemy
-import os
-import uuid
-import datetime
+import os, uuid, datetime
 
 app = Flask(__name__)
+app.config["SECRET_KEY"] = "C83D98E8-B23B-4325-A8F0-5C58106B9145"
 app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///coursebox.sqlite3'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
+def token_required(f):
+    @wraps(f)
+    def decorator(*args, **kwargs):
 
+        token = None
+
+        if 'x-access-tokens' in request.headers:
+            token = request.headers['x-access-tokens']
+
+        if not token:
+            return jsonify({'message': 'a valid token is missing'})
+
+        try:
+            data = jwt.decode(token, app.config["SECRET_KEY"])
+            current_user = User.query.filter_by(id=data['id']).first()
+        except:
+            return jsonify({'message': 'token is invalid'})
+
+        return f(current_user, *args, **kwargs)
+    return decorator
 
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
@@ -27,21 +45,17 @@ class User(db.Model):
     username = db.Column(db.String(50), nullable=False, unique=True)
     email = db.Column(db.String(200), nullable=False, unique=True)
     password = db.Column(db.String(255), nullable=False)
-    password_salt = db.Column(db.String, nullable=False)
-    active_code = db.Column(db.String(10), nullable=False)
     is_active = db.Column(db.Boolean, nullable=False)
     avatar = db.Column(db.String(200), unique=True)
     register_date = db.Column(db.DateTime, nullable=False)
     # Relations
     created_courses = db.relationship('Course', backref='creator')
 
-    def __init__(self, username, email, password, password_salt, active_code, is_active, avatar, register_date):
+    def __init__(self, username, email, password, is_active, avatar, register_date):
         self.username = username
         self.email = email
         self.email = email
         self.password = password
-        self.password_salt = password_salt
-        self.active_code = active_code
         self.is_active = is_active
         self.avatar = avatar
         self.register_date = register_date
@@ -174,6 +188,41 @@ def latest_courses():
 
 @app.route("/User/Register", methods=['POST'])
 def signup():
+    try:
+        if request.is_json:
+            user = User(
+                username=request.json["username"],
+                email=request.json["email"],
+                password=request.json["password"],
+                avatar="default.png",
+                is_active=False,
+                register_date=datetime.datetime.now()
+                )
+            db.session.add(user)
+            db.session.commit()
+            status_code = Response(status=200, response="Account Created!")
+            return status_code
+        status_code = Response(status=404, response="")
+        return status_code
+    except:
+        status_code = Response(status=400, response="There is a problem with creating your account.")
+        return status_code
+
+@app.route("/User/Login", methods=['POST'])
+def login():
+    try:
+        if request.is_json:
+            email = request.json["email"]
+            password = request.json["password"]
+            user = User.query.filter_by(email=email, password=password).first()
+            if user == None:
+                status_code = Response(status=400, response="A User with this information doesn't exists.")
+                return status_code
+            token = jwt.encode({'id': user.id, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(month=1)}, app.config['SECRET_KEY'])  
+            return jsonify({'token' : token.decode('UTF-8')}) 
+    except:
+        status_code = Response(status=400, response="There is a problem with server.")
+        return status_code
     # try:
     #     if request.is_json:
     #         user = User(

@@ -131,35 +131,36 @@ export default function Profile({ navigation }) {
         {/* Header */}
         <Header title="Profile" height={60} />
         <ScrollView style={globalStyles.appBackground}>
-          {/* Account Name And Icon Header */}
-          <View style={styles.profileAccountHeader}>
-            <Image
-              source={require("../assets/Images/Default_Profile_Img.png")}
-              style={styles.profileAccountImage}
-            ></Image>
-            <Text
-              style={{
-                ...styles.profileAccountName,
-                ...globalStyles.TitleText,
-              }}
-            >
-              {profilePageValues.accountName}
-            </Text>
-          </View>
+          <View style={{ borderWidth: 1, }}>
+            {/* Account Name And Icon Header */}
+            <View style={styles.profileAccountHeader}>
+              <Image
+                source={require("../assets/Images/Default_Profile_Img.png")}
+                style={styles.profileAccountImage}
+              ></Image>
+              <Text
+                style={{
+                  ...styles.profileAccountName,
+                  ...globalStyles.TitleText,
+                }}
+              >
+                {profilePageValues.accountName}
+              </Text>
+            </View>
 
-          {/* Username */}
-          <View style={styles.userName}>
-            <Text style={styles.userName}>@</Text>
-            <Text style={styles.userName}>{profilePageValues.userName}</Text>
-          </View>
+            {/* Username */}
+            <View style={styles.userName}>
+              <Text style={styles.userName}>@</Text>
+              <Text style={styles.userName}>{profilePageValues.userName}</Text>
+            </View>
 
-          {/* Account Description */}
-          <View style={styles.profileDescriptionHeader}>
-            <Text style={styles.profileDescriptionText}>
-              {profilePageValues.profileAccountDescription}
-            </Text>
+            {/* Account Description */}
+            <View style={styles.profileDescriptionHeader}>
+              <Text style={styles.profileDescriptionText}>
+                {profilePageValues.profileAccountDescription}
+              </Text>
+            </View>
           </View>
-
           {/* Account Details */}
           <View style={styles.profileDetailHeader}>
             {/* Ammount of made courses */}
