@@ -45,8 +45,9 @@ export default function CoursePreview(props) {
                     }
 
                 )}
-
+                <Text style={{ alignSelf: 'center', color: '#A8DADC', fontFamily: 'comfortaa-light' }}>Created by {course.author}</Text>
             </ScrollView >
+
             <FAB
                 color='#A8DADC'
                 icon='information'
