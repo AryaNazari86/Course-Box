@@ -43,6 +43,7 @@ class Category(db.Model):
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
     username = db.Column(db.String(50), nullable=False, unique=True)
+    name = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(200), nullable=False, unique=True)
     password = db.Column(db.String(255), nullable=False)
     is_active = db.Column(db.Boolean, nullable=False)
@@ -51,9 +52,9 @@ class User(db.Model):
     # Relations
     created_courses = db.relationship('Course', backref='creator')
 
-    def __init__(self, username, email, password, is_active, avatar, register_date):
+    def __init__(self, username, name, email, password, is_active, avatar, register_date):
         self.username = username
-        self.email = email
+        self.name = name
         self.email = email
         self.password = password
         self.is_active = is_active
@@ -115,8 +116,9 @@ participants = db.Table('participants',
 )
 
 # Change the profile avatar
-@app.route("/ChangeProfileAvatar/<user_id>", methods=["POST"])
-def change_profile_avatar(user_id):
+@app.route("/ChangeProfileAvatar", methods=["POST"])
+def change_profile_avatar():
+    user_id = request.form["userId"]
     avatar = request.files['avatar']
     if avatar == None:
         # Return error
@@ -129,18 +131,29 @@ def change_profile_avatar(user_id):
     if allowed_extensions.__contains__(file_extension):
         # Get user row
         user = User.query.filter_by(id=user_id).first()
-        # Generate a random if for the image
-        avatar_uid = uuid.uuid4()
         # Get last avatar name
         last_avatar = user.avatar
+        # File size limit
+        size_limit = 20000000
+
+        #  Get file size
+        avatar.seek(0, os.SEEK_END)
+        avatar_size = avatar.tell()
+
+        # Check for file size
+        print(avatar_size)
+        if avatar_size > size_limit:
+            status_code = Response(
+                status=400, response="Uploaded File Was Too Big!")
+            return status_code
         # Save avatar image
-        avatar.save(os.path.join("avatars", str(
-            avatar_uid) + file_extension))
+        avatar.save(os.path.join("/avatars", str(
+            user.id) + file_extension))
         if user == None:
             status_code = Response(status=400, response="User Was Not Found!")
             return status_code
         # Update avatar name in database
-        user.avatar = str(avatar_uid) + file_extension
+        user.avatar = str(user.id) + file_extension
         # Commit changes
         db.session.commit()
         # Delete the last avatar from images
@@ -162,7 +175,6 @@ def change_profile_avatar(user_id):
         status_code = Response(
             status=400, response="Uploaded File Must Be An Image!")
         return status_code
-
 
 @app.route("/SearchCourses", methods=['POST'])
 def search_course():
@@ -190,10 +202,10 @@ def latest_courses():
 
 @app.route("/User/Register", methods=['POST'])
 def signup():
-    try:
         if request.is_json:
             user = User(
                 username=request.json["username"],
+                name=request.json["name"],
                 email=request.json["email"],
                 password=request.json["password"],
                 avatar="default.png",
@@ -205,9 +217,6 @@ def signup():
             status_code = Response(status=200, response="Account Created!")
             return status_code
         status_code = Response(status=404, response="")
-        return status_code
-    except:
-        status_code = Response(status=400, response="There is a problem with creating your account.")
         return status_code
 
 @app.route("/User/Login", methods=['POST'])
@@ -228,4 +237,4 @@ def login():
 
 if __name__ == '__main__':
     db.create_all()
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0")
