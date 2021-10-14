@@ -15,6 +15,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { setStatusBarStyle } from "expo-status-bar";
+import * as UserService from '../Services/userService';
 
 // * Holds important values for the use of the function
 // const testFunc = () => {
@@ -41,8 +42,12 @@ export default function SignUp({ makeUser, navigation }) {
     return false;
   });
   // * Go to the tab componnent
-  const signUpPress = () => {
-    navigation.navigate("Tab");
+  const signUpPress = (values) => {
+    let result = UserService.SignUp(values);
+    if(result.successful){
+      navigation.navigate("Tab");
+    }
+    //TODO: Show an error message to user. (result.response)
   };
   // * Go to the sign in page
   const signInPress = () => {
