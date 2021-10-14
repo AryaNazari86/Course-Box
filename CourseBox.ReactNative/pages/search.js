@@ -25,8 +25,7 @@ export default function Search({ navigation }) {
   InteractionManager.runAfterInteractions(function () {
     setLoaded(true);
   });
-  const courses = coursesData;
-  const [coursesToSearch, setCoursesToSearch] = useState(courses);
+  const [courses, setCourses] = useState([]);
   const filterCourses = () => {
     return courses
       .filter((item) => {
@@ -100,6 +99,11 @@ export default function Search({ navigation }) {
   ]);
   const [selectedCategory, setSelectedCategory] = useState("All");
 
+  const Search = (searchValue, searchCategory) => {
+    fetch('http://127.0.0.1:5000/SearchCourses', { method: 'POST', body: JSON.stringify({ 'search_value': searchValue, 'category_id': category.indexOf(searchCategory) }), })
+      .then(response => response.json())
+      .then(data => setCourses(data));
+  }
   if (loaded) {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -113,14 +117,16 @@ export default function Search({ navigation }) {
                 label="Search"
                 onChangeText={(value) => {
                   setSearchValue(value);
+                  Search(value, selectedCategory);
                 }}
                 style={globalStyles.input}
                 left={
-                  <TextInput.Icon name="magnify" style={styles.searchIcon} />
+                  <TextInput.Icon name="magnify" color="#A8DADC" style={styles.searchIcon} />
                 }
                 theme={{
                   colors: {
-                    primary: "#141D28",
+                    primary: "#A8DADC",
+                    placeholder: "#A8DADC"
                   },
                 }}
               />
@@ -140,7 +146,7 @@ export default function Search({ navigation }) {
                 })}
               </ScrollView>
               {/* Showing Search results */}
-              {filterCourses().map((item) => {
+              {courses.map((item) => {
                 return <CourseBox navigation={navigation} item={item} />;
               })}
 
