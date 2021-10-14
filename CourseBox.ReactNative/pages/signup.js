@@ -46,7 +46,6 @@ export default function SignUp({ makeUser, navigation }) {
   };
   // * Go to the sign in page
   const signInPress = () => {
-    console.log("Hi");
     navigation.navigate("SignIn");
   };
 
@@ -71,8 +70,8 @@ export default function SignUp({ makeUser, navigation }) {
       onPress={Keyboard.dismiss}
       style={globalStyles.container}
     >
-      <View style={globalStyles.container}>
-        <Header title="Home" height={60} />
+      <View>
+        <Header title="Sign Up" height={60} />
         <Formik
           initialValues={{ username: "", name: "", email: "", password: "" }}
           validationSchema={ReviewSchema}
