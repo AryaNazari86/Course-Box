@@ -131,7 +131,7 @@ export default function Profile({ navigation }) {
         {/* Header */}
         <Header title="Profile" height={60} />
         <ScrollView style={globalStyles.appBackground}>
-          <View style={{ borderWidth: 1, }}>
+          <View style={styles.accountBox}>
             {/* Account Name And Icon Header */}
             <View style={styles.profileAccountHeader}>
               <Image
@@ -234,7 +234,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   profileAccountHeader: {
-    paddingTop: 40,
     alignItems: "center",
     alignSelf: "center",
   },
@@ -265,9 +264,14 @@ const styles = StyleSheet.create({
 
   // * Profile Description
   profileDetailHeader: {
+    borderWidth: 3,
+    borderColor: '#3D4751',
+    borderRadius: 30,
+    paddingVertical: 15,
+    paddingHorizontal: 15,
+    marginTop: 10,
     flexDirection: "row",
     alignSelf: "center",
-    paddingTop: 30,
   },
   profileDetail: {
     paddingLeft: 30,
@@ -287,5 +291,12 @@ const styles = StyleSheet.create({
   },
   madeCoursesList: {
     flex: 1,
+  },
+  accountBox: {
+    marginHorizontal: 30,
+    paddingVertical: 30,
+    borderWidth: 3,
+    borderColor: '#3D4751',
+    borderRadius: 50,
   },
 });
