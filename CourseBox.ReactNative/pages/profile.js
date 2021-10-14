@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   profileAccountName: {
-    fontFamily: "rubik-bold",
+    fontFamily: "comfortaa-bold",
     color: '#A8DADC',
   },
 
@@ -246,7 +246,7 @@ const styles = StyleSheet.create({
   userName: {
     flexDirection: "row",
     alignSelf: "center",
-    fontFamily: "rubik-light",
+    fontFamily: "comfortaa-regular",
     color: '#A8DADC',
   },
 
@@ -260,6 +260,7 @@ const styles = StyleSheet.create({
   profileDescriptionText: {
     fontSize: 13,
     color: '#A8DADC',
+    fontFamily: 'comfortaa-light'
   },
 
   // * Profile Description
@@ -280,6 +281,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 17,
     color: '#A8DADC',
+    fontFamily: 'comfortaa-light',
   },
 
   // * Courses
