@@ -164,8 +164,10 @@ def change_profile_avatar(user_id):
         return status_code
 
 
-@app.route("/SearchCourses/<search_value>/<category_id>", methods=['GET'])
-def search_course(search_value, category_id):
+@app.route("/SearchCourses", methods=['GET'])
+def search_course():
+    search_value = request.form['search_value']
+    category_id = request.form['category_id']
     search_result = []
     for i in Course.query.filter_by(category_id=category_id).all():
         if search_value in i.title.to_lower():

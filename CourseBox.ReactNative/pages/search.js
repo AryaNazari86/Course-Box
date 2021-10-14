@@ -107,6 +107,7 @@ export default function Search({ navigation }) {
           <Header title="Search" height={60} />
           <ScrollView>
             <View style={globalStyles.container}>
+              {/* Search Text input */}
               <TextInput
                 mode="outlined"
                 label="Search"
@@ -119,10 +120,11 @@ export default function Search({ navigation }) {
                 }
                 theme={{
                   colors: {
-                    primary: "#14213D",
+                    primary: "#141D28",
                   },
                 }}
               />
+              {/* Category filters */}
               <ScrollView horizontal={true}>
                 {category.map((item) => {
                   return (
@@ -137,7 +139,7 @@ export default function Search({ navigation }) {
                   );
                 })}
               </ScrollView>
-
+              {/* Showing Search results */}
               {filterCourses().map((item) => {
                 return <CourseBox navigation={navigation} item={item} />;
               })}
