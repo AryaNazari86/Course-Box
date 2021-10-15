@@ -15,16 +15,8 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { setStatusBarStyle } from "expo-status-bar";
-import * as UserService from '../Services/userService';
-
-// * Holds important values for the use of the function
-// const testFunc = () => {
-//     console.log("Hello")
-//   }
-
-{
-  /* <SignUp makeUser={testFunc} /> */
-}
+import * as UserService from "../Services/userService";
+import Snackbar from "react-native-snackbar";
 
 // * Set of yup rules for the text input
 const ReviewSchema = yup.object({
@@ -44,7 +36,7 @@ export default function SignUp({ makeUser, navigation }) {
   // * Go to the tab componnent
   const signUpPress = (values) => {
     let result = UserService.SignUp(values);
-    if(result.successful){
+    if (result.successful) {
       navigation.navigate("Tab");
     }
     //TODO: Show an error message to user. (result.response)

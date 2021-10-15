@@ -35,9 +35,12 @@ const styles = StyleSheet.create({
     height: 50,
     margin: 8,
     elevation: 3,
-    backgroundColor: "#fff",
+    backgroundColor: "#141C27",
     shadowOffset: { width: 1, height: 1 },
-    shadowColor: "#333",
+    shadowColor: "#A8DADC",
+    borderWidth: 3,
+    borderColor: "#3D4751",
+    borderRadius: 30,
     shadowOpacity: 0.3,
     shadowRadius: 2,
     borderRadius: 10,
@@ -52,5 +55,6 @@ const styles = StyleSheet.create({
   categoryTitle: {
     fontFamily: "rubik-regular",
     marginLeft: 10,
+    color: "#A8DADC",
   },
 });
