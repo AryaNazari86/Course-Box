@@ -26,28 +26,6 @@ export default function Search({ navigation }) {
     setLoaded(true);
   });
   const [courses, setCourses] = useState([]);
-  const filterCourses = () => {
-    return courses
-      .filter((item) => {
-        for (var i = 0; i <= item.title.length - searchValue.length; i++) {
-          if (
-            item.title.slice(i, i + searchValue.length).toLowerCase() ==
-            searchValue.toLowerCase()
-          ) {
-            return true;
-          } else {
-            return false;
-          }
-        }
-      })
-      .filter((item) => {
-        if (item.category == selectedCategory || "All" == selectedCategory) {
-          return true;
-        } else {
-          return false;
-        }
-      });
-  };
   const categorySearch = (item) => {
     if (item.selected == false) {
       var newSelectedArray = [];
@@ -91,7 +69,6 @@ export default function Search({ navigation }) {
       setCategory(newSelectedArray);
     }
   };
-  const [searchValue, setSearchValue] = useState("");
   const [category, setCategory] = useState([
     { name: "All", selected: true, key: "1" },
     { name: "Sports", selected: false, key: "2" },
@@ -116,7 +93,6 @@ export default function Search({ navigation }) {
                 mode="outlined"
                 label="Search"
                 onChangeText={(value) => {
-                  setSearchValue(value);
                   Search(value, selectedCategory);
                 }}
                 style={globalStyles.input}

@@ -8,6 +8,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///coursebox.sqlite3'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
+    
 def token_required(f):
     @wraps(f)
     def decorator(*args, **kwargs):
@@ -28,6 +29,18 @@ def token_required(f):
 
         return f(current_user, *args, **kwargs)
     return decorator
+
+def get_user():
+    if 'x-access-tokens' in request.headers:
+        token = request.headers['x-access-tokens']
+
+    try:
+        data = jwt.decode(token, app.config["SECRET_KEY"])
+        current_user = User.query.filter_by(id=data['id']).first()
+        return current_user
+    except:
+        return None
+    
 
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
@@ -235,6 +248,10 @@ def login():
         status_code = Response(status=400, response="There is a problem with server.")
         return status_code
 
+@app.route("/User/Login")
+@token_required()
+def profile_details():
+    
 if __name__ == '__main__':
     db.create_all()
     app.run(debug=True, host="0.0.0.0")
