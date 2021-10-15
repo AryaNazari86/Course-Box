@@ -62,10 +62,11 @@ class User(db.Model):
     is_active = db.Column(db.Boolean, nullable=False)
     avatar = db.Column(db.String(200))
     register_date = db.Column(db.DateTime, nullable=False)
+    bio = db.Column(db.String(255), nullable=False)
     # Relations
     created_courses = db.relationship('Course', backref='creator')
 
-    def __init__(self, username, name, email, password, is_active, avatar, register_date):
+    def __init__(self, username, name, email, password, is_active, avatar, register_date, bio):
         self.username = username
         self.name = name
         self.email = email
@@ -73,6 +74,7 @@ class User(db.Model):
         self.is_active = is_active
         self.avatar = avatar
         self.register_date = register_date
+        self.bio = bio
 
 class Course(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
@@ -248,9 +250,18 @@ def login():
         status_code = Response(status=400, response="There is a problem with server.")
         return status_code
 
-@app.route("/User/Login")
-@token_required()
-def profile_details():
+@app.route("/User/Profile")
+def profile():
+    user = get_user()
+
+    data = {
+        'name': user.name, 
+        'username': user.username,
+        'bio': user.bio
+    }
+
+    return jsonify(data)
+
     
 if __name__ == '__main__':
     db.create_all()
