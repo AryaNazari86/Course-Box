@@ -3,7 +3,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import 'react-native-gesture-handler';
-import { AsyncStorage } from 'react-native';
 
 //Check Internet Connection
 import CheckConnection from './Network/checkConnection';

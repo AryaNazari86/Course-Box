@@ -1,6 +1,7 @@
 from flask import Flask, request, Response, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import os, uuid, datetime, jwt
+from functools import wraps
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "C83D98E8-B23B-4325-A8F0-5C58106B9145"
@@ -14,7 +15,6 @@ def token_required(f):
     def decorator(*args, **kwargs):
 
         token = None
-
         if 'x-access-tokens' in request.headers:
             token = request.headers['x-access-tokens']
 
@@ -22,7 +22,7 @@ def token_required(f):
             return jsonify({'message': 'a valid token is missing'})
 
         try:
-            data = jwt.decode(token, app.config["SECRET_KEY"])
+            data = jwt.decode(token, app.config["SECRET_KEY"], algorithms="HS256")
             current_user = User.query.filter_by(id=data['id']).first()
         except:
             return jsonify({'message': 'token is invalid'})
@@ -31,16 +31,14 @@ def token_required(f):
     return decorator
 
 def get_user():
-    if 'x-access-tokens' in request.headers:
-        token = request.headers['x-access-tokens']
-
     try:
-        data = jwt.decode(token, app.config["SECRET_KEY"])
+        if 'x-access-tokens' in request.headers:
+            token = request.headers['x-access-tokens']
+        data = jwt.decode(token, app.config["SECRET_KEY"], algorithms="HS256")
         current_user = User.query.filter_by(id=data['id']).first()
         return current_user
     except:
-        return None
-    
+        return None 
 
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
@@ -62,7 +60,7 @@ class User(db.Model):
     is_active = db.Column(db.Boolean, nullable=False)
     avatar = db.Column(db.String(200))
     register_date = db.Column(db.DateTime, nullable=False)
-    bio = db.Column(db.String(255), nullable=False)
+    bio = db.Column(db.String(255))
     # Relations
     created_courses = db.relationship('Course', backref='creator')
 
@@ -217,6 +215,7 @@ def latest_courses():
 
 @app.route("/User/Register", methods=['POST'])
 def signup():
+    try:
         if request.is_json:
             user = User(
                 username=request.json["username"],
@@ -225,13 +224,17 @@ def signup():
                 password=request.json["password"],
                 avatar="default.png",
                 is_active=False,
-                register_date=datetime.datetime.now()
+                register_date=datetime.datetime.now(),
+                bio=""
                 )
             db.session.add(user)
             db.session.commit()
             status_code = Response(status=200, response="Account Created!")
             return status_code
         status_code = Response(status=404, response="")
+        return status_code
+    except:
+        status_code = Response(status=400, response="There is a problem with your information.")
         return status_code
 
 @app.route("/User/Login", methods=['POST'])
@@ -250,13 +253,15 @@ def login():
         status_code = Response(status=400, response="There is a problem with server.")
         return status_code
 
-@app.route("/User/Profile")
-def profile():
+@app.route("/User/Details", methods=['POST'])
+@token_required
+def get_user_details(current_user):
     user = get_user()
 
     data = {
         'name': user.name, 
         'username': user.username,
+        'email': user.username,
         'bio': user.bio
     }
 
