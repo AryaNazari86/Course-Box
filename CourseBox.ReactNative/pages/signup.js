@@ -16,7 +16,7 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { setStatusBarStyle } from "expo-status-bar";
 import * as UserService from "../Services/userService";
-import Snackbar from "react-native-snackbar";
+import { Snackbar } from "react-native-paper";
 
 // * Set of yup rules for the text input
 const ReviewSchema = yup.object({
@@ -33,6 +33,8 @@ export default function SignUp({ makeUser, navigation }) {
     BackHandler.exitApp();
     return false;
   });
+  const [showResult, setShowResult] = useState(false);
+  const [useResult, setUseResult] = useState();
   // * Go to the tab componnent
   const signUpPress = (values) => {
     let result = UserService.SignUp(values);
@@ -40,6 +42,7 @@ export default function SignUp({ makeUser, navigation }) {
       navigation.navigate("Tab");
     }
     //TODO: Show an error message to user. (result.response)
+    setUseResult(result.response);
   };
   // * Go to the sign in page
   const signInPress = () => {
@@ -196,6 +199,9 @@ export default function SignUp({ makeUser, navigation }) {
             </View>
           )}
         </Formik>
+        <Snackbar style={styles.result} visible={showResult}>
+          {useResult}
+        </Snackbar>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -205,5 +211,10 @@ const styles = StyleSheet.create({
   // The text input
   input: {
     width: 250,
+  },
+  result: {
+    position: "absolute",
+    bottom: 20,
+    backgroundColor: "#f50a29",
   },
 });

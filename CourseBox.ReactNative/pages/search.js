@@ -77,10 +77,16 @@ export default function Search({ navigation }) {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const Search = (searchValue, searchCategory) => {
-    fetch('http://127.0.0.1:5000/SearchCourses', { method: 'POST', body: JSON.stringify({ 'search_value': searchValue, 'category_id': category.indexOf(searchCategory) }), })
-      .then(response => response.json())
-      .then(data => setCourses(data));
-  }
+    fetch("http://127.0.0.1:5000/SearchCourses", {
+      method: "POST",
+      body: JSON.stringify({
+        search_value: searchValue,
+        category_id: category.indexOf(searchCategory),
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => setCourses(data));
+  };
   if (loaded) {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -97,12 +103,16 @@ export default function Search({ navigation }) {
                 }}
                 style={globalStyles.input}
                 left={
-                  <TextInput.Icon name="magnify" color="#A8DADC" style={styles.searchIcon} />
+                  <TextInput.Icon
+                    name="magnify"
+                    color="#A8DADC"
+                    style={styles.searchIcon}
+                  />
                 }
                 theme={{
                   colors: {
                     primary: "#A8DADC",
-                    placeholder: "#A8DADC"
+                    placeholder: "#A8DADC",
                   },
                 }}
               />
@@ -115,6 +125,8 @@ export default function Search({ navigation }) {
                       style={styles.chip}
                       selected={item.selected}
                       onPress={() => categorySearch(item)}
+                      textStyle={styles.chipText}
+                      selectedColor="#A8DADC"
                     >
                       {item.name}
                     </Chip>
@@ -155,6 +167,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     height: 36,
     marginHorizontal: 2,
+    backgroundColor: "#141C27",
+    borderColor: "#A8DADC",
+    borderWidth: 1,
+  },
+  chipText: {
+    color: "#A8DADC",
   },
   searchIcon: {
     paddingTop: 9.5,
