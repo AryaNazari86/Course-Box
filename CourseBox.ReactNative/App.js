@@ -21,7 +21,6 @@ import { InteractionManager } from 'react-native';
 import { Snackbar } from 'react-native-paper';
 import Splash from './pages/splash';
 
-
 const getFonts = () => Font.loadAsync({
   'comfortaa-bold': require('./assets/Fonts/Comfortaa-Bold.ttf'),
   'comfortaa-light': require('./assets/Fonts/Comfortaa-Light.ttf'),
