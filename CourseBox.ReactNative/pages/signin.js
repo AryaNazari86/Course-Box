@@ -13,6 +13,8 @@ import Header from "../shared/header";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Formik } from "formik";
 import * as yup from "yup";
+import * as UserService from "../Services/userService";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function SignIn({ navigation }) {
   const loginSchema = yup.object({
@@ -20,8 +22,22 @@ export default function SignIn({ navigation }) {
     password: yup.string().required().min(5).max(100),
   });
 
-  const signInPress = () => {
-    navigation.navigate("Tab");
+  const signInPress = async (values) => {
+    let result = UserService.Login(values);
+    if(result.successful){
+      try {
+        let userDetails = UserService.GetUserDetails(result.response);
+        const token = result.response;
+        await AsyncStorage.setItem('token', token);
+        await AsyncStorage.setItem('userDetails', userDetails);
+        navigation.navigate("Tab");
+      } catch (e) {
+        //TODO: Show an error message to user. (result.response)
+      }
+    }
+    else{
+      //TODO: Show an error message to user. (result.response)
+    }
   };
 
   const forgetPress = () => {

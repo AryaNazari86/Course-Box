@@ -39,10 +39,12 @@ export default function SignUp({ makeUser, navigation }) {
   const signUpPress = (values) => {
     let result = UserService.SignUp(values);
     if (result.successful) {
+      console.log(result);
       navigation.navigate("Tab");
     }
-    //TODO: Show an error message to user. (result.response)
-    setUseResult(result.response);
+    else{
+      setUseResult(result.response);
+    }
   };
   // * Go to the sign in page
   const signInPress = () => {
