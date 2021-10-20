@@ -20,6 +20,8 @@ import { InteractionManager } from "react-native";
 import { Snackbar } from "react-native-paper";
 import Splash from "./pages/splash";
 import SettingsPage from "./pages/Settings/settings";
+import Tabs from "./routes/tabs";
+import LessonPreview from "./pages/lessonPreview";
 
 const getFonts = () =>
   Font.loadAsync({
@@ -52,7 +54,7 @@ export default function App() {
     if (isConnected) {
       return (
         <NavigationContainer>
-          <SplashStack />
+          <LessonPreview />
         </NavigationContainer>
       );
     } else {

@@ -77,7 +77,7 @@ export default function Search({ navigation }) {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const Search = (searchValue, searchCategory) => {
-    fetch("http://192.168.0.147.:5000/SearchCourses", {
+    fetch("http://192.168.0.147:5000/SearchCourses", {
       method: "POST",
       body: JSON.stringify({
         search_value: searchValue,
