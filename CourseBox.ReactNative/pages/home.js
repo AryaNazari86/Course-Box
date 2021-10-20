@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -48,6 +48,24 @@ export default function Home({ navigation }) {
   const [darkScreen, setDarkScreen] = useState({ width: 0, height: 0 });
 
   // Get Categories From API
+  const [latestCourses, setLatestCourses] = useState([]);
+  const [popularCorurses, setPopularCourses] = useState([]);
+  const fetchDatas = async () => {
+    try {
+      const response = await fetch('http://192.168.0.147:5000/LatestCourses');
+      const courses = await response.json();
+      setLatestCourses(courses);
+      const response1 = await fetch('http://192.168.0.147:5000/PopularCourses');
+      const courses1 = await response1.json();
+      setPopularCourses(courses1);
+    }
+    catch (error) {
+      console.log(error)
+    }
+  }
+  useEffect(() => {
+    fetchDatas();
+  }, []);
   const categories = [
     {
       categoryId: 1,
@@ -126,7 +144,7 @@ export default function Home({ navigation }) {
 
               {/* A carousel for showing the latest courses. */}
               <CoursesCarousel
-                courses={courses}
+                courses={latestCourses}
                 navigation={navigation}
                 dotesColor="#A8DADC"
               />
@@ -137,7 +155,7 @@ export default function Home({ navigation }) {
 
               {/* A carousel for showing the popular courses. */}
               <CoursesCarousel
-                courses={courses}
+                courses={popularCorurses}
                 navigation={navigation}
                 dotesColor="#A8DADC"
               />
