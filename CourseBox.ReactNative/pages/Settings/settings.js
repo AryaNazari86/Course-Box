@@ -13,7 +13,7 @@ import Header from "../../shared/header";
 
 // Lottie Library
 import LottieView from "lottie-react-native";
-import settingButton from "../../components/SettingButton/settingButton";
+import SettingButton from "../../components/SettingButton/settingButton";
 
 export default function SettingsPage({ navigation }) {
   // If loaded is false, show a loader.
@@ -33,8 +33,10 @@ export default function SettingsPage({ navigation }) {
           <Text style={{ ...globalStyles.headerTitle, ...styles.headerText }}>
             Profile
           </Text>
-          <View style={styles.settingView}>
-            <SettingsPage />
+          <View style={globalStyles.container}>
+            <SettingButton buttonText={"Hi"} buttonStyle="Edit" />
+            <SettingButton buttonText={"Profile Name"} buttonStyle="Edit" />
+            <SettingButton buttonText={"Profile Name"} buttonStyle="Edit" />
           </View>
         </ScrollView>
       </View>

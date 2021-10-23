@@ -2,7 +2,6 @@ import { StyleSheet } from "react-native";
 export const globalStyles = StyleSheet.create({
   appBackground: {
     backgroundColor: "#141D28",
-    flex: 1,
   },
 
   // Container of the page
