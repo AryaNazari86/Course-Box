@@ -24,6 +24,10 @@ export default function SettingsPage({ navigation }) {
     setLoaded(true);
   });
 
+  const testFunc = () => {
+    console.log("Hi");
+  };
+
   if (loaded) {
     return (
       <View>
@@ -34,9 +38,21 @@ export default function SettingsPage({ navigation }) {
             Profile
           </Text>
           <View style={globalStyles.container}>
-            <SettingButton buttonText={"Hi"} buttonStyle="Edit" />
-            <SettingButton buttonText={"Profile Name"} buttonStyle="Edit" />
-            <SettingButton buttonText={"Profile Name"} buttonStyle="Edit" />
+            <SettingButton
+              buttonText={"Profile Name"}
+              buttonStyle="Edit"
+              functionName={testFunc}
+            />
+            <SettingButton
+              buttonText={"UserName"}
+              buttonStyle="Edit"
+              functionName={testFunc}
+            />
+            <SettingButton
+              buttonText={"Profile Picture"}
+              buttonStyle="Edit"
+              functionName={testFunc}
+            />
           </View>
         </ScrollView>
       </View>

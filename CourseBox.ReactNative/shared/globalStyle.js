@@ -100,6 +100,7 @@ export const globalStyles = StyleSheet.create({
     fontSize: 25,
     color: "#141D28",
     fontFamily: "rubik-bold",
+    textAlign: "center",
   },
 
   // Container of loading animation
@@ -120,6 +121,17 @@ export const globalStyles = StyleSheet.create({
     backgroundColor: "#A1D1D3",
     width: 330,
     height: 50,
+    borderRadius: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 20,
+    marginBottom: 20,
+  },
+
+  smallButton: {
+    backgroundColor: "#A1D1D3",
+    width: 60,
+    height: 30,
     borderRadius: 50,
     alignItems: "center",
     justifyContent: "center",

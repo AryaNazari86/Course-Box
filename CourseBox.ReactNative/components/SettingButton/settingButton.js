@@ -3,21 +3,29 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { globalStyles } from "../../shared/globalStyle";
 
-export default function SettingButton({ buttonText, buttonStyle }) {
+export default function SettingButton({
+  buttonText,
+  buttonStyle,
+  functionName,
+}) {
   if (buttonStyle == "Edit") {
     return (
-      <TouchableOpacity style={styles.buttonContainer}>
+      <View style={styles.buttonContainer}>
         <View style={styles.redTest}>
           <Text style={{ ...globalStyles.normalText, ...styles.buttonText }}>
             {buttonText}
           </Text>
         </View>
-        <View style={styles.blueTest}>
-          <Text style={{ ...globalStyles.normalText, ...styles.editText }}>
+        <TouchableOpacity
+          onPress={functionName}
+          style={{ ...globalStyles.smallButton, ...styles.blueTest }}
+          onPress={functionName}
+        >
+          <Text style={{ ...globalStyles.buttonText, ...styles.editText }}>
             Edit
           </Text>
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
+      </View>
     );
   }
 }
@@ -28,16 +36,17 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: "left",
     alignSelf: "flex-start",
-    paddingTop: 5,
+    paddingTop: -5,
   },
   buttonContainer: {
-    borderBottomWidth: 1,
-    borderBottomColor: "#3D4751",
-    marginTop: 20,
+    // borderBottomWidth: 1,
+    // borderBottomColor: "#3D4751",
 
     flexDirection: "row",
-    paddingBottom: 15,
+    // paddingBottom: 15,
     width: "90%",
+
+    justifyContent: "center",
   },
   editText: {
     marginRight: 10,
@@ -48,10 +57,11 @@ const styles = StyleSheet.create({
   },
 
   redTest: {
-    flex: 1,
+    width: 300,
+    justifyContent: "center",
   },
 
   blueTest: {
-    flex: 1,
+    justifyContent: "center",
   },
 });
