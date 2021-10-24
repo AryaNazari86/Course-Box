@@ -15,6 +15,7 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import * as UserService from "../Services/userService";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Snackbar } from "react-native-paper";
 
 export default function SignIn({ navigation }) {
   const loginSchema = yup.object({
@@ -22,21 +23,36 @@ export default function SignIn({ navigation }) {
     password: yup.string().required().min(5).max(100),
   });
 
+  const [showResult, setShowResult] = useState(false);
+  const [result, setResult] = useState();
+
   const signInPress = async (values) => {
-    let result = UserService.Login(values);
-    if(result.successful){
-      try {
-        let userDetails = UserService.GetUserDetails(result.response);
-        const token = result.response;
-        await AsyncStorage.setItem('token', token);
-        await AsyncStorage.setItem('userDetails', userDetails);
-        navigation.navigate("Tab");
-      } catch (e) {
-        //TODO: Show an error message to user. (result.response)
-      }
-    }
-    else{
-      //TODO: Show an error message to user. (result.response)
+    try {
+      UserService.Login(values).then(async result => {
+        if (result.successful) {
+          UserService.GetUserDetails(result.response)
+            .then(async userDetails => {
+              if (userDetails.successful) {
+                await AsyncStorage.setItem('userDetails', userDetails.response);
+              }
+              else {
+                setShowResult(true);
+                setResult("Error with getting your account info.");
+              }
+            });
+          const token = result.response;
+          await AsyncStorage.setItem('token', token);
+          navigation.navigate("Tab");
+        }
+        else {
+          setShowResult(true);
+          setResult(result.response);
+        }
+      });
+
+    } catch (error) {
+      setShowResult(true);
+      setResult("Error with connecting to server...");
     }
   };
 
@@ -63,7 +79,7 @@ export default function SignIn({ navigation }) {
       onPress={Keyboard.dismiss}
       style={globalStyles.container}
     >
-      <View>
+      <View style={{ flex: 1 }}>
         <Header
           title="Sign In"
           backButton={true}
@@ -142,6 +158,9 @@ export default function SignIn({ navigation }) {
             </View>
           )}
         </Formik>
+        <Snackbar style={styles.result} visible={showResult}>
+          {result}
+        </Snackbar>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -151,5 +170,9 @@ const styles = StyleSheet.create({
   // The text input
   input: {
     width: 250,
+  },
+  result: {
+    bottom: 0,
+    backgroundColor: "#f50a29",
   },
 });

@@ -34,17 +34,20 @@ export default function SignUp({ makeUser, navigation }) {
     return false;
   });
   const [showResult, setShowResult] = useState(false);
-  const [useResult, setUseResult] = useState();
+  const [result, setResult] = useState();
   // * Go to the tab componnent
   const signUpPress = (values) => {
-    let result = UserService.SignUp(values);
-    if (result.successful) {
-      console.log(result);
-      navigation.navigate("Tab");
-    }
-    else{
-      setUseResult(result.response);
-    }
+    UserService.SignUp(values).then(result => {
+      if (result.successful) {
+        setShowResult(false);
+        navigation.navigate("Tab");
+      }
+      else {
+        setShowResult(true);
+        setResult(result.response);
+      }
+    });
+
   };
   // * Go to the sign in page
   const signInPress = () => {
@@ -72,7 +75,7 @@ export default function SignUp({ makeUser, navigation }) {
       onPress={Keyboard.dismiss}
       style={globalStyles.container}
     >
-      <View>
+      <View style={{flex: 1}}>
         <Header title="Sign Up" height={60} />
         <Formik
           initialValues={{ username: "", name: "", email: "", password: "" }}
@@ -202,7 +205,7 @@ export default function SignUp({ makeUser, navigation }) {
           )}
         </Formik>
         <Snackbar style={styles.result} visible={showResult}>
-          {useResult}
+          {result}
         </Snackbar>
       </View>
     </TouchableWithoutFeedback>
@@ -215,8 +218,7 @@ const styles = StyleSheet.create({
     width: 250,
   },
   result: {
-    position: "absolute",
-    bottom: 20,
+    bottom: 0,
     backgroundColor: "#f50a29",
   },
 });

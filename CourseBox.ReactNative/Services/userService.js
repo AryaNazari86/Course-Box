@@ -1,7 +1,8 @@
 import React from "react";
 import md5 from 'md5';
+import axios from 'axios';
 
-export function SignUp(values) {
+export async function SignUp(values) {
     try {
         let user = {
             username: values.username,
@@ -9,62 +10,86 @@ export function SignUp(values) {
             email: values.email,
             password: md5(values.password)
         };
+
         let result = {
             successful: false,
             response: ""
         };
-        fetch('http://192.168.169.22:5000/User/Register', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(user) })
-            .then(response => {
-                result.response = response.statusText;
-                if (response.status == 200) {
-                    result.successful = true;
-                }
-            });
-        return result;
+
+        const options = {
+            url: 'http://192.168.79.22:5000/User/Register',
+            method: 'POST',
+            timeout: 10000,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data: user
+        };
+        let response = await axios(options);
+        if (await (response).status === 200) {
+            result.successful = true;
+        }
+        result.response = await (response).data;
+        return result
     } catch (error) {
         return {
             successful: false,
-            response: "Error..."
+            response: "Sign up unsuccessful."
         };
     }
 }
 
-export function Login(values) {
+export async function Login(values) {
+    let user = {
+        email: values.email,
+        password: md5(values.password)
+    };
+
+    let result = {
+        successful: false,
+        response: ""
+    };
+
+    const options = {
+        url: 'http://192.168.79.22:5000/User/Login',
+        method: 'POST',
+        timeout: 10000,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: user
+    };
+    let response = await axios(options);
+    if (await (response).status === 200) {
+        result.successful = true;
+    }
+    result.response = (await response).data;
+    return result;
+
+}
+
+export async function GetUserDetails(token) {
     try {
-        let user = {
-            email: values.email,
-            password: md5(values.password)
-        };
         let result = {
             successful: false,
-            response: null
+            response: ""
         };
-        fetch('http://192.168.169.22:5000/User/Login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(user) })
-            .then(response => {
-                if (response.status == 200) {
-                    result.successful = true;
-                    result.response = JSON.parse(response.json()).token;
-                }
-            });
-        return result;
-    } catch (error) {
-        return {
-            successful: false,
-            response: "Error..."
+
+        const options = {
+            url: 'http://192.168.79.22:5000/User/Details',
+            method: 'POST',
+            timeout: 10000,
+            headers: {
+                'Content-Type': 'application/json',
+                'x-access-tokens': token
+            }
         };
-    }
-
-}
-
-export function GetUserDetails(token) {
-    try {
-        fetch('http://192.168.169.22:5000/User/Details', { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-access-tokens': token } })
-            .then(response => {
-                if (response.status == 200) {
-                    result.successful = true;
-                    result.response = JSON.parse(response.json());
-                }
-            });
+        let response = await axios(options);
+        if (await (response).status === 200) {
+            result.successful = true;
+        }
+        result.response = (await response).data;
+        return result
     } catch (error) {
         return {
             successful: false,
