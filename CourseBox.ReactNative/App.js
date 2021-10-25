@@ -22,6 +22,7 @@ import Splash from "./pages/splash";
 import SettingsPage from "./pages/Settings/settings";
 import Tabs from "./routes/tabs";
 import LessonPreview from "./pages/lessonPreview";
+import ProfileStack from "./routes/profileStack";
 
 const getFonts = () =>
   Font.loadAsync({
@@ -54,7 +55,7 @@ export default function App() {
     if (isConnected) {
       return (
         <NavigationContainer>
-          <LessonPreview />
+          <ProfileStack />
         </NavigationContainer>
       );
     } else {

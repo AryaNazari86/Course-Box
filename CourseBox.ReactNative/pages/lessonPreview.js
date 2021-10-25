@@ -7,14 +7,14 @@ import { globalStyles } from '../shared/globalStyle';
 import LessonBlock from '../components/LessonBlock';
 export default function LessonPreview() {
     const lessonContent = [
-        { type: 'title', content: 'header' },
-        { type: 'text', content: 'This is a test content' },
-        { type: 'image', content: require('../assets/Icons/user.png') },
-        { type: 'text', content: 'test content' },
+        { type: 'title', content: 'header', key: '1' },
+        { type: 'text', content: 'This is a test content', key: '2' },
+        { type: 'image', content: require('../assets/Icons/user.png'), key: '3' },
+        { type: 'text', content: 'test content', key: '4' },
     ]
 
     return (
-        <View style={globalStyles.appBackground}>
+        <View style={{ ...globalStyles.appBackground, flex: 1 }}>
             <Header
                 title="Lesson"
             />
