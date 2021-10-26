@@ -42,13 +42,7 @@
     "strict-uri-encode": "^2.0.0",
     "yarn": "^1.22.11",
     "yet": "^0.1.0",
-<<<<<<< Updated upstream
-    "yup": "^0.32.9",
-    "@react-native-async-storage/async-storage": "~1.15.0",
-    "expo-notifications": "~0.12.3"
-=======
     "yup": "^0.32.9"
->>>>>>> Stashed changes
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"

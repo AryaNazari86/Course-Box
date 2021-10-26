@@ -7,8 +7,49 @@ export default function SettingButton({
   buttonText,
   buttonStyle,
   functionName,
+  editButtonName,
 }) {
   if (buttonStyle == "Edit") {
+    if (editButtonName) {
+      return (
+        <View style={styles.buttonContainer}>
+          <View style={styles.redTest}>
+            <Text style={{ ...globalStyles.normalText, ...styles.buttonText }}>
+              {buttonText}
+            </Text>
+          </View>
+          <TouchableOpacity
+            onPress={functionName}
+            style={{ ...globalStyles.smallButton, ...styles.blueTest }}
+            onPress={functionName}
+          >
+            <Text style={{ ...globalStyles.buttonText, ...styles.editText }}>
+              {editButtonName}
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
+    } else {
+      return (
+        <View style={styles.buttonContainer}>
+          <View style={styles.redTest}>
+            <Text style={{ ...globalStyles.normalText, ...styles.buttonText }}>
+              {buttonText}
+            </Text>
+          </View>
+          <TouchableOpacity
+            onPress={functionName}
+            style={{ ...globalStyles.smallButton, ...styles.blueTest }}
+            onPress={functionName}
+          >
+            <Text style={{ ...globalStyles.buttonText, ...styles.editText }}>
+              Edit
+            </Text>
+          </TouchableOpacity>
+        </View>
+      );
+    }
+  } else if (buttonStyle == "Dropdown") {
     return (
       <View style={styles.buttonContainer}>
         <View style={styles.redTest}>
@@ -44,15 +85,13 @@ const styles = StyleSheet.create({
 
     flexDirection: "row",
     // paddingBottom: 15,
+    marginBottom: -10,
     width: "90%",
 
     justifyContent: "center",
   },
   editText: {
-    marginRight: 10,
     fontSize: 18,
-    textAlign: "right",
-    alignSelf: "flex-end",
     paddingTop: 5,
   },
 
@@ -61,7 +100,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 
-  blueTest: {
-    justifyContent: "center",
-  },
+  blueTest: {},
 });

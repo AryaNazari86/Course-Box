@@ -19,7 +19,7 @@ import Search from "./pages/search";
 import { InteractionManager } from "react-native";
 import { Snackbar } from "react-native-paper";
 import Splash from "./pages/splash";
-import SettingsPage from "./pages/Settings/settings";
+import SettingsPage from "./pages/settings";
 import Tabs from "./routes/tabs";
 import LessonPreview from "./pages/lessonPreview";
 
@@ -53,9 +53,12 @@ export default function App() {
   if (fontsLoaded) {
     if (isConnected) {
       return (
-        <NavigationContainer>
-          <LessonPreview />
-        </NavigationContainer>
+        // <NavigationContainer>
+        //   <LessonPreview />
+        // </NavigationContainer>
+
+        // ! Delete this before commit
+        <SettingsPage />
       );
     } else {
       return <Splash disconnected={true} />;

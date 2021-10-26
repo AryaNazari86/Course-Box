@@ -8,12 +8,12 @@ import {
   ScrollView,
   InteractionManager,
 } from "react-native";
-import { globalStyles } from "../../shared/globalStyle";
-import Header from "../../shared/header";
+import { globalStyles } from "../shared/globalStyle";
+import Header from "../shared/header";
 
 // Lottie Library
 import LottieView from "lottie-react-native";
-import SettingButton from "../../components/SettingButton/settingButton";
+import SettingButton from "../components/SettingButton/settingButton";
 
 export default function SettingsPage({ navigation }) {
   // If loaded is false, show a loader.
@@ -34,6 +34,7 @@ export default function SettingsPage({ navigation }) {
         {/* Header */}
         <Header title="Settings" height={60} />
         <ScrollView style={globalStyles.appBackground}>
+          {/* Profile Settings */}
           <Text style={{ ...globalStyles.headerTitle, ...styles.headerText }}>
             Profile
           </Text>
@@ -53,6 +54,41 @@ export default function SettingsPage({ navigation }) {
               buttonStyle="Edit"
               functionName={testFunc}
             />
+            {/* App theme */}
+            <Text style={{ ...globalStyles.headerTitle, ...styles.headerText }}>
+              Theme
+            </Text>
+            <View style={globalStyles.container}>
+              <SettingButton
+                buttonText={"App Theme"}
+                buttonStyle="Edit"
+                functionName={testFunc}
+              />
+            </View>
+            {/* About */}
+            <Text style={{ ...globalStyles.headerTitle, ...styles.headerText }}>
+              About Us
+            </Text>
+            <View style={globalStyles.container}>
+              <SettingButton
+                buttonText={"About Code Rangers"}
+                buttonStyle="Edit"
+                functionName={testFunc}
+                editButtonName="View"
+              />
+              <SettingButton
+                buttonText={"Terms of service"}
+                buttonStyle="Edit"
+                functionName={testFunc}
+                editButtonName="View"
+              />
+              <SettingButton
+                buttonText={"Privacy Policy"}
+                buttonStyle="Edit"
+                functionName={testFunc}
+                editButtonName="View"
+              />
+            </View>
           </View>
         </ScrollView>
       </View>
@@ -64,7 +100,7 @@ export default function SettingsPage({ navigation }) {
           autoPlay={true}
           loop={true}
           style={globalStyles.loader}
-          source={require("../../assets/Animations/loader2.json")}
+          source={require("../assets/Animations/loader2.json")}
         />
       </View>
     );

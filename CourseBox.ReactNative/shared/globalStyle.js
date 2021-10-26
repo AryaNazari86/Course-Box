@@ -100,6 +100,7 @@ export const globalStyles = StyleSheet.create({
     fontSize: 25,
     color: "#141D28",
     fontFamily: "rubik-bold",
+
     textAlign: "center",
   },
 
@@ -130,11 +131,9 @@ export const globalStyles = StyleSheet.create({
 
   smallButton: {
     backgroundColor: "#A1D1D3",
-    width: 60,
+    width: 70,
     height: 30,
     borderRadius: 50,
-    alignItems: "center",
-    justifyContent: "center",
     marginTop: 20,
     marginBottom: 20,
   },
