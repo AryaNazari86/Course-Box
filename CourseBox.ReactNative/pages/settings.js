@@ -61,10 +61,11 @@ export default function SettingsPage({ navigation }) {
             <View style={globalStyles.container}>
               <SettingButton
                 buttonText={"App Theme"}
-                buttonStyle="Edit"
+                buttonStyle="Dropdown"
                 functionName={testFunc}
               />
             </View>
+            {/* Empty Spacer */}
             {/* About */}
             <Text style={{ ...globalStyles.headerTitle, ...styles.headerText }}>
               About Us
