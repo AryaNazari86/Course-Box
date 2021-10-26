@@ -14,8 +14,11 @@ export default function SearchStack() {
         cardStyle: { backgroundColor: "#141D28" },
       })}
     >
+      {/* the search page */}
       <Stack.Screen name="Search" component={Search} />
+      {/* the lesson preview page */}
       <Stack.Screen name="Lesson" component={LessonPreview} />
+      {/* the home course preview page */}
       <Stack.Screen name="CoursePreview" component={CoursePreview} />
     </Stack.Navigator>
   );

@@ -13,8 +13,11 @@ export default function ProfileStack() {
         cardStyle: { backgroundColor: "#141D28" },
       })}
     >
+      {/* the home page */}
       <Stack.Screen name="Profile" component={Profile} />
+      {/* the lesson preview page */}
       <Stack.Screen name="Lesson" component={LessonPreview} />
+      {/* the home course preview page */}
       <Stack.Screen name="CoursePreview" component={CoursePreview} />
     </Stack.Navigator>
   );

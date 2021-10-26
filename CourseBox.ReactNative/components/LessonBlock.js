@@ -7,12 +7,14 @@ import { globalStyles } from '../shared/globalStyle';
 import { user } from '../assets/Icons/user.png'
 export default function LessonBlock({ type, content }) {
 
-
+    {/* if the item type was a simple text */ }
     if (type == 'text') {
         return (
             <Text style={styles.text}>{content}</Text>
         )
     }
+
+    {/* if the item type was an image */ }
     if (type == 'image') {
         console.log(typeof content)
         return (
@@ -22,6 +24,8 @@ export default function LessonBlock({ type, content }) {
             />
         )
     }
+
+    {/* if the item type was a header title */ }
     if (type == 'title') {
         return (
             <View style={styles.titleContainer} >

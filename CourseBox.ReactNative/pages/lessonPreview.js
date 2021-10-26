@@ -19,6 +19,7 @@ export default function LessonPreview() {
                 title="Lesson"
             />
 
+            {/* mapping between every item in each lesson */}
             {lessonContent.map((item) => (
                 <LessonBlock
 
