@@ -19,7 +19,7 @@ import Search from "./pages/search";
 import { InteractionManager } from "react-native";
 import { Snackbar } from "react-native-paper";
 import Splash from "./pages/splash";
-import SettingsPage from "./pages/Settings/settings";
+import SettingsPage from "./pages/settings";
 import Tabs from "./routes/tabs";
 import LessonPreview from "./pages/lessonPreview";
 import ProfileStack from "./routes/profileStack";
