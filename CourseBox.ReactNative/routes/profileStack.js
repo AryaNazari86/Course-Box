@@ -2,7 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import Profile from "../pages/profile";
 import CoursePreview from "../pages/coursePreview";
-
+import LessonPreview from '../pages/lessonPreview';
 const Stack = createStackNavigator();
 
 export default function ProfileStack() {
@@ -14,6 +14,7 @@ export default function ProfileStack() {
       })}
     >
       <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="Lesson" component={LessonPreview} />
       <Stack.Screen name="CoursePreview" component={CoursePreview} />
     </Stack.Navigator>
   );

@@ -25,7 +25,7 @@ export default function CourseBox({ navigation, item }) {
   return (
     <TouchableRipple
       style={styles.coursesBox}
-      onPress={() => navigation.navigate("CoursePreview", { item })}
+      onPress={() => navigation.navigate("CoursePreview", { item, navigation })}
     >
       <View>
         <Image source={item.image} style={styles.courseImage}></Image>
