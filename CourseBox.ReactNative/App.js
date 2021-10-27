@@ -34,11 +34,6 @@ const getFonts = () =>
     "rubik-regular": require("./assets/Fonts/Rubik-Regular.ttf"),
   });
 
-// * A test function
-const testFunc = () => {
-  console.log("Test success!");
-};
-
 export default function App() {
   // When app loaded, check internet.
   InteractionManager.runAfterInteractions(() => {
@@ -55,7 +50,7 @@ export default function App() {
     if (isConnected) {
       return (
         <NavigationContainer>
-          <Tabs />
+          <SplashStack />
         </NavigationContainer>
       );
     } else {

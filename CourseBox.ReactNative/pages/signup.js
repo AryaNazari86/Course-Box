@@ -40,7 +40,7 @@ export default function SignUp({ makeUser, navigation }) {
     UserService.SignUp(values).then(result => {
       if (result.successful) {
         setShowResult(false);
-        navigation.navigate("Tab");
+        navigation.navigate("SignIn");
       }
       else {
         setShowResult(true);
