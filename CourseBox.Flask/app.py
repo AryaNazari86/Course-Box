@@ -264,7 +264,7 @@ def get_user_details(current_user):
         'email': user.username,
         'bio': user.bio
     }
-
+    
     return jsonify(data)
 
     

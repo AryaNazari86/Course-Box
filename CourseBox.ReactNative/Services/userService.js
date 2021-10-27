@@ -1,6 +1,7 @@
 import React from "react";
 import md5 from 'md5';
-import axios from 'axios';
+
+const API_ADDRESS = "192.168.186.22";
 
 export async function SignUp(values) {
     try {
@@ -10,61 +11,50 @@ export async function SignUp(values) {
             email: values.email,
             password: md5(values.password)
         };
-
         let result = {
             successful: false,
             response: ""
         };
-
-        const options = {
-            url: 'http://192.168.79.22:5000/User/Register',
-            method: 'POST',
-            timeout: 10000,
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: user
-        };
-        let response = await axios(options);
-        if (await (response).status === 200) {
-            result.successful = true;
-        }
-        result.response = await (response).data;
-        return result
+        await fetch('http://' + API_ADDRESS + ':5000/User/Register', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(user) })
+            .then(response => {
+                result.response = response.statusText;
+                if (response.status == 200) {
+                    result.successful = true;
+                }
+            });
+        return result;
     } catch (error) {
         return {
             successful: false,
-            response: "Sign up unsuccessful."
+            response: "Error..."
         };
     }
 }
 
 export async function Login(values) {
-    let user = {
-        email: values.email,
-        password: md5(values.password)
-    };
-
-    let result = {
-        successful: false,
-        response: ""
-    };
-
-    const options = {
-        url: 'http://192.168.79.22:5000/User/Login',
-        method: 'POST',
-        timeout: 10000,
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        data: user
-    };
-    let response = await axios(options);
-    if (await (response).status === 200) {
-        result.successful = true;
+    try {
+        let user = {
+            email: values.email,
+            password: md5(values.password)
+        };
+        let result = {
+            successful: false,
+            response: ""
+        };
+        await fetch('http://' + API_ADDRESS + ':5000/User/Login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(user) })
+            .then(response => {
+                if (response.status == 200) {
+                    result.successful = true;
+                    result.response = response.json();
+                }
+            });
+        return result;
+    } catch (error) {
+        return {
+            successful: false,
+            response: "Error..."
+        };
     }
-    result.response = (await response).data;
-    return result;
 
 }
 
@@ -74,22 +64,14 @@ export async function GetUserDetails(token) {
             successful: false,
             response: ""
         };
-
-        const options = {
-            url: 'http://192.168.79.22:5000/User/Details',
-            method: 'POST',
-            timeout: 10000,
-            headers: {
-                'Content-Type': 'application/json',
-                'x-access-tokens': token
-            }
-        };
-        let response = await axios(options);
-        if (await (response).status === 200) {
-            result.successful = true;
-        }
-        result.response = (await response).data;
-        return result
+        await fetch('http://' + API_ADDRESS + ':5000/User/Details', { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-access-tokens': token } })
+            .then(response => {
+                if (response.status == 200) {
+                    result.successful = true;
+                    result.response = response.json();
+                }
+            });
+        return result;
     } catch (error) {
         return {
             successful: false,
