@@ -6,6 +6,7 @@ import { FAB } from 'react-native-paper';
 
 export default function CoursePreview(props) {
     const course = props.route.params.item;
+    const navigation = props.route.params.navigation;
     return (
         <View style={{ backgroundColor: '#141D28', flex: 1 }}>
             <Header title={course.title} backButton={true} backAction={() => props.navigation.goBack()} height={60} />
@@ -27,7 +28,7 @@ export default function CoursePreview(props) {
                                         (item) => {
                                             {/* Each lesson of the subject  */ }
                                             return (
-                                                <TouchableOpacity style={styles.ql}>
+                                                <TouchableOpacity style={styles.ql} onPress={() => navigation.navigate('Lesson')}>
                                                     {/* lesson's icon */}
                                                     <View style={styles.qlIconOut}>
                                                         <MaterialIcons name={item.icon} size={50} color='#3D4751' style={{ ...styles.qlIconIn, backgroundColor: item.color }} />

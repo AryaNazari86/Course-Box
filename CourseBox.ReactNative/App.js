@@ -55,7 +55,7 @@ export default function App() {
     if (isConnected) {
       return (
         <NavigationContainer>
-          <ProfileStack />
+          <Tabs />
         </NavigationContainer>
       );
     } else {
