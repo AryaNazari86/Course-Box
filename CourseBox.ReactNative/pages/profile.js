@@ -15,14 +15,27 @@ import CoursesCarousel from "../components/Carousel/coursesCarousel";
 import courses from "../data/courses";
 // Lottie Library
 import LottieView from "lottie-react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Profile({ navigation }) {
   // If loaded is false, show a loader.
   const [loaded, setLoaded] = useState(false);
+  const [profilePageValues, setProfilePageValues] = useState(false);
 
   // When app loads this function is called.
   InteractionManager.runAfterInteractions(function () {
-    setLoaded(true);
+    const getProfileData = async () => {
+      let result;
+      await AsyncStorage.getItem("userDetails").then(data => {
+        result = JSON.parse(data);
+      });
+      return result;
+    };
+    getProfileData()
+      .then(result => setProfilePageValues(result))
+      .finally(() => {
+        setLoaded(true);
+      });
   });
 
   // * The list of user's made courses
@@ -115,15 +128,6 @@ export default function Profile({ navigation }) {
     },
   ]);
 
-  // Profile Page Variables
-  const profilePageValues = {
-    accountName: "Ilia soleymani",
-    profileAccountDescription: "This is an account Description!!!",
-    accountCoursesVal: "4",
-    accountFollowersVal: "63",
-    accountParticipatedVal: "4",
-    userName: "Ilia",
-  };
 
   if (loaded) {
     return (
@@ -144,20 +148,20 @@ export default function Profile({ navigation }) {
                   ...globalStyles.TitleText,
                 }}
               >
-                {profilePageValues.accountName}
+                {profilePageValues.name}
               </Text>
             </View>
 
             {/* Username */}
             <View style={styles.userName}>
               <Text style={styles.userName}>@</Text>
-              <Text style={styles.userName}>{profilePageValues.userName}</Text>
+              <Text style={styles.userName}>{profilePageValues.username}</Text>
             </View>
 
             {/* Account Description */}
             <View style={styles.profileDescriptionHeader}>
               <Text style={styles.profileDescriptionText}>
-                {profilePageValues.profileAccountDescription}
+                {profilePageValues.bio}
               </Text>
             </View>
           </View>

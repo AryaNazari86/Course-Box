@@ -50,7 +50,7 @@ export default function SignIn({ navigation }) {
                 }
               });
             await AsyncStorage.setItem('token', token);
-
+            await AsyncStorage.setItem('login', "true");
             navigation.navigate("Tab");
           });
         }

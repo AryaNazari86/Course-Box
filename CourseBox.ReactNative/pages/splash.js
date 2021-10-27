@@ -1,18 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { InteractionManager, StyleSheet, Text, View } from "react-native";
 import LottieView from "lottie-react-native";
 import { setStatusBarStyle } from "expo-status-bar";
 import { Snackbar } from "react-native-paper";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Splash({ navigation, disconnected }) {
   // Set status bar light.
   setStatusBarStyle("light");
+  const [nextPage, setNextPage] = useState("SignUp");
+  // Check if user logged in.
+  AsyncStorage.getItem("login").then(data => {
+    if (data == "true") {
+      setNextPage("Tab");
+    }
+  });
   // After page loaded, set timeout for going to signup page.
   InteractionManager.runAfterInteractions(() => {
     console.log(navigation);
     if (navigation != null || navigation != undefined) {
       setTimeout(function () {
-        navigation.push("SignUp");
+        navigation.push(nextPage);
       }, 3000);
     }
   });
