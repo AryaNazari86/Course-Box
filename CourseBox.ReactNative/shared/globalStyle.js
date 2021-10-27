@@ -104,6 +104,14 @@ export const globalStyles = StyleSheet.create({
     textAlign: "center",
   },
 
+  smallButtonText: {
+    fontSize: 25,
+    color: "#A8DADC",
+    fontFamily: "rubik-light",
+
+    textAlign: "center",
+  },
+
   // Container of loading animation
   loaderContainer: {
     flex: 1,
@@ -130,7 +138,9 @@ export const globalStyles = StyleSheet.create({
   },
 
   smallButton: {
-    backgroundColor: "#A1D1D3",
+    backgroundColor: "#161D28",
+    borderColor: "#A8DADC",
+    borderWidth: 2,
     width: 70,
     height: 30,
     borderRadius: 50,
