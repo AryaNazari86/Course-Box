@@ -2,7 +2,8 @@ import React, { useRef, useState } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { globalStyles } from "../../shared/globalStyle";
-import { Dropdown } from "react-native-material-dropdown-v2";
+import DropDownPicker from "react-native-dropdown-picker";
+import Constants from "expo-constants";
 
 export default function SettingButton({
   buttonText,
@@ -10,17 +11,12 @@ export default function SettingButton({
   functionName,
   editButtonName,
 }) {
-  let data = [
-    {
-      value: "Banana",
-    },
-    {
-      value: "Mango",
-    },
-    {
-      value: "Pear",
-    },
-  ];
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState([
+    { label: "Apple", value: "apple" },
+    { label: "Banana", value: "banana" },
+  ]);
 
   if (buttonStyle == "Edit") {
     if (editButtonName) {
@@ -36,7 +32,9 @@ export default function SettingButton({
             style={{ ...globalStyles.smallButton, ...styles.blueTest }}
             onPress={functionName}
           >
-            <Text style={{ ...globalStyles.buttonText, ...styles.editText }}>
+            <Text
+              style={{ ...globalStyles.smallButtonText, ...styles.editText }}
+            >
               {editButtonName}
             </Text>
           </TouchableOpacity>
@@ -55,7 +53,9 @@ export default function SettingButton({
             style={{ ...globalStyles.smallButton, ...styles.blueTest }}
             onPress={functionName}
           >
-            <Text style={{ ...globalStyles.buttonText, ...styles.editText }}>
+            <Text
+              style={{ ...globalStyles.smallButtonText, ...styles.editText }}
+            >
               Edit
             </Text>
           </TouchableOpacity>
@@ -71,10 +71,18 @@ export default function SettingButton({
           </Text>
         </View>
         <View style={styles.bigBlueTest}>
-          <Dropdown
-            label="Favorite Fruit"
-            data={data}
+          <DropDownPicker
+            open={open}
+            value={value}
+            items={items}
+            setOpen={setOpen}
+            setValue={setValue}
+            setItems={setItems}
             style={styles.dropDown}
+            theme="DARK"
+            dropDownDirection="TOP"
+            labelStyle={{ ...globalStyles.smallButtonText, ...styles.editText }}
+            textStyle={{ ...globalStyles.smallButtonText, ...styles.editText }}
           />
         </View>
       </View>
@@ -126,9 +134,12 @@ const styles = StyleSheet.create({
 
   dropDown: {
     width: 200,
+    backgroundColor: "#161D28",
     height: 40,
-    backgroundColor: "#A1D1D3",
 
-    alignSelf: "center",
+    color: "#A8DADC",
+    borderColor: "#A8DADC",
+
+    borderWidth: 2,
   },
 });
