@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { globalStyles } from "../../shared/globalStyle";
-import DropDownPicker from "react-native-dropdown-picker";
+import { Dropdown } from "react-native-material-dropdown-v2";
 
 export default function SettingButton({
   buttonText,
@@ -10,12 +10,17 @@ export default function SettingButton({
   functionName,
   editButtonName,
 }) {
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
-  const [items, setItems] = useState([
-    { label: "Apple", value: "apple" },
-    { label: "Banana", value: "banana" },
-  ]);
+  let data = [
+    {
+      value: "Banana",
+    },
+    {
+      value: "Mango",
+    },
+    {
+      value: "Pear",
+    },
+  ];
 
   if (buttonStyle == "Edit") {
     if (editButtonName) {
@@ -66,16 +71,10 @@ export default function SettingButton({
           </Text>
         </View>
         <View style={styles.bigBlueTest}>
-          <DropDownPicker
-            open={open}
-            value={value}
-            items={items}
-            setOpen={setOpen}
-            setValue={setValue}
-            setItems={setItems}
+          <Dropdown
+            label="Favorite Fruit"
+            data={data}
             style={styles.dropDown}
-            theme="DARK"
-            dropDownDirection="BOTTOM"
           />
         </View>
       </View>
@@ -128,7 +127,7 @@ const styles = StyleSheet.create({
   dropDown: {
     width: 200,
     height: 40,
-    borderRadius: 20,
+    backgroundColor: "#A1D1D3",
 
     alignSelf: "center",
   },
