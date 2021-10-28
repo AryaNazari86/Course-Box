@@ -2,8 +2,7 @@ import React, { useRef, useState } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { globalStyles } from "../../shared/globalStyle";
-import DropDownPicker from "react-native-dropdown-picker";
-import Constants from "expo-constants";
+import SelectDropdown from "react-native-select-dropdown";
 
 export default function SettingButton({
   buttonText,
@@ -11,12 +10,7 @@ export default function SettingButton({
   functionName,
   editButtonName,
 }) {
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState(null);
-  const [items, setItems] = useState([
-    { label: "Apple", value: "apple" },
-    { label: "Banana", value: "banana" },
-  ]);
+  const countries = ["Egypt", "Canada", "Australia", "Ireland"];
 
   if (buttonStyle == "Edit") {
     if (editButtonName) {
@@ -71,18 +65,22 @@ export default function SettingButton({
           </Text>
         </View>
         <View style={styles.bigBlueTest}>
-          <DropDownPicker
-            open={open}
-            value={value}
-            items={items}
-            setOpen={setOpen}
-            setValue={setValue}
-            setItems={setItems}
-            style={styles.dropDown}
-            theme="DARK"
-            dropDownDirection="TOP"
-            labelStyle={{ ...globalStyles.smallButtonText, ...styles.editText }}
-            textStyle={{ ...globalStyles.smallButtonText, ...styles.editText }}
+          <SelectDropdown
+            data={countries}
+            onSelect={(selectedItem, index) => {
+              console.log(selectedItem, index);
+            }}
+            buttonStyle={styles.dropDown}
+            buttonTextAfterSelection={(selectedItem, index) => {
+              // text represented after item is selected
+              // if data array is an array of objects then return selectedItem.property to render after item is selected
+              return selectedItem;
+            }}
+            rowTextForSelection={(item, index) => {
+              // text represented for each item in dropdown
+              // if data array is an array of objects then return item.property to represent item in dropdown
+              return item;
+            }}
           />
         </View>
       </View>
@@ -134,9 +132,9 @@ const styles = StyleSheet.create({
 
   dropDown: {
     width: 200,
-    backgroundColor: "#161D28",
     height: 40,
 
+    backgroundColor: "#161D28",
     color: "#A8DADC",
     borderColor: "#A8DADC",
 
