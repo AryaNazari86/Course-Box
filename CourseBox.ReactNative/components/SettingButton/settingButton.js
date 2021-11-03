@@ -9,9 +9,8 @@ export default function SettingButton({
   buttonStyle,
   functionName,
   editButtonName,
+  dropDownList,
 }) {
-  const countries = ["Egypt", "Canada", "Australia", "Ireland"];
-
   if (buttonStyle == "Edit") {
     if (editButtonName) {
       return (
@@ -66,11 +65,21 @@ export default function SettingButton({
         </View>
         <View style={styles.bigBlueTest}>
           <SelectDropdown
-            data={countries}
+            data={dropDownList}
             onSelect={(selectedItem, index) => {
               console.log(selectedItem, index);
             }}
             buttonStyle={styles.dropDown}
+            buttonTextStyle={{
+              ...globalStyles.smallButtonText,
+              ...styles.editText,
+            }}
+            dropdownStyle={styles.dropDownDrop}
+            rowTextStyle={{
+              ...globalStyles.smallButtonText,
+              ...styles.editText,
+            }}
+            rowStyle={styles.dropDownRow}
             buttonTextAfterSelection={(selectedItem, index) => {
               // text represented after item is selected
               // if data array is an array of objects then return selectedItem.property to render after item is selected
@@ -136,6 +145,29 @@ const styles = StyleSheet.create({
 
     backgroundColor: "#161D28",
     color: "#A8DADC",
+    borderColor: "#A8DADC",
+
+    borderWidth: 2,
+    borderRadius: 10,
+  },
+
+  dropDownText: {
+    fontSize: 18,
+    color: "#A8DADC",
+  },
+
+  dropDownDrop: {
+    backgroundColor: "#161D28",
+
+    borderBottomColor: "#A8DADC",
+
+    borderBottomWidth: 2,
+    borderRadius: 10,
+  },
+
+  dropDownRow: {
+    backgroundColor: "#161D28",
+
     borderColor: "#A8DADC",
 
     borderWidth: 2,

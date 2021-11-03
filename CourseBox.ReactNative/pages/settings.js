@@ -28,6 +28,8 @@ export default function SettingsPage({ navigation }) {
     console.log("Hi");
   };
 
+  const countries = ["Light", "Dark", "Auto"];
+
   if (loaded) {
     return (
       <View>
@@ -63,6 +65,19 @@ export default function SettingsPage({ navigation }) {
                 buttonText={"App Theme"}
                 buttonStyle="Dropdown"
                 functionName={testFunc}
+                dropDownList={countries}
+              />
+            </View>
+            {/* Language */}
+            <Text style={{ ...globalStyles.headerTitle, ...styles.headerText }}>
+              Language
+            </Text>
+            <View style={globalStyles.container}>
+              <SettingButton
+                buttonText={"Language"}
+                buttonStyle="Dropdown"
+                functionName={testFunc}
+                dropDownList={countries}
               />
             </View>
             {/* Empty Spacer */}
