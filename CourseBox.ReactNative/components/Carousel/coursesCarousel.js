@@ -16,6 +16,7 @@ export default function CoursesCarousel({ courses, navigation, dotesColor }) {
         renderItem={({ item }) => (
           <CourseBox item={item} navigation={navigation} />
         )}
+        keyExtractor={(item, index) => index.toString()}
         onSnapToItem={(index) => setActiveSlide(index)}
         sliderWidth={Dimensions.get("window").width}
         itemWidth={250}

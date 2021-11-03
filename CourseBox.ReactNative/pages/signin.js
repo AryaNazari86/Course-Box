@@ -67,7 +67,6 @@ export default function SignIn({ navigation }) {
   };
 
   const forgetPress = () => {
-    console.log("Hi");
     navigation.navigate("Email");
   };
 

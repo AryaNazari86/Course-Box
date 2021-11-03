@@ -4,19 +4,20 @@ import { MaterialIcons } from '@expo/vector-icons';
 import Header from '../shared/header';
 import { FAB } from 'react-native-paper';
 import { globalStyles } from '../shared/globalStyle';
-import { user } from '../assets/Icons/user.png'
+import { user } from '../assets/Icons/user.png';
+import { Video } from 'expo-av';
 export default function LessonBlock({ type, content }) {
 
-    {/* if the item type was a simple text */ }
+
     if (type == 'text') {
+        {/* if the item type was a simple text */ }
         return (
             <Text style={styles.text}>{content}</Text>
         )
     }
 
-    {/* if the item type was an image */ }
-    if (type == 'image') {
-        console.log(typeof content)
+    else if (type == 'image') {
+        {/* if the item type was an image */ }
         return (
             <Image
                 style={styles.image}
@@ -25,12 +26,28 @@ export default function LessonBlock({ type, content }) {
         )
     }
 
-    {/* if the item type was a header title */ }
-    if (type == 'title') {
+
+    else if (type == 'title') {
+        {/* if the item type was a header title */ }
         return (
             <View style={styles.titleContainer} >
                 <Text style={styles.title}>{content}</Text>
             </View >
+        )
+    }
+
+    else if (type == 'video') {
+        {/* if the item type was a video */ }
+        return (
+            <View style={styles.videoContainer}>
+                <Video
+                    source={content}
+                    useNativeControls
+                    resizeMode="contain"
+                    isLooping
+                    style={styles.video}
+                />
+            </View>
         )
     }
 }
@@ -57,5 +74,12 @@ const styles = StyleSheet.create({
         fontFamily: 'comfortaa-light',
         marginHorizontal: 15,
         marginTop: 5,
+    },
+    videoContainer: {
+        marginVertical: 20,
+        marginHorizontal: 15,
+    },
+    video: {
+        height: '100%'
     }
 })
