@@ -10,6 +10,7 @@ export default function Header({
   backAction,
   fontFamily = "comfortaa-bold",
   height = 45,
+  buttons = []
 }) {
   const backAnimation = useRef(null);
 
@@ -32,6 +33,11 @@ export default function Header({
             globalStyles.headerTitle,
           ]}
         />
+        {buttons.map((value) => {
+          return (
+            <Appbar.Action icon={value.icon} onPress={value.onPress} />
+          );
+        })}
       </Appbar.Header>
     );
   }
@@ -47,6 +53,11 @@ export default function Header({
           globalStyles.headerTitle,
         ]}
       />
+      {buttons.map((value) => {
+        return (
+          <Appbar.Action icon={value.icon} onPress={value.onPress} />
+        );
+      })}
     </Appbar.Header>
   );
 }

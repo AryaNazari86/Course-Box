@@ -133,7 +133,14 @@ export default function Profile({ navigation }) {
     return (
       <View>
         {/* Header */}
-        <Header title="Profile" height={60} />
+        <Header title="Profile" height={60} buttons={[
+          {
+            icon: 'cog-outline',
+            onPress: () => {
+              navigation.push("Settings");
+            }
+          }
+        ]} />
         <ScrollView style={globalStyles.appBackground}>
           <View style={styles.accountBox}>
             {/* Account Name And Icon Header */}

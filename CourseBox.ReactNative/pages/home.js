@@ -52,10 +52,10 @@ export default function Home({ navigation }) {
   const [popularCorurses, setPopularCourses] = useState([]);
   const fetchDatas = async () => {
     try {
-      const response = await fetch('http://192.168.0.147:5000/LatestCourses');
+      const response = await fetch('http://192.168.199.22:5000/LatestCourses');
       const courses = await response.json();
       setLatestCourses(courses);
-      const response1 = await fetch('http://192.168.0.147:5000/PopularCourses');
+      const response1 = await fetch('http://192.168.199.22:5000/PopularCourses');
       const courses1 = await response1.json();
       setPopularCourses(courses1);
     }

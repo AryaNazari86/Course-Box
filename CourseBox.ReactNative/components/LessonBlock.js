@@ -16,7 +16,6 @@ export default function LessonBlock({ type, content }) {
 
     {/* if the item type was an image */ }
     if (type == 'image') {
-        console.log(typeof content)
         return (
             <Image
                 style={styles.image}

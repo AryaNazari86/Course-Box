@@ -35,6 +35,8 @@ const getFonts = () =>
   });
 
 export default function App() {
+  // When Internet disconnected, it's false.
+  const [isConnected, setIsConnected] = useState(false);
   // When app loaded, check internet.
   InteractionManager.runAfterInteractions(() => {
     CheckConnection((isConnected) => setIsConnected(isConnected));
@@ -42,9 +44,6 @@ export default function App() {
 
   // When App Starts, fonts are not loaded.
   const [fontsLoaded, setFontsLoaded] = useState(false);
-
-  // When Internet disconnected, it's false.
-  const [isConnected, setIsConnected] = useState(false);
 
   if (fontsLoaded) {
     if (isConnected) {

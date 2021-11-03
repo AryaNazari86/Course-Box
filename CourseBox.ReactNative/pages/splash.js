@@ -17,7 +17,6 @@ export default function Splash({ navigation, disconnected }) {
   });
   // After page loaded, set timeout for going to signup page.
   InteractionManager.runAfterInteractions(() => {
-    console.log(navigation);
     if (navigation != null || navigation != undefined) {
       setTimeout(function () {
         navigation.push(nextPage);

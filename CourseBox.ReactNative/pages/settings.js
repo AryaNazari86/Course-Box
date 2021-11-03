@@ -25,7 +25,6 @@ export default function SettingsPage({ navigation }) {
   });
 
   const testFunc = () => {
-    console.log("Hi");
   };
 
   const countries = ["Light", "Dark", "Auto"];
@@ -34,7 +33,10 @@ export default function SettingsPage({ navigation }) {
     return (
       <View>
         {/* Header */}
-        <Header title="Settings" height={60} />
+        <Header title="Settings"
+          height={60} 
+          backButton={true} 
+          backAction={() => navigation.goBack()} />
         <ScrollView style={globalStyles.appBackground}>
           {/* Profile Settings */}
           <Text style={{ ...globalStyles.headerTitle, ...styles.headerText }}>

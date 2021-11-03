@@ -66,7 +66,6 @@ export default function ForgetPassword_Password({ navigation }) {
   };
 
   const signInPress = () => {
-    console.log("Hi");
     navigation.navigate("SignIn");
   };
   return (

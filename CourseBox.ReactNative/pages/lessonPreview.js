@@ -22,7 +22,6 @@ export default function LessonPreview() {
             {/* mapping between every item in each lesson */}
             {lessonContent.map((item) => (
                 <LessonBlock
-
                     type={item.type}
                     content={item.content}
                 />

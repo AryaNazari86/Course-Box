@@ -11,8 +11,7 @@ export default function CategoryBox({ category, onPress }) {
         style={[
           { backgroundColor: category.categoryBgColor },
           styles.iconContainer,
-        ]}
-      >
+        ]}>
         <MaterialCommunityIcons
           name={category.categoryIcon}
           size={24}
@@ -40,6 +39,7 @@ const styles = StyleSheet.create({
     shadowColor: "#A8DADC",
     borderWidth: 3,
     borderColor: "#3D4751",
+    borderLeftWidth: 0,
     borderRadius: 30,
     shadowOpacity: 0.3,
     shadowRadius: 2,
