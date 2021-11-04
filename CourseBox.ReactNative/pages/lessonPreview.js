@@ -12,7 +12,8 @@ export default function LessonPreview() {
         { type: 'text', content: 'This is a test content', key: '2' },
         { type: 'image', content: require('../assets/Icons/user.png'), key: '3' },
         { type: 'text', content: 'test content', key: '4' },
-        { type: 'video', content: require('../assets/Videos/ex.mp4'), key: '5' }
+        { type: 'video', content: require('../assets/Videos/ex.mp4'), key: '5' },
+        { type: 'code', content: ['print()'] }
     ]
     const video = React.useRef(null);
 

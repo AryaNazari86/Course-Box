@@ -50,6 +50,22 @@ export default function LessonBlock({ type, content }) {
             </View>
         )
     }
+    else if (type == 'code') {
+        {/* if the item type was a video */ }
+        return (
+            <View style={styles.codeBlock}>
+                <Text style={styles.codeLang}>python</Text>
+                {content.map((item) => {
+                    return (
+                        <View style={styles.codeLine}>
+                            <Text style={styles.codeLineNum}>{content.indexOf(item) + 1}</Text>
+                            <Text style={styles.code}>{item}</Text>
+                        </View>
+                    )
+                })}
+            </View>
+        )
+    }
 }
 
 const styles = StyleSheet.create({
@@ -81,5 +97,25 @@ const styles = StyleSheet.create({
     },
     video: {
         height: '100%'
+    },
+    codeBlock: {
+        borderWidth: 1,
+        borderColor: '#A8DADC',
+        borderRadius: 10,
+        marginHorizontal: 15,
+        paddingLeft: 10,
+    },
+    codeLang: {
+        color: '#A8DADC',
+    },
+    code: {
+        color: '#A8DADC',
+    },
+    codeLineNum: {
+        color: '#A8DADC',
+        marginRight: 10,
+    },
+    codeLine: {
+        flexDirection: 'row',
     }
 })
