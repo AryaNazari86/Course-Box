@@ -26,13 +26,13 @@ export default function Profile({ navigation }) {
   InteractionManager.runAfterInteractions(function () {
     const getProfileData = async () => {
       let result;
-      await AsyncStorage.getItem("userDetails").then(data => {
+      await AsyncStorage.getItem("userDetails").then((data) => {
         result = JSON.parse(data);
       });
       return result;
     };
     getProfileData()
-      .then(result => setProfilePageValues(result))
+      .then((result) => setProfilePageValues(result))
       .finally(() => {
         setLoaded(true);
       });
@@ -128,19 +128,22 @@ export default function Profile({ navigation }) {
     },
   ]);
 
-
   if (loaded) {
     return (
       <View>
         {/* Header */}
-        <Header title="Profile" height={60} buttons={[
-          {
-            icon: 'cog-outline',
-            onPress: () => {
-              navigation.push("Settings");
-            }
-          }
-        ]} />
+        <Header
+          title="Profile"
+          height={60}
+          buttons={[
+            {
+              icon: "cog-outline",
+              onPress: () => {
+                navigation.push("Settings");
+              },
+            },
+          ]}
+        />
         <ScrollView style={globalStyles.appBackground}>
           <View style={styles.accountBox}>
             {/* Account Name And Icon Header */}
@@ -250,7 +253,7 @@ const styles = StyleSheet.create({
   },
   profileAccountName: {
     fontFamily: "comfortaa-bold",
-    color: '#A8DADC',
+    color: "#A8DADC",
   },
 
   // * Username
@@ -258,7 +261,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignSelf: "center",
     fontFamily: "comfortaa-regular",
-    color: '#A8DADC',
+    color: "#A8DADC",
   },
 
   // * Profile Description
@@ -270,14 +273,14 @@ const styles = StyleSheet.create({
   },
   profileDescriptionText: {
     fontSize: 13,
-    color: '#A8DADC',
-    fontFamily: 'comfortaa-light'
+    color: "#A8DADC",
+    fontFamily: "comfortaa-light",
   },
 
   // * Profile Description
   profileDetailHeader: {
     borderWidth: 3,
-    borderColor: '#3D4751',
+    borderColor: "#3D4751",
     borderRadius: 30,
     paddingVertical: 15,
     paddingHorizontal: 15,
@@ -291,8 +294,8 @@ const styles = StyleSheet.create({
   profileDetailText: {
     textAlign: "center",
     fontSize: 17,
-    color: '#A8DADC',
-    fontFamily: 'comfortaa-light',
+    color: "#A8DADC",
+    fontFamily: "comfortaa-light",
   },
 
   // * Courses
@@ -300,7 +303,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     paddingTop: 30,
     textAlign: "center",
-    color: '#A8DADC',
+    color: "#A8DADC",
   },
   madeCoursesList: {
     flex: 1,
@@ -309,7 +312,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
     paddingVertical: 30,
     borderWidth: 3,
-    borderColor: '#3D4751',
+    borderColor: "#3D4751",
     borderRadius: 50,
   },
 });

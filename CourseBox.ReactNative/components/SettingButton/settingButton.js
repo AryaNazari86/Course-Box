@@ -94,6 +94,21 @@ export default function SettingButton({
         </View>
       </View>
     );
+  } else if (buttonStyle == "Switch") {
+    return (
+      <View style={styles.smallButtonContainer}>
+        <TouchableOpacity style={styles.switchRedTest}>
+          <Text style={{ ...globalStyles.normalText, ...styles.switchText }}>
+            Light
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.switchBlueTest}>
+          <Text style={{ ...globalStyles.normalText, ...styles.switchText }}>
+            Dark
+          </Text>
+        </TouchableOpacity>
+      </View>
+    );
   }
 }
 
@@ -116,6 +131,21 @@ const styles = StyleSheet.create({
 
     justifyContent: "center",
   },
+
+  smallButtonContainer: {
+    width: 200,
+    height: 40,
+
+    backgroundColor: "#161D28",
+    color: "#A8DADC",
+    borderColor: "#A8DADC",
+
+    borderWidth: 2,
+    borderRadius: 10,
+
+    flexDirection: "row",
+  },
+
   editText: {
     fontSize: 18,
     paddingTop: 5,
@@ -132,6 +162,7 @@ const styles = StyleSheet.create({
   },
 
   blueTest: {
+    justifyContent: "center",
     width: 100,
   },
 
@@ -171,5 +202,22 @@ const styles = StyleSheet.create({
     borderColor: "#A8DADC",
 
     borderWidth: 2,
+  },
+
+  switchRedTest: {
+    justifyContent: "center",
+    flex: 1,
+    borderRightWidth: 2,
+    borderRightColor: "#A8DADC",
+  },
+
+  switchBlueTest: {
+    justifyContent: "center",
+    flex: 1,
+  },
+
+  switchText: {
+    fontSize: 18,
+    alignSelf: "center",
   },
 });

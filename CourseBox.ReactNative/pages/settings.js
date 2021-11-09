@@ -24,8 +24,7 @@ export default function SettingsPage({ navigation }) {
     setLoaded(true);
   });
 
-  const testFunc = () => {
-  };
+  const testFunc = () => {};
 
   const countries = ["Light", "Dark", "Auto"];
 
@@ -33,10 +32,12 @@ export default function SettingsPage({ navigation }) {
     return (
       <View>
         {/* Header */}
-        <Header title="Settings"
-          height={60} 
-          backButton={true} 
-          backAction={() => navigation.goBack()} />
+        <Header
+          title="Settings"
+          height={60}
+          backButton={true}
+          backAction={() => navigation.goBack()}
+        />
         <ScrollView style={globalStyles.appBackground}>
           {/* Profile Settings */}
           <Text style={{ ...globalStyles.headerTitle, ...styles.headerText }}>
@@ -65,9 +66,8 @@ export default function SettingsPage({ navigation }) {
             <View style={globalStyles.container}>
               <SettingButton
                 buttonText={"App Theme"}
-                buttonStyle="Dropdown"
+                buttonStyle="Switch"
                 functionName={testFunc}
-                dropDownList={countries}
               />
             </View>
             {/* Language */}

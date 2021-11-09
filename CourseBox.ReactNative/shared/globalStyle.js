@@ -83,7 +83,6 @@ export const globalStyles = StyleSheet.create({
   normalText: {
     flexDirection: "row",
     fontFamily: "rubik-light",
-    paddingTop: 20,
     color: "#A8DADC",
   },
 
