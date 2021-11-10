@@ -149,7 +149,7 @@ export default function Profile({ navigation }) {
             {/* Account Name And Icon Header */}
             <View style={styles.profileAccountHeader}>
               <Image
-                source={require("../assets/Images/Default_Profile_Img.png")}
+                source={{ uri: "http://192.168.242.22:5000/static/avatars/" + profilePageValues.avatar }}
                 style={styles.profileAccountImage}
               ></Image>
               <Text
