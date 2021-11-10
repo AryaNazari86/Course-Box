@@ -10,7 +10,22 @@ export default function SettingButton({
   functionName,
   editButtonName,
   dropDownList,
+
+  switchFunc1,
+  switchFunc2,
 }) {
+  const [switchStateVar, switchStateFunc] = useState();
+
+  const changeSwitchState = (state) => {
+    if (state === 0) {
+      switchStateFunc(0);
+    } else if (state === 1) {
+      switchStateFunc(1);
+    }
+
+    console.log(switchStateVar);
+  };
+
   if (buttonStyle == "Edit") {
     if (editButtonName) {
       return (
@@ -96,17 +111,30 @@ export default function SettingButton({
     );
   } else if (buttonStyle == "Switch") {
     return (
-      <View style={styles.smallButtonContainer}>
-        <TouchableOpacity style={styles.switchRedTest}>
-          <Text style={{ ...globalStyles.normalText, ...styles.switchText }}>
-            Light
+      <View style={styles.buttonContainer}>
+        <View style={styles.smallRedTest}>
+          <Text style={{ ...globalStyles.normalText, ...styles.buttonText }}>
+            {buttonText}
           </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.switchBlueTest}>
-          <Text style={{ ...globalStyles.normalText, ...styles.switchText }}>
-            Dark
-          </Text>
-        </TouchableOpacity>
+        </View>
+        <View style={{ ...styles.smallButtonContainer, ...styles.bigBlueTest }}>
+          <TouchableOpacity
+            style={styles.switchRedTest}
+            onPress={() => switchFunc1}
+          >
+            <Text style={{ ...globalStyles.normalText, ...styles.switchText }}>
+              Light
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.switchBlueTest}
+            onPress={() => switchFunc2}
+          >
+            <Text style={{ ...globalStyles.normalText, ...styles.switchText }}>
+              Dark
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
