@@ -132,8 +132,9 @@ participants = db.Table('participants',
 
 # Change the profile avatar
 @app.route("/ChangeProfileAvatar", methods=["POST"])
-def change_profile_avatar():
-    user_id = request.form["userId"]
+@token_required
+def change_profile_avatar(current_user):
+    user_id = current_user.id
     avatar = request.files['avatar']
     if avatar == None:
         # Return error
@@ -156,13 +157,13 @@ def change_profile_avatar():
         avatar_size = avatar.tell()
 
         # Check for file size
-        print(avatar_size)
         if avatar_size > size_limit:
             status_code = Response(
                 status=400, response="Uploaded File Was Too Big!")
             return status_code
         # Save avatar image
-        avatar.save(os.path.join("/avatars", str(
+        # TODO: there is a problem with saving files.
+        avatar.save(os.path.join("/static", "/avatars", str(
             user.id) + file_extension))
         if user == None:
             status_code = Response(status=400, response="User Was Not Found!")
@@ -178,8 +179,9 @@ def change_profile_avatar():
                 status_code = Response(
                     status=400, response="Last User Avatar Was Not Found!")
                 return status_code
-            else:
-                os.remove(f"avatars/{last_avatar}")
+            # else:
+            # TODO : Check if avatar exists before deleting.
+            #     os.remove(f"/static/avatars/{last_avatar}")
 
         # Return sucessfull
         status_code = Response(status=200, response="Avatar Image Uploaded!")
