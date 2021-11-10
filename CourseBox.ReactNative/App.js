@@ -14,7 +14,6 @@ import CoursePreview from "./pages/coursePreview";
 import ForgetPassword_Email from "./pages/Forget Password/forgetPassword-Email";
 import ForgetPassword_Code from "./pages/Forget Password/forgetPassword-Code";
 import ForgetPassword_Password from "./pages/Forget Password/forgetPassword-Password";
-import SplashStack from "./routes/splashStack";
 import Search from "./pages/search";
 import { InteractionManager } from "react-native";
 import { Snackbar } from "react-native-paper";

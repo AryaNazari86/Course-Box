@@ -30,7 +30,7 @@ export default function CourseBox({ navigation, item }) {
           <Text style={styles.courseTitle}>{item.title}</Text>
 
 
-          <TouchableOpacity style={styles.courseButton}>
+          <TouchableOpacity style={styles.courseButton} onPress={() => navigation.navigate("CoursePreview", { item, navigation })}>
             <MaterialCommunityIcons name="arrow-right" size={75} />
           </TouchableOpacity>
         </View>
@@ -40,7 +40,7 @@ export default function CourseBox({ navigation, item }) {
 }
 
 
-fun
+
 const styles = StyleSheet.create({
   courseImage: {
     width: 250,
