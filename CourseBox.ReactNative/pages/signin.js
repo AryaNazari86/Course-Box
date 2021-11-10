@@ -30,23 +30,23 @@ export default function SignIn({ navigation }) {
     try {
       UserService.Login(values).then(async result => {
         if (result.successful) {
-          result.response.then(async userToken => {
+          result.token.then(async userToken => {
             const token = userToken.token;
             UserService.GetUserDetails(token)
               .then(async userDetails => {
                 if (userDetails.successful) {
-                  userDetails.response.then(async data => {
+                  userDetails.data.then(async data => {
                     await AsyncStorage.setItem('userDetails', JSON.stringify(data))
                       .catch(() => {
                         setShowResult(true);
-                        setResult("Error with saving your account info.");
+                        setResult(userDetails.response);
                       });
                   });
 
                 }
                 else {
                   setShowResult(true);
-                  setResult("Error with getting your account info.");
+                  setResult(userDetails.response);
                 }
               });
             await AsyncStorage.setItem('token', token);

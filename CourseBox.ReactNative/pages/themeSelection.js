@@ -52,7 +52,7 @@ export default function ThemeSelection({ navigation }) {
           autoPlay={true}
           loop={true}
           style={globalStyles.loader}
-          source={require("../assets/Animations/loader2.json")}
+          source={require("../assets/Animations/7751-load.json")}
         />
       </View>
     );

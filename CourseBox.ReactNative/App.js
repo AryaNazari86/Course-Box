@@ -49,7 +49,7 @@ export default function App() {
     if (isConnected) {
       return (
         <NavigationContainer>
-          <Tabs />
+          <SplashStack />
         </NavigationContainer>
       );
     } else {
