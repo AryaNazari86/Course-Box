@@ -20,7 +20,7 @@ import Animated from "react-native-reanimated";
 import BottomSheet from "reanimated-bottom-sheet";
 import BottomSheetHeader from "../components/BottomSheet/Header/header";
 import BottomSheetCategory from "../components/BottomSheet/Category/category";
-
+import useLang from '../lang/lang';
 // Carousel Imports
 import CoursesCarousel from "../components/Carousel/coursesCarousel";
 
@@ -35,6 +35,8 @@ import { globalStyles } from "../shared/globalStyle";
 export default function Home({ navigation }) {
   // If loaded is false, show a loader.
   const [loaded, setLoaded] = useState(false);
+
+  const language = useLang();
 
   // When app loads this function is called.
   InteractionManager.runAfterInteractions(function () {
@@ -147,7 +149,7 @@ export default function Home({ navigation }) {
             />
 
             <View style={styles.latestCoursesContainer}>
-              <Text style={styles.latestCoursesTitle}>Latest Courses</Text>
+              <Text style={styles.latestCoursesTitle}>dfgdfgsf</Text>
 
               {/* A carousel for showing the latest courses. */}
               <CoursesCarousel

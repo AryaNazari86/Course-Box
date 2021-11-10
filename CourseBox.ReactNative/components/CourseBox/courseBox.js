@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Chip, TouchableRipple } from "react-native-paper";
 
@@ -23,51 +23,31 @@ export default function CourseBox({ navigation, item }) {
   };
 
   return (
-    <TouchableRipple
-      style={styles.coursesBox}
-      onPress={() => navigation.navigate("CoursePreview", { item, navigation })}
-    >
-      <View>
+    <TouchableOpacity>
+      <View style={styles.coursesBox}>
         <Image source={item.image} style={styles.courseImage}></Image>
-        <View style={styles.courseBoxContent}>
-          <View style={styles.courseLines}>
-            <Text style={styles.courseTitle}>{item.title}</Text>
-            <MaterialCommunityIcons
-              name="account-group"
-              size={18}
-              color="white"
-              style={styles.courseIcons}
-            />
-            <Text style={[{ color: "white" }, styles.courseNumData]}>
-              {item.participants}
-            </Text>
-          </View>
-          <Chip style={styles.courseCategory}>{item.category}</Chip>
-          <View style={styles.courseLines}>
-            <Text style={styles.courseAuthor}>{item.author}</Text>
-            <MaterialCommunityIcons
-              name="star"
-              size={18}
-              color="#fca311"
-              style={styles.courseIcons}
-            />
-            <Text style={[{ color: "#fca311" }, styles.courseNumData]}>
-              {item.likes}
-            </Text>
-          </View>
+        <View style={styles.coursesBox}>
+          <Text style={styles.courseTitle}>{item.title}</Text>
+
+
+          <TouchableOpacity style={styles.courseButton}>
+            <MaterialCommunityIcons name="arrow-right" size={75} />
+          </TouchableOpacity>
         </View>
       </View>
-    </TouchableRipple>
+    </TouchableOpacity>
   );
 }
 
+
+fun
 const styles = StyleSheet.create({
   courseImage: {
     width: 250,
     height: 100,
   },
   coursesBox: {
-    borderRadius: 6,
+    borderRadius: 50,
     overflow: "hidden",
     elevation: 3,
     backgroundColor: "#161D28",
@@ -78,40 +58,20 @@ const styles = StyleSheet.create({
     marginHorizontal: 4,
     marginVertical: 6,
     alignItems: "center",
-    width: 250,
-    borderWidth: 2,
-    borderColor: "#3D4751",
-  },
-  courseBoxContent: {
-    margin: 5,
+    width: 225,
+    height: 300,
   },
   courseTitle: {
-    fontWeight: "bold",
-    alignSelf: "flex-start",
-    flex: 1,
-    color: "white",
+    color: 'white',
+    fontFamily: 'rubik-regular',
+    fontSize: 40,
+    alignSelf: 'center',
   },
-  courseAuthor: {
-    alignSelf: "flex-start",
-    flex: 1,
-    fontStyle: "italic",
-    color: "white",
-  },
-  courseNumData: {
-    alignSelf: "flex-end",
-  },
-  courseIcons: {
-    alignSelf: "flex-end",
-    marginRight: 4,
-  },
-  courseLines: {
-    flexDirection: "row",
-    justifyContent: "center",
-  },
-  courseCategory: {
-    marginVertical: 5,
-    alignSelf: "flex-start",
-    alignItems: "center",
-    height: 20,
-  },
+  courseButton: {
+    marginTop: 50,
+    width: 75,
+    height: 75,
+    backgroundColor: 'white',
+    borderRadius: 50,
+  }
 });

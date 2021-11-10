@@ -64,6 +64,7 @@ export default function LessonBlock({ type, content }) {
                     )
                 })}
             </View>
+
         )
     }
 }
