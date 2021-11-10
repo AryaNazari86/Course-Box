@@ -1,6 +1,9 @@
 from flask import Flask, request, Response, jsonify
 from flask_sqlalchemy import SQLAlchemy
-import os, uuid, datetime, jwt
+import os
+import uuid
+import datetime
+import jwt
 from functools import wraps
 
 app = Flask(__name__)
@@ -9,7 +12,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///coursebox.sqlite3'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
-    
+
 def token_required(f):
     @wraps(f)
     def decorator(*args, **kwargs):
@@ -19,11 +22,13 @@ def token_required(f):
             token = request.headers['x-access-tokens']
 
         if not token:
-            status_code = Response(status=500, response="A valid token is missing.")
+            status_code = Response(
+                status=500, response="A valid token is missing.")
             return status_code
 
         try:
-            data = jwt.decode(token, app.config["SECRET_KEY"], algorithms="HS256")
+            data = jwt.decode(
+                token, app.config["SECRET_KEY"], algorithms="HS256")
             current_user = User.query.filter_by(id=data['id']).first()
         except:
             status_code = Response(status=401, response="Token is invalid.")
@@ -31,6 +36,7 @@ def token_required(f):
 
         return f(current_user, *args, **kwargs)
     return decorator
+
 
 def get_user():
     try:
@@ -40,7 +46,8 @@ def get_user():
         current_user = User.query.filter_by(id=data['id']).first()
         return current_user
     except:
-        return None 
+        return None
+
 
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
@@ -52,6 +59,7 @@ class Category(db.Model):
     def __init__(self, title, category_image):
         self.title = title
         self.category_image = category_image
+
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
@@ -76,6 +84,7 @@ class User(db.Model):
         self.register_date = register_date
         self.bio = bio
 
+
 class Course(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
     title = db.Column(db.String(200), nullable=False)
@@ -86,7 +95,8 @@ class Course(db.Model):
     # Relations
     category_id = db.Column(db.Integer, db.ForeignKey(Category.id))
     author_id = db.Column(db.Integer, db.ForeignKey(User.id))
-    participants = db.relationship('User', secondary='participants', backref='courses')
+    participants = db.relationship(
+        'User', secondary='participants', backref='courses')
     content = db.relationship('CourseContent', backref='course')
 
     def __init__(self, title, description, participants_count, likes, category_id, author_id, image):
@@ -98,12 +108,13 @@ class Course(db.Model):
         self.author_id = author_id
         self.image = image
 
+
 class CourseContent(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
     title = db.Column(db.String(200))
     icon = db.Column(db.String(200))
     content = db.relationship('LessonContent', backref='course_content')
-    #Relations
+    # Relations
     course_id = db.Column(db.Integer, db.ForeignKey(Course.id))
 
     def _init_(self, title, icon, content):
@@ -111,12 +122,13 @@ class CourseContent(db.Model):
         self.icon = icon
         self.content = content
 
+
 class LessonContent(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
     title = db.Column(db.String(200))
     icon = db.Column(db.String(200))
     color = db.Column(db.String(200))
-    #Relations
+    # Relations
     course_content_id = db.Column(db.Integer, db.ForeignKey(CourseContent.id))
 
     def _init_(self, title, icon, color, course_content_id):
@@ -125,12 +137,17 @@ class LessonContent(db.Model):
         self.color = color
         self.course_content_id = course_content_id
 
+
 participants = db.Table('participants',
-    db.Column('course_id', db.Integer, db.ForeignKey(Course.id), primary_key=True),
-    db.Column('user_id', db.Integer, db.ForeignKey(User.id), primary_key=True)
-)
+                        db.Column('course_id', db.Integer, db.ForeignKey(
+                            Course.id), primary_key=True),
+                        db.Column('user_id', db.Integer, db.ForeignKey(
+                            User.id), primary_key=True)
+                        )
 
 # Change the profile avatar
+
+
 @app.route("/ChangeProfileAvatar", methods=["POST"])
 @token_required
 def change_profile_avatar(current_user):
@@ -163,8 +180,8 @@ def change_profile_avatar(current_user):
             return status_code
         # Save avatar image
         # TODO: there is a problem with saving files.
-        avatar.save(os.path.join("/static", "/avatars", str(
-            user.id) + file_extension))
+        avatar.save('statics/avatars/' + str(
+            user.id) + file_extension)
         if user == None:
             status_code = Response(status=400, response="User Was Not Found!")
             return status_code
@@ -193,6 +210,7 @@ def change_profile_avatar(current_user):
             status=400, response="Uploaded File Must Be An Image!")
         return status_code
 
+
 @app.route("/SearchCourses", methods=['POST'])
 def search_course():
     search_value = request.json['search_value']
@@ -204,6 +222,7 @@ def search_course():
 
     return jsonify(search_result)
 
+
 @app.route("/PopularCourses", methods=['GET'])
 def popular_courses():
     all_courses = Course.query.filter_by().all()
@@ -211,11 +230,13 @@ def popular_courses():
 
     return jsonify(all_courses[0:6])
 
+
 @app.route("/LatestCourses", methods=['GET'])
 def latest_courses():
     all_courses = Course.query.filter_by().all()
 
     return jsonify(all_courses[-7:-1])
+
 
 @app.route("/User/Register", methods=['POST'])
 def signup():
@@ -230,7 +251,7 @@ def signup():
                 is_active=False,
                 register_date=datetime.datetime.now(),
                 bio=""
-                )
+            )
             db.session.add(user)
             db.session.commit()
             status_code = Response(status=200, response="Account Created!")
@@ -238,8 +259,10 @@ def signup():
         status_code = Response(status=404)
         return status_code
     except:
-        status_code = Response(status=500, response="There is a problem with your information.")
+        status_code = Response(
+            status=500, response="There is a problem with your information.")
         return status_code
+
 
 @app.route("/User/Login", methods=['POST'])
 def login():
@@ -249,13 +272,17 @@ def login():
             password = request.json["password"]
             user = User.query.filter_by(email=email, password=password).first()
             if user == None:
-                status_code = Response(status=404, response="A User with this information doesn't exists.")
+                status_code = Response(
+                    status=404, response="A User with this information doesn't exists.")
                 return status_code
-            token = jwt.encode({'id': user.id, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(days=30)}, app.config['SECRET_KEY'])  
-            return jsonify({'token' : token})
+            token = jwt.encode({'id': user.id, 'exp': datetime.datetime.utcnow(
+            ) + datetime.timedelta(days=30)}, app.config['SECRET_KEY'])
+            return jsonify({'token': token})
     except:
-        status_code = Response(status=500, response="There is a problem with server.")
+        status_code = Response(
+            status=500, response="There is a problem with server.")
         return status_code
+
 
 @app.route("/User/Details", methods=['POST'])
 @token_required
@@ -263,16 +290,16 @@ def get_user_details(current_user):
     user = get_user()
 
     data = {
-        'name': user.name, 
+        'name': user.name,
         'username': user.username,
         'email': user.username,
         'bio': user.bio,
         'avatar': user.avatar
     }
-    
+
     return jsonify(data)
 
-    
+
 if __name__ == '__main__':
     db.create_all()
     app.run(debug=True, host="0.0.0.0")
