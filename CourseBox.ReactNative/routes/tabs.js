@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
+import { AntDesign } from '@expo/vector-icons';
 import HomeStack from "./homeStack";
 import SearchStack from "./searchStack";
 import ProfileStack from "./profileStack";
@@ -15,9 +15,9 @@ import { globalStyles } from "../shared/globalStyle";
 // Lottie Animation
 import LottieView from "lottie-react-native";
 import { TouchableRipple } from "react-native-paper";
-
+import { FontAwesome } from '@expo/vector-icons';
 const Tab = createBottomTabNavigator();
-
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 export default function Tabs() {
   // If loaded is false, show a loader.
   const [loaded, setLoaded] = useState(false);
@@ -43,9 +43,9 @@ export default function Tabs() {
             tabBarShowLabel: false,
             tabBarIcon: ({ focused }) => {
               const icon = focused
-                ? require("../assets/Icons/search-focused.png")
-                : require("../assets/Icons/search.png");
-              return <Image style={{ height: 40, width: 40 }} source={icon} />;
+                ? <FontAwesome name="search" size={40} color="#A8DADC" />
+                : <FontAwesome name="search" size={30} color="#A8DADC" />
+              return icon;
             },
             tabBarButton: (props) => <TouchableRipple {...props} />,
           }}
@@ -57,9 +57,9 @@ export default function Tabs() {
             tabBarShowLabel: false,
             tabBarIcon: ({ focused }) => {
               const icon = focused
-                ? require("../assets/Icons/house-focused.png")
-                : require("../assets/Icons/house.png");
-              return <Image style={{ height: 40, width: 40 }} source={icon} />;
+              ? <AntDesign name="home" size={45} color="#A8DADC" />
+              : <AntDesign name="home" size={35} color="#A8DADC" />
+              return icon;
             },
             tabBarButton: (props) => <TouchableRipple {...props} />,
           }}
@@ -71,9 +71,10 @@ export default function Tabs() {
             tabBarShowLabel: false,
             tabBarIcon: ({ focused }) => {
               const icon = focused
-                ? require("../assets/Icons/user-focused.png")
-                : require("../assets/Icons/user.png");
-              return <Image style={{ height: 40, width: 40 }} source={icon} />;
+                ? <MaterialCommunityIcons name="face-profile" size={40} color="#A8DADC" />
+                : <MaterialCommunityIcons name="face-profile" size={30} color="#A8DADC" />
+              return icon;
+              
             },
             tabBarButton: (props) => <TouchableRipple {...props} />,
           }}

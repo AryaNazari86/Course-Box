@@ -4,7 +4,7 @@ let langs = {
     'en': en
 }
 
-const getLang = async function () {
+export default getLang = async function () {
     try {
         await AsyncStorage.getItem("lang").then(data => {
             result = JSON.parse(data);
@@ -13,7 +13,7 @@ const getLang = async function () {
 
     }
     catch {
-        await AsyncStorage.setItem('lang', en);
+        await AsyncStorage.setItem("lang", "en");
         await AsyncStorage.getItem("lang").then(data => {
             result = data;
             return result;
@@ -21,11 +21,16 @@ const getLang = async function () {
     }
 };
 
-export default async function useLang() {
-    const currentlanguage = await getLang();
-    console.log(currentlanguage);
-    if (currentlanguage == 'en') {
-        return langs.en;
-    }
+ async function useLang() {
+    var currentLang = {Home:{LatestCourses: 'djshfnkjdhn'}};
+    await getLang().then(
+        (data) => {
+            console.log(data);
+            if (data == 'en') {
+                currentLang = langs.en;
+            }
+        }
+    );
+    return currentLang;
 }
 
