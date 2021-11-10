@@ -19,13 +19,15 @@ def token_required(f):
             token = request.headers['x-access-tokens']
 
         if not token:
-            return jsonify({'message': 'a valid token is missing'})
+            status_code = Response(status=500, response="A valid token is missing.")
+            return status_code
 
         try:
             data = jwt.decode(token, app.config["SECRET_KEY"], algorithms="HS256")
             current_user = User.query.filter_by(id=data['id']).first()
         except:
-            return jsonify({'message': 'token is invalid'})
+            status_code = Response(status=401, response="Token is invalid.")
+            return status_code
 
         return f(current_user, *args, **kwargs)
     return decorator
@@ -231,10 +233,10 @@ def signup():
             db.session.commit()
             status_code = Response(status=200, response="Account Created!")
             return status_code
-        status_code = Response(status=404, response="")
+        status_code = Response(status=404)
         return status_code
     except:
-        status_code = Response(status=400, response="There is a problem with your information.")
+        status_code = Response(status=500, response="There is a problem with your information.")
         return status_code
 
 @app.route("/User/Login", methods=['POST'])
@@ -245,12 +247,12 @@ def login():
             password = request.json["password"]
             user = User.query.filter_by(email=email, password=password).first()
             if user == None:
-                status_code = Response(status=400, response="A User with this information doesn't exists.")
+                status_code = Response(status=404, response="A User with this information doesn't exists.")
                 return status_code
             token = jwt.encode({'id': user.id, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(days=30)}, app.config['SECRET_KEY'])  
             return jsonify({'token' : token})
     except:
-        status_code = Response(status=400, response="There is a problem with server.")
+        status_code = Response(status=500, response="There is a problem with server.")
         return status_code
 
 @app.route("/User/Details", methods=['POST'])

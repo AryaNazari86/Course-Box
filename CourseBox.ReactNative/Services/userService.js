@@ -1,7 +1,7 @@
 import React from "react";
 import md5 from 'md5';
 
-const API_ADDRESS = "192.168.186.22";
+const API_ADDRESS = "192.168.242.22";
 
 export async function SignUp(values) {
     try {
@@ -21,6 +21,12 @@ export async function SignUp(values) {
                 if (response.status == 200) {
                     result.successful = true;
                 }
+                else if (response.status == 500) {
+                    result.response = "Error...";
+                }
+                else if (response.status == 404){
+                    result.response = "Error...";
+                }
             });
         return result;
     } catch (error) {
@@ -39,13 +45,20 @@ export async function Login(values) {
         };
         let result = {
             successful: false,
-            response: ""
+            response: "",
+            token: ""
         };
         await fetch('http://' + API_ADDRESS + ':5000/User/Login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(user) })
             .then(response => {
                 if (response.status == 200) {
                     result.successful = true;
-                    result.response = response.json();
+                    result.token = response.json();
+                }
+                else if (response.status == 500) {
+                    result.response = "Error...";
+                }
+                else if (response.status == 404){
+                    result.response = "A User with these details doesn't exists.";
                 }
             });
         return result;
@@ -62,13 +75,20 @@ export async function GetUserDetails(token) {
     try {
         let result = {
             successful: false,
-            response: ""
+            response: "",
+            data: ""
         };
         await fetch('http://' + API_ADDRESS + ':5000/User/Details', { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-access-tokens': token } })
             .then(response => {
                 if (response.status == 200) {
                     result.successful = true;
-                    result.response = response.json();
+                    result.data = response.json();
+                }
+                else if(response.status == 500){
+                    result.response = "Error...";
+                }
+                else if(response.status == 401){
+                    result.response = "Unauthorized...";
                 }
             });
         return result;
@@ -79,3 +99,4 @@ export async function GetUserDetails(token) {
         };
     }
 }
+
