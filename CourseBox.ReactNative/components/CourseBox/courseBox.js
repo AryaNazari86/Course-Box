@@ -28,8 +28,6 @@ export default function CourseBox({ navigation, item }) {
         <Image source={item.image} style={styles.courseImage}></Image>
         <View style={styles.coursesBox}>
           <Text style={styles.courseTitle}>{item.title}</Text>
-
-
           <TouchableOpacity style={styles.courseButton} onPress={() => navigation.navigate("CoursePreview", { item, navigation })}>
             <MaterialCommunityIcons name="arrow-right" size={75} />
           </TouchableOpacity>
