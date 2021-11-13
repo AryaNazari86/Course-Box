@@ -9,6 +9,7 @@ import {
   InteractionManager,
 } from "react-native";
 
+import { dark } from '../theme/theme.js';
 // Header Imports
 import Header from "../shared/header";
 
@@ -32,16 +33,17 @@ import LottieView from "lottie-react-native";
 // Global Styles
 import { globalStyles } from "../shared/globalStyle";
 
+
 export default function Home({ navigation }) {
   // If loaded is false, show a loader.
   const [loaded, setLoaded] = useState(false);
-
-  
 
   // When app loads this function is called.
   InteractionManager.runAfterInteractions(async function () {
     setLoaded(true);
   });
+
+
 
   // Access bottom sheet using sheetRef.current;
   const bottomSheetRef = useRef(null);
@@ -50,8 +52,8 @@ export default function Home({ navigation }) {
   const [darkScreen, setDarkScreen] = useState({ width: 0, height: 0 });
 
   // Get Categories From API
-  const [latestCourses, setLatestCourses] = useState([]);
-  const [popularCorurses, setPopularCourses] = useState([]);
+  const [latestCourses, setLatestCourses] = useState(courses);
+  const [popularCorurses, setPopularCourses] = useState(courses);
   const fetchDatas = async () => {
     try {
       const response = await fetch('http://192.168.199.22:5000/LatestCourses');
@@ -69,7 +71,7 @@ export default function Home({ navigation }) {
 
 
   useEffect(() => {
-    fetchDatas();
+    //fetchDatas();
   }, []);
   const categories = [
     {
@@ -221,7 +223,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   bgBlue: {
-    backgroundColor: "#14213D",
+    backgroundColor: dark.color1,
   },
   categoriesContainer: {
     flexDirection: "row",

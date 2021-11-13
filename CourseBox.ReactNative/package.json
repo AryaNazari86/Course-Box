@@ -47,7 +47,8 @@
     "yarn": "^1.22.11",
     "yet": "^0.1.0",
     "yup": "^0.32.9",
-    "expo-av": "~9.2.3"
+    "expo-av": "~9.2.3",
+    "expo-linear-gradient": "~9.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"

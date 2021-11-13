@@ -1,13 +1,9 @@
 import { StyleSheet } from "react-native";
+import { color } from "react-native-reanimated";
+import {dark} from '../theme/theme.js';
 export const globalStyles = StyleSheet.create({
   appBackground: {
-    backgroundColor: "#141D28",
-  },
-
-  // Container of the page
-  container: {
-    alignItems: "center",
-    backgroundColor: "#141D28",
+    backgroundColor: dark.color1,
   },
 
   // Header
@@ -21,7 +17,7 @@ export const globalStyles = StyleSheet.create({
   // Title of the header
   headerTitle: {
     fontSize: 26,
-    color: "#A8DADC",
+    color: dark.color3,
     paddingBottom: 7,
     textAlign: "center",
   },
@@ -35,9 +31,9 @@ export const globalStyles = StyleSheet.create({
   // Tabbar
   tabBar: {
     borderTopWidth: 1,
-    borderTopColor: "#3D4751",
+    borderTopColor: dark.color2,
     height: 80,
-    backgroundColor: "#141D28",
+    backgroundColor: dark.color1,
   },
 
   // Used for react-native-paper inputs

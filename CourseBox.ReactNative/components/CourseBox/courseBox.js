@@ -2,6 +2,8 @@ import React, { useRef, useState } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Chip, TouchableRipple } from "react-native-paper";
+import {dark} from '../../theme/theme.js';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function CourseBox({ navigation, item }) {
   // If user likes this course. (Get this from api).
@@ -11,31 +13,24 @@ export default function CourseBox({ navigation, item }) {
 
   const [likeOpacity, setLikeOpacity] = useState(0.8);
 
-  const playAnimation = () => {
-    if (!isLiked) {
-      setIsLiked(true);
-      setLikeOpacity(1);
-      likeAnimation.current.play();
-    } else {
-      setIsLiked(false);
-      setLikeOpacity(0.7);
-    }
-  };
-
   return (
-    <TouchableOpacity>
+    <View>
+      <Image source={item.image} style={styles.courseImage}></Image>
       <View style={styles.coursesBox}>
-        <Image source={item.image} style={styles.courseImage}></Image>
-        <View style={styles.coursesBox}>
+      <LinearGradient
+        // Background Linear Gradient
+        colors={['#fff', 'transparent']}
+        style={styles.background}
+      />
+      
+        
           <Text style={styles.courseTitle}>{item.title}</Text>
-
-
+          <Text style={styles.courseDescription}>{item.description}</Text>
           <TouchableOpacity style={styles.courseButton} onPress={() => navigation.navigate("CoursePreview", { item, navigation })}>
-            <MaterialCommunityIcons name="arrow-right" size={75} />
+            <MaterialCommunityIcons color={dark.color3} name="arrow-right-circle" size={90} />
           </TouchableOpacity>
-        </View>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 }
 
@@ -43,35 +38,52 @@ export default function CourseBox({ navigation, item }) {
 
 const styles = StyleSheet.create({
   courseImage: {
-    width: 250,
-    height: 100,
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    width: 230,
+    height: 140,
+  },
+  background: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    height: 190,
   },
   coursesBox: {
-    borderRadius: 50,
-    overflow: "hidden",
-    elevation: 3,
-    backgroundColor: "#161D28",
+    borderBottomLeftRadius: 50,
+    borderBottomRightRadius: 50,
+    backgroundColor: dark.color3,
+    overflow: 'visible',
     shadowOffset: { width: 1, height: 1 },
     shadowColor: "#333",
     shadowOpacity: 0.3,
     shadowRadius: 2,
-    marginHorizontal: 4,
-    marginVertical: 6,
+    marginBottom: 20,
     alignItems: "center",
-    width: 225,
-    height: 300,
+    width: 230,
+    height: 190,
   },
   courseTitle: {
-    color: 'white',
-    fontFamily: 'rubik-regular',
-    fontSize: 40,
-    alignSelf: 'center',
+    color: dark.color1,
+    fontFamily: 'rubik-bold',
+    marginTop: 5,
+    fontSize: 30,
+    marginLeft: 10,
+    alignSelf: 'flex-start'
   },
   courseButton: {
-    marginTop: 50,
-    width: 75,
-    height: 75,
-    backgroundColor: 'white',
+    backgroundColor: dark.color2,
+    marginTop: 55,
+    width: 90,
+    height: 90,
     borderRadius: 50,
+  },
+  courseDescription: {
+    color: dark.color1,
+    fontFamily: 'rubik-light',
+    fontSize: 20,
+    marginLeft: 10,
+    alignSelf: 'flex-start'
   }
 });
