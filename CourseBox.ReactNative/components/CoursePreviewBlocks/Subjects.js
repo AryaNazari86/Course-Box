@@ -1,35 +1,36 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, ImageBackground } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-import Header from '../shared/header';
-import { FAB } from 'react-native-paper';
-import Subject from '../components/CoursePreviewBlocks/Subjects.js';
 
-export default function CoursePreview(props) {
-    const course = props.route.params.datas[0];
-    const navigation = props.route.params.datas[1];
+export default function Subject( {item} ) {
     return (
-        <View style={{ backgroundColor: '#141D28', flex: 1 }}>
-            <Header title={course.title} backButton={true} backAction={() => props.navigation.goBack()} height={60} />
-            <ScrollView >
-                {course.content.map(
-                    (item) => {
-                        return (
-                            <Subject item={item} />
-                        )
-                    }
-
-                )}
-                <Text style={{ alignSelf: 'center', color: '#A8DADC', fontFamily: 'comfortaa-light' }}>Created by {course.author}</Text>
-            </ScrollView >
-
-            <FAB
-                color='#A8DADC'
-                icon='information'
-                style={styles.infoButton}
-            />
-        </View >
-    )
+    <View style={styles.subject}>
+        {/* Subject's title */}
+        <View style={styles.subjectTitle}>
+            {/* Icon */}
+            <MaterialIcons name={item.icon} size={100} color='#3D4751' style={styles.subjectIcon} />
+            {/* Text */}
+            <Text style={styles.subjectTitleText}>{item.title}</Text>
+        </View>
+        <View style={styles.subjectQls}>
+            {item.content.map(
+                (item) => {
+                    {/* Each lesson of the subject  */ }
+                    return (
+                        <TouchableOpacity style={styles.ql} onPress={() => navigation.navigate('Lesson')}>
+                            {/* lesson's icon */}
+                            <View style={styles.qlIconOut}>
+                                <MaterialIcons name={item.icon} size={50} color='#3D4751' style={{ ...styles.qlIconIn, backgroundColor: item.color }} />
+                            </View>
+                            {/* lesson's title */}
+                            <Text style={styles.qlTitleText}>{item.title}</Text>
+                        </TouchableOpacity>
+                    )
+                }
+            )}
+        </View>
+    </View>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -86,15 +87,4 @@ const styles = StyleSheet.create({
         borderColor: '#3D4751',
         overflow: 'hidden',
     },
-    infoButton: {
-        left: 300,
-        bottom: 10,
-        width: 70,
-        height: 70,
-        borderRadius: 100,
-        backgroundColor: '#3D4751',
-        justifyContent: 'center',
-        alignItems: 'center',
-        position: 'absolute',
-    }
-})
+});

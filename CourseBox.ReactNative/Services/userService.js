@@ -1,7 +1,7 @@
 import React from "react";
 import md5 from 'md5';
 
-const API_ADDRESS = "192.168.242.22";
+const API_ADDRESS = "127.0.0.1";
 
 export async function SignUp(values) {
     try {

@@ -149,7 +149,7 @@ export default function Profile({ navigation }) {
             {/* Account Name And Icon Header */}
             <View style={styles.profileAccountHeader}>
               <Image
-                source={{ uri: "http://192.168.242.22:5000/static/avatars/" + profilePageValues.avatar }}
+                source={{ uri: "http://127.0.0.1:5000/static/avatars/" + profilePageValues.avatar }}
                 style={styles.profileAccountImage}
               ></Image>
               <Text

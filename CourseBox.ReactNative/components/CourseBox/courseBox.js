@@ -19,14 +19,14 @@ export default function CourseBox({ navigation, item }) {
       <View style={styles.coursesBox}>
       <LinearGradient
         // Background Linear Gradient
-        colors={['#fff', 'transparent']}
+        colors={['#', 'transparent']}
         style={styles.background}
       />
       
         
           <Text style={styles.courseTitle}>{item.title}</Text>
           <Text style={styles.courseDescription}>{item.description}</Text>
-          <TouchableOpacity style={styles.courseButton} onPress={() => navigation.navigate("CoursePreview", { item, navigation })}>
+          <TouchableOpacity style={styles.courseButton} onPress={() => navigation.navigate("CoursePreview", { datas: [item, navigation] })}>
             <MaterialCommunityIcons color={dark.color3} name="arrow-right-circle" size={90} />
           </TouchableOpacity>
       </View>

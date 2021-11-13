@@ -22,7 +22,7 @@ import SettingsPage from "./pages/settings";
 import Tabs from "./routes/tabs";
 import LessonPreview from "./pages/lessonPreview";
 import ProfileStack from "./routes/profileStack";
-
+import SplashStack from "./routes/splashStack";
 const getFonts = () =>
   Font.loadAsync({
     "comfortaa-bold": require("./assets/Fonts/Comfortaa-Bold.ttf"),
@@ -48,7 +48,7 @@ export default function App() {
     if (isConnected) {
       return (
         <NavigationContainer>
-          <Tabs />
+          <Tabs/>
         </NavigationContainer>
       );
     } else {
