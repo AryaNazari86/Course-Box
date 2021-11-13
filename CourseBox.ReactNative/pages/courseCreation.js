@@ -61,9 +61,7 @@ export default function CourseCreation({ navigation }) {
           >
             {(props) => (
               <View style={globalStyles.container}>
-                <Text
-                  style={{ ...globalStyles.headerTitle, ...styles.headerText }}
-                >
+                <Text style={{ ...globalStyles.headerTitle, ...styles.headerText }}>
                   Profile
                 </Text>
                 {/* Course Name */}
