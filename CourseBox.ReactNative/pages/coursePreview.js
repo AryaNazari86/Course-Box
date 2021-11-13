@@ -15,7 +15,7 @@ export default function CoursePreview(props) {
                 {course.content.map(
                     (item) => {
                         return (
-                            <Subject item={item} />
+                            <Subject item={item} navigation={navigation}/>
                         )
                     }
 

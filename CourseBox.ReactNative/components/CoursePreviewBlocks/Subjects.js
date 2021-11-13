@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, ImageBackground } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
-
-export default function Subject( {item} ) {
+import Lesson from './Lesson.js';
+export default function Subject( {item, navigation} ) {
     return (
     <View style={styles.subject}>
         {/* Subject's title */}
@@ -17,14 +17,7 @@ export default function Subject( {item} ) {
                 (item) => {
                     {/* Each lesson of the subject  */ }
                     return (
-                        <TouchableOpacity style={styles.ql} onPress={() => navigation.navigate('Lesson')}>
-                            {/* lesson's icon */}
-                            <View style={styles.qlIconOut}>
-                                <MaterialIcons name={item.icon} size={50} color='#3D4751' style={{ ...styles.qlIconIn, backgroundColor: item.color }} />
-                            </View>
-                            {/* lesson's title */}
-                            <Text style={styles.qlTitleText}>{item.title}</Text>
-                        </TouchableOpacity>
+                        <Lesson item={item} navigation={navigation}/>
                     )
                 }
             )}
