@@ -15,13 +15,15 @@ export default function CourseBox({ navigation, item }) {
 
   return (
     <View>
-      <Image source={item.image} style={styles.courseImage}></Image>
+      
       <View style={styles.coursesBox}>
       <LinearGradient
         // Background Linear Gradient
         colors={['#', 'transparent']}
         style={styles.background}
       />
+
+<Image source={item.image} style={styles.courseImage}></Image>
       
         
           <Text style={styles.courseTitle}>{item.title}</Text>
@@ -42,6 +44,8 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 50,
     width: 230,
     height: 140,
+    overflow: 'hidden',
+    
   },
   background: {
     position: 'absolute',
@@ -51,8 +55,7 @@ const styles = StyleSheet.create({
     height: 190,
   },
   coursesBox: {
-    borderBottomLeftRadius: 50,
-    borderBottomRightRadius: 50,
+    borderRadius: 50,
     backgroundColor: dark.color3,
     overflow: 'visible',
     shadowOffset: { width: 1, height: 1 },
@@ -62,7 +65,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     alignItems: "center",
     width: 230,
-    height: 190,
+    height: 330,
   },
   courseTitle: {
     color: dark.color1,

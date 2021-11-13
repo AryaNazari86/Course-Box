@@ -1,6 +1,6 @@
 var courses = [
     {
-        title: 'Dribbling', category: 'Sports', author: '@Arya', participants: '100', likes: '99', description: 'something ...', image: require(`../assets/Images/messi.jpeg`), key: '1', content: [
+        title: 'Dribbling', category: 'Sports', author: '@Arya', participants: '100', likes: '99', description: 'something ...', image: require(`../assets/Images/earth.png`), key: '1', content: [
             {
                 title: 'Low Dribble',
                 icon: 'sports-soccer',
@@ -53,7 +53,7 @@ var courses = [
         ],
     },
     {
-        title: 'Javascript Beginner Course', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/Javascript_Course.png`), key: '3', content: [
+        title: 'Javascript', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/Javascript_Course.png`), key: '3', content: [
             {
                 title: 'Low Dribble', content: [
                     { title: 'how to', color: 'red' },

@@ -93,7 +93,7 @@ export default function Search({ navigation }) {
         <View>
           <Header title="Search" height={60} />
           <ScrollView>
-            <View style={globalStyles.container}>
+            <View style={styles.container}>
               {/* Search Text input */}
               <TextInput
                 mode="outlined"

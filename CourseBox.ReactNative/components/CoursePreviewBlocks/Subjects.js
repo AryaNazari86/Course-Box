@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, ImageBackground } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import Lesson from './Lesson.js';
-export default function Subject( {item, navigation} ) {
+export default function Subject( {item, navigation, theme} ) {
     return (
     <View style={styles.subject}>
         {/* Subject's title */}
@@ -17,7 +17,7 @@ export default function Subject( {item, navigation} ) {
                 (item) => {
                     {/* Each lesson of the subject  */ }
                     return (
-                        <Lesson item={item} navigation={navigation}/>
+                        <Lesson item={item} navigation={navigation} />
                     )
                 }
             )}
