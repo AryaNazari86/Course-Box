@@ -7,8 +7,6 @@ import { globalStyles } from '../shared/globalStyle';
 import { user } from '../assets/Icons/user.png';
 import { Video } from 'expo-av';
 export default function LessonBlock({ type, content }) {
-
-
     if (type == 'text') {
         {/* if the item type was a simple text */ }
         return (
@@ -54,7 +52,9 @@ export default function LessonBlock({ type, content }) {
         {/* if the item type was a video */ }
         return (
             <View style={styles.codeBlock}>
-                <Text style={styles.codeLang}>python</Text>
+                <View style={styles.codeLangContainer}>
+                    <Text style={styles.codeLang}>python</Text>
+                </View>
                 {content.map((item) => {
                     return (
                         <View style={styles.codeLine}>
@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
     },
     image: {
         width: '100%',
+        borderRadius: 30,
     },
     text: {
         color: '#A8DADC',
@@ -95,6 +96,8 @@ const styles = StyleSheet.create({
     videoContainer: {
         marginVertical: 20,
         marginHorizontal: 15,
+        borderRadius: 30,
+        overflow: 'hidden',
     },
     video: {
         height: '100%'
@@ -108,11 +111,18 @@ const styles = StyleSheet.create({
     },
     codeLang: {
         color: '#A8DADC',
+        fontFamily: 'Courier New',
+    },
+    codeLangContainer: {
+        borderBottomWidth: 1,
+        borderColor: '#A8DADC',
     },
     code: {
         color: '#A8DADC',
+        fontFamily: 'Courier New',
     },
     codeLineNum: {
+        fontFamily: 'Courier New',
         color: '#A8DADC',
         marginRight: 10,
     },
