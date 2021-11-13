@@ -23,6 +23,7 @@ export const globalStyles = StyleSheet.create({
     fontSize: 26,
     color: "#A8DADC",
     paddingBottom: 7,
+    textAlign: "center",
   },
 
   // Header back button
@@ -161,7 +162,7 @@ export const globalStyles = StyleSheet.create({
   // The view covering the text input
   textInputView: {
     borderWidth: 1,
-    borderRadius: 50,
+    borderRadius: 10,
     flexDirection: "row",
     alignItems: "center",
     marginTop: 5,

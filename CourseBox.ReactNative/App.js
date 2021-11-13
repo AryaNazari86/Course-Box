@@ -22,6 +22,7 @@ import SettingsPage from "./pages/settings";
 import Tabs from "./routes/tabs";
 import LessonPreview from "./pages/lessonPreview";
 import ProfileStack from "./routes/profileStack";
+import CourseCreation from "./pages/courseCreation";
 
 const getFonts = () =>
   Font.loadAsync({
