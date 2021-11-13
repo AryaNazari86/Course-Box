@@ -23,6 +23,8 @@ import Tabs from "./routes/tabs";
 import LessonPreview from "./pages/lessonPreview";
 import ProfileStack from "./routes/profileStack";
 import SplashStack from "./routes/splashStack";
+import CourseCreation from "./pages/courseCreation";
+
 const getFonts = () =>
   Font.loadAsync({
     "comfortaa-bold": require("./assets/Fonts/Comfortaa-Bold.ttf"),
