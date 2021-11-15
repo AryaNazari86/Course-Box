@@ -1,6 +1,6 @@
 var courses = [
     {
-        title: 'Dribbling', category: 'Sports', author: '@Arya', participants: '100', likes: '99', description: 'something ...', image: require(`../assets/Images/earth.png`), key: '1', content: [
+        title: 'Dribbling', category: 'Sports', author: '@Arya', participants: '100', likes: '99', description: ' ...', image: require(`../assets/Images/earth.png`), key: '1', content: [
             {
                 title: 'Low Dribble',
                 icon: 'sports-soccer',
