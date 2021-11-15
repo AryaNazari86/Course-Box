@@ -20,13 +20,22 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export default function Profile({ navigation }) {
   // If loaded is false, show a loader.
   const [loaded, setLoaded] = useState(false);
-  const [profilePageValues, setProfilePageValues] = useState(false);
+  const [profilePageValues, setProfilePageValues] = useState({
+    avatar: "default.png",
+    name: "none",
+    username: "none",
+    bio: "No Description",
+    accountCoursesVal: 0,
+    accountFollowersVal: 0,
+    accountParticipatedVal: 0,
+  });
 
   // When app loads this function is called.
+  // ! Problem here
   InteractionManager.runAfterInteractions(function () {
     const getProfileData = async () => {
       let result;
-      await AsyncStorage.getItem("userDetails").then((data) => {
+      AsyncStorage.getItem("userDetails").then((data) => {
         result = JSON.parse(data);
       });
       return result;
@@ -36,97 +45,12 @@ export default function Profile({ navigation }) {
       .finally(() => {
         setLoaded(true);
       });
+      console.log(profilePageValues);
   });
 
-  // * The list of user's made courses
-  const [madeCourses, setMadeCourses] = useState([
-    {
-      title: "Hacking",
-      category: "Programming",
-      author: "@Ilia",
-      participants: "10",
-      likes: "10",
-      description: "something ...",
-      image: require(`../assets/Images/hacking_course.jpg`),
-      key: "2",
-    },
-    {
-      title: "Javascript Beginner Course",
-      category: "Programming",
-      author: "@Ilia",
-      participants: "10",
-      likes: "10",
-      description: "something ...",
-      image: require(`../assets/Images/Javascript_Course.png`),
-      key: "3",
-    },
-    {
-      title: "HTML Beginner Course",
-      category: "Programming",
-      author: "@Ilia",
-      participants: "10",
-      likes: "10",
-      description: "something ...",
-      image: require(`../assets/Images/HTML_Course.jpeg`),
-      key: "4",
-    },
-    {
-      title: "CSS Beginner Course",
-      category: "Programming",
-      author: "@Ilia",
-      participants: "10",
-      likes: "10",
-      description: "something ...",
-      image: require(`../assets/Images/CSS_Course.png`),
-      key: "5",
-    },
-    ,
-  ]);
-
-  // * The list of user's participated courses
-
-  const [participatedCourses, setParticipatedCourses] = useState([
-    {
-      title: "Dribbling",
-      category: "Sports",
-      author: "@Arya",
-      participants: "100",
-      likes: "99",
-      description: "something ...",
-      image: require(`../assets/Images/messi.jpeg`),
-      key: "1",
-    },
-    {
-      title: "PyQT5 Course",
-      category: "Programming",
-      author: "@Arya",
-      participants: "10",
-      likes: "10",
-      description: "something ...",
-      image: require(`../assets/Images/PyQT5_Course.jpeg`),
-      key: "6",
-    },
-    {
-      title: "C# Course",
-      category: "Programming",
-      author: "@MHK",
-      participants: "10",
-      likes: "10",
-      description: "something ...",
-      image: require(`../assets/Images/c-sharp-course.jpeg`),
-      key: "7",
-    },
-    {
-      title: "Soccer for beginners",
-      category: "Sports",
-      author: "@MHK",
-      participants: "10",
-      likes: "10",
-      description: "something ...",
-      image: require(`../assets/Images/soccer_Course.jpeg`),
-      key: "8",
-    },
-  ]);
+  // InteractionManager.runAfterInteractions(async function () {
+  //   setLoaded(true);
+  // });
 
   if (loaded) {
     return (
@@ -149,54 +73,65 @@ export default function Profile({ navigation }) {
             {/* Account Name And Icon Header */}
             <View style={styles.profileAccountHeader}>
               <Image
-                source={{ uri: "http://127.0.0.1:5000/static/avatars/" + profilePageValues.avatar }}
+                source={{uri: "http://192.168.1.101:5000/static/avatars/default.png" }}
                 style={styles.profileAccountImage}
               ></Image>
+            </View>
+
+            <View style={styles.detailBox}>
               <Text
-                style={{
-                  ...styles.profileAccountName,
-                  ...globalStyles.TitleText,
-                }}
-              >
-                {profilePageValues.name}
-              </Text>
-            </View>
+                  style={{
+                    ...styles.profileAccountName,
+                    ...globalStyles.TitleText,
+                  }}
+                >
+                  {/* {profilePageValues.name} */}
+                  Ilia Soleimani
+                </Text>
 
-            {/* Username */}
-            <View style={styles.userName}>
-              <Text style={styles.userName}>@</Text>
-              <Text style={styles.userName}>{profilePageValues.username}</Text>
-            </View>
-
-            {/* Account Description */}
-            <View style={styles.profileDescriptionHeader}>
-              <Text style={styles.profileDescriptionText}>
-                {profilePageValues.bio}
-              </Text>
+              {/* Username */}
+              <View style={styles.userNameTag}>
+                <Text style={{...globalStyles.TitleText, ...globalStyles.normalText, ...styles.userName}}>@ </Text>
+                <Text style={{...globalStyles.TitleText, ...globalStyles.normalText, ...styles.userName}}>
+                  {/* {profilePageValues.username} */}
+                  II Games
+                  </Text>
+              </View>
             </View>
           </View>
+
+          {/* Account Description */}
+          <View style={styles.profileDescriptionHeader}>
+              <Text style={{...globalStyles.TitleText, ...globalStyles.normalText, ...styles.profileDescriptionText}}>
+                {/* {profilePageValues.bio} */}
+                Hello there! I am a small developer working at CodeRangers! 
+              </Text>
+            </View>
           {/* Account Details */}
           <View style={styles.profileDetailHeader}>
             {/* Ammount of made courses */}
             <View>
-              <Text style={styles.profileDetailText}>
-                {profilePageValues.accountCoursesVal}
+              <Text style={{...globalStyles.TitleText, ...globalStyles.normalText, ...styles.profileDetailText}}>
+                {/* {profilePageValues.accountCoursesVal} */}
+                5
               </Text>
-              <Text style={styles.profileDetailText}>Courses</Text>
+              <Text style={{...globalStyles.TitleText, ...globalStyles.normalText, ...styles.profileDetailText}}>Courses</Text>
             </View>
             {/* Ammount of followers */}
             <View style={styles.profileDetail}>
-              <Text style={styles.profileDetailText}>
-                {profilePageValues.accountFollowersVal}
+              <Text style={{...globalStyles.TitleText, ...globalStyles.normalText, ...styles.profileDetailText}}>
+                {/* {profilePageValues.accountFollowersVal} */}
+                5
               </Text>
-              <Text style={styles.profileDetailText}>Followers</Text>
+              <Text style={{...globalStyles.TitleText, ...globalStyles.normalText, ...styles.profileDetailText}}>Followers</Text>
             </View>
             {/* Ammount of made participated courses */}
             <View style={styles.profileDetail}>
-              <Text style={styles.profileDetailText}>
-                {profilePageValues.accountParticipatedVal}
+              <Text style={{...globalStyles.TitleText, ...globalStyles.normalText, ...styles.profileDetailText}}>
+                {/* {profilePageValues.accountParticipatedVal} */}
+                5
               </Text>
-              <Text style={styles.profileDetailText}>Participated</Text>
+              <Text style={{...globalStyles.TitleText, ...globalStyles.normalText, ...styles.profileDetailText}}>Participated</Text>
             </View>
           </View>
 
@@ -244,12 +179,12 @@ const styles = StyleSheet.create({
   profileAccountImage: {
     width: 125,
     height: 125,
-    borderRadius: 100,
-    marginBottom: 10,
+    borderRadius: 200,
   },
   profileAccountHeader: {
     alignItems: "center",
     alignSelf: "center",
+
   },
   profileAccountName: {
     fontFamily: "comfortaa-bold",
@@ -259,9 +194,11 @@ const styles = StyleSheet.create({
   // * Username
   userName: {
     flexDirection: "row",
-    alignSelf: "center",
-    fontFamily: "comfortaa-regular",
-    color: "#A8DADC",
+    fontSize: 17,
+  },
+
+  userNameTag: {
+    flexDirection: "row",
   },
 
   // * Profile Description
@@ -269,20 +206,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     alignSelf: "center",
-    paddingTop: 10,
   },
   profileDescriptionText: {
-    fontSize: 13,
+    fontSize: 14,
     color: "#A8DADC",
-    fontFamily: "comfortaa-light",
+    textAlign: 'center',
+    marginRight: 10,
+    marginLeft: 10,
+    paddingTop: 3,
+    paddingBottom: 15,
   },
 
   // * Profile Description
   profileDetailHeader: {
-    borderWidth: 3,
-    borderColor: "#3D4751",
-    borderRadius: 30,
-    paddingVertical: 15,
     paddingHorizontal: 15,
     marginTop: 10,
     flexDirection: "row",
@@ -293,9 +229,7 @@ const styles = StyleSheet.create({
   },
   profileDetailText: {
     textAlign: "center",
-    fontSize: 17,
-    color: "#A8DADC",
-    fontFamily: "comfortaa-light",
+    fontSize: 20,
   },
 
   // * Courses
@@ -304,6 +238,7 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     textAlign: "center",
     color: "#A8DADC",
+    paddingBottom: 5,
   },
   madeCoursesList: {
     flex: 1,
@@ -311,8 +246,14 @@ const styles = StyleSheet.create({
   accountBox: {
     marginHorizontal: 30,
     paddingVertical: 30,
-    borderWidth: 3,
-    borderColor: "#3D4751",
-    borderRadius: 50,
+    paddingBottom: 14,
+    flexDirection: 'row',
+    justifyContent: 'center'
+
   },
+  detailBox: {
+    flexDirection: 'column',
+    paddingLeft: 20,
+    justifyContent: 'center',
+  }
 });

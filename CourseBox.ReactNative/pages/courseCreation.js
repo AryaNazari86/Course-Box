@@ -61,11 +61,12 @@ export default function CourseCreation({ navigation }) {
           >
             {(props) => (
               <View style={globalStyles.container}>
-                <Text style={{ ...globalStyles.headerTitle, ...styles.headerText }}>
-                  Profile
+                <Text style=
+                {{ ...globalStyles.headerTitle, ...styles.headerText, ...styles.smallTitle }}>
+                  Name Of The Course
                 </Text>
                 {/* Course Name */}
-                <View style={globalStyles.textInputView}>
+                <View style={{...globalStyles.textInputView, ...styles.attachedInput}}>
                   <TextInput
                     style={globalStyles.inputComp}
                     placeholder="Course Name"
@@ -82,8 +83,12 @@ export default function CourseCreation({ navigation }) {
                   {props.touched.courseName && props.errors.courseName}
                 </Text>
 
+                <Text style=
+                {{ ...globalStyles.headerTitle, ...styles.headerText, ...styles.smallTitle }}>
+                  Name Of The Course
+                </Text>
                 {/* Course Description */}
-                <View style={styles.largeTextInputView}>
+                <View style={{...styles.largeTextInputView, ...styles.attachedInput}}>
                   <TextInput
                     style={styles.largeInputComp}
                     placeholder="Course Name"
@@ -95,6 +100,7 @@ export default function CourseCreation({ navigation }) {
                     placeholderTextColor={"black"}
                     placeholderTextColor="#A8DADC"
                     maxLength={80}
+                    textAlignVertical={'top'}
                   />
                 </View>
 
@@ -124,6 +130,9 @@ export default function CourseCreation({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  attachedInput: {
+    marginTop: 3,
+  },
   largeInputComp: {
     paddingHorizontal: 8,
     paddingVertical: 6,
@@ -132,7 +141,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: "rubik-regular",
     color: "#A8DADC",
-    height: 500,
+    height: 100,
+
+    marginTop: 20,
   },
 
   largeTextInputView: {
@@ -147,4 +158,9 @@ const styles = StyleSheet.create({
     marginTop: 20,
     color: "#A8DADC",
   },
+
+  smallTitle: {
+    fontSize: 16,
+    paddingTop:30,
+  }
 });

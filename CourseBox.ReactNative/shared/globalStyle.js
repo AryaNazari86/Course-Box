@@ -6,6 +6,11 @@ export const globalStyles = StyleSheet.create({
     backgroundColor: dark.color1,
   },
 
+  container: {
+    alignItems: "center",
+    backgroundColor: dark.color1,
+  },
+
   // Header
   header: {
     borderBottomWidth: 1,
