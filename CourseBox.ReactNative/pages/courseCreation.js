@@ -10,6 +10,7 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   TextInput,
+  TouchableOpacity,
 } from "react-native";
 import { globalStyles } from "../shared/globalStyle";
 import Header from "../shared/header";
@@ -21,11 +22,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Formik } from "formik";
 import * as yup from "yup";
 
-// * Set of yup rules for the text input
-const ReviewSchema = yup.object({
-  courseName: yup.string().required().min(5),
-  courseDescription: yup.string().required().min(15),
-});
+import SettingButton from "../components/SettingButton/settingButton";
 
 export default function CourseCreation({ navigation }) {
   // If loaded is false, show a loader.
@@ -34,6 +31,24 @@ export default function CourseCreation({ navigation }) {
   // When app loads this function is called.
   InteractionManager.runAfterInteractions(function () {
     setLoaded(true);
+  });
+
+  const [selectedCourseCategory, setSelectedCourseCategory] = useState("");
+  const [categoryError, setCategoryError] = useState("");
+
+  const testFunc = () => {
+    if (selectedCourseCategory != "Math") {
+      setCategoryError("You should do math!");
+    } else {
+      setCategoryError("");
+      console.log(selectedCourseCategory);
+    }
+  };
+
+  // * Set of yup rules for the text input
+  const ReviewSchema = yup.object({
+    courseName: yup.string().required().min(5),
+    courseDescription: yup.string().required().min(15),
   });
 
   if (loaded) {
@@ -51,22 +66,34 @@ export default function CourseCreation({ navigation }) {
             backAction={() => navigation.goBack()}
           />
           <Formik
-            initialValues={{ courseName: "", courseDescription: "" }}
+            initialValues={{
+              courseName: "",
+              courseDescription: "",
+            }}
             validationSchema={ReviewSchema}
             onSubmit={(values, actions) => {
-              signUpPress(values);
-              actions.resetForm();
+              testFunc();
             }}
             style={globalStyles.container}
           >
             {(props) => (
               <View style={globalStyles.container}>
-                <Text style=
-                {{ ...globalStyles.headerTitle, ...styles.headerText, ...styles.smallTitle }}>
+                <Text
+                  style={{
+                    ...globalStyles.headerTitle,
+                    ...styles.headerText,
+                    ...styles.smallTitle,
+                  }}
+                >
                   Name Of The Course
                 </Text>
                 {/* Course Name */}
-                <View style={{...globalStyles.textInputView, ...styles.attachedInput}}>
+                <View
+                  style={{
+                    ...globalStyles.textInputView,
+                    ...styles.attachedInput,
+                  }}
+                >
                   <TextInput
                     style={globalStyles.inputComp}
                     placeholder="Course Name"
@@ -83,12 +110,22 @@ export default function CourseCreation({ navigation }) {
                   {props.touched.courseName && props.errors.courseName}
                 </Text>
 
-                <Text style=
-                {{ ...globalStyles.headerTitle, ...styles.headerText, ...styles.smallTitle }}>
+                <Text
+                  style={{
+                    ...globalStyles.headerTitle,
+                    ...styles.headerText,
+                    ...styles.smallTitle,
+                  }}
+                >
                   Name Of The Course
                 </Text>
                 {/* Course Description */}
-                <View style={{...styles.largeTextInputView, ...styles.attachedInput}}>
+                <View
+                  style={{
+                    ...styles.largeTextInputView,
+                    ...styles.attachedInput,
+                  }}
+                >
                   <TextInput
                     style={styles.largeInputComp}
                     placeholder="Course Name"
@@ -100,16 +137,35 @@ export default function CourseCreation({ navigation }) {
                     placeholderTextColor={"black"}
                     placeholderTextColor="#A8DADC"
                     maxLength={80}
-                    textAlignVertical={'top'}
+                    textAlignVertical={"top"}
                   />
                 </View>
 
                 <Text style={globalStyles.errorText}>
-                  {props.touched.courseDescription && props.errors.courseDescription}
+                  {props.touched.courseDescription &&
+                    props.errors.courseDescription}
                 </Text>
-              </View>
 
-              
+                <View style={{ ...globalStyles.container, ...styles.category }}>
+                  <SettingButton
+                    buttonText={"Course Category"}
+                    buttonStyle="Dropdown"
+                    dropDownList={["Code", "Math", "Paint", "Science", "Sport"]}
+                    selectedVar={setSelectedCourseCategory}
+                  />
+                </View>
+
+                <Text style={{ ...globalStyles.errorText, ...styles.error }}>
+                  {categoryError}
+                </Text>
+
+                <TouchableOpacity
+                  style={{ ...globalStyles.button, ...styles.button }}
+                  onPress={props.handleSubmit}
+                >
+                  <Text style={globalStyles.buttonText}>Sign Up</Text>
+                </TouchableOpacity>
+              </View>
             )}
           </Formik>
         </View>
@@ -161,6 +217,18 @@ const styles = StyleSheet.create({
 
   smallTitle: {
     fontSize: 16,
-    paddingTop:30,
-  }
+    paddingTop: 30,
+  },
+
+  button: {
+    marginTop: 80,
+  },
+
+  category: {
+    marginTop: 20,
+  },
+
+  error: {
+    marginTop: 18,
+  },
 });

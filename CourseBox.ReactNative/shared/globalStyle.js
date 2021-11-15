@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { color } from "react-native-reanimated";
-import {dark} from '../theme/theme.js';
+import { dark } from "../theme/theme.js";
 export const globalStyles = StyleSheet.create({
   appBackground: {
     backgroundColor: dark.color1,
@@ -131,7 +131,7 @@ export const globalStyles = StyleSheet.create({
     backgroundColor: "#A1D1D3",
     width: 330,
     height: 50,
-    borderRadius: 50,
+    borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
     marginTop: 20,
@@ -144,7 +144,7 @@ export const globalStyles = StyleSheet.create({
     borderWidth: 2,
     width: 70,
     height: 30,
-    borderRadius: 50,
+    borderRadius: 10,
     marginTop: 20,
     marginBottom: 20,
   },

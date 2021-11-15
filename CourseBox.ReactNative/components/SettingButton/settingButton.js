@@ -13,6 +13,8 @@ export default function SettingButton({
 
   switchFunc1,
   switchFunc2,
+
+  selectedVar,
 }) {
   const [switchStateVar, switchStateFunc] = useState();
 
@@ -82,7 +84,7 @@ export default function SettingButton({
           <SelectDropdown
             data={dropDownList}
             onSelect={(selectedItem, index) => {
-              console.log(selectedItem, index);
+              selectedVar(selectedItem);
             }}
             buttonStyle={styles.dropDown}
             buttonTextStyle={{
@@ -96,13 +98,9 @@ export default function SettingButton({
             }}
             rowStyle={styles.dropDownRow}
             buttonTextAfterSelection={(selectedItem, index) => {
-              // text represented after item is selected
-              // if data array is an array of objects then return selectedItem.property to render after item is selected
               return selectedItem;
             }}
             rowTextForSelection={(item, index) => {
-              // text represented for each item in dropdown
-              // if data array is an array of objects then return item.property to represent item in dropdown
               return item;
             }}
           />
