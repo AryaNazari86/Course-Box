@@ -33,28 +33,28 @@ export default function CourseBox({ navigation, item }) {
 
 const styles = StyleSheet.create({
   courseImage: {
-    borderTopLeftRadius: 50,
-    borderTopRightRadius: 50,
     width: 230,
     height: 140,
     overflow: 'visible',
+    bottom: 20,
   },
   coursesBox: {
-    marginTop: 50,
+    marginTop: 60,
+    marginBottom: 20,
     borderRadius: 50,
     backgroundColor: dark.color3,
     shadowOffset: { width: 1, height: 1 },
     shadowColor: "#333",
     shadowOpacity: 0.3,
     shadowRadius: 2,
-    marginBottom: 20,
     alignItems: "center",
-    width: 230,
+    width: 250,
     height: 330,
   },
   courseTitle: {
     color: dark.color1,
     fontFamily: 'rubik-bold',
+    height: 35,
     marginTop: 5,
     fontSize: 30,
     marginLeft: 10,
@@ -62,16 +62,17 @@ const styles = StyleSheet.create({
   },
   courseButton: {
     backgroundColor: dark.color2,
-    marginTop: 55,
     width: 90,
     height: 90,
     borderRadius: 50,
+    overflow: 'visible',
   },
   courseDescription: {
     color: dark.color1,
     fontFamily: 'rubik-light',
     fontSize: 20,
     marginLeft: 10,
-    alignSelf: 'flex-start'
+    alignSelf: 'flex-start',
+    height: 100,
   },
 });
