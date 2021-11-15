@@ -5,6 +5,7 @@ import { Chip, TouchableRipple } from "react-native-paper";
 import {dark} from '../../theme/theme.js';
 import { LinearGradient } from 'expo-linear-gradient';
 import CategoryIcon from './courseBoxIcon.js';
+import { FontAwesome } from '@expo/vector-icons';
 export default function CourseBox({ navigation, item }) {
   // If user likes this course. (Get this from api).
   const [isLiked, setIsLiked] = useState(false);
@@ -22,7 +23,7 @@ export default function CourseBox({ navigation, item }) {
           <Text style={styles.courseDescription}>{item.description}</Text>
           
           <TouchableOpacity style={styles.courseButton} onPress={() => navigation.navigate("CoursePreview", { datas: [item, navigation] })}>
-            <MaterialCommunityIcons color={dark.color3} name="arrow-right-circle" size={90} />
+            <FontAwesome name="arrow-circle-right" size={90} color={dark.color2} />
           </TouchableOpacity>
       </View>
     </View>
@@ -61,11 +62,12 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start'
   },
   courseButton: {
-    backgroundColor: dark.color2,
+    backgroundColor: dark.color3,
     width: 90,
     height: 90,
     borderRadius: 50,
     overflow: 'visible',
+    alignItems: 'center',
   },
   courseDescription: {
     color: dark.color1,
