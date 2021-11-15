@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
   },
 
   redTest: {
-    width: 270,
+    width: 300,
     justifyContent: "center",
   },
 
@@ -189,7 +189,6 @@ const styles = StyleSheet.create({
 
   blueTest: {
     justifyContent: "center",
-    width: 100,
   },
 
   bigBlueTest: {

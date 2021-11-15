@@ -110,7 +110,8 @@ export const globalStyles = StyleSheet.create({
     color: "#A8DADC",
     fontFamily: "rubik-light",
 
-    textAlign: "center",
+    alignSelf: "center",
+    paddingBottom: 4,
   },
 
   // Container of loading animation
@@ -147,6 +148,8 @@ export const globalStyles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 20,
     marginBottom: 20,
+
+    justifyContent: "center",
   },
 
   // Style for the default react native text input component
