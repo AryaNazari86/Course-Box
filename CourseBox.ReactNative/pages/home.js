@@ -43,8 +43,6 @@ export default function Home({ navigation }) {
     setLoaded(true);
   });
 
-
-
   // Access bottom sheet using sheetRef.current;
   const bottomSheetRef = useRef(null);
 
@@ -130,7 +128,13 @@ export default function Home({ navigation }) {
     return (
       <View style={styles.container}>
         {/* Header */}
-        <Header title="Home" height={60} />
+        <Header 
+        title="Home" 
+        height={60} 
+        profileButton={true}
+        profileAction={() => navigation.navigate("ProfileStack") }
+        headerIcon={true}
+        headerIconSource={require('../assets/3DIcons/Math_3DIcon.png')} />
 
         {/* Content */}
         <ScrollView

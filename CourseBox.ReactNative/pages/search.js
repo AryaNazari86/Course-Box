@@ -91,7 +91,11 @@ export default function Search({ navigation }) {
     return (
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View>
-          <Header title="Search" height={60} />
+          <Header
+            title="Search"
+            height={60}
+            profileButton={true}
+            profileAction={() => navigation.navigate("ProfileStack")} />
           <ScrollView>
             <View style={styles.container}>
               {/* Search Text input */}

@@ -68,6 +68,7 @@ export default function Profile({ navigation }) {
               },
             },
           ]}
+          profileButton={false}
         />
         <ScrollView style={globalStyles.appBackground}>
           <View style={styles.accountBox}>
