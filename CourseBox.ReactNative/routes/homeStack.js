@@ -6,7 +6,7 @@ import LessonPreview from '../pages/lessonPreview';
 
 const Stack = createStackNavigator();
 
-export default function HomeStack() {
+export default function HomeStack({ navigation }) {
   return (
     <Stack.Navigator
       screenOptions={({ route, navigation }) => ({

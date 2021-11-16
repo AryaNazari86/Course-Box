@@ -13,7 +13,7 @@ export const globalStyles = StyleSheet.create({
 
   // Header
   header: {
-    borderBottomWidth: 1,
+    borderBottomWidth: 3,
     borderBottomColor: "#3D4751",
     elevation: 0,
     backgroundColor: "#141D28",
@@ -24,20 +24,17 @@ export const globalStyles = StyleSheet.create({
     fontSize: 26,
     color: dark.color3,
     paddingBottom: 7,
-    textAlign: "center",
   },
-
-  // Header back button
-  headerBackAnimation: {
-    width: 50,
-    height: 50,
+  headerIcon: {
+    width: 30,
+    height: 30,
   },
 
   // Tabbar
   tabBar: {
-    borderTopWidth: 1,
+    borderTopWidth: 2,
     borderTopColor: dark.color2,
-    height: 80,
+    height: 70,
     backgroundColor: dark.color1,
   },
 
