@@ -81,8 +81,7 @@ export default function CourseCreation({ navigation }) {
                 <Text
                   style={{
                     ...globalStyles.headerTitle,
-                    ...styles.headerText,
-                    ...styles.smallTitle,
+                    ...globalStyles.smallTitle,
                   }}
                 >
                   Name Of The Course
@@ -91,12 +90,11 @@ export default function CourseCreation({ navigation }) {
                 <View
                   style={{
                     ...globalStyles.textInputView,
-                    ...styles.attachedInput,
                   }}
                 >
                   <TextInput
                     style={globalStyles.inputComp}
-                    placeholder="Course Name"
+                    // placeholder="Course Name"
                     onChangeText={props.handleChange("courseName")}
                     value={props.values.courseName}
                     onBlur={props.handleBlur("courseName")}
@@ -113,8 +111,7 @@ export default function CourseCreation({ navigation }) {
                 <Text
                   style={{
                     ...globalStyles.headerTitle,
-                    ...styles.headerText,
-                    ...styles.smallTitle,
+                    ...globalStyles.smallTitle,
                   }}
                 >
                   Name Of The Course
@@ -128,7 +125,7 @@ export default function CourseCreation({ navigation }) {
                 >
                   <TextInput
                     style={styles.largeInputComp}
-                    placeholder="Course Name"
+                    // placeholder="Course Name"
                     multiline={true}
                     numberOfLines={3}
                     onChangeText={props.handleChange("courseDescription")}

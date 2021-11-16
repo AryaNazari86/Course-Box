@@ -37,17 +37,15 @@ export default function SignUp({ makeUser, navigation }) {
   const [result, setResult] = useState();
   // * Go to the tab componnent
   const signUpPress = (values) => {
-    UserService.SignUp(values).then(result => {
+    UserService.SignUp(values).then((result) => {
       if (result.successful) {
         setShowResult(false);
         navigation.navigate("SignIn");
-      }
-      else {
+      } else {
         setShowResult(true);
         setResult(result.response);
       }
     });
-
   };
   // * Go to the sign in page
   const signInPress = () => {
@@ -75,7 +73,7 @@ export default function SignUp({ makeUser, navigation }) {
       onPress={Keyboard.dismiss}
       style={globalStyles.container}
     >
-      <View style={{flex: 1}}>
+      <View style={{ flex: 1 }}>
         <Header title="Sign Up" height={60} />
         <Formik
           initialValues={{ username: "", name: "", email: "", password: "" }}
@@ -88,11 +86,19 @@ export default function SignUp({ makeUser, navigation }) {
         >
           {(props) => (
             <View style={globalStyles.container}>
+              <Text
+                style={{
+                  ...globalStyles.headerTitle,
+                  ...globalStyles.smallTitle,
+                }}
+              >
+                Account Username
+              </Text>
               {/* Username */}
               <View style={globalStyles.textInputView}>
                 <TextInput
                   style={globalStyles.inputComp}
-                  placeholder="Username"
+                  // placeholder="Username"
                   onChangeText={props.handleChange("username")}
                   value={props.values.username}
                   onBlur={props.handleBlur("username")}
@@ -105,11 +111,19 @@ export default function SignUp({ makeUser, navigation }) {
                 {props.touched.username && props.errors.username}
               </Text>
 
+              <Text
+                style={{
+                  ...globalStyles.headerTitle,
+                  ...globalStyles.smallTitle,
+                }}
+              >
+                Account Name
+              </Text>
               {/* Name */}
               <View style={globalStyles.textInputView}>
                 <TextInput
                   style={globalStyles.inputComp}
-                  placeholder="Name"
+                  // placeholder="Name"
                   onChangeText={props.handleChange("name")}
                   value={props.values.name}
                   onBlur={props.handleBlur("name")}
@@ -122,12 +136,20 @@ export default function SignUp({ makeUser, navigation }) {
                 {props.touched.name && props.errors.name}
               </Text>
 
+              <Text
+                style={{
+                  ...globalStyles.headerTitle,
+                  ...globalStyles.smallTitle,
+                }}
+              >
+                Account Email
+              </Text>
               {/* Email */}
               <View style={globalStyles.textInputView}>
                 {/* <MaterialIcons name="email" size={40} color="black" style={{ paddingLeft: 5, }} /> */}
                 <TextInput
                   style={globalStyles.inputComp}
-                  placeholder="Email"
+                  // placeholder="Email"
                   onChangeText={props.handleChange("email")}
                   value={props.values.email}
                   onBlur={props.handleBlur("email")}
@@ -140,11 +162,20 @@ export default function SignUp({ makeUser, navigation }) {
                 {props.touched.email && props.errors.email}
               </Text>
 
+              <Text
+                style={{
+                  ...globalStyles.headerTitle,
+                  ...globalStyles.smallTitle,
+                }}
+              >
+                Account Password
+              </Text>
+
               {/* Password */}
               <View style={globalStyles.textInputView}>
                 <TextInput
                   style={{ ...globalStyles.inputComp, ...styles.input }}
-                  placeholder="Password"
+                  // placeholder="Password"
                   onChangeText={props.handleChange("password")}
                   value={props.values.password}
                   onBlur={props.handleBlur("password")}

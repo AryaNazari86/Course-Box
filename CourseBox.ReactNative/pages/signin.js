@@ -14,7 +14,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Formik } from "formik";
 import * as yup from "yup";
 import * as UserService from "../Services/userService";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Snackbar } from "react-native-paper";
 
 export default function SignIn({ navigation }) {
@@ -28,38 +28,35 @@ export default function SignIn({ navigation }) {
 
   const signInPress = async (values) => {
     try {
-      UserService.Login(values).then(async result => {
+      UserService.Login(values).then(async (result) => {
         if (result.successful) {
-          result.token.then(async userToken => {
+          result.token.then(async (userToken) => {
             const token = userToken.token;
-            UserService.GetUserDetails(token)
-              .then(async userDetails => {
-                if (userDetails.successful) {
-                  userDetails.data.then(async data => {
-                    await AsyncStorage.setItem('userDetails', JSON.stringify(data))
-                      .catch(() => {
-                        setShowResult(true);
-                        setResult(userDetails.response);
-                      });
+            UserService.GetUserDetails(token).then(async (userDetails) => {
+              if (userDetails.successful) {
+                userDetails.data.then(async (data) => {
+                  await AsyncStorage.setItem(
+                    "userDetails",
+                    JSON.stringify(data)
+                  ).catch(() => {
+                    setShowResult(true);
+                    setResult(userDetails.response);
                   });
-
-                }
-                else {
-                  setShowResult(true);
-                  setResult(userDetails.response);
-                }
-              });
-            await AsyncStorage.setItem('token', token);
-            await AsyncStorage.setItem('login', "true");
+                });
+              } else {
+                setShowResult(true);
+                setResult(userDetails.response);
+              }
+            });
+            await AsyncStorage.setItem("token", token);
+            await AsyncStorage.setItem("login", "true");
             navigation.navigate("Tab");
           });
-        }
-        else {
+        } else {
           setShowResult(true);
           setResult(result.response);
         }
       });
-
     } catch (error) {
       setShowResult(true);
       setResult("Error with connecting to server...");
@@ -105,11 +102,19 @@ export default function SignIn({ navigation }) {
         >
           {(props) => (
             <View style={globalStyles.container}>
+              <Text
+                style={{
+                  ...globalStyles.headerTitle,
+                  ...globalStyles.smallTitle,
+                }}
+              >
+                Account Email
+              </Text>
               {/* Email */}
               <View style={globalStyles.textInputView}>
                 <TextInput
                   style={globalStyles.inputComp}
-                  placeholder="Email"
+                  // placeholder="Email"
                   onChangeText={props.handleChange("email")}
                   value={props.values.email}
                   onBlur={props.handleBlur("email")}
@@ -121,11 +126,20 @@ export default function SignIn({ navigation }) {
                 {props.touched.email && props.errors.email}
               </Text>
 
+              <Text
+                style={{
+                  ...globalStyles.headerTitle,
+                  ...globalStyles.smallTitle,
+                }}
+              >
+                Account Password
+              </Text>
+
               {/* Password */}
               <View style={globalStyles.textInputView}>
                 <TextInput
                   style={{ ...globalStyles.inputComp, ...styles.input }}
-                  placeholder="Password"
+                  // placeholder="Password"
                   secureTextEntry={hidePass}
                   onChangeText={props.handleChange("password")}
                   value={props.values.password}

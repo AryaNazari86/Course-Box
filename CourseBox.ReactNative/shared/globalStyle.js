@@ -172,6 +172,7 @@ export const globalStyles = StyleSheet.create({
     borderColor: "#3D4751",
     marginTop: 20,
     color: "#A8DADC",
+    marginTop: 0,
   },
 
   // Style of the button that hides password
@@ -184,5 +185,10 @@ export const globalStyles = StyleSheet.create({
     flexDirection: "row",
     fontFamily: "rubik-light",
     color: "#A8DADC",
+  },
+
+  smallTitle: {
+    fontSize: 16,
+    paddingTop: 30,
   },
 });
