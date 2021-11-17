@@ -90,11 +90,19 @@ export default function ForgetPassword_Password({ navigation }) {
         >
           {(props) => (
             <View style={globalStyles.container}>
+              <Text
+                style={{
+                  ...globalStyles.headerTitle,
+                  ...globalStyles.smallTitle,
+                }}
+              >
+                Previous Password
+              </Text>
               {/* Password */}
               <View style={globalStyles.textInputView}>
                 <TextInput
                   style={{ ...globalStyles.inputComp, ...styles.input }}
-                  placeholder="New Password"
+                  // placeholder="New Password"
                   onChangeText={props.handleChange("Password")}
                   value={props.values.Password}
                   onBlur={props.handleBlur("Password")}
@@ -115,11 +123,19 @@ export default function ForgetPassword_Password({ navigation }) {
                 {props.touched.Password && props.errors.Password}
               </Text>
 
+              <Text
+                style={{
+                  ...globalStyles.headerTitle,
+                  ...globalStyles.smallTitle,
+                }}
+              >
+                New Password
+              </Text>
               {/* Confirm Password */}
               <View style={globalStyles.textInputView}>
                 <TextInput
                   style={{ ...globalStyles.inputComp, ...styles.input }}
-                  placeholder="Confirm New Password"
+                  // placeholder="Confirm New Password"
                   onChangeText={props.handleChange("confirmPassword")}
                   value={props.values.confirmPassword}
                   onBlur={props.handleBlur("confirmPassword")}

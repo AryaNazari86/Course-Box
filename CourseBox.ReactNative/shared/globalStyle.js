@@ -183,7 +183,6 @@ export const globalStyles = StyleSheet.create({
   // Used for showing two texts (mostly a normalText and a highlightText) beside each other
   normalAndHighlightContainer: {
     flexDirection: "row",
-    fontFamily: "rubik-light",
     color: "#A8DADC",
   },
 

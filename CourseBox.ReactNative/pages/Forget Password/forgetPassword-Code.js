@@ -45,8 +45,13 @@ export default function ForgetPassword_Code({ navigation }) {
         >
           {(props) => (
             <View style={globalStyles.container}>
-              <Text style={globalStyles.normalText}>
-                Enter the code we sent to your email
+              <Text
+                style={{
+                  ...globalStyles.headerTitle,
+                  ...globalStyles.smallTitle,
+                }}
+              >
+                Enter the code we send you through email
               </Text>
               {/* Code Input*/}
               <View style={globalStyles.textInputView}>
