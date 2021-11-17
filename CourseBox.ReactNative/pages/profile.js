@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -30,29 +30,23 @@ export default function Profile({ navigation }) {
     accountParticipatedVal: 0,
     key: 1,
   });
+  const [dataFetched, setDataFetched] = useState(false);
 
   // When app loads this function is called.
   // ! Problem here
   InteractionManager.runAfterInteractions(function () {
-    const getProfileData = async () => {
-      let result;
-      AsyncStorage.getItem("userDetails").then((data) => {
-        result = JSON.parse(data);
-      });
-      return result;
-    };
-    getProfileData()
-      .then((result) => setProfilePageValues(result))
-      .finally(() => {
-        setLoaded(true);
-      });
-    console.log(profilePageValues);
+    setLoaded(true);
   });
-
-  // InteractionManager.runAfterInteractions(async function () {
-  //   setLoaded(true);
-  // });
-
+  const fetchData = async () => {
+    const storedData = await AsyncStorage.getItem("userDetails");
+    const storedDataParsed = JSON.parse(storedData);
+    console.log(storedDataParsed);
+    setProfilePageValues(storedDataParsed);
+  };
+  if (!dataFetched) {
+    fetchData();
+    setDataFetched(true);
+  }
   if (loaded) {
     return (
       <View>
@@ -76,7 +70,7 @@ export default function Profile({ navigation }) {
             <View style={styles.profileAccountHeader}>
               <Image
                 source={{
-                  uri: "http://192.168.1.101:5000/static/avatars/default.png",
+                  uri: "http://192.168.90.22:5000/static/avatars/" + profilePageValues.avatar,
                 }}
                 style={styles.profileAccountImage}
               ></Image>
@@ -89,8 +83,7 @@ export default function Profile({ navigation }) {
                   ...globalStyles.TitleText,
                 }}
               >
-                {/* {profilePageValues.name} */}
-                Ilia Soleimani
+                {profilePageValues.name}
               </Text>
 
               {/* Username */}
@@ -102,7 +95,7 @@ export default function Profile({ navigation }) {
                     ...styles.userName,
                   }}
                 >
-                  @{" "}
+                  @{profilePageValues.username}
                 </Text>
                 <Text
                   style={{
@@ -111,8 +104,6 @@ export default function Profile({ navigation }) {
                     ...styles.userName,
                   }}
                 >
-                  {/* {profilePageValues.username} */}
-                  II Games
                 </Text>
               </View>
             </View>
@@ -127,8 +118,7 @@ export default function Profile({ navigation }) {
                 ...styles.profileDescriptionText,
               }}
             >
-              {/* {profilePageValues.bio} */}
-              Hello there! I am a small developer working at CodeRangers!
+              {profilePageValues.bio}
             </Text>
           </View>
           {/* Account Details */}

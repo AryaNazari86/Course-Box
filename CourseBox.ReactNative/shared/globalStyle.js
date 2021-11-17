@@ -24,6 +24,8 @@ export const globalStyles = StyleSheet.create({
     fontSize: 26,
     color: dark.color3,
     paddingBottom: 7,
+    textAlign: "left",
+    marginLeft: 10,
   },
   headerIcon: {
     width: 30,
