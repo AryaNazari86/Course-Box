@@ -17,6 +17,8 @@ import courses from "../data/courses";
 import LottieView from "lottie-react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+import { FAB } from "react-native-paper";
+
 export default function Profile({ navigation }) {
   // If loaded is false, show a loader.
   const [loaded, setLoaded] = useState(false);
@@ -64,6 +66,7 @@ export default function Profile({ navigation }) {
           ]}
           profileButton={false}
         />
+        <FAB color="#A8DADC" icon="information" style={styles.infoButton} />
         <ScrollView style={globalStyles.appBackground}>
           <View style={styles.accountBox}>
             {/* Account Name And Icon Header */}
@@ -306,5 +309,16 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     paddingLeft: 20,
     justifyContent: "center",
+  },
+  infoButton: {
+    left: 300,
+    bottom: 10,
+    width: 70,
+    height: 70,
+    borderRadius: 100,
+    backgroundColor: "#3D4751",
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
   },
 });
