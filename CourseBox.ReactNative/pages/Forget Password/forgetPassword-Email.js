@@ -46,11 +46,19 @@ export default function ForgetPassword_Email({ navigation }) {
         >
           {(props) => (
             <View style={globalStyles.container}>
+              <Text
+                style={{
+                  ...globalStyles.headerTitle,
+                  ...globalStyles.smallTitle,
+                }}
+              >
+                Account Email
+              </Text>
               {/* Email Input */}
               <View style={globalStyles.textInputView}>
                 <TextInput
                   style={globalStyles.inputComp}
-                  placeholder="Email"
+                  // placeholder="Email"
                   onChangeText={props.handleChange("email")}
                   value={props.values.email}
                   onBlur={props.handleBlur("email")}

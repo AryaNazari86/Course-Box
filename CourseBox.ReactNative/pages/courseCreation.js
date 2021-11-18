@@ -114,7 +114,7 @@ export default function CourseCreation({ navigation }) {
                     ...globalStyles.smallTitle,
                   }}
                 >
-                  Name Of The Course
+                  Description Of The Course
                 </Text>
                 {/* Course Description */}
                 <View
@@ -156,11 +156,23 @@ export default function CourseCreation({ navigation }) {
                   {categoryError}
                 </Text>
 
+                <View style={{ ...globalStyles.container, ...styles.category }}>
+                  <SettingButton
+                    buttonText={"Course Picture"}
+                    buttonStyle="Edit"
+                    functionName={testFunc}
+                  />
+                </View>
+
+                <Text style={{ ...globalStyles.errorText, ...styles.error }}>
+                  {categoryError}
+                </Text>
+
                 <TouchableOpacity
                   style={{ ...globalStyles.button, ...styles.button }}
                   onPress={props.handleSubmit}
                 >
-                  <Text style={globalStyles.buttonText}>Sign Up</Text>
+                  <Text style={globalStyles.buttonText}>Create Course</Text>
                 </TouchableOpacity>
               </View>
             )}
