@@ -7,14 +7,22 @@ import {
   ScrollView,
   Text,
   InteractionManager,
+  Button,
+  TouchableOpacity
 } from "react-native";
 
-import { dark } from '../theme/theme.js';
+
 // Header Imports
 import Header from "../shared/header";
 
 // Category Box Imports
 import CategoryBox from "../components/Categorybox/categorybox";
+
+// redux
+import styled, {ThemeProvider} from 'styled-components';
+import {useSelector, useDispatch} from 'react-redux';
+import {switchTheme} from '../redux/themeActions';
+import {light, dark} from '../Themes/theme';
 
 // Bottom Sheet Imports
 import Animated from "react-native-reanimated";
@@ -32,9 +40,14 @@ import courses from "../data/courses";
 import LottieView from "lottie-react-native";
 // Global Styles
 import { globalStyles } from "../shared/globalStyle";
+import { $CombinedState } from "redux";
 
 
 export default function Home({ navigation }) {
+
+  const theme = useSelector((state) => state.themeReducer.theme);
+  const dispatch = useDispatch();
+  
   // If loaded is false, show a loader.
   const [loaded, setLoaded] = useState(false);
 
@@ -126,6 +139,7 @@ export default function Home({ navigation }) {
   };
   if (loaded) {
     return (
+      <ThemeProvider theme={theme}>
       <View style={styles.container}>
         {/* Header */}
         <Header 
@@ -137,6 +151,9 @@ export default function Home({ navigation }) {
         headerIconSource={require('../assets/3DIcons/Math_3DIcon.png')} />
 
         {/* Content */}
+        <TouchableOpacity onPress={() => {dispatch(switchTheme(light)); console.log(theme)}} style={{backgroundColor: 'white'}}><Text>aksjdk</Text></TouchableOpacity>
+        {theme.mode === "dark2"?(<Text style={bgBlue}>jhdfnksjhfnksjdhfnksdjhfnkj</Text>) : (<Text>Slama</Text>)}
+        
         <ScrollView
           style={styles.contentContainer}
           showsVerticalScrollIndicator={false}
@@ -204,6 +221,9 @@ export default function Home({ navigation }) {
           onCloseEnd={() => setDarkScreen({ width: 0, height: 0 })}
         />
       </View>
+      </ThemeProvider>
+      
+
     );
   } else {
     return (
@@ -227,7 +247,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   bgBlue: {
-    backgroundColor: dark.color1,
+    backgroundColor: ${props.theme.color1}
   },
   categoriesContainer: {
     flexDirection: "row",

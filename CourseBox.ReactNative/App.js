@@ -25,6 +25,13 @@ import ProfileStack from "./routes/profileStack";
 import SplashStack from "./routes/splashStack";
 import CourseCreation from "./pages/courseCreation";
 
+
+// redux
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware, combineReducers} from 'redux';
+import thunk from 'redux-thunk';
+import themeReducer from './redux/themeReducer';
+
 const getFonts = () =>
   Font.loadAsync({
     "comfortaa-bold": require("./assets/Fonts/Comfortaa-Bold.ttf"),
@@ -35,6 +42,7 @@ const getFonts = () =>
     "rubik-regular": require("./assets/Fonts/Rubik-Regular.ttf"),
   });
 
+const store = createStore(combineReducers({themeReducer}), applyMiddleware(thunk));
 export default function App() {
   // When Internet disconnected, it's false.
   const [isConnected, setIsConnected] = useState(false);
@@ -49,9 +57,11 @@ export default function App() {
   if (fontsLoaded) {
     if (isConnected) {
       return (
+        <Provider store={store}>
         <NavigationContainer>
           <Tabs/>
         </NavigationContainer>
+        </Provider>
       );
     } else {
       return <Splash disconnected={true} />;

@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { color } from "react-native-reanimated";
-import { dark } from "../theme/theme.js";
+import { dark } from "../Themes/theme.js";
 export const globalStyles = StyleSheet.create({
   appBackground: {
     backgroundColor: dark.color1,

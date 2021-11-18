@@ -18,6 +18,8 @@
     "axios": "^0.23.0",
     "expo": "~42.0.1",
     "expo-app-loading": "^1.1.2",
+    "expo-av": "~9.2.3",
+    "expo-linear-gradient": "~9.2.0",
     "expo-status-bar": "~1.0.4",
     "formik": "^2.2.9",
     "lottie-react-native": "4.0.2",
@@ -42,13 +44,15 @@
     "react-native-web": "^0.17.1",
     "react-navigation": "^4.4.4",
     "react-navigation-stack": "^2.10.4",
+    "react-redux": "^7.2.6",
     "reanimated-bottom-sheet": "^1.0.0-alpha.22",
+    "redux": "^4.1.2",
+    "redux-thunk": "^2.4.0",
     "strict-uri-encode": "^2.0.0",
+    "styled-components": "^5.3.3",
     "yarn": "^1.22.11",
     "yet": "^0.1.0",
-    "yup": "^0.32.9",
-    "expo-av": "~9.2.3",
-    "expo-linear-gradient": "~9.2.0"
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"
