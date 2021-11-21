@@ -19,6 +19,7 @@ import LottieView from "lottie-react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { FAB } from "react-native-paper";
+import CourseCreation from "./courseCreation";
 
 export default function Profile({ navigation }) {
   // If loaded is false, show a loader.
@@ -83,20 +84,9 @@ export default function Profile({ navigation }) {
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              <Text
-                style={{
-                  ...globalStyles.normalText,
-                  ...globalStyles.TitleText,
-                }}
-              >
-                Hello World!
-              </Text>
-              <TouchableOpacity
-                style={globalStyles.button}
-                onPress={() => setModalVisible(!modalVisible)}
-              >
-                <Text style={globalStyles.buttonText}>Hide Modal</Text>
-              </TouchableOpacity>
+              <CourseCreation
+                closeFunc={() => setModalVisible(!modalVisible)}
+              />
             </View>
           </View>
         </Modal>

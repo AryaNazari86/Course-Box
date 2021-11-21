@@ -24,7 +24,7 @@ import * as yup from "yup";
 
 import SettingButton from "../components/SettingButton/settingButton";
 
-export default function CourseCreation({ navigation }) {
+export default function CourseCreation({ navigation, closeFunc }) {
   // If loaded is false, show a loader.
   const [loaded, setLoaded] = useState(false);
 
@@ -51,147 +51,134 @@ export default function CourseCreation({ navigation }) {
     courseDescription: yup.string().required().min(15),
   });
 
-  if (loaded) {
-    return (
-      <TouchableWithoutFeedback
-        onPress={Keyboard.dismiss}
-        style={globalStyles.container}
-      >
-        <View>
-          {/* Header */}
-          <Header
-            title="Create Course"
-            height={60}
-            backButton={true}
-            backAction={() => navigation.goBack()}
-          />
-          <Formik
-            initialValues={{
-              courseName: "",
-              courseDescription: "",
-            }}
-            validationSchema={ReviewSchema}
-            onSubmit={(values, actions) => {
-              testFunc();
-            }}
-            style={globalStyles.container}
-          >
-            {(props) => (
-              <View style={globalStyles.container}>
-                <Text
-                  style={{
-                    ...globalStyles.headerTitle,
-                    ...globalStyles.smallTitle,
-                  }}
-                >
-                  Name Of The Course
-                </Text>
-                {/* Course Name */}
-                <View
-                  style={{
-                    ...globalStyles.textInputView,
-                  }}
-                >
-                  <TextInput
-                    style={globalStyles.inputComp}
-                    // placeholder="Course Name"
-                    onChangeText={props.handleChange("courseName")}
-                    value={props.values.courseName}
-                    onBlur={props.handleBlur("courseName")}
-                    placeholderTextColor={"black"}
-                    placeholderTextColor="#A8DADC"
-                    maxLength={10}
-                  />
-                </View>
-
-                <Text style={globalStyles.errorText}>
-                  {props.touched.courseName && props.errors.courseName}
-                </Text>
-
-                <Text
-                  style={{
-                    ...globalStyles.headerTitle,
-                    ...globalStyles.smallTitle,
-                  }}
-                >
-                  Description Of The Course
-                </Text>
-                {/* Course Description */}
-                <View
-                  style={{
-                    ...styles.largeTextInputView,
-                    ...styles.attachedInput,
-                  }}
-                >
-                  <TextInput
-                    style={styles.largeInputComp}
-                    // placeholder="Course Name"
-                    multiline={true}
-                    numberOfLines={3}
-                    onChangeText={props.handleChange("courseDescription")}
-                    value={props.values.courseDescription}
-                    onBlur={props.handleBlur("courseDescription")}
-                    placeholderTextColor={"black"}
-                    placeholderTextColor="#A8DADC"
-                    maxLength={80}
-                    textAlignVertical={"top"}
-                  />
-                </View>
-
-                <Text style={globalStyles.errorText}>
-                  {props.touched.courseDescription &&
-                    props.errors.courseDescription}
-                </Text>
-
-                <View style={{ ...globalStyles.container, ...styles.category }}>
-                  <SettingButton
-                    buttonText={"Course Category"}
-                    buttonStyle="Dropdown"
-                    dropDownList={["Code", "Math", "Paint", "Science", "Sport"]}
-                    selectedVar={setSelectedCourseCategory}
-                  />
-                </View>
-
-                <Text style={{ ...globalStyles.errorText, ...styles.error }}>
-                  {categoryError}
-                </Text>
-
-                <View style={{ ...globalStyles.container, ...styles.category }}>
-                  <SettingButton
-                    buttonText={"Course Picture"}
-                    buttonStyle="Edit"
-                    functionName={testFunc}
-                  />
-                </View>
-
-                <Text style={{ ...globalStyles.errorText, ...styles.error }}>
-                  {categoryError}
-                </Text>
-
-                <TouchableOpacity
-                  style={{ ...globalStyles.button, ...styles.button }}
-                  onPress={props.handleSubmit}
-                >
-                  <Text style={globalStyles.buttonText}>Create Course</Text>
-                </TouchableOpacity>
-              </View>
-            )}
-          </Formik>
-        </View>
-      </TouchableWithoutFeedback>
-    );
-  } else {
-    return (
-      <View style={globalStyles.loaderContainer}>
-        <LottieView
-          autoPlay={true}
-          loop={true}
-          style={globalStyles.loader}
-          source={require("../assets/Animations/7751-load.json")}
+  return (
+    <TouchableWithoutFeedback
+      onPress={Keyboard.dismiss}
+      style={globalStyles.container}
+    >
+      <View>
+        {/* Header */}
+        <Header
+          title="Create Course"
+          height={60}
+          backButton={true}
+          backAction={closeFunc}
         />
+        <Formik
+          initialValues={{
+            courseName: "",
+            courseDescription: "",
+          }}
+          validationSchema={ReviewSchema}
+          onSubmit={(values, actions) => {
+            testFunc();
+          }}
+          style={globalStyles.container}
+        >
+          {(props) => (
+            <View style={globalStyles.container}>
+              <Text
+                style={{
+                  ...globalStyles.headerTitle,
+                  ...globalStyles.smallTitle,
+                }}
+              >
+                Name Of The Course
+              </Text>
+              {/* Course Name */}
+              <View
+                style={{
+                  ...globalStyles.textInputView,
+                }}
+              >
+                <TextInput
+                  style={globalStyles.inputComp}
+                  // placeholder="Course Name"
+                  onChangeText={props.handleChange("courseName")}
+                  value={props.values.courseName}
+                  onBlur={props.handleBlur("courseName")}
+                  placeholderTextColor={"black"}
+                  placeholderTextColor="#A8DADC"
+                  maxLength={10}
+                />
+              </View>
+
+              <Text style={globalStyles.errorText}>
+                {props.touched.courseName && props.errors.courseName}
+              </Text>
+
+              <Text
+                style={{
+                  ...globalStyles.headerTitle,
+                  ...globalStyles.smallTitle,
+                }}
+              >
+                Description Of The Course
+              </Text>
+              {/* Course Description */}
+              <View
+                style={{
+                  ...styles.largeTextInputView,
+                  ...styles.attachedInput,
+                }}
+              >
+                <TextInput
+                  style={styles.largeInputComp}
+                  // placeholder="Course Name"
+                  multiline={true}
+                  numberOfLines={3}
+                  onChangeText={props.handleChange("courseDescription")}
+                  value={props.values.courseDescription}
+                  onBlur={props.handleBlur("courseDescription")}
+                  placeholderTextColor={"black"}
+                  placeholderTextColor="#A8DADC"
+                  maxLength={80}
+                  textAlignVertical={"top"}
+                />
+              </View>
+
+              <Text style={globalStyles.errorText}>
+                {props.touched.courseDescription &&
+                  props.errors.courseDescription}
+              </Text>
+
+              <View style={{ ...globalStyles.container, ...styles.category }}>
+                <SettingButton
+                  buttonText={"Course Category"}
+                  buttonStyle="Dropdown"
+                  dropDownList={["Code", "Math", "Paint", "Science", "Sport"]}
+                  selectedVar={setSelectedCourseCategory}
+                />
+              </View>
+
+              <Text style={{ ...globalStyles.errorText, ...styles.error }}>
+                {categoryError}
+              </Text>
+
+              <View style={{ ...globalStyles.container, ...styles.category }}>
+                <SettingButton
+                  buttonText={"Course Picture"}
+                  buttonStyle="Edit"
+                  functionName={testFunc}
+                />
+              </View>
+
+              <Text style={{ ...globalStyles.errorText, ...styles.error }}>
+                {categoryError}
+              </Text>
+
+              <TouchableOpacity
+                style={{ ...globalStyles.button, ...styles.button }}
+                onPress={props.handleSubmit}
+              >
+                <Text style={globalStyles.buttonText}>Create Course</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+        </Formik>
       </View>
-    );
-  }
+    </TouchableWithoutFeedback>
+  );
 }
 
 const styles = StyleSheet.create({
