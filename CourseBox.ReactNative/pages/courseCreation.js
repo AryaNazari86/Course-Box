@@ -165,7 +165,7 @@ export default function CourseCreation({ navigation, closeFunc }) {
                 {categoryError}
               </Text>
 
-              <View
+              {/* <View
                 style={{
                   ...globalStyles.container,
                   ...styles.categoryNOMargin,
@@ -180,7 +180,7 @@ export default function CourseCreation({ navigation, closeFunc }) {
 
               <Text style={{ ...globalStyles.errorText, ...styles.error }}>
                 {pictureError}
-              </Text>
+              </Text> */}
 
               <TouchableOpacity
                 style={{ ...globalStyles.button, ...styles.button }}

@@ -336,7 +336,7 @@ const styles = StyleSheet.create({
   },
   infoButton: {
     left: 300,
-    bottom: 10,
+    bottom: 150,
     width: 70,
     height: 70,
     borderRadius: 100,
