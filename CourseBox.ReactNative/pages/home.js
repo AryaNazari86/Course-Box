@@ -18,12 +18,6 @@ import Header from "../shared/header";
 // Category Box Imports
 import CategoryBox from "../components/Categorybox/categorybox";
 
-// redux
-import styled, {ThemeProvider} from 'styled-components';
-import {useSelector, useDispatch} from 'react-redux';
-import {switchTheme} from '../redux/themeActions';
-import {light, dark} from '../Themes/theme';
-
 // Bottom Sheet Imports
 import Animated from "react-native-reanimated";
 import BottomSheet from "reanimated-bottom-sheet";
@@ -39,15 +33,10 @@ import courses from "../data/courses";
 // Lottie Library
 import LottieView from "lottie-react-native";
 // Global Styles
-import { globalStyles } from "../shared/globalStyle";
+import { globalStyles, Theme } from "../shared/globalStyle";
 import { $CombinedState } from "redux";
-
-
 export default function Home({ navigation }) {
 
-  const theme = useSelector((state) => state.themeReducer.theme);
-  const dispatch = useDispatch();
-  
   // If loaded is false, show a loader.
   const [loaded, setLoaded] = useState(false);
 
@@ -137,9 +126,10 @@ export default function Home({ navigation }) {
   const closeBottomSheet = () => {
     bottomSheetRef.current.snapTo(0);
   };
+  
+
   if (loaded) {
     return (
-      <ThemeProvider theme={theme}>
       <View style={styles.container}>
         {/* Header */}
         <Header 
@@ -148,11 +138,7 @@ export default function Home({ navigation }) {
         profileButton={true}
         profileAction={() => navigation.navigate("ProfileStack") }
         headerIcon={true}
-        headerIconSource={require('../assets/3DIcons/Math_3DIcon.png')} />
-
-        {/* Content */}
-        <TouchableOpacity onPress={() => {dispatch(switchTheme(light)); console.log(theme)}} style={{backgroundColor: 'white'}}><Text>aksjdk</Text></TouchableOpacity>
-        {theme.mode === "dark2"?(<Text style={bgBlue}>jhdfnksjhfnksjdhfnksdjhfnkj</Text>) : (<Text>Slama</Text>)}
+        headersIconSource={require('../assets/3DIcons/Math_3DIcon.png')} />
         
         <ScrollView
           style={styles.contentContainer}
@@ -221,7 +207,6 @@ export default function Home({ navigation }) {
           onCloseEnd={() => setDarkScreen({ width: 0, height: 0 })}
         />
       </View>
-      </ThemeProvider>
       
 
     );
@@ -239,6 +224,7 @@ export default function Home({ navigation }) {
   }
 }
 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -247,7 +233,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   bgBlue: {
-    backgroundColor: ${props.theme.color1}
+    backgroundColor: 'white'
   },
   categoriesContainer: {
     flexDirection: "row",
@@ -257,7 +243,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     textAlign: "center",
     paddingBottom: 10,
-    color: "#A8DADC",
+    color: 'white',
   },
   latestCoursesContainer: {
     paddingTop: 20,
