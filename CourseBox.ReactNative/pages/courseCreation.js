@@ -36,12 +36,22 @@ export default function CourseCreation({ navigation, closeFunc }) {
   const [selectedCourseCategory, setSelectedCourseCategory] = useState("");
   const [categoryError, setCategoryError] = useState("");
 
+  const [selectedCousePicture, setSelectedCoursePicture] = useState("");
+  const [pictureError, setPictureError] = useState("");
+
   const testFunc = () => {
     if (selectedCourseCategory != "Math") {
       setCategoryError("You should do math!");
     } else {
       setCategoryError("");
       console.log(selectedCourseCategory);
+    }
+
+    if (selectedCousePicture != "HI") {
+      setPictureError("You should do HI!");
+    } else {
+      setPictureError("");
+      console.log(selectedCousePicture);
     }
   };
 
@@ -60,7 +70,7 @@ export default function CourseCreation({ navigation, closeFunc }) {
         {/* Header */}
         <Header
           title="Create Course"
-          height={60}
+          height={50}
           backButton={true}
           backAction={closeFunc}
         />
@@ -155,16 +165,21 @@ export default function CourseCreation({ navigation, closeFunc }) {
                 {categoryError}
               </Text>
 
-              <View style={{ ...globalStyles.container, ...styles.category }}>
+              <View
+                style={{
+                  ...globalStyles.container,
+                  ...styles.categoryNOMargin,
+                }}
+              >
                 <SettingButton
                   buttonText={"Course Picture"}
                   buttonStyle="Edit"
-                  functionName={testFunc}
+                  functionName={setSelectedCoursePicture("HI")}
                 />
               </View>
 
               <Text style={{ ...globalStyles.errorText, ...styles.error }}>
-                {categoryError}
+                {pictureError}
               </Text>
 
               <TouchableOpacity
@@ -217,11 +232,17 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    marginTop: 80,
+    marginTop: 0,
   },
 
   category: {
-    marginTop: 20,
+    marginTop: 10,
+    marginRight: -25,
+  },
+
+  categoryNOMargin: {
+    marginTop: -15,
+    marginRight: -25,
   },
 
   error: {
