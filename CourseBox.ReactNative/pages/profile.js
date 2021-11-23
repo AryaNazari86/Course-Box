@@ -69,12 +69,8 @@ export default function Profile({ navigation }) {
           ]}
           profileButton={false}
         />
-        <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
-          <Text style={globalStyles.normalText}>Hi</Text>
-        </TouchableOpacity>
-        <FAB color="#A8DADC" icon="information" style={styles.infoButton} />
         <Modal
-          animationType="slide"
+          animationType="fade"
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => {
@@ -238,6 +234,12 @@ export default function Profile({ navigation }) {
           {/* Empty Spacer */}
           <Text style={globalStyles.emptySpacer}>Code Rangers®</Text>
         </ScrollView>
+        <FAB
+          color="#A8DADC"
+          icon="plus"
+          style={styles.infoButton}
+          onPress={() => setModalVisible(!modalVisible)}
+        />
       </View>
     );
   } else {
@@ -335,8 +337,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   infoButton: {
-    left: 300,
-    bottom: 150,
+    left: 335,
+    bottom: 125,
     width: 70,
     height: 70,
     borderRadius: 100,
