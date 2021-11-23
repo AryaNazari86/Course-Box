@@ -1,7 +1,8 @@
 import React from "react";
 import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-
+// Theme colors
+import {theme} from '../../Themes/theme';
 export default function CategoryBox({ category, onPress }) {
   return (
     // Category Box
@@ -34,9 +35,9 @@ const styles = StyleSheet.create({
     height: 50,
     margin: 8,
     elevation: 3,
-    backgroundColor: "#141C27",
+    backgroundColor: theme.color2,
     shadowOffset: { width: 1, height: 1 },
-    shadowColor: "#A8DADC",
+    shadowColor: theme.color3,
     borderWidth: 3,
     borderColor: "#3D4751",
     borderLeftWidth: 0,
@@ -55,6 +56,6 @@ const styles = StyleSheet.create({
   categoryTitle: {
     fontFamily: "rubik-regular",
     marginLeft: 10,
-    color: "#A8DADC",
+    color: theme.color3,
   },
 });

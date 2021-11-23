@@ -35,6 +35,10 @@ import LottieView from "lottie-react-native";
 // Global Styles
 import { globalStyles, Theme } from "../shared/globalStyle";
 import { $CombinedState } from "redux";
+
+// Theme colors
+import {theme} from '../Themes/theme';
+
 export default function Home({ navigation }) {
 
   // If loaded is false, show a loader.
@@ -167,7 +171,7 @@ export default function Home({ navigation }) {
               <CoursesCarousel
                 courses={latestCourses}
                 navigation={navigation}
-                dotesColor="#A8DADC"
+                dotesColor={theme.color3}
               />
             </View>
 
@@ -178,7 +182,7 @@ export default function Home({ navigation }) {
               <CoursesCarousel
                 courses={popularCorurses}
                 navigation={navigation}
-                dotesColor="#A8DADC"
+                dotesColor={theme.color3}
               />
             </View>
 
@@ -232,9 +236,6 @@ const styles = StyleSheet.create({
   contentContainer: {
     flexDirection: "column",
   },
-  bgBlue: {
-    backgroundColor: 'white'
-  },
   categoriesContainer: {
     flexDirection: "row",
   },
@@ -243,7 +244,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     textAlign: "center",
     paddingBottom: 10,
-    color: 'white',
+    color: theme.color2,
   },
   latestCoursesContainer: {
     paddingTop: 20,
@@ -252,11 +253,11 @@ const styles = StyleSheet.create({
     fontFamily: "rubik-regular",
     fontSize: 24,
     textAlign: "center",
-    color: "#A8DADC",
+    color: theme.color3,
     paddingBottom: 10,
   },
   popularCoursesContainer: {
-    backgroundColor: "#141C27",
+    backgroundColor: theme.color2,
     paddingTop: 20,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,

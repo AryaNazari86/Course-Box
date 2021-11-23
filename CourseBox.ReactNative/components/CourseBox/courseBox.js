@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Chip, TouchableRipple } from "react-native-paper";
-import { dark } from "../../Themes/theme.js";
+import { theme } from "../../Themes/theme.js";
 import CategoryIcon from "./courseBoxIcon.js";
 import { FontAwesome } from "@expo/vector-icons";
 export default function CourseBox({ navigation, item }) {
@@ -38,7 +38,7 @@ export default function CourseBox({ navigation, item }) {
           <FontAwesome
             name="arrow-circle-right"
             size={90}
-            color={dark.color2}
+            color={theme.color2}
           />
         </TouchableOpacity>
       </View>
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     marginTop: 60,
     marginBottom: 20,
     borderRadius: 50,
-    backgroundColor: dark.color3,
+    backgroundColor: theme.color3,
     shadowOffset: { width: 1, height: 1 },
     shadowColor: "#333",
     shadowOpacity: 0.3,
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     height: 330,
   },
   courseTitle: {
-    color: dark.color1,
+    color: theme.color2,
     fontFamily: "rubik-bold",
     height: 35,
     marginTop: 5,
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
   },
   courseButton: {
-    backgroundColor: dark.color3,
+    backgroundColor: theme.color3,
     width: 90,
     height: 90,
     borderRadius: 50,
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   courseDescription: {
-    color: dark.color1,
+    color: theme.color2,
     fontFamily: "rubik-light",
     fontSize: 20,
     marginLeft: 10,

@@ -1,29 +1,29 @@
 import { StyleSheet } from "react-native";
 import { color } from "react-native-reanimated";
-import { dark } from "../Themes/theme.js";
+import { theme } from "../Themes/theme.js";
 
 export const globalStyles = StyleSheet.create({
   appBackground: {
-    backgroundColor: dark.color1,
+    backgroundColor: theme.color1,
   },
 
   container: {
     alignItems: "center",
-    backgroundColor: dark.color1,
+    backgroundColor: theme.color1,
   },
 
   // Header
   header: {
     borderBottomWidth: 3,
-    borderBottomColor: "#3D4751",
+    borderBottomColor: theme.color3,
     elevation: 0,
-    backgroundColor: "#141D28",
+    backgroundColor: theme.color2,
   },
 
   // Title of the header
   headerTitle: {
     fontSize: 26,
-    color: dark.color3,
+    color: theme.color3,
     paddingBottom: 7,
     textAlign: "left",
     marginLeft: 10,
@@ -36,9 +36,9 @@ export const globalStyles = StyleSheet.create({
   // Tabbar
   tabBar: {
     borderTopWidth: 2,
-    borderTopColor: dark.color2,
+    borderTopColor: theme.color2,
     height: 70,
-    backgroundColor: dark.color1,
+    backgroundColor: theme.color2,
   },
 
   // Used for react-native-paper inputs
@@ -85,7 +85,7 @@ export const globalStyles = StyleSheet.create({
   normalText: {
     flexDirection: "row",
     fontFamily: "rubik-light",
-    color: "#A8DADC",
+    color: theme.color3,
   },
 
   // Used for Normal texts on a black background
@@ -99,7 +99,7 @@ export const globalStyles = StyleSheet.create({
   // Text of the button
   buttonText: {
     fontSize: 25,
-    color: "#141D28",
+    color: theme.color2,
     fontFamily: "rubik-bold",
 
     textAlign: "center",
@@ -107,7 +107,7 @@ export const globalStyles = StyleSheet.create({
 
   smallButtonText: {
     fontSize: 25,
-    color: "#A8DADC",
+    color: theme.color3,
     fontFamily: "rubik-light",
 
     alignSelf: "center",
@@ -141,7 +141,7 @@ export const globalStyles = StyleSheet.create({
 
   smallButton: {
     backgroundColor: "#161D28",
-    borderColor: "#A8DADC",
+    borderColor: theme.color3,
     borderWidth: 2,
     width: 70,
     height: 30,
@@ -160,7 +160,7 @@ export const globalStyles = StyleSheet.create({
     paddingLeft: 20,
     fontSize: 18,
     fontFamily: "rubik-regular",
-    color: "#A8DADC",
+    color: theme.color1,
   },
 
   // The view covering the text input

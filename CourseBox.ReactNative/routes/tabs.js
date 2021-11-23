@@ -16,6 +16,10 @@ import { globalStyles } from "../shared/globalStyle";
 import LottieView from "lottie-react-native";
 import { TouchableRipple } from "react-native-paper";
 import { FontAwesome } from '@expo/vector-icons';
+
+// Theme colors
+import {theme} from '../Themes/theme';
+
 const Tab = createBottomTabNavigator();
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 export default function Tabs() {
@@ -43,8 +47,8 @@ export default function Tabs() {
             tabBarShowLabel: false,
             tabBarIcon: ({ focused }) => {
               const icon = focused
-                ? <FontAwesome name="search" size={40} color="#A8DADC" />
-                : <FontAwesome name="search" size={30} color="#A8DADC" />
+                ? <FontAwesome name="search" size={40} color={theme.color3}/>
+                : <FontAwesome name="search" size={30} color={theme.color3} />
               return icon;
             },
             tabBarButton: (props) => <TouchableRipple {...props} />,
@@ -57,8 +61,8 @@ export default function Tabs() {
             tabBarShowLabel: false,
             tabBarIcon: ({ focused }) => {
               const icon = focused
-              ? <AntDesign name="home" size={45} color="#A8DADC" />
-              : <AntDesign name="home" size={35} color="#A8DADC" />
+              ? <AntDesign name="home" size={45} color={theme.color3} />
+              : <AntDesign name="home" size={35} color={theme.color3} />
               return icon;
             },
             tabBarButton: (props) => <TouchableRipple {...props} />,
@@ -71,8 +75,8 @@ export default function Tabs() {
             tabBarShowLabel: false,
             tabBarIcon: ({ focused }) => {
               const icon = focused
-                ? <MaterialCommunityIcons name="face-profile" size={40} color="#A8DADC" />
-                : <MaterialCommunityIcons name="face-profile" size={30} color="#A8DADC" />
+                ? <MaterialCommunityIcons name="face-profile" size={40} color={theme.color3} />
+                : <MaterialCommunityIcons name="face-profile" size={30} color={theme.color3} />
               return icon;
               
             },

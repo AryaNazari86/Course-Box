@@ -3,5 +3,5 @@ import dark2 from './dark2';
 import light from './light';
 
 export {dark as dark};
-export {dark2 as dark2};
+export {dark2 as theme};
 export {light as light};
