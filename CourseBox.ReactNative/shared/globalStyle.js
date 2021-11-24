@@ -85,7 +85,7 @@ export const globalStyles = StyleSheet.create({
   normalText: {
     flexDirection: "row",
     fontFamily: "rubik-light",
-    color: theme.color3,
+    color: theme.color2,
   },
 
   // Used for Normal texts on a black background
@@ -174,7 +174,7 @@ export const globalStyles = StyleSheet.create({
     backgroundColor: "#161D28",
     borderColor: "#3D4751",
     marginTop: 20,
-    color: "#A8DADC",
+    color: theme.color3,
     marginTop: 0,
   },
 
@@ -186,7 +186,7 @@ export const globalStyles = StyleSheet.create({
   // Used for showing two texts (mostly a normalText and a highlightText) beside each other
   normalAndHighlightContainer: {
     flexDirection: "row",
-    color: "#A8DADC",
+    color: theme.color3,
   },
 
   smallTitle: {

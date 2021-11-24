@@ -21,6 +21,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { FAB } from "react-native-paper";
 import CourseCreation from "./courseCreation";
 
+// Theme colors
+import {theme} from '../Themes/theme';
 export default function Profile({ navigation }) {
   // If loaded is false, show a loader.
   const [loaded, setLoaded] = useState(false);
@@ -217,7 +219,7 @@ export default function Profile({ navigation }) {
             <CoursesCarousel
               courses={courses}
               navigation={navigation}
-              dotesColor="#A8DADC"
+              dotesColor={theme.color3}
             />
           </View>
 
@@ -227,7 +229,7 @@ export default function Profile({ navigation }) {
             <CoursesCarousel
               courses={courses}
               navigation={navigation}
-              dotesColor="#A8DADC"
+              dotesColor={theme.color3}
             />
           </View>
 
@@ -235,7 +237,7 @@ export default function Profile({ navigation }) {
           <Text style={globalStyles.emptySpacer}>Code Rangers®</Text>
         </ScrollView>
         <FAB
-          color="#A8DADC"
+          color={theme.color3}
           icon="plus"
           style={styles.infoButton}
           onPress={() => setModalVisible(!modalVisible)}
@@ -269,7 +271,7 @@ const styles = StyleSheet.create({
   },
   profileAccountName: {
     fontFamily: "comfortaa-bold",
-    color: "#A8DADC",
+    color: theme.color2,
   },
 
   // * Username
@@ -290,7 +292,7 @@ const styles = StyleSheet.create({
   },
   profileDescriptionText: {
     fontSize: 14,
-    color: "#A8DADC",
+    color: theme.color2,
     textAlign: "center",
     marginRight: 10,
     marginLeft: 10,
@@ -318,7 +320,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     paddingTop: 30,
     textAlign: "center",
-    color: "#A8DADC",
+    color: theme.color2,
     paddingBottom: 5,
   },
   madeCoursesList: {
@@ -337,12 +339,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   infoButton: {
-    left: 335,
+    right: 10,
     bottom: 125,
     width: 70,
     height: 70,
     borderRadius: 100,
-    backgroundColor: "#3D4751",
+    backgroundColor: theme.color2,
     justifyContent: "center",
     alignItems: "center",
     position: "absolute",
@@ -357,7 +359,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-    backgroundColor: "#141D28",
+    backgroundColor: theme.color2,
     borderRadius: 20,
     borderColor: "#FFF",
     borderWidth: 2,
