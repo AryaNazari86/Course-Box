@@ -3,7 +3,7 @@ import { Image, Pressable, TouchableOpacity, Text } from "react-native";
 import { Appbar, TouchableRipple } from "react-native-paper";
 import LottieView from "lottie-react-native";
 import { globalStyles } from "../shared/globalStyle";
-import {theme} from '../Themes/theme';
+import { theme } from '../Themes/theme';
 export default function Header({
   title,
   backButton = false,
@@ -14,13 +14,26 @@ export default function Header({
   headerIconSource,
   fontFamily = "comfortaa-bold",
   height = 45,
-  buttons = [],
+  buttons = []
 }) {
 
   return (
     <Appbar.Header style={[{ height: height }, globalStyles.header]}>
       {backButton ? (<Appbar.BackAction onPress={() => backAction()} />) : null}
-      <Text style={{ fontFamily: fontFamily, color:theme.color2, ...globalStyles.headerTitle}}>{title}</Text>
+      {headerIcon ?
+        (<Image
+          source={headerIconSource}
+          style={[{ marginEnd: -15 }, globalStyles.headerIcon]} />)
+        : null}
+      <Appbar.Content
+        title={title}
+        color="#14213D"
+        titleStyle={[
+          { textAlign: titleAlignment, fontFamily: fontFamily },
+          { fontFamily: fontFamily },
+          globalStyles.headerTitle,
+        ]}
+      />
       {buttons.map((value) => {
         return (
           <Appbar.Action icon={value.icon} onPress={value.onPress} />

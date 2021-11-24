@@ -25,7 +25,6 @@ export const globalStyles = StyleSheet.create({
     fontSize: 26,
     color: theme.color3,
     paddingBottom: 7,
-    textAlign: "left",
     marginLeft: 10,
   },
   headerIcon: {
@@ -37,7 +36,7 @@ export const globalStyles = StyleSheet.create({
   tabBar: {
     borderTopWidth: 2,
     borderTopColor: theme.color2,
-    height: 70,
+    height: 80,
     backgroundColor: theme.color2,
   },
 
