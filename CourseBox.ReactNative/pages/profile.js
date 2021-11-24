@@ -271,7 +271,7 @@ const styles = StyleSheet.create({
   },
   profileAccountName: {
     fontFamily: "comfortaa-bold",
-    color: theme.color2,
+    color: theme.textColor2,
   },
 
   // * Username
@@ -292,7 +292,7 @@ const styles = StyleSheet.create({
   },
   profileDescriptionText: {
     fontSize: 14,
-    color: theme.color2,
+    color: theme.textColor2,
     textAlign: "center",
     marginRight: 10,
     marginLeft: 10,
@@ -320,7 +320,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     paddingTop: 30,
     textAlign: "center",
-    color: theme.color2,
+    color: theme.textColor2,
     paddingBottom: 5,
   },
   madeCoursesList: {
