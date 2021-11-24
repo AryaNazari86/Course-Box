@@ -48,8 +48,8 @@ export default function Tabs() {
             tabBarShowLabel: false,
             tabBarIcon: ({ focused }) => {
               const icon = focused
-                ? <Feather name="search" size={45} color={theme.color3} />
-                : <Feather name="search" size={35} color={theme.color3} />
+                ? <View style={{ borderTopWidth: 2, borderTopColor: theme.color3 }}><Feather name="search" size={45} color={theme.color3} /></View>
+                : <View><Feather name="search" size={35} color={theme.color3} /></View>
               return icon;
             },
             tabBarButton: (props) => <TouchableRipple {...props} />,
@@ -62,8 +62,8 @@ export default function Tabs() {
             tabBarShowLabel: false,
             tabBarIcon: ({ focused }) => {
               const icon = focused
-              ? <Feather name="home" size={45} color={theme.color3} />
-              : <Feather name="home" size={35} color={theme.color3} />
+              ? <View style={{ borderTopWidth: 2, borderTopColor: theme.color3 }}><Feather name="home" size={45} color={theme.color3} /></View>
+              : <View><Feather name="home" size={35} color={theme.color3} /></View>
               return icon;
             },
             tabBarButton: (props) => <TouchableRipple {...props} />,
@@ -76,8 +76,8 @@ export default function Tabs() {
             tabBarShowLabel: false,
             tabBarIcon: ({ focused }) => {
               const icon = focused
-                ? <Feather name="user" size={45} color={theme.color3} />
-                : <Feather name="user" size={35} color={theme.color3} />
+                ? <View style={{ borderTopWidth: 2, borderTopColor: theme.color3 }}><Feather name="user" size={45} color={theme.color3} /></View>
+                : <View><Feather name="user" size={35} color={theme.color3} /></View>
               return icon;
               
             },
