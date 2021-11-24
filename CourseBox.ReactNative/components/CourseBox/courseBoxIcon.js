@@ -4,7 +4,7 @@ export default function CategoryIcon({category, style}) {
     if (category == 'Sports') {
         return (
             <Image
-                source={require('../../assets/3DIcons/Math_3DIcon.png')}
+                source={require('../../assets/3DIcons/رقص.gif')}
                 style={style}
             />
         );
@@ -12,7 +12,7 @@ export default function CategoryIcon({category, style}) {
     else if (category == 'Maths') {
         return (
             <Image
-                source={require('../../assets/3DIcons/Math_3DIcon.png')}
+                source={require('../../assets/3DIcons/رقص.gif')}
                 style={style}
             />
         );

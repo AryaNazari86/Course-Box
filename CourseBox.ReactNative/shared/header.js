@@ -29,7 +29,7 @@ export default function Header({
         title={title}
         color="#14213D"
         titleStyle={[
-          { textAlign: titleAlignment, fontFamily: fontFamily },
+          { fontFamily: fontFamily },
           { fontFamily: fontFamily },
           globalStyles.headerTitle,
         ]}
