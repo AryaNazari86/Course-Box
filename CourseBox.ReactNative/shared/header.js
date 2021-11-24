@@ -14,7 +14,8 @@ export default function Header({
   headerIconSource,
   fontFamily = "comfortaa-bold",
   height = 45,
-  buttons = []
+  buttons = [],
+  titleAlignment = "left"
 }) {
 
   return (
@@ -29,8 +30,7 @@ export default function Header({
         title={title}
         color="#14213D"
         titleStyle={[
-          { fontFamily: fontFamily },
-          { fontFamily: fontFamily },
+          { fontFamily: fontFamily, textAlign: titleAlignment },
           globalStyles.headerTitle,
         ]}
       />
