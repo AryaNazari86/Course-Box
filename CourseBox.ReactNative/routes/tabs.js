@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { AntDesign } from '@expo/vector-icons';
+import { Feather } from '@expo/vector-icons';
 import HomeStack from "./homeStack";
 import SearchStack from "./searchStack";
 import ProfileStack from "./profileStack";
@@ -47,8 +48,8 @@ export default function Tabs() {
             tabBarShowLabel: false,
             tabBarIcon: ({ focused }) => {
               const icon = focused
-                ? <FontAwesome name="search" size={40} color={theme.color3}/>
-                : <FontAwesome name="search" size={30} color={theme.color3} />
+                ? <Feather name="search" size={45} color={theme.color3} />
+                : <Feather name="search" size={35} color={theme.color3} />
               return icon;
             },
             tabBarButton: (props) => <TouchableRipple {...props} />,
@@ -61,8 +62,8 @@ export default function Tabs() {
             tabBarShowLabel: false,
             tabBarIcon: ({ focused }) => {
               const icon = focused
-              ? <AntDesign name="home" size={45} color={theme.color3} />
-              : <AntDesign name="home" size={35} color={theme.color3} />
+              ? <Feather name="home" size={45} color={theme.color3} />
+              : <Feather name="home" size={35} color={theme.color3} />
               return icon;
             },
             tabBarButton: (props) => <TouchableRipple {...props} />,
@@ -75,8 +76,8 @@ export default function Tabs() {
             tabBarShowLabel: false,
             tabBarIcon: ({ focused }) => {
               const icon = focused
-                ? <MaterialCommunityIcons name="face-profile" size={40} color={theme.color3} />
-                : <MaterialCommunityIcons name="face-profile" size={30} color={theme.color3} />
+                ? <Feather name="user" size={45} color={theme.color3} />
+                : <Feather name="user" size={35} color={theme.color3} />
               return icon;
               
             },
