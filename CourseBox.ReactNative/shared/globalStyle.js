@@ -192,4 +192,9 @@ export const globalStyles = StyleSheet.create({
     fontSize: 16,
     paddingTop: 30,
   },
+
+  // For tab icons
+  tabBarIcons: {
+    paddingTop: 10,
+  }
 });
