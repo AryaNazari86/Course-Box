@@ -175,6 +175,7 @@ export const globalStyles = StyleSheet.create({
     marginTop: 20,
     color: theme.color3,
     marginTop: 0,
+    marginBottom: -10,
   },
 
   // Style of the button that hides password
