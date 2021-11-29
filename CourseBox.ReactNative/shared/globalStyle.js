@@ -85,6 +85,7 @@ export const globalStyles = StyleSheet.create({
     flexDirection: "row",
     fontFamily: "rubik-light",
     color: theme.textColor2,
+    fontSize: 18,
   },
 
   // Used for Normal texts on a black background
@@ -159,19 +160,17 @@ export const globalStyles = StyleSheet.create({
     paddingLeft: 20,
     fontSize: 18,
     fontFamily: "rubik-regular",
-    color: theme.color1,
+    color: theme.textColor2,
   },
 
   // The view covering the text input
   textInputView: {
-    borderWidth: 1,
     borderRadius: 10,
     flexDirection: "row",
     alignItems: "center",
     marginTop: 5,
     height: 50,
-    backgroundColor: "#161D28",
-    borderColor: "#3D4751",
+    backgroundColor: theme.color2,
     marginTop: 20,
     color: theme.color3,
     marginTop: 0,
@@ -197,5 +196,5 @@ export const globalStyles = StyleSheet.create({
   // For tab icons
   tabBarIcons: {
     paddingTop: 10,
-  }
+  },
 });

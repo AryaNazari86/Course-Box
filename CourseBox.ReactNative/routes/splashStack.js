@@ -7,6 +7,7 @@ import ForgetPassword_Email from "../pages/Forget Password/forgetPassword-Email"
 import ForgetPassword_Code from "../pages/Forget Password/forgetPassword-Code";
 import ForgetPassword_Password from "../pages/Forget Password/forgetPassword-Password";
 import Tabs from "./tabs";
+import { theme } from "../Themes/theme";
 
 const Stack = createStackNavigator();
 
@@ -15,7 +16,7 @@ export default function SplashStack() {
     <Stack.Navigator
       screenOptions={({ route, navigation }) => ({
         headerMode: "none",
-        cardStyle: { backgroundColor: "#141D28" },
+        cardStyle: { backgroundColor: theme.color1 },
       })}
     >
       <Stack.Screen name="Splash" component={Splash} />
