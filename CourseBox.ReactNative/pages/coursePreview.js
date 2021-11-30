@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, ImageBackground } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import Header from '../shared/header';
@@ -7,15 +7,29 @@ import Subject from '../components/CoursePreviewBlocks/Subjects.js';
 
 export default function CoursePreview(props) {
     const course = props.route.params.datas[0];
+    const [content, setContent] = useState(course.content);
     const navigation = props.route.params.datas[1];
     return (
         <View style={{ backgroundColor: '#141D28', flex: 1 }}>
-            <Header title={course.title} backButton={true} backAction={() => props.navigation.goBack()} height={60} />
+            <Header
+                title={course.title}
+                backButton={true}
+                backAction={() => props.navigation.goBack()}
+                height={60}
+                buttons={[
+                    {
+                        icon: "plus",
+                        onPress: () => {
+                            setContent([...content, { title: "New Subject", icon: "book", content: [] }]);
+                            course.content = content;
+                        }
+                    }
+                ]} />
             <ScrollView >
-                {course.content.map(
+                {content.map(
                     (item) => {
                         return (
-                            <Subject item={item} navigation={navigation}/>
+                            <Subject item={item} navigation={navigation} />
                         )
                     }
 

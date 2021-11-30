@@ -34,7 +34,6 @@ import courses from "../data/courses";
 import LottieView from "lottie-react-native";
 // Global Styles
 import { globalStyles, Theme } from "../shared/globalStyle";
-import { $CombinedState } from "redux";
 
 // Theme colors
 import {theme} from '../Themes/theme';
