@@ -24,7 +24,6 @@ import LessonPreview from "./pages/lessonPreview";
 import ProfileStack from "./routes/profileStack";
 import SplashStack from "./routes/splashStack";
 import CourseCreation from "./pages/courseCreation";
-import {AddLessonBlock} from './pages/addLessonBlock';
 
 const getFonts = () =>
   Font.loadAsync({
@@ -51,9 +50,7 @@ export default function App() {
     if (isConnected) {
       return (
         
-        <NavigationContainer>
-          <Tabs/>
-        </NavigationContainer>
+        <LessonPreview/>
         
       );
     } else {

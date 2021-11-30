@@ -77,7 +77,7 @@ export default function Tabs() {
             tabBarIcon: ({ focused }) => {
               const icon = focused
                 ? <View style={{ borderTopWidth: 2, borderTopColor: theme.color3, ...globalStyles.tabBarIcons}}><Feather name="user" size={40} color={theme.color3} /></View>
-                : <View style={globalStyles.tabBarIcons}><Feather name="user" size={35} color={theme.color3} /></View>
+                : <View style={globalStyles.tabBarIcons }><Feather name="user" size={35} color={theme.color3} /></View>
               return icon;
               
             },
