@@ -71,6 +71,7 @@ export default function Profile({ navigation }) {
           ]}
           profileButton={false}
         />
+        <Button actions={[]}></Button>
         <Modal
           animationType="fade"
           transparent={true}
