@@ -15,9 +15,19 @@ export default function LessonPreview() {
         { type: 'video', content: require('../assets/Videos/ex.mp4'), key: '5' },
         { type: 'code', content: ['print()'] }
     ])
-    const video = React.useRef(null);
-    const [modalVisible, setModalVisible] = useState(false);
-    const [text, onChangeText] = React.useState(" sdfs");
+
+    // Visiblity Vars
+    const [textVisible, setTextVisible] = useState(false);
+    const [headerVisible, setHeaderVisible] = useState(false);
+
+    // Modal Vars
+    const [text, setText] = React.useState("Some Text...");
+    const [header, setHeader] = React.useState("Some Header...");
+
+    // Button Vars
+    const [state, setState] = React.useState({ open: false });
+    const onStateChange = ({ open }) => setState({ open });
+    const { open } = state;
 
 
 
@@ -28,27 +38,20 @@ export default function LessonPreview() {
                 backButton={true}
                 backAction={() => props.navigation.goBack()}
                 height={60}
-                buttons={[
-                    {
-                        icon: "plus",
-                        onPress: () => {
-                            setModalVisible(true);
-                        }
-                    }
-                ]} />
+                />
             <Modal
                 animationType="slide"
                 transparent={true}
-                visible={modalVisible}
+                visible={textVisible}
                 onRequestClose={() => {
                 Alert.alert("Modal has been closed.");
-                setModalVisible(!modalVisible);
+                setModalVisible(!textVisible);
                 }}
             >
                 <View style={styles.centeredView}>
                 <View style={styles.modalView}>
                     <TextInput
-                        onChangeText={onChangeText}
+                        onChangeText={setText}
                         value={text}
                     />
                     <Button
@@ -59,6 +62,31 @@ export default function LessonPreview() {
                 </View>
                 </View>
             </Modal>
+
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={headerVisible}
+                onRequestClose={() => {
+                Alert.alert("Modal has been closed.");
+                setModalVisible(!headerVisible);
+                }}
+            >
+                <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                    <TextInput
+                        onChangeText={setHeader}
+                        value={header}
+                    />
+                    <Button
+                    title="add"
+                    onPress={() => {
+                        setLessonContent([...lessonContent, {type: 'title', content: 'asdj'}])
+                    }}/>
+                </View>
+                </View>
+            </Modal>
+            
             <ScrollView>
                 {/* mapping between every item in each lesson */}
                 {lessonContent.map((item) => {
@@ -71,6 +99,36 @@ export default function LessonPreview() {
                     )
                 })}
             </ScrollView>
+
+            <FAB.Group
+            open={open}
+            icon={open ? 'calendar-today' : 'plus'}
+            actions={[
+                { icon: 'plus', onPress: () => console.log('Pressed add') },
+                {
+                icon: 'text',
+                label: 'Text',
+                onPress: () => setTextVisible(true),
+                },
+                {
+                icon: 'head',
+                label: 'Header',
+                onPress: () => setHeaderVisible(true),
+                },
+                {
+                icon: 'bell',
+                label: 'Remind',
+                onPress: () => console.log('Pressed notifications'),
+                small: false,
+                },
+            ]}
+            onStateChange={onStateChange}
+            onPress={() => {
+                if (open) {
+                // do something if the speed dial is open
+                }
+            }}
+            />
 
             
 
