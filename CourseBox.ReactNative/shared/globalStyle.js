@@ -167,6 +167,9 @@ export const globalStyles = StyleSheet.create({
   // The view covering the text input
   textInputView: {
     borderRadius: 10,
+    borderColor: theme.textColor2,
+    borderWidth: 2,
+
     flexDirection: "row",
     alignItems: "center",
     marginTop: 5,

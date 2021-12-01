@@ -8,6 +8,7 @@ import {
   TextInput,
   TouchableOpacity,
   BackHandler,
+  Image,
 } from "react-native";
 import { globalStyles } from "../shared/globalStyle";
 import Header from "../shared/header";
@@ -17,6 +18,12 @@ import * as yup from "yup";
 import { setStatusBarStyle } from "expo-status-bar";
 import * as UserService from "../Services/userService";
 import { Snackbar } from "react-native-paper";
+
+import { Dimensions } from "react-native";
+import { theme } from "../Themes/theme";
+
+const width = Dimensions.get("window").width;
+const height = Dimensions.get("window").height;
 
 // * Set of yup rules for the text input
 const ReviewSchema = yup.object({
@@ -75,6 +82,10 @@ export default function SignUp({ makeUser, navigation }) {
     >
       <View style={{ flex: 1 }}>
         <Header title="Sign Up" height={60} />
+        <Image
+          source={require("../assets/Images/Backgrounds/5322.jpg")}
+          style={styles.backgroundImage}
+        ></Image>
         <Formik
           initialValues={{ username: "", name: "", email: "", password: "" }}
           validationSchema={ReviewSchema}
@@ -85,7 +96,7 @@ export default function SignUp({ makeUser, navigation }) {
           style={globalStyles.container}
         >
           {(props) => (
-            <View style={globalStyles.container}>
+            <View style={{ ...globalStyles.container, ...styles.container }}>
               <Text
                 style={{
                   ...globalStyles.headerTitle,
@@ -225,7 +236,12 @@ export default function SignUp({ makeUser, navigation }) {
               </TouchableOpacity>
 
               <View style={globalStyles.normalAndHighlightContainer}>
-                <Text style={globalStyles.normalAndHighlightContainer}>
+                <Text
+                  style={{
+                    ...globalStyles.normalAndHighlightContainer,
+                    marginBottom: 20,
+                  }}
+                >
                   Already have an account?{" "}
                 </Text>
                 <TouchableOpacity onPress={signInPress}>
@@ -251,5 +267,19 @@ const styles = StyleSheet.create({
   result: {
     bottom: 0,
     backgroundColor: "#f50a29",
+  },
+
+  backgroundImage: {
+    width: width,
+    height: height,
+  },
+
+  container: {
+    marginTop: -(height / 1.1),
+    width: width * (80 / 100),
+    alignSelf: "center",
+    borderRadius: 20,
+
+    backgroundColor: theme.color2,
   },
 });

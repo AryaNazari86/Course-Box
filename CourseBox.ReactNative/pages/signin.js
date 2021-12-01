@@ -7,6 +7,7 @@ import {
   Keyboard,
   TextInput,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import { globalStyles } from "../shared/globalStyle";
 import Header from "../shared/header";
@@ -16,6 +17,12 @@ import * as yup from "yup";
 import * as UserService from "../Services/userService";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Snackbar } from "react-native-paper";
+
+import { Dimensions } from "react-native";
+import { theme } from "../Themes/theme";
+
+const width = Dimensions.get("window").width;
+const height = Dimensions.get("window").height;
 
 export default function SignIn({ navigation }) {
   const loginSchema = yup.object({
@@ -92,6 +99,10 @@ export default function SignIn({ navigation }) {
           backAction={() => navigation.goBack()}
           height={60}
         />
+        <Image
+          source={require("../assets/Images/Backgrounds/5322.jpg")}
+          style={styles.backgroundImage}
+        ></Image>
         <Formik
           initialValues={{ code: "" }}
           validationSchema={loginSchema}
@@ -101,7 +112,7 @@ export default function SignIn({ navigation }) {
           }}
         >
           {(props) => (
-            <View style={globalStyles.container}>
+            <View style={{ ...globalStyles.container, ...styles.container }}>
               <Text
                 style={{
                   ...globalStyles.headerTitle,
@@ -197,5 +208,19 @@ const styles = StyleSheet.create({
   result: {
     bottom: 0,
     backgroundColor: "#f50a29",
+  },
+
+  backgroundImage: {
+    width: width,
+    height: height,
+  },
+
+  container: {
+    marginTop: -(height / 1.3),
+    width: width * (80 / 100),
+    alignSelf: "center",
+    borderRadius: 20,
+
+    backgroundColor: theme.color2,
   },
 });
