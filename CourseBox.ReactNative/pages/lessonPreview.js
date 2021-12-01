@@ -44,7 +44,6 @@ export default function LessonPreview() {
                 transparent={true}
                 visible={textVisible}
                 onRequestClose={() => {
-                Alert.alert("Modal has been closed.");
                 setModalVisible(!textVisible);
                 }}
             >

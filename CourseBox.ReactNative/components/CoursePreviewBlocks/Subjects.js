@@ -1,28 +1,42 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView, ImageBackground } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import React, { useRef, useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, ImageBackground, TextInput, Keyboard } from 'react-native';
+import { MaterialIcons, Feather } from '@expo/vector-icons';
 import Lesson from './Lesson.js';
-export default function Subject( {item, navigation, theme} ) {
+import { globalStyles } from '../../shared/globalStyle.js';
+export default function Subject({ item, navigation, theme }) {
+    const [editable, setEditable] = useState(false);
+    const [editIcon, setEditIcon] = useState('edit-2');
+    const editSubject = () => {
+        setEditable(true);
+        setEditIcon("check");
+    };
+    const inputRef = useRef();
     return (
-    <View style={styles.subject}>
-        {/* Subject's title */}
-        <View style={styles.subjectTitle}>
-            {/* Icon */}
-            <MaterialIcons name={item.icon} size={100} color='#3D4751' style={styles.subjectIcon} />
-            {/* Text */}
-            <Text style={styles.subjectTitleText}>{item.title}</Text>
+        <View style={styles.subject}>
+            <TouchableOpacity style={styles.editIcon} onPress={editSubject  }>
+                <Feather
+                    name={editIcon}
+                    size={24}
+                    color="white" />
+            </TouchableOpacity>
+            {/* Subject's title */}
+            <View style={styles.subjectTitle}>
+                {/* Icon */}
+                <MaterialIcons name={item.icon} size={100} color='#3D4751' style={styles.subjectIcon} />
+                {/* Text */}
+                <TextInput editable={editable} style={styles.subjectTitleText}>{item.title}</TextInput>
+            </View>
+            <View style={styles.subjectQls}>
+                {item.content.map(
+                    (item) => {
+                        {/* Each lesson of the subject  */ }
+                        return (
+                            <Lesson item={item} navigation={navigation} />
+                        )
+                    }
+                )}
+            </View>
         </View>
-        <View style={styles.subjectQls}>
-            {item.content.map(
-                (item) => {
-                    {/* Each lesson of the subject  */ }
-                    return (
-                        <Lesson item={item} navigation={navigation} />
-                    )
-                }
-            )}
-        </View>
-    </View>
     );
 }
 
@@ -45,8 +59,8 @@ const styles = StyleSheet.create({
     subjectTitleText: {
         alignSelf: 'center',
         fontSize: 25,
-        fontFamily: 'rubik-bold',
         color: '#A8DADC',
+        fontWeight: '100',
         fontFamily: 'comfortaa-bold',
     },
     subjectQls: {
@@ -80,4 +94,9 @@ const styles = StyleSheet.create({
         borderColor: '#3D4751',
         overflow: 'hidden',
     },
+    editIcon: {
+        position: 'absolute',
+        top: 15,
+        right: 15,
+    }
 });
