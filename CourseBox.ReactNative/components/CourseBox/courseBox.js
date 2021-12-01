@@ -51,10 +51,10 @@ const styles = StyleSheet.create({
     height: 435,
   },
   courseImage: {
-    width: 230,
-    height: 140,
+    width: 180,
+    height: 180,
     overflow: "visible",
-    bottom: 20,
+    top: -50,
   },
   coursesBox: {
     marginTop: 60,
@@ -73,11 +73,11 @@ const styles = StyleSheet.create({
     color: theme.color2,
     fontFamily: "rubik-bold",
     height: 35,
-    marginTop: 5,
     fontSize: 25,
     marginLeft: 10,
     alignSelf: "flex-start",
     flexWrap: "wrap",
+    top: -50,
   },
   courseButton: {
     backgroundColor: theme.color3,
@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
     height: 90,
     borderRadius: 50,
     overflow: "visible",
+    top: -50,
     alignItems: "center",
   },
   courseDescription: {
@@ -93,6 +94,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginLeft: 10,
     alignSelf: "flex-start",
+    top: -50,
     height: 100,
   },
 });

@@ -22,7 +22,7 @@ import { FAB } from "react-native-paper";
 import CourseCreation from "./courseCreation";
 
 // Theme colors
-import {theme} from '../Themes/theme';
+import { theme } from "../Themes/theme";
 export default function Profile({ navigation }) {
   // If loaded is false, show a loader.
   const [loaded, setLoaded] = useState(false);
@@ -71,7 +71,6 @@ export default function Profile({ navigation }) {
           ]}
           profileButton={false}
         />
-        <Button actions={[]}></Button>
         <Modal
           animationType="fade"
           transparent={true}

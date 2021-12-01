@@ -3,6 +3,7 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { globalStyles } from "../../shared/globalStyle";
 import SelectDropdown from "react-native-select-dropdown";
+import { theme } from "../../Themes/theme";
 
 export default function SettingButton({
   buttonText,
@@ -162,7 +163,7 @@ const styles = StyleSheet.create({
     width: 200,
     height: 40,
 
-    backgroundColor: "#161D28",
+    backgroundColor: theme.color1,
     color: "#A8DADC",
     borderColor: "#A8DADC",
 
@@ -199,7 +200,7 @@ const styles = StyleSheet.create({
     width: 200,
     height: 40,
 
-    backgroundColor: "#161D28",
+    backgroundColor: theme.color1,
     color: "#A8DADC",
     borderColor: "#A8DADC",
 
@@ -213,7 +214,7 @@ const styles = StyleSheet.create({
   },
 
   dropDownDrop: {
-    backgroundColor: "#161D28",
+    backgroundColor: theme.color1,
 
     borderBottomColor: "#A8DADC",
 
@@ -222,7 +223,7 @@ const styles = StyleSheet.create({
   },
 
   dropDownRow: {
-    backgroundColor: "#161D28",
+    backgroundColor: theme.color1,
 
     borderColor: "#A8DADC",
 

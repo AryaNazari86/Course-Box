@@ -70,13 +70,14 @@ export const globalStyles = StyleSheet.create({
   // Used for highlited texts or links
   highlitedText: {
     color: "#00A19D",
+    paddingTop: 3,
   },
 
   // Used for showing errors
   errorText: {
     color: "crimson",
     fontWeight: "bold",
-    marginTop: 6,
+    marginTop: 15,
     textAlign: "center",
   },
 
@@ -129,7 +130,7 @@ export const globalStyles = StyleSheet.create({
 
   // Style of the button
   button: {
-    backgroundColor: "#A1D1D3",
+    backgroundColor: theme.textColor2,
     width: 330,
     height: 50,
     borderRadius: 10,
@@ -186,11 +187,12 @@ export const globalStyles = StyleSheet.create({
   normalAndHighlightContainer: {
     flexDirection: "row",
     color: theme.color3,
+    paddingTop: 3,
   },
 
   smallTitle: {
     fontSize: 16,
-    paddingTop: 30,
+    paddingTop: 15,
   },
 
   // For tab icons
