@@ -49,9 +49,9 @@ export default function App() {
   if (fontsLoaded) {
     if (isConnected) {
       return (
-        
-        <LessonPreview/>
-        
+        <NavigationContainer>
+          <Tabs />
+        </NavigationContainer>
       );
     } else {
       return <Splash disconnected={true} />;
