@@ -23,6 +23,7 @@ import { Formik } from "formik";
 import * as yup from "yup";
 
 import SettingButton from "../components/SettingButton/settingButton";
+import { theme } from "../Themes/theme";
 
 export default function CourseCreation({ navigation, closeFunc }) {
   // If loaded is false, show a loader.
@@ -207,7 +208,7 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     fontSize: 18,
     fontFamily: "rubik-regular",
-    color: "#A8DADC",
+    color: theme.textColor2,
     height: 100,
 
     marginTop: 20,
@@ -220,7 +221,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 5,
     height: 100,
-    backgroundColor: "#161D28",
+    backgroundColor: theme.color2,
     borderColor: "#3D4751",
     marginTop: 20,
     color: "#A8DADC",

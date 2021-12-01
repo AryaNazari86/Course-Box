@@ -2,8 +2,9 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import Profile from "../pages/profile";
 import CoursePreview from "../pages/coursePreview";
-import LessonPreview from '../pages/lessonPreview';
-import SettingsPage from '../pages/settings';
+import LessonPreview from "../pages/lessonPreview";
+import SettingsPage from "../pages/settings";
+import { theme } from "../Themes/theme";
 const Stack = createStackNavigator();
 
 export default function ProfileStack() {
@@ -11,7 +12,7 @@ export default function ProfileStack() {
     <Stack.Navigator
       screenOptions={({ route, navigation }) => ({
         headerMode: "none",
-        cardStyle: { backgroundColor: "#141D28" },
+        cardStyle: { backgroundColor: theme.color1 },
       })}
     >
       {/* the profile page */}

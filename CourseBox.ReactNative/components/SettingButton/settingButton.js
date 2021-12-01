@@ -164,8 +164,8 @@ const styles = StyleSheet.create({
     height: 40,
 
     backgroundColor: theme.color1,
-    color: "#A8DADC",
-    borderColor: "#A8DADC",
+    color: theme.textColor2,
+    borderColor: theme.textColor2,
 
     borderWidth: 2,
     borderRadius: 10,
@@ -190,6 +190,7 @@ const styles = StyleSheet.create({
 
   blueTest: {
     justifyContent: "center",
+    backgroundColor: theme.color1,
   },
 
   bigBlueTest: {
@@ -201,8 +202,8 @@ const styles = StyleSheet.create({
     height: 40,
 
     backgroundColor: theme.color1,
-    color: "#A8DADC",
-    borderColor: "#A8DADC",
+    color: theme.color1,
+    borderColor: theme.textColor2,
 
     borderWidth: 2,
     borderRadius: 10,
@@ -210,13 +211,13 @@ const styles = StyleSheet.create({
 
   dropDownText: {
     fontSize: 18,
-    color: "#A8DADC",
+    color: theme.textColor2,
   },
 
   dropDownDrop: {
     backgroundColor: theme.color1,
 
-    borderBottomColor: "#A8DADC",
+    borderBottomColor: theme.textColor2,
 
     borderBottomWidth: 2,
     borderRadius: 10,
@@ -225,7 +226,7 @@ const styles = StyleSheet.create({
   dropDownRow: {
     backgroundColor: theme.color1,
 
-    borderColor: "#A8DADC",
+    borderColor: theme.textColor2,
 
     borderWidth: 2,
   },
@@ -234,7 +235,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flex: 1,
     borderRightWidth: 2,
-    borderRightColor: "#A8DADC",
+    borderRightColor: theme.textColor2,
   },
 
   switchBlueTest: {
