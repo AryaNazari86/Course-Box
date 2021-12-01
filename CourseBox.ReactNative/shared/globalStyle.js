@@ -183,7 +183,7 @@ export const globalStyles = StyleSheet.create({
 
   // Style of the button that hides password
   hideIcon: {
-    padding: 25,
+    margin: 25,
   },
 
   // Used for showing two texts (mostly a normalText and a highlightText) beside each other

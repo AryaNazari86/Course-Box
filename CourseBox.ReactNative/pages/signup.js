@@ -83,7 +83,7 @@ export default function SignUp({ makeUser, navigation }) {
       <View style={{ flex: 1 }}>
         <Header title="Sign Up" height={60} />
         <Image
-          source={require("../assets/Images/Backgrounds/5322.jpg")}
+          source={require("../assets/Images/Backgrounds/wp2003036.jpg")}
           style={styles.backgroundImage}
         ></Image>
         <Formik
@@ -97,49 +97,32 @@ export default function SignUp({ makeUser, navigation }) {
         >
           {(props) => (
             <View style={{ ...globalStyles.container, ...styles.container }}>
-              <Text
-                style={{
-                  ...globalStyles.headerTitle,
-                  ...globalStyles.smallTitle,
-                }}
-              >
-                Account Username
-              </Text>
               {/* Username */}
-              <View style={globalStyles.textInputView}>
+              <View style={{ ...globalStyles.textInputView, marginTop: 20 }}>
                 <TextInput
                   style={globalStyles.inputComp}
-                  // placeholder="Username"
+                  placeholder="Username"
                   onChangeText={props.handleChange("username")}
                   value={props.values.username}
                   onBlur={props.handleBlur("username")}
                   placeholderTextColor={"black"}
-                  placeholderTextColor="#A8DADC"
+                  placeholderTextColor={theme.textColor2}
                 />
               </View>
 
               <Text style={globalStyles.errorText}>
                 {props.touched.username && props.errors.username}
               </Text>
-
-              <Text
-                style={{
-                  ...globalStyles.headerTitle,
-                  ...globalStyles.smallTitle,
-                }}
-              >
-                Account Name
-              </Text>
               {/* Name */}
               <View style={globalStyles.textInputView}>
                 <TextInput
                   style={globalStyles.inputComp}
-                  // placeholder="Name"
+                  placeholder="Name"
                   onChangeText={props.handleChange("name")}
                   value={props.values.name}
                   onBlur={props.handleBlur("name")}
                   placeholderTextColor={"black"}
-                  placeholderTextColor="#A8DADC"
+                  placeholderTextColor={theme.textColor2}
                 />
               </View>
 
@@ -147,25 +130,17 @@ export default function SignUp({ makeUser, navigation }) {
                 {props.touched.name && props.errors.name}
               </Text>
 
-              <Text
-                style={{
-                  ...globalStyles.headerTitle,
-                  ...globalStyles.smallTitle,
-                }}
-              >
-                Account Email
-              </Text>
               {/* Email */}
               <View style={globalStyles.textInputView}>
                 {/* <MaterialIcons name="email" size={40} color="black" style={{ paddingLeft: 5, }} /> */}
                 <TextInput
                   style={globalStyles.inputComp}
-                  // placeholder="Email"
+                  placeholder="Email"
                   onChangeText={props.handleChange("email")}
                   value={props.values.email}
                   onBlur={props.handleBlur("email")}
                   placeholderTextColor={"black"}
-                  placeholderTextColor="#A8DADC"
+                  placeholderTextColor={theme.textColor2}
                 />
               </View>
 
@@ -173,32 +148,23 @@ export default function SignUp({ makeUser, navigation }) {
                 {props.touched.email && props.errors.email}
               </Text>
 
-              <Text
-                style={{
-                  ...globalStyles.headerTitle,
-                  ...globalStyles.smallTitle,
-                }}
-              >
-                Account Password
-              </Text>
-
               {/* Password */}
               <View style={globalStyles.textInputView}>
                 <TextInput
                   style={{ ...globalStyles.inputComp, ...styles.input }}
-                  // placeholder="Password"
+                  placeholder="Password"
                   onChangeText={props.handleChange("password")}
                   value={props.values.password}
                   onBlur={props.handleBlur("password")}
                   secureTextEntry={hidePass}
                   placeholderTextColor={"black"}
-                  placeholderTextColor="#A8DADC"
+                  placeholderTextColor={theme.textColor2}
                 />
                 <TouchableOpacity onPress={hidePassFunc}>
                   <MaterialCommunityIcons
                     name={hidePassIcon}
                     size={30}
-                    color="#A8DADC"
+                    color={theme.textColor2}
                     style={globalStyles.hideIcon}
                   />
                 </TouchableOpacity>
@@ -275,11 +241,15 @@ const styles = StyleSheet.create({
   },
 
   container: {
-    marginTop: -(height / 1.1),
-    width: width * (80 / 100),
+    marginTop: -(height / 1.15),
+    width: 370,
     alignSelf: "center",
     borderRadius: 20,
 
     backgroundColor: theme.color2,
+
+    shadowOpacity: 0.25,
+    shadowRadius: 3.04,
+    elevation: 5,
   },
 });

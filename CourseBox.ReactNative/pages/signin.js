@@ -100,7 +100,7 @@ export default function SignIn({ navigation }) {
           height={60}
         />
         <Image
-          source={require("../assets/Images/Backgrounds/5322.jpg")}
+          source={require("../assets/Images/Backgrounds/wp2003036.jpg")}
           style={styles.backgroundImage}
         ></Image>
         <Formik
@@ -192,6 +192,7 @@ export default function SignIn({ navigation }) {
             </View>
           )}
         </Formik>
+
         <Snackbar style={styles.result} visible={showResult}>
           {result}
         </Snackbar>
@@ -217,10 +218,14 @@ const styles = StyleSheet.create({
 
   container: {
     marginTop: -(height / 1.3),
-    width: width * (80 / 100),
+    width: 370,
     alignSelf: "center",
     borderRadius: 20,
 
     backgroundColor: theme.color2,
+
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
 });
