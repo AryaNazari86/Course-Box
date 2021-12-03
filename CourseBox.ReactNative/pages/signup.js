@@ -246,8 +246,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     borderRadius: 20,
 
-    backgroundColor: theme.color2,
-
     shadowOpacity: 0.25,
     shadowRadius: 3.04,
     elevation: 5,

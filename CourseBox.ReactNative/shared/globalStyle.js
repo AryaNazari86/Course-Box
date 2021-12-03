@@ -174,7 +174,7 @@ export const globalStyles = StyleSheet.create({
     alignItems: "center",
     marginTop: 5,
     height: 50,
-    backgroundColor: theme.color2,
+    backgroundColor: theme.color1,
     marginTop: 20,
     color: theme.color3,
     marginTop: 0,

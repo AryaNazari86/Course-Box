@@ -27,7 +27,7 @@ const height = Dimensions.get("window").height;
 export default function SignIn({ navigation }) {
   const loginSchema = yup.object({
     email: yup.string().required().min(4),
-    password: yup.string().required().min(5).max(100),
+    password: yup.string().required().min(5),
   });
 
   const [showResult, setShowResult] = useState(false);
@@ -113,23 +113,15 @@ export default function SignIn({ navigation }) {
         >
           {(props) => (
             <View style={{ ...globalStyles.container, ...styles.container }}>
-              <Text
-                style={{
-                  ...globalStyles.headerTitle,
-                  ...globalStyles.smallTitle,
-                }}
-              >
-                Account Email
-              </Text>
               {/* Email */}
-              <View style={globalStyles.textInputView}>
+              <View style={{ ...globalStyles.textInputView, marginTop: 20 }}>
                 <TextInput
                   style={globalStyles.inputComp}
-                  // placeholder="Email"
+                  placeholder="Email"
                   onChangeText={props.handleChange("email")}
                   value={props.values.email}
                   onBlur={props.handleBlur("email")}
-                  placeholderTextColor="#A8DADC"
+                  placeholderTextColor={theme.textColor2}
                 />
               </View>
 
@@ -137,25 +129,17 @@ export default function SignIn({ navigation }) {
                 {props.touched.email && props.errors.email}
               </Text>
 
-              <Text
-                style={{
-                  ...globalStyles.headerTitle,
-                  ...globalStyles.smallTitle,
-                }}
-              >
-                Account Password
-              </Text>
-
               {/* Password */}
               <View style={globalStyles.textInputView}>
                 <TextInput
                   style={{ ...globalStyles.inputComp, ...styles.input }}
-                  // placeholder="Password"
+                  placeholder="Password"
                   secureTextEntry={hidePass}
                   onChangeText={props.handleChange("password")}
                   value={props.values.password}
                   onBlur={props.handleBlur("password")}
-                  placeholderTextColor="#A8DADC"
+                  placeholderTextColor={theme.textColor2}
+                  maxLength={100}
                 />
                 <TouchableOpacity onPress={hidePassFunc}>
                   <MaterialCommunityIcons
@@ -221,8 +205,6 @@ const styles = StyleSheet.create({
     width: 370,
     alignSelf: "center",
     borderRadius: 20,
-
-    backgroundColor: theme.color2,
 
     shadowOpacity: 0.25,
     shadowRadius: 3.84,

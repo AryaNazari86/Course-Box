@@ -88,28 +88,21 @@ export default function CourseCreation({ navigation, closeFunc }) {
         >
           {(props) => (
             <View style={globalStyles.container}>
-              <Text
-                style={{
-                  ...globalStyles.headerTitle,
-                  ...globalStyles.smallTitle,
-                }}
-              >
-                Name Of The Course
-              </Text>
               {/* Course Name */}
               <View
                 style={{
                   ...globalStyles.textInputView,
+                  marginTop: 20,
                 }}
               >
                 <TextInput
                   style={globalStyles.inputComp}
-                  // placeholder="Course Name"
+                  placeholder="Course Name"
                   onChangeText={props.handleChange("courseName")}
                   value={props.values.courseName}
                   onBlur={props.handleBlur("courseName")}
                   placeholderTextColor={"black"}
-                  placeholderTextColor="#A8DADC"
+                  placeholderTextColor={theme.textColor2}
                   maxLength={10}
                 />
               </View>
@@ -118,14 +111,6 @@ export default function CourseCreation({ navigation, closeFunc }) {
                 {props.touched.courseName && props.errors.courseName}
               </Text>
 
-              <Text
-                style={{
-                  ...globalStyles.headerTitle,
-                  ...globalStyles.smallTitle,
-                }}
-              >
-                Description Of The Course
-              </Text>
               {/* Course Description */}
               <View
                 style={{
@@ -135,14 +120,14 @@ export default function CourseCreation({ navigation, closeFunc }) {
               >
                 <TextInput
                   style={styles.largeInputComp}
-                  // placeholder="Course Name"
+                  placeholder="Course Name"
                   multiline={true}
                   numberOfLines={3}
                   onChangeText={props.handleChange("courseDescription")}
                   value={props.values.courseDescription}
                   onBlur={props.handleBlur("courseDescription")}
                   placeholderTextColor={"black"}
-                  placeholderTextColor="#A8DADC"
+                  placeholderTextColor={theme.textColor2}
                   maxLength={80}
                   textAlignVertical={"top"}
                 />
@@ -215,14 +200,15 @@ const styles = StyleSheet.create({
   },
 
   largeTextInputView: {
-    borderWidth: 1,
     borderRadius: 10,
+    borderColor: theme.textColor2,
+    borderWidth: 2,
+
     flexDirection: "row",
     alignItems: "center",
     marginTop: 5,
     height: 100,
-    backgroundColor: theme.color2,
-    borderColor: "#3D4751",
+    backgroundColor: theme.color1,
     marginTop: 20,
     color: "#A8DADC",
   },
