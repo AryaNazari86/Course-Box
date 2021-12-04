@@ -7,13 +7,18 @@ export default function Subject({ item, navigation, theme }) {
     const [editable, setEditable] = useState(false);
     const [editIcon, setEditIcon] = useState('edit-2');
     const editSubject = () => {
-        setEditable(true);
-        setEditIcon("check");
+        if (editable) {
+            setEditable(false);
+            setEditIcon("edit-2");
+        }
+        else {
+            setEditable(true);
+            setEditIcon("check");
+        }
     };
-    const inputRef = useRef();
     return (
         <View style={styles.subject}>
-            <TouchableOpacity style={styles.editIcon} onPress={editSubject  }>
+            <TouchableOpacity style={styles.editIcon} onPress={editSubject}>
                 <Feather
                     name={editIcon}
                     size={24}
@@ -22,9 +27,12 @@ export default function Subject({ item, navigation, theme }) {
             {/* Subject's title */}
             <View style={styles.subjectTitle}>
                 {/* Icon */}
-                <MaterialIcons name={item.icon} size={100} color='#3D4751' style={styles.subjectIcon} />
+                <View style={styles.subjectIcon}>
+                    <MaterialIcons name={item.icon} size={100} color='#3D4751' />
+                    {editable ? <TouchableOpacity style={styles.subjectEditIconButton}><Feather name="edit-2" size={35} color='white' style={styles.subjectEditIcon} /></TouchableOpacity> : null}
+                </View>
                 {/* Text */}
-                <TextInput editable={editable} style={styles.subjectTitleText}>{item.title}</TextInput>
+                <TextInput editable={editable} style={{ borderBottomColor: editable ? '#A8DADC' : 'transparent', ...styles.subjectTitleText }}>{item.title}</TextInput>
             </View>
             <View style={styles.subjectQls}>
                 {item.content.map(
@@ -50,7 +58,14 @@ const styles = StyleSheet.create({
         paddingBottom: 10,
     },
     subjectIcon: {
-        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    subjectEditIconButton: {
+        position: 'absolute',
+    },
+    subjectEditIcon: {
+        opacity: 0.6
     },
     subjectTitle: {
         alignSelf: 'center',
@@ -62,6 +77,9 @@ const styles = StyleSheet.create({
         color: '#A8DADC',
         fontWeight: '100',
         fontFamily: 'comfortaa-bold',
+        borderBottomLeftRadius: 5,
+        borderBottomRightRadius: 5,
+        borderBottomWidth: 2,
     },
     subjectQls: {
         flexDirection: 'row',
