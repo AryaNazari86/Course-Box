@@ -19,7 +19,6 @@ export default function SplashStack() {
         cardStyle: { backgroundColor: theme.color1 },
       })}
     >
-      <Stack.Screen name="Splash" component={Splash} />
       <Stack.Screen name="SignUp" component={SignUp} />
       <Stack.Screen name="SignIn" component={SignIn} />
       <Stack.Screen name="Tab" component={Tabs} />

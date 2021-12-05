@@ -120,6 +120,7 @@ export const globalStyles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: theme.color1,
   },
 
   // Style of loading animation

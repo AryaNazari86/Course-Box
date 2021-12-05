@@ -23,6 +23,10 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "splash": {
+      "image": "./assets/splash.png",
+      "backgroundColor": "#484469"
     }
   },
   "androidNavigationBar": {
