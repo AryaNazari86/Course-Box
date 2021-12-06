@@ -8,6 +8,7 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
+  ImageBackground,
 } from "react-native";
 import { globalStyles } from "../shared/globalStyle";
 import Header from "../shared/header";
@@ -99,87 +100,89 @@ export default function SignIn({ navigation }) {
           backAction={() => navigation.goBack()}
           height={60}
         />
-        <Image
+        <ImageBackground
           source={require("../assets/Images/Backgrounds/wp2003036.jpg")}
-          style={styles.backgroundImage}
-        ></Image>
-        <Formik
-          initialValues={{ code: "" }}
-          validationSchema={loginSchema}
-          onSubmit={(values, actions) => {
-            signInPress(values);
-            actions.resetForm();
-          }}
+          resizeMode="cover"
+          style={styles.image}
         >
-          {(props) => (
-            <View style={{ ...globalStyles.container, ...styles.container }}>
-              {/* Email */}
-              <View style={{ ...globalStyles.textInputView, marginTop: 20 }}>
-                <TextInput
-                  style={globalStyles.inputComp}
-                  placeholder="Email"
-                  onChangeText={props.handleChange("email")}
-                  value={props.values.email}
-                  onBlur={props.handleBlur("email")}
-                  placeholderTextColor={theme.textColor2}
-                />
-              </View>
-
-              <Text style={globalStyles.errorText}>
-                {props.touched.email && props.errors.email}
-              </Text>
-
-              {/* Password */}
-              <View style={globalStyles.textInputView}>
-                <TextInput
-                  style={{ ...globalStyles.inputComp, ...styles.input }}
-                  placeholder="Password"
-                  secureTextEntry={hidePass}
-                  onChangeText={props.handleChange("password")}
-                  value={props.values.password}
-                  onBlur={props.handleBlur("password")}
-                  placeholderTextColor={theme.textColor2}
-                  maxLength={100}
-                />
-                <TouchableOpacity onPress={hidePassFunc}>
-                  <MaterialCommunityIcons
-                    name={hidePassIcon}
-                    size={30}
-                    color="#A8DADC"
-                    style={globalStyles.hideIcon}
+          <Formik
+            initialValues={{ code: "" }}
+            validationSchema={loginSchema}
+            onSubmit={(values, actions) => {
+              signInPress(values);
+              actions.resetForm();
+            }}
+          >
+            {(props) => (
+              <View style={{ ...globalStyles.container, ...styles.container }}>
+                {/* Email */}
+                <View style={{ ...globalStyles.textInputView, marginTop: 20 }}>
+                  <TextInput
+                    style={globalStyles.inputComp}
+                    placeholder="Email"
+                    onChangeText={props.handleChange("email")}
+                    value={props.values.email}
+                    onBlur={props.handleBlur("email")}
+                    placeholderTextColor={theme.textColor2}
                   />
-                </TouchableOpacity>
-              </View>
+                </View>
 
-              <Text style={globalStyles.errorText}>
-                {props.touched.password && props.errors.password}
-              </Text>
-
-              {/* Accept the privacy policy */}
-              <View style={globalStyles.normalAndHighlightContainer}>
-                <Text style={globalStyles.normalAndHighlightContainer}>
-                  Did you{" "}
+                <Text style={globalStyles.errorText}>
+                  {props.touched.email && props.errors.email}
                 </Text>
-                <TouchableOpacity onPress={forgetPress}>
-                  <Text style={globalStyles.highlitedText}>
-                    Forget your password?
+
+                {/* Password */}
+                <View style={globalStyles.textInputView}>
+                  <TextInput
+                    style={{ ...globalStyles.inputComp, ...styles.input }}
+                    placeholder="Password"
+                    secureTextEntry={hidePass}
+                    onChangeText={props.handleChange("password")}
+                    value={props.values.password}
+                    onBlur={props.handleBlur("password")}
+                    placeholderTextColor={theme.textColor2}
+                    maxLength={100}
+                  />
+                  <TouchableOpacity onPress={hidePassFunc}>
+                    <MaterialCommunityIcons
+                      name={hidePassIcon}
+                      size={30}
+                      color="#A8DADC"
+                      style={globalStyles.hideIcon}
+                    />
+                  </TouchableOpacity>
+                </View>
+
+                <Text style={globalStyles.errorText}>
+                  {props.touched.password && props.errors.password}
+                </Text>
+
+                {/* Accept the privacy policy */}
+                <View style={globalStyles.normalAndHighlightContainer}>
+                  <Text style={globalStyles.normalAndHighlightContainer}>
+                    Did you{" "}
                   </Text>
+                  <TouchableOpacity onPress={forgetPress}>
+                    <Text style={globalStyles.highlitedText}>
+                      Forget your password?
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+                {/* Sign Up Button */}
+                <TouchableOpacity
+                  style={globalStyles.button}
+                  onPress={props.handleSubmit}
+                >
+                  <Text style={globalStyles.buttonText}>Sign In</Text>
                 </TouchableOpacity>
               </View>
-              {/* Sign Up Button */}
-              <TouchableOpacity
-                style={globalStyles.button}
-                onPress={props.handleSubmit}
-              >
-                <Text style={globalStyles.buttonText}>Sign In</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-        </Formik>
+            )}
+          </Formik>
 
-        <Snackbar style={styles.result} visible={showResult}>
-          {result}
-        </Snackbar>
+          <Snackbar style={styles.result} visible={showResult}>
+            {result}
+          </Snackbar>
+        </ImageBackground>
       </View>
     </TouchableWithoutFeedback>
   );
@@ -201,7 +204,6 @@ const styles = StyleSheet.create({
   },
 
   container: {
-    marginTop: -(height / 1.3),
     width: 370,
     alignSelf: "center",
     borderRadius: 20,
@@ -209,5 +211,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+    marginBottom: 60,
+  },
+
+  image: {
+    flex: 1,
+    justifyContent: "center",
   },
 });

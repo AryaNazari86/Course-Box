@@ -78,6 +78,7 @@ export const globalStyles = StyleSheet.create({
     color: "crimson",
     fontWeight: "bold",
     marginTop: 15,
+    marginBottom: 10,
     textAlign: "center",
   },
 
