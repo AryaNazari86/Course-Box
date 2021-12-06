@@ -27,6 +27,8 @@ export default function SettingsPage({ navigation }) {
   const testFunc = () => {};
 
   const countries = ["Light", "Dark", "Auto"];
+  const themes = ["Dark", "Dark2", "Light"];
+  const language = ["English", "Farsi"];
 
   if (loaded) {
     return (
@@ -43,7 +45,7 @@ export default function SettingsPage({ navigation }) {
           <Text style={{ ...globalStyles.headerTitle, ...styles.headerText }}>
             Profile
           </Text>
-          <View style={globalStyles.container}>
+          <View style={{ ...globalStyles.container, marginTop: -15 }}>
             <SettingButton
               buttonText={"Profile Name"}
               buttonStyle="Edit"
@@ -65,9 +67,10 @@ export default function SettingsPage({ navigation }) {
             </Text>
             <View style={globalStyles.container}>
               <SettingButton
-                buttonText={"App Theme"}
-                buttonStyle="Switch"
+                buttonText={"Language"}
+                buttonStyle="Dropdown"
                 functionName={testFunc}
+                dropDownList={themes}
               />
             </View>
             {/* Language */}
@@ -79,7 +82,7 @@ export default function SettingsPage({ navigation }) {
                 buttonText={"Language"}
                 buttonStyle="Dropdown"
                 functionName={testFunc}
-                dropDownList={countries}
+                dropDownList={language}
               />
             </View>
             {/* Empty Spacer */}
@@ -87,7 +90,7 @@ export default function SettingsPage({ navigation }) {
             <Text style={{ ...globalStyles.headerTitle, ...styles.headerText }}>
               About Us
             </Text>
-            <View style={globalStyles.container}>
+            <View style={{ ...globalStyles.container, marginTop: -16 }}>
               <SettingButton
                 buttonText={"About Code Rangers"}
                 buttonStyle="Edit"
@@ -128,8 +131,8 @@ export default function SettingsPage({ navigation }) {
 const styles = StyleSheet.create({
   headerText: {
     textAlign: "center",
-    paddingTop: 20,
-    fontSize: 22,
+    paddingTop: 25,
+    paddingBottom: 10,
   },
   settingView: {
     borderWidth: 1,

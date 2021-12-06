@@ -22,10 +22,11 @@ export const globalStyles = StyleSheet.create({
 
   // Title of the header
   headerTitle: {
-    fontSize: 26,
+    fontSize: 20,
     color: theme.color3,
     paddingBottom: 7,
     marginLeft: 10,
+    fontFamily: "comfortaa-bold",
   },
   headerIcon: {
     width: 30,
@@ -108,9 +109,9 @@ export const globalStyles = StyleSheet.create({
   },
 
   smallButtonText: {
-    fontSize: 25,
+    fontSize: 13,
     color: theme.color3,
-    fontFamily: "rubik-light",
+    fontFamily: "comfortaa-bold",
 
     alignSelf: "center",
     paddingBottom: 4,

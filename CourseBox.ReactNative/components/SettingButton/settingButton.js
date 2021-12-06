@@ -91,11 +91,13 @@ export default function SettingButton({
             buttonTextStyle={{
               ...globalStyles.smallButtonText,
               ...styles.editText,
+              fontSize: 18,
             }}
             dropdownStyle={styles.dropDownDrop}
             rowTextStyle={{
               ...globalStyles.smallButtonText,
               ...styles.editText,
+              fontSize: 18,
             }}
             rowStyle={styles.dropDownRow}
             buttonTextAfterSelection={(selectedItem, index) => {
@@ -142,7 +144,6 @@ export default function SettingButton({
 const styles = StyleSheet.create({
   buttonText: {
     marginLeft: 10,
-    fontSize: 18,
     textAlign: "left",
     alignSelf: "flex-start",
     paddingTop: -5,
@@ -174,7 +175,6 @@ const styles = StyleSheet.create({
   },
 
   editText: {
-    fontSize: 18,
     paddingTop: 5,
   },
 
@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
     borderBottomColor: theme.textColor2,
 
     borderBottomWidth: 2,
-    borderRadius: 10,
+    borderRadius: 3,
   },
 
   dropDownRow: {
