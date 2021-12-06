@@ -215,7 +215,11 @@ export default function Profile({ navigation }) {
 
           {/* Made Courses */}
           <View style={styles.madeCoursesHeader}>
-            <Text style={styles.madeCoursesText}>Made Courses</Text>
+            <Text
+              style={{ ...styles.madeCoursesText, ...globalStyles.normalText }}
+            >
+              Made Courses
+            </Text>
             <CoursesCarousel
               courses={courses}
               navigation={navigation}
@@ -225,7 +229,11 @@ export default function Profile({ navigation }) {
 
           {/* Participated Courses */}
           <View style={styles.madeCoursesHeader}>
-            <Text style={styles.madeCoursesText}>Participated Courses</Text>
+            <Text
+              style={{ ...styles.madeCoursesText, ...globalStyles.normalText }}
+            >
+              Participated Courses
+            </Text>
             <CoursesCarousel
               courses={courses}
               navigation={navigation}
@@ -308,11 +316,11 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   profileDetail: {
-    paddingLeft: 30,
+    paddingLeft: 20,
   },
   profileDetailText: {
     textAlign: "center",
-    fontSize: 20,
+    fontSize: 16,
   },
 
   // * Courses

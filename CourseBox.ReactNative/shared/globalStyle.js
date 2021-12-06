@@ -85,7 +85,7 @@ export const globalStyles = StyleSheet.create({
   // Used for Normal texts
   normalText: {
     flexDirection: "row",
-    fontFamily: "rubik-light",
+    fontFamily: "comfortaa-bold",
     color: theme.textColor2,
     fontSize: 18,
   },
