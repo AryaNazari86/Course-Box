@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
-import { View, Modal, Text, TextInput, Pressable, TouchableOpacity, StyleSheet, ScrollView, FlatList, Image, Button } from 'react-native';
+import { View, Modal, Text, Pressable, TextInput, TouchableOpacity, StyleSheet, ScrollView, FlatList, Image, Button, TouchableOpacityBase } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import Header from '../shared/header';
 import { FAB } from 'react-native-paper';
 import { globalStyles } from '../shared/globalStyle';
 import LessonBlock from '../components/LessonBlock';
 import { Video } from 'expo-av';
+import { AntDesign } from '@expo/vector-icons';
+import {theme} from '../Themes/theme';
+
 export default function LessonPreview() {
     const [lessonContent, setLessonContent] = useState([
         { type: 'title', content: 'header', key: '1' },
@@ -49,9 +52,16 @@ export default function LessonPreview() {
             >
                 <View style={styles.centeredView}>
                 <View style={styles.modalView}>
+                    <View style={styles.modalTitle}>
+                        <Text style={{...globalStyles.normalText, marginRight: 40}}>Add Text</Text>
+                        <TouchableOpacity style={{alignSelf: 'flex-end', bottom: 4,}}onPress={() => setTextVisible(false)}><AntDesign name="close" size={24} color={theme.color3} /></TouchableOpacity>
+                    </View>
                     <TextInput
                         onChangeText={setText}
                         value={text}
+                        multiline={true}
+                        numberOfLines={4}
+                        style={{borderWidth: 1, borderColor: theme.color3, color: theme.color3, borderRadius: 10, padding: 10, marginTop: 10,}}
                     />
                     <Button
                     title="add"
@@ -73,9 +83,16 @@ export default function LessonPreview() {
             >
                 <View style={styles.centeredView}>
                 <View style={styles.modalView}>
+                    <View style={styles.modalTitle}>
+                    <Text style={{...globalStyles.normalText, marginRight: 40}}>Add Header</Text>
+                        <TouchableOpacity style={{alignSelf: 'flex-end', bottom: 4,}}onPress={() => setHeaderVisible(false)}><AntDesign name="close" size={24} color={theme.color3} /></TouchableOpacity>
+                    </View>
+                    
                     <TextInput
                         onChangeText={setHeader}
                         value={header}
+                        style={{borderWidth: 1, borderColor: theme.color3, color: theme.color3, borderRadius: 10, padding: 10, marginTop: 10,}}
+                        maxLength={18}
                     />
                     <Button
                     title="add"
@@ -122,11 +139,6 @@ export default function LessonPreview() {
                 },
             ]}
             onStateChange={onStateChange}
-            onPress={() => {
-                if (open) {
-                // do something if the speed dial is open
-                }
-            }}
             />
 
             
@@ -146,10 +158,9 @@ const styles = StyleSheet.create({
     },
     modalView: {
       margin: 20,
-      backgroundColor: "white",
+      backgroundColor: theme.color1,
       borderRadius: 20,
       padding: 35,
-      alignItems: "center",
       shadowColor: "#000",
       shadowOffset: {
         width: 0,
@@ -158,6 +169,9 @@ const styles = StyleSheet.create({
       shadowOpacity: 0.25,
       shadowRadius: 4,
       elevation: 5
+    },
+    modalTitle: {
+        flexDirection: 'row'
     }
 })
   
