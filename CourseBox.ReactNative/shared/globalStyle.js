@@ -63,7 +63,7 @@ export const globalStyles = StyleSheet.create({
 
   // Used for spacing components (Used a lot when scrollbar doesn't scroll to the bottom)
   emptySpacer: {
-    marginTop: 75,
+    marginTop: 55,
     opacity: 0,
   },
 

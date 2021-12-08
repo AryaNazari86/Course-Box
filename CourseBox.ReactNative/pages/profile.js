@@ -87,7 +87,10 @@ export default function Profile({ navigation }) {
             </View>
           </View>
         </Modal>
-        <ScrollView style={globalStyles.appBackground}>
+        <ScrollView
+          style={globalStyles.appBackground}
+          showsVerticalScrollIndicator={false}
+        >
           <View style={styles.accountBox}>
             {/* Account Name And Icon Header */}
             <View style={styles.profileAccountHeader}>
