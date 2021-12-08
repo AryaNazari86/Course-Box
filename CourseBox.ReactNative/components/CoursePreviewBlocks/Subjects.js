@@ -3,7 +3,8 @@ import { View, Text, TouchableOpacity, StyleSheet, ScrollView, ImageBackground, 
 import { MaterialIcons, Feather } from '@expo/vector-icons';
 import Lesson from './Lesson.js';
 import { globalStyles } from '../../shared/globalStyle.js';
-export default function Subject({ item, navigation, theme }) {
+import {theme} from '../../Themes/theme';
+export default function Subject({ item, navigation }) {
     const [editable, setEditable] = useState(false);
     const [editIcon, setEditIcon] = useState('edit-2');
     const editSubject = () => {
@@ -22,13 +23,13 @@ export default function Subject({ item, navigation, theme }) {
                 <Feather
                     name={editIcon}
                     size={24}
-                    color="white" />
+                    color={theme.color3} />
             </TouchableOpacity>
             {/* Subject's title */}
             <View style={styles.subjectTitle}>
                 {/* Icon */}
                 <View style={styles.subjectIcon}>
-                    <MaterialIcons name={item.icon} size={100} color='#3D4751' />
+                    <MaterialIcons name={item.icon} size={100} color={theme.color3} />
                     {editable ? <TouchableOpacity style={styles.subjectEditIconButton}><Feather name="edit-2" size={35} color='white' style={styles.subjectEditIcon} /></TouchableOpacity> : null}
                 </View>
                 {/* Text */}
@@ -54,7 +55,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 30,
         borderWidth: 3,
         borderRadius: 50,
-        borderColor: '#3D4751',
+        borderColor: theme.color3,
         paddingBottom: 10,
     },
     subjectIcon: {
@@ -69,12 +70,11 @@ const styles = StyleSheet.create({
     },
     subjectTitle: {
         alignSelf: 'center',
-        borderColor: '#14213D',
     },
     subjectTitleText: {
         alignSelf: 'center',
         fontSize: 25,
-        color: '#A8DADC',
+        color: theme.color3,
         fontWeight: '100',
         fontFamily: 'comfortaa-bold',
         borderBottomLeftRadius: 5,
@@ -90,14 +90,14 @@ const styles = StyleSheet.create({
         marginTop: 10,
         height: 100,
         width: 100,
-        borderColor: '#14213D',
+        borderColor: theme.color2,
         alignItems: 'center',
     },
     qlTitleText: {
         marginBottom: 10,
         alignSelf: 'center',
         fontFamily: 'comfortaa-bold',
-        color: '#A8DADC',
+        color: theme.color3,
     },
     qlIconIn: {
         padding: 8,
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
         borderWidth: 4,
         padding: 5,
         borderRadius: 40,
-        borderColor: '#3D4751',
+        borderColor: theme.color3,
         overflow: 'hidden',
     },
     editIcon: {

@@ -46,8 +46,8 @@ export const globalStyles = StyleSheet.create({
     marginBottom: 15,
     width: "85%",
     height: 50,
-    backgroundColor: "#161D28",
-    borderColor: "#3D4751",
+    backgroundColor: theme.color1,
+    borderColor: theme.color3,
   },
 
   // Used for Titles

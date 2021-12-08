@@ -4,13 +4,14 @@ import { MaterialIcons } from '@expo/vector-icons';
 import Header from '../shared/header';
 import { FAB } from 'react-native-paper';
 import Subject from '../components/CoursePreviewBlocks/Subjects.js';
+import {theme} from '../Themes/theme';
 
 export default function CoursePreview(props) {
     const course = props.route.params.datas[0];
     const [content, setContent] = useState(course.content);
     const navigation = props.route.params.datas[1];
     return (
-        <View style={{ backgroundColor: '#141D28', flex: 1 }}>
+        <View style={{ backgroundColor: theme.color1, flex: 1 }}>
             <Header
                 title={course.title}
                 backButton={true}
@@ -34,11 +35,11 @@ export default function CoursePreview(props) {
                     }
 
                 )}
-                <Text style={{ alignSelf: 'center', color: '#A8DADC', fontFamily: 'comfortaa-light' }}>Created by {course.author}</Text>
+                <Text style={{ alignSelf: 'center', color: theme.color3, fontFamily: 'comfortaa-light' }}>Created by {course.author}</Text>
             </ScrollView >
 
             <FAB
-                color='#A8DADC'
+                color={theme.color3}
                 icon='information'
                 style={styles.infoButton}
             />
@@ -52,7 +53,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 30,
         borderWidth: 3,
         borderRadius: 50,
-        borderColor: '#3D4751',
+        borderColor: theme.color2,
         paddingBottom: 10,
     },
     subjectIcon: {
@@ -60,13 +61,13 @@ const styles = StyleSheet.create({
     },
     subjectTitle: {
         alignSelf: 'center',
-        borderColor: '#14213D',
+        borderColor: theme.color2,
     },
     subjectTitleText: {
         alignSelf: 'center',
         fontSize: 25,
         fontFamily: 'rubik-bold',
-        color: '#A8DADC',
+        color: theme.color3,
         fontFamily: 'comfortaa-bold',
     },
     subjectQls: {
@@ -78,14 +79,14 @@ const styles = StyleSheet.create({
         marginTop: 10,
         height: 100,
         width: 100,
-        borderColor: '#14213D',
+        borderColor: theme.color3,
         alignItems: 'center',
     },
     qlTitleText: {
         marginBottom: 10,
         alignSelf: 'center',
         fontFamily: 'comfortaa-bold',
-        color: '#A8DADC',
+        color: theme.color3,
     },
     qlIconIn: {
         padding: 8,
@@ -97,7 +98,7 @@ const styles = StyleSheet.create({
         borderWidth: 4,
         padding: 5,
         borderRadius: 40,
-        borderColor: '#3D4751',
+        borderColor: theme.color2,
         overflow: 'hidden',
     },
     infoButton: {
@@ -106,7 +107,7 @@ const styles = StyleSheet.create({
         width: 70,
         height: 70,
         borderRadius: 100,
-        backgroundColor: '#3D4751',
+        backgroundColor: theme.color2,
         justifyContent: 'center',
         alignItems: 'center',
         position: 'absolute',

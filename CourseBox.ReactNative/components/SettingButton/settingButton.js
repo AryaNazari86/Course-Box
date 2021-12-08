@@ -178,6 +178,8 @@ const styles = StyleSheet.create({
     paddingTop: 5,
     fontSize: 16,
 
+    top: 1,
+
     alignSelf: "center",
     bottom: 2,
   },

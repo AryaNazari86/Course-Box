@@ -79,7 +79,7 @@ export default function SettingsPage({ navigation }) {
             </Text>
             <View style={globalStyles.container}>
               <SettingButton
-                buttonText={"Language"}
+                buttonText={"Theme"}
                 buttonStyle="Dropdown"
                 functionName={testFunc}
                 dropDownList={themes}

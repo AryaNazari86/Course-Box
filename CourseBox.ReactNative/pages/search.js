@@ -110,14 +110,14 @@ export default function Search({ navigation }) {
                 left={
                   <TextInput.Icon
                     name="magnify"
-                    color="#A8DADC"
+                    color={theme.color3}
                     style={styles.searchIcon}
                   />
                 }
                 theme={{
                   colors: {
-                    primary: "#A8DADC",
-                    placeholder: "#A8DADC",
+                    primary: theme.color3,
+                    placeholder: theme.color3,
                   },
                 }}
               />
