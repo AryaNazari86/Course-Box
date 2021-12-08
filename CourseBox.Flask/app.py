@@ -233,7 +233,7 @@ def popular_courses():
 
 @app.route("/LatestCourses", methods=['GET'])
 def latest_courses():
-    all_courses = Course.query.filter_by().all()
+    all_courses = Course.query.all()
 
     return jsonify(all_courses[-7:-1])
 

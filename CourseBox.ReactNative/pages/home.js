@@ -14,6 +14,7 @@ import {
 // Header Imports
 import Header from "../shared/header";
 
+import * as CourseService from "../Services/courseService";
 // Category Box Imports
 import CategoryBox from "../components/Categorybox/categorybox";
 
@@ -35,7 +36,11 @@ import LottieView from "lottie-react-native";
 import { globalStyles, Theme } from "../shared/globalStyle";
 
 // Theme colors
+<<<<<<< Updated upstream
 import { theme } from "../Themes/theme";
+=======
+import { theme } from '../Themes/theme';
+>>>>>>> Stashed changes
 
 export default function Home({ navigation }) {
   // If loaded is false, show a loader.
@@ -53,6 +58,7 @@ export default function Home({ navigation }) {
   const [darkScreen, setDarkScreen] = useState({ width: 0, height: 0 });
 
   // Get Categories From API
+<<<<<<< Updated upstream
   const [latestCourses, setLatestCourses] = useState(courses);
   const [popularCorurses, setPopularCourses] = useState(courses);
   const fetchDatas = async () => {
@@ -73,6 +79,25 @@ export default function Home({ navigation }) {
   useEffect(() => {
     //fetchDatas();
   }, []);
+=======
+  const [latestCourses, setLatestCourses] = useState([]);
+  const [popularCorurses, setPopularCourses] = useState([]);
+  const [dataFetched, setDataFetched] = useState(false);
+  const fetchCourses = async () => {
+    CourseService.GetLatestCourses().then(async (response) => {
+      if (response.successful) {
+        response.data.then(async (data) => {
+          setLatestCourses(data);
+          console.log(data);
+          setDataFetched(true);
+        });
+      }
+    });
+  }
+  if (dataFetched == false) {
+    fetchCourses();
+  }
+>>>>>>> Stashed changes
   const categories = [
     {
       categoryId: 1,
@@ -126,6 +151,10 @@ export default function Home({ navigation }) {
   const closeBottomSheet = () => {
     bottomSheetRef.current.snapTo(0);
   };
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 
   if (loaded) {
     return (
@@ -137,8 +166,12 @@ export default function Home({ navigation }) {
           profileButton={true}
           profileAction={() => navigation.navigate("ProfileStack")}
           headerIcon={true}
+<<<<<<< Updated upstream
           headersIconSource={require("../assets/3DIcons/Math_3DIcon.png")}
         />
+=======
+          headersIconSource={require('../assets/3DIcons/Math_3DIcon.png')} />
+>>>>>>> Stashed changes
 
         <ScrollView
           style={styles.contentContainer}
@@ -205,6 +238,11 @@ export default function Home({ navigation }) {
           onCloseEnd={() => setDarkScreen({ width: 0, height: 0 })}
         />
       </View>
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
     );
   } else {
     return (
@@ -235,7 +273,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     textAlign: "center",
     paddingBottom: 10,
-    color: theme.color2,
+    color: theme.color3,
   },
   latestCoursesContainer: {
     paddingTop: 20,
