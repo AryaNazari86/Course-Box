@@ -33,6 +33,8 @@ const getFonts = () =>
     "rubik-bold": require("./assets/Fonts/Rubik-Bold.ttf"),
     "rubik-light": require("./assets/Fonts/Rubik-Light.ttf"),
     "rubik-regular": require("./assets/Fonts/Rubik-Regular.ttf"),
+    "courier-regular": require("./assets/Fonts/CourierPrime-Regular.ttf"),
+    "courier-bold": require("./assets/Fonts/CourierPrime-Bold.ttf"),
   });
 
 export default function App() {

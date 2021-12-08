@@ -9,7 +9,7 @@ import { Video } from 'expo-av';
 import { AntDesign } from '@expo/vector-icons';
 import {theme} from '../Themes/theme';
 
-export default function LessonPreview() {
+export default function LessonPreview(props) {
     const [lessonContent, setLessonContent] = useState([
         { type: 'title', content: 'header', key: '1' },
         { type: 'text', content: 'This is a test content', key: '2' },
@@ -105,12 +105,12 @@ export default function LessonPreview() {
             
             <ScrollView>
                 {/* mapping between every item in each lesson */}
-                {lessonContent.map((item) => {
+                {lessonContent.map((item, index) => {
                     return (
                         <LessonBlock
                             type={item.type}
                             content={item.content}
-                            key={item.key}
+                            key={index}
                         />
                     )
                 })}

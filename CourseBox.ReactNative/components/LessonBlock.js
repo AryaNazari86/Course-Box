@@ -55,9 +55,9 @@ export default function LessonBlock({ type, content }) {
                 <View style={styles.codeLangContainer}>
                     <Text style={styles.codeLang}>python</Text>
                 </View>
-                {content.map((item) => {
+                {content.map((item, index) => {
                     return (
-                        <View style={styles.codeLine}>
+                        <View style={styles.codeLine} key={index}>
                             <Text style={styles.codeLineNum}>{content.indexOf(item) + 1}</Text>
                             <Text style={styles.code}>{item}</Text>
                         </View>
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     },
     codeLang: {
         color: '#A8DADC',
-        fontFamily: 'Courier New',
+        fontFamily: 'courier-regular',
     },
     codeLangContainer: {
         borderBottomWidth: 1,
@@ -119,10 +119,10 @@ const styles = StyleSheet.create({
     },
     code: {
         color: '#A8DADC',
-        fontFamily: 'Courier New',
+        fontFamily: 'courier-regular',
     },
     codeLineNum: {
-        fontFamily: 'Courier New',
+        fontFamily: 'courier-regular',
         color: '#A8DADC',
         marginRight: 10,
     },

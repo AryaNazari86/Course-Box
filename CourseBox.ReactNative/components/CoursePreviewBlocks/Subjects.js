@@ -36,10 +36,10 @@ export default function Subject({ item, navigation, theme }) {
             </View>
             <View style={styles.subjectQls}>
                 {item.content.map(
-                    (item) => {
+                    (item, index) => {
                         {/* Each lesson of the subject  */ }
                         return (
-                            <Lesson item={item} navigation={navigation} />
+                            <Lesson item={item} navigation={navigation} key={index} />
                         )
                     }
                 )}

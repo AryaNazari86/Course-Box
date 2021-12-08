@@ -27,9 +27,9 @@ export default function CoursePreview(props) {
                 ]} />
             <ScrollView >
                 {content.map(
-                    (item) => {
+                    (item, index) => {
                         return (
-                            <Subject item={item} navigation={navigation} />
+                            <Subject item={item} navigation={navigation} key={index} />
                         )
                     }
 
