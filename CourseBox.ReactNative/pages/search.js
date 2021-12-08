@@ -16,6 +16,7 @@ import CourseBox from "../components/CourseBox/courseBox";
 import coursesData from "../data/courses";
 // Lottie Library
 import LottieView from "lottie-react-native";
+import { theme } from "../Themes/theme";
 
 export default function Search({ navigation }) {
   // If loaded is false, show a loader.
@@ -96,7 +97,7 @@ export default function Search({ navigation }) {
             height={60}
             profileButton={true}
             profileAction={() => navigation.navigate("ProfileStack")} />
-          <ScrollView>
+          <ScrollView >
             <View style={styles.container}>
               {/* Search Text input */}
               <TextInput
@@ -130,7 +131,7 @@ export default function Search({ navigation }) {
                       selected={item.selected}
                       onPress={() => categorySearch(item)}
                       textStyle={styles.chipText}
-                      selectedColor="#A8DADC"
+                      selectedColor={theme.color3}
                       key={index}
                     >
                       {item.name}
@@ -172,12 +173,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     height: 36,
     marginHorizontal: 2,
-    backgroundColor: "#141C27",
-    borderColor: "#A8DADC",
+    backgroundColor: theme.color2,
+    borderColor: theme.color1,
     borderWidth: 1,
   },
   chipText: {
-    color: "#A8DADC",
+    color: theme.color3,
   },
   searchIcon: {
     paddingTop: 9.5,

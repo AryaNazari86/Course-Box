@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Search from "../pages/search";
 import CoursePreview from "../pages/coursePreview";
 import LessonPreview from '../pages/lessonPreview';
+import { theme } from "../Themes/theme";
 
 const Stack = createStackNavigator();
 
@@ -11,7 +12,7 @@ export default function SearchStack() {
     <Stack.Navigator
       screenOptions={({ route, navigation }) => ({
         headerMode: "none",
-        cardStyle: { backgroundColor: "#141D28" },
+        cardStyle: { backgroundColor: theme.color1 },
       })}
     >
       {/* the search page */}
