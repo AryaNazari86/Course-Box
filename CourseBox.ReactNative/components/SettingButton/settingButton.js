@@ -176,6 +176,10 @@ const styles = StyleSheet.create({
 
   editText: {
     paddingTop: 5,
+    fontSize: 16,
+
+    alignSelf: "center",
+    bottom: 2,
   },
 
   redTest: {
@@ -191,6 +195,7 @@ const styles = StyleSheet.create({
   blueTest: {
     justifyContent: "center",
     backgroundColor: theme.color1,
+    alignItems: "center",
   },
 
   bigBlueTest: {

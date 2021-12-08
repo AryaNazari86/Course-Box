@@ -319,7 +319,7 @@ const styles = StyleSheet.create({
   },
   profileDetailText: {
     textAlign: "center",
-    fontSize: 16,
+    fontSize: 18,
   },
 
   // * Courses

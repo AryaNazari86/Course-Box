@@ -71,9 +71,10 @@ export default function CourseCreation({ navigation, closeFunc }) {
         {/* Header */}
         <Header
           title="Create Course"
-          height={50}
+          height={40}
           backButton={true}
           backAction={closeFunc}
+          backgroundColor={theme.color1}
         />
         <Formik
           initialValues={{
@@ -140,7 +141,7 @@ export default function CourseCreation({ navigation, closeFunc }) {
 
               <View style={{ ...globalStyles.container, ...styles.category }}>
                 <SettingButton
-                  buttonText={"Course Category"}
+                  buttonText={"Category"}
                   buttonStyle="Dropdown"
                   dropDownList={["Code", "Math", "Paint", "Science", "Sport"]}
                   selectedVar={setSelectedCourseCategory}
