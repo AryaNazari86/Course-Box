@@ -47,7 +47,6 @@ export default function Profile({ navigation }) {
   const fetchData = async () => {
     const storedData = await AsyncStorage.getItem("userDetails");
     const storedDataParsed = JSON.parse(storedData);
-    console.log(storedDataParsed);
     setProfilePageValues(storedDataParsed);
   };
   if (!dataFetched) {

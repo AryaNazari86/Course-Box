@@ -17,7 +17,6 @@ export const globalStyles = StyleSheet.create({
     borderBottomWidth: 3,
     borderBottomColor: theme.color3,
     elevation: 0,
-    backgroundColor: theme.color2,
   },
 
   // Title of the header

@@ -122,7 +122,7 @@ export default function Search({ navigation }) {
               />
               {/* Category filters */}
               <ScrollView horizontal={true}>
-                {category.map((item) => {
+                {category.map((item, index) => {
                   return (
                     <Chip
                       mode="flat"
@@ -131,6 +131,7 @@ export default function Search({ navigation }) {
                       onPress={() => categorySearch(item)}
                       textStyle={styles.chipText}
                       selectedColor="#A8DADC"
+                      key={index}
                     >
                       {item.name}
                     </Chip>

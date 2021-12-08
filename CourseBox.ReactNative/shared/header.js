@@ -15,11 +15,12 @@ export default function Header({
   fontFamily = "comfortaa-bold",
   height = 45,
   buttons = [],
-  titleAlignment = "left"
+  titleAlignment = "left",
+  backgroundColor = theme.color2
 }) {
 
   return (
-    <Appbar.Header style={[{ height: height }, globalStyles.header]}>
+    <Appbar.Header style={[{ height: height, backgroundColor: backgroundColor, }, globalStyles.header]}>
       {backButton ? (<Appbar.BackAction onPress={() => backAction()} />) : null}
       {headerIcon ?
         (<Image
@@ -34,9 +35,9 @@ export default function Header({
           globalStyles.headerTitle,
         ]}
       />
-      {buttons.map((value) => {
+      {buttons.map((value, index) => {
         return (
-          <Appbar.Action icon={value.icon} onPress={value.onPress} />
+          <Appbar.Action icon={value.icon} onPress={value.onPress} key={index} />
         );
       })}
       {profileButton ?
