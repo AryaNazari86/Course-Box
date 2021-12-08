@@ -147,7 +147,7 @@ export default function SignIn({ navigation }) {
                     <MaterialCommunityIcons
                       name={hidePassIcon}
                       size={30}
-                      color="#A8DADC"
+                      color={theme.textColor2}
                       style={globalStyles.hideIcon}
                     />
                   </TouchableOpacity>

@@ -7,6 +7,7 @@ import {
   Keyboard,
   TextInput,
   TouchableOpacity,
+  ImageBackground,
 } from "react-native";
 import { globalStyles } from "../../shared/globalStyle";
 import Header from "../../shared/header";
@@ -28,7 +29,7 @@ export default function ForgetPassword_Email({ navigation }) {
       onPress={Keyboard.dismiss}
       style={globalStyles.container}
     >
-      <View>
+      <View style={{ flex: 1 }}>
         {/* * The header */}
         <Header
           title="Forget Password"
@@ -36,55 +37,78 @@ export default function ForgetPassword_Email({ navigation }) {
           backAction={() => navigation.goBack()}
           height={60}
         />
-        <Formik
-          initialValues={{ email: "" }}
-          validationSchema={ForgetSchema}
-          onSubmit={(values, actions) => {
-            codePress(values);
-            actions.resetForm();
-          }}
+        <ImageBackground
+          source={require("../../assets/Images/Backgrounds/wp2003036.jpg")}
+          resizeMode="cover"
+          style={styles.image}
         >
-          {(props) => (
-            <View style={globalStyles.container}>
-              <Text
-                style={{
-                  ...globalStyles.headerTitle,
-                  ...globalStyles.smallTitle,
-                }}
-              >
-                Account Email
-              </Text>
-              {/* Email Input */}
-              <View style={globalStyles.textInputView}>
-                <TextInput
-                  style={globalStyles.inputComp}
-                  // placeholder="Email"
-                  onChangeText={props.handleChange("email")}
-                  value={props.values.email}
-                  onBlur={props.handleBlur("email")}
-                  placeholderTextColor="#A8DADC"
-                />
-              </View>
-
-              <Text style={globalStyles.errorText}>
-                {props.touched.email && props.errors.email}
-              </Text>
-
-              {/* Continue Button */}
-              <TouchableOpacity style={globalStyles.button}>
+          <Formik
+            initialValues={{ email: "" }}
+            validationSchema={ForgetSchema}
+            onSubmit={(values, actions) => {
+              codePress(values);
+              actions.resetForm();
+            }}
+          >
+            {(props) => (
+              <View style={{ ...globalStyles.container, ...styles.container }}>
                 <Text
-                  style={globalStyles.buttonText}
-                  onPress={props.handleSubmit}
+                  style={{
+                    ...globalStyles.headerTitle,
+                    ...globalStyles.smallTitle,
+                  }}
                 >
-                  Continue
+                  Account Email
                 </Text>
-              </TouchableOpacity>
-            </View>
-          )}
-        </Formik>
+                {/* Email Input */}
+                <View style={globalStyles.textInputView}>
+                  <TextInput
+                    style={globalStyles.inputComp}
+                    // placeholder="Email"
+                    onChangeText={props.handleChange("email")}
+                    value={props.values.email}
+                    onBlur={props.handleBlur("email")}
+                    placeholderTextColor="#A8DADC"
+                  />
+                </View>
+
+                <Text style={globalStyles.errorText}>
+                  {props.touched.email && props.errors.email}
+                </Text>
+
+                {/* Continue Button */}
+                <TouchableOpacity style={globalStyles.button}>
+                  <Text
+                    style={globalStyles.buttonText}
+                    onPress={props.handleSubmit}
+                  >
+                    Continue
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            )}
+          </Formik>
+        </ImageBackground>
       </View>
     </TouchableWithoutFeedback>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  image: {
+    flex: 1,
+    justifyContent: "center",
+  },
+
+  container: {
+    width: 370,
+    alignSelf: "center",
+    borderRadius: 20,
+
+    shadowOpacity: 0.25,
+    shadowRadius: 3.04,
+    elevation: 5,
+
+    marginBottom: 60,
+  },
+});
