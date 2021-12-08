@@ -8,9 +8,8 @@ import {
   Text,
   InteractionManager,
   Button,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
-
 
 // Header Imports
 import Header from "../shared/header";
@@ -23,7 +22,7 @@ import Animated from "react-native-reanimated";
 import BottomSheet from "reanimated-bottom-sheet";
 import BottomSheetHeader from "../components/BottomSheet/Header/header";
 import BottomSheetCategory from "../components/BottomSheet/Category/category";
-import getLang from '../lang/lang';
+import getLang from "../lang/lang";
 // Carousel Imports
 import CoursesCarousel from "../components/Carousel/coursesCarousel";
 
@@ -36,10 +35,9 @@ import LottieView from "lottie-react-native";
 import { globalStyles, Theme } from "../shared/globalStyle";
 
 // Theme colors
-import {theme} from '../Themes/theme';
+import { theme } from "../Themes/theme";
 
 export default function Home({ navigation }) {
-
   // If loaded is false, show a loader.
   const [loaded, setLoaded] = useState(false);
 
@@ -59,19 +57,18 @@ export default function Home({ navigation }) {
   const [popularCorurses, setPopularCourses] = useState(courses);
   const fetchDatas = async () => {
     try {
-      const response = await fetch('http://192.168.199.22:5000/LatestCourses');
+      const response = await fetch("http://192.168.199.22:5000/LatestCourses");
       const courses = await response.json();
       setLatestCourses(courses);
-      const response1 = await fetch('http://192.168.199.22:5000/PopularCourses');
+      const response1 = await fetch(
+        "http://192.168.199.22:5000/PopularCourses"
+      );
       const courses1 = await response1.json();
       setPopularCourses(courses1);
+    } catch (error) {
+      console.log(error);
     }
-    catch (error) {
-      console.log(error)
-    }
-  }
-
-
+  };
 
   useEffect(() => {
     //fetchDatas();
@@ -129,20 +126,20 @@ export default function Home({ navigation }) {
   const closeBottomSheet = () => {
     bottomSheetRef.current.snapTo(0);
   };
-  
 
   if (loaded) {
     return (
       <View style={styles.container}>
         {/* Header */}
-        <Header 
-        title="Home" 
-        height={60} 
-        profileButton={true}
-        profileAction={() => navigation.navigate("ProfileStack") }
-        headerIcon={true}
-        headersIconSource={require('../assets/3DIcons/Math_3DIcon.png')} />
-        
+        <Header
+          title="Home"
+          height={60}
+          profileButton={true}
+          profileAction={() => navigation.navigate("ProfileStack")}
+          headerIcon={true}
+          headersIconSource={require("../assets/3DIcons/Math_3DIcon.png")}
+        />
+
         <ScrollView
           style={styles.contentContainer}
           showsVerticalScrollIndicator={false}
@@ -184,8 +181,6 @@ export default function Home({ navigation }) {
                 dotesColor={theme.color3}
               />
             </View>
-
-
           </View>
         </ScrollView>
 
@@ -210,8 +205,6 @@ export default function Home({ navigation }) {
           onCloseEnd={() => setDarkScreen({ width: 0, height: 0 })}
         />
       </View>
-      
-
     );
   } else {
     return (
@@ -226,7 +219,6 @@ export default function Home({ navigation }) {
     );
   }
 }
-
 
 const styles = StyleSheet.create({
   container: {

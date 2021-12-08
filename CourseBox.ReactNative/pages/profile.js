@@ -212,34 +212,43 @@ export default function Profile({ navigation }) {
             </View>
           </View>
 
-          {/* Made Courses */}
           <View style={styles.madeCoursesHeader}>
-            <Text
-              style={{ ...styles.madeCoursesText, ...globalStyles.normalText }}
-            >
-              Made Courses
-            </Text>
-            <CoursesCarousel
-              courses={courses}
-              navigation={navigation}
-              dotesColor={theme.color3}
-            />
-          </View>
+            {/* Made Courses */}
+            <View>
+              <Text
+                style={{
+                  ...styles.madeCoursesText,
+                  ...globalStyles.normalText,
+                  ...globalStyles.TitleText,
+                }}
+              >
+                Made Courses
+              </Text>
+              <CoursesCarousel
+                courses={courses}
+                navigation={navigation}
+                dotesColor={theme.color3}
+              />
+            </View>
 
-          {/* Participated Courses */}
-          <View style={styles.madeCoursesHeader}>
-            <Text
-              style={{ ...styles.madeCoursesText, ...globalStyles.normalText }}
-            >
-              Participated Courses
-            </Text>
-            <CoursesCarousel
-              courses={courses}
-              navigation={navigation}
-              dotesColor={theme.color3}
-            />
+            {/* Participated Courses */}
+            <View>
+              <Text
+                style={{
+                  ...styles.madeCoursesText,
+                  ...globalStyles.normalText,
+                  ...globalStyles.TitleText,
+                }}
+              >
+                Participated Courses
+              </Text>
+              <CoursesCarousel
+                courses={courses}
+                navigation={navigation}
+                dotesColor={theme.color3}
+              />
+            </View>
           </View>
-
           {/* Empty Spacer */}
           <Text style={globalStyles.emptySpacer}>Code Rangers®</Text>
         </ScrollView>
@@ -325,7 +334,7 @@ const styles = StyleSheet.create({
   // * Courses
   madeCoursesText: {
     fontSize: 20,
-    paddingTop: 30,
+    paddingTop: 15,
     textAlign: "center",
     color: theme.textColor2,
     paddingBottom: 5,
@@ -380,5 +389,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+  },
+
+  madeCoursesHeader: {
+    backgroundColor: theme.color2,
+    marginTop: 25,
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
   },
 });
