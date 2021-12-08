@@ -42,7 +42,13 @@ export default function SettingsPage({ navigation }) {
         />
         <ScrollView style={globalStyles.appBackground}>
           {/* Profile Settings */}
-          <Text style={{ ...globalStyles.headerTitle, ...styles.headerText }}>
+          <Text
+            style={{
+              ...styles.headerText,
+              ...globalStyles.normalText,
+              ...globalStyles.TitleText,
+            }}
+          >
             Profile
           </Text>
           <View style={{ ...globalStyles.container, marginTop: -15 }}>
@@ -62,7 +68,13 @@ export default function SettingsPage({ navigation }) {
               functionName={testFunc}
             />
             {/* App theme */}
-            <Text style={{ ...globalStyles.headerTitle, ...styles.headerText }}>
+            <Text
+              style={{
+                ...styles.headerText,
+                ...globalStyles.normalText,
+                ...globalStyles.TitleText,
+              }}
+            >
               Theme
             </Text>
             <View style={globalStyles.container}>
@@ -74,7 +86,13 @@ export default function SettingsPage({ navigation }) {
               />
             </View>
             {/* Language */}
-            <Text style={{ ...globalStyles.headerTitle, ...styles.headerText }}>
+            <Text
+              style={{
+                ...styles.headerText,
+                ...globalStyles.normalText,
+                ...globalStyles.TitleText,
+              }}
+            >
               Language
             </Text>
             <View style={globalStyles.container}>
@@ -87,7 +105,13 @@ export default function SettingsPage({ navigation }) {
             </View>
             {/* Empty Spacer */}
             {/* About */}
-            <Text style={{ ...globalStyles.headerTitle, ...styles.headerText }}>
+            <Text
+              style={{
+                ...styles.headerText,
+                ...globalStyles.normalText,
+                ...globalStyles.TitleText,
+              }}
+            >
               About Us
             </Text>
             <View style={{ ...globalStyles.container, marginTop: -16 }}>
@@ -131,8 +155,10 @@ export default function SettingsPage({ navigation }) {
 const styles = StyleSheet.create({
   headerText: {
     textAlign: "center",
-    paddingTop: 25,
+    paddingTop: 35,
     paddingBottom: 10,
+
+    fontSize: 20,
   },
   settingView: {
     borderWidth: 1,
