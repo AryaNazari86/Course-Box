@@ -46,7 +46,22 @@ export default function LessonPreview(props) {
 
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
-          mediaTypes: ImagePicker.MediaTypeOptions.All,
+          mediaTypes: ImagePicker.MediaTypeOptions.Images,
+          allowsEditing: true,
+          aspect: [4, 3],
+          quality: 1,
+        });
+    
+        console.log(result);
+    
+        if (!result.cancelled) {
+            setLessonContent([...lessonContent, {type: 'image', content: result.uri}])
+        }
+      };
+
+      const pickVideo = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+          mediaTypes: ImagePicker.MediaTypeOptions.Videos,
           allowsEditing: true,
           aspect: [4, 3],
           quality: 1,
@@ -152,7 +167,12 @@ export default function LessonPreview(props) {
                 {
                 icon: 'image',
                 label: 'Image',
-                onPress: () => console.log('Pressed notifications'),
+                onPress: () => pickImage(),
+                },
+                {
+                icon: 'video',
+                label: 'Video',
+                onPress: () => pickVideo(),
                 },
                 {
                 icon: 'text',
@@ -163,7 +183,7 @@ export default function LessonPreview(props) {
                 {
                 icon: 'head',
                 label: 'Header',
-                onPress: pickImage(),
+                onPress: () => setHeaderVisible(true),
                 small: false,
                 },
             ]}
