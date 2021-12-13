@@ -53,7 +53,7 @@ var courses = [
         ],
     },
     {
-        title: 'Javascript', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'something ...', image: require(`../assets/Images/Javascript_Course.png`), key: '3', content: [
+        title: 'Javascript', category: 'Programming', author: '@Ilia', participants: '10', likes: '10', description: 'The best course for learning js!', image: require(`../assets/Images/Javascript_Course.png`), key: '3', content: [
             {
                 title: 'Low Dribble', content: [
                     { title: 'how to', color: 'red' },

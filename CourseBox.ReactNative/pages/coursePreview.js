@@ -26,6 +26,12 @@ export default function CoursePreview(props) {
                         }
                     }
                 ]} />
+
+        <ImageBackground
+          source={require("../assets/Images/Backgrounds/wp2003036.jpg")}
+          resizeMode="cover"
+          style={styles.image}
+        >
             <ScrollView >
                 {content.map(
                     (item, index) => {
@@ -43,6 +49,7 @@ export default function CoursePreview(props) {
                 icon='information'
                 style={styles.infoButton}
             />
+            </ImageBackground>
         </View >
     )
 }
@@ -111,5 +118,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         position: 'absolute',
-    }
+    },
+    image: {
+        flex: 1,
+        justifyContent: "center",
+    },
 })

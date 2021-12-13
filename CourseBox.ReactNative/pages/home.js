@@ -9,6 +9,7 @@ import {
   InteractionManager,
   Button,
   TouchableOpacity,
+  ImageBackground
 } from "react-native";
 
 // Header Imports
@@ -141,11 +142,17 @@ export default function Home({ navigation }) {
           headersIconSource={require("../assets/3DIcons/Math_3DIcon.png")}
         />
 
+        <ImageBackground
+          source={require("../assets/Images/Backgrounds/wp2003036.jpg")}
+          resizeMode="cover"
+          style={styles.image}
+        >
+
         <ScrollView
           style={styles.contentContainer}
           showsVerticalScrollIndicator={false}
         >
-          <View style={globalStyles.appBackground}>
+          <View>
             {/* Categories */}
             <FlatList
               showsHorizontalScrollIndicator={false}
@@ -205,6 +212,7 @@ export default function Home({ navigation }) {
           enabledContentGestureInteraction={false}
           onCloseEnd={() => setDarkScreen({ width: 0, height: 0 })}
         />
+        </ImageBackground>
       </View>
     );
   } else {
@@ -260,4 +268,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#000",
     opacity: 0.4,
   },
+  image: {
+    flex: 1, 
+    justifyContent: "center",
+  }
 });
