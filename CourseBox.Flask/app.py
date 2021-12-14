@@ -97,7 +97,7 @@ class Course(db.Model):
     author_id = db.Column(db.Integer, db.ForeignKey(User.id))
     participants = db.relationship(
         'User', secondary='participants', backref='courses')
-    content = db.relationship('CourseContent', backref='course')
+    content = db.relationship('Subject', backref='course')
 
     def __init__(self, title, description, participants_count, likes, category_id, author_id, image):
         self.title = title
@@ -109,11 +109,11 @@ class Course(db.Model):
         self.image = image
 
 
-class CourseContent(db.Model):
+class Subject(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
     title = db.Column(db.String(200))
     icon = db.Column(db.String(200))
-    content = db.relationship('LessonContent', backref='course_content')
+    content = db.relationship('Lesson', backref='course_content')
     # Relations
     course_id = db.Column(db.Integer, db.ForeignKey(Course.id))
 
@@ -123,19 +123,31 @@ class CourseContent(db.Model):
         self.content = content
 
 
-class LessonContent(db.Model):
+class Lesson(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
     title = db.Column(db.String(200))
     icon = db.Column(db.String(200))
     color = db.Column(db.String(200))
+    content = db.relationship('LessonBlock', backref='lesson_content')
     # Relations
-    course_content_id = db.Column(db.Integer, db.ForeignKey(CourseContent.id))
+    subject_id = db.Column(db.Integer, db.ForeignKey(Subject.id))
 
     def _init_(self, title, icon, color, course_content_id):
         self.title = title
         self.icon = icon
         self.color = color
         self.course_content_id = course_content_id
+
+
+class LessonBlock(db.Model):
+    id = db.Column(db.Integer, primary_key=True, unique=True)
+    type = db.Column(db.String(30))
+    content = db.Column(db.String(500))
+    lesson_id = db.Column(db.Integer, db.ForeignKey(Lesson.id))
+
+    def __init__(self, type, content):
+        self.type = type
+        self.content = content
 
 
 participants = db.Table('participants',
