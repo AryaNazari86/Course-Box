@@ -25,14 +25,14 @@ export default function CategoryIcon({ category, style }) {
   } else if (category == "Art") {
     return (
       <Image
-        source={require("../../assets/3DIcons/Animated/Paint.gif")}
+        source={require("../../assets/3DIcons/Animated/Paint2.gif")}
         style={style}
       />
     );
   } else if (category == "Science") {
     return (
       <Image
-        source={require("../../assets/3DIcons/Animated/Science.gif")}
+        source={require("../../assets/3DIcons/Animated/Science2.gif")}
         style={style}
       />
     );
