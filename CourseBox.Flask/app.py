@@ -296,6 +296,29 @@ def login():
         return status_code
 
 
+@app.route("/CreateCourse", methods=['POST'])
+def create_course():
+    try:
+        if request.is_json:
+            newCourse = Course(
+                title="Title",
+                description="Description",
+                participants_count=0,
+                likes=0,
+                category_id=1,
+                author_id=0,
+                image=None,
+            )
+            db.session.add(newCourse)
+            db.session.commit()
+            status_code = Response(status=200, response="Course Created!")
+            return status_code
+    except:
+        status_code = Response(
+            status=500, response="There is a problem with your information.")
+        return status_code
+
+
 @app.route("/User/Details", methods=['POST'])
 @token_required
 def get_user_details(current_user):
