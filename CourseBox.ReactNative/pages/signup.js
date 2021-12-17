@@ -84,9 +84,10 @@ export default function SignUp({ makeUser, navigation }) {
       <View style={{ flex: 1 }}>
         <Header title="Sign Up" height={60} />
         <ImageBackground
-          source={require("../assets/Images/Backgrounds/wp2003036.jpg")}
+          source={require("../assets/Images/Backgrounds/acf4d023e1b9ff3a285d5cab92433f07.jpg")}
           resizeMode="cover"
           style={styles.image}
+          blurRadius={0}
         >
           <Formik
             initialValues={{ username: "", name: "", email: "", password: "" }}
@@ -228,6 +229,8 @@ const styles = StyleSheet.create({
     width: 370,
     alignSelf: "center",
     borderRadius: 20,
+    // borderColor: "black",
+    // borderWidth: 1,
 
     shadowOpacity: 0.25,
     shadowRadius: 3.04,

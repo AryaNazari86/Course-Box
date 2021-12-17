@@ -101,7 +101,7 @@ export default function SignIn({ navigation }) {
           height={60}
         />
         <ImageBackground
-          source={require("../assets/Images/Backgrounds/wp2003036.jpg")}
+          source={require("../assets/Images/Backgrounds/acf4d023e1b9ff3a285d5cab92433f07.jpg")}
           resizeMode="cover"
           style={styles.image}
         >

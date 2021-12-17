@@ -9,7 +9,7 @@ import {
   InteractionManager,
   Button,
   TouchableOpacity,
-  ImageBackground
+  ImageBackground,
 } from "react-native";
 
 // Header Imports
@@ -127,6 +127,8 @@ export default function Home({ navigation }) {
 
   const closeBottomSheet = () => {
     bottomSheetRef.current.snapTo(0);
+
+    setDarkScreen({ width: "0%", height: "0%" });
   };
 
   if (loaded) {
@@ -143,75 +145,76 @@ export default function Home({ navigation }) {
         />
 
         <ImageBackground
-          source={require("../assets/Images/Backgrounds/wp2003036.jpg")}
+          source={require("../assets/Images/Backgrounds/b05ed9832a0663c2e80b846604e157d3.png")}
           resizeMode="cover"
           style={styles.image}
         >
+          <ScrollView
+            style={styles.contentContainer}
+            showsVerticalScrollIndicator={false}
+          >
+            <View>
+              {/* Categories */}
+              <FlatList
+                showsHorizontalScrollIndicator={false}
+                style={styles.categoriesContainer}
+                horizontal={true}
+                data={categories}
+                keyExtractor={(item) => item.categoryId.toString()}
+                renderItem={({ item }) => (
+                  <CategoryBox
+                    category={item}
+                    onPress={() => onCategoryClicked(item)}
+                  />
+                )}
+              />
 
-        <ScrollView
-          style={styles.contentContainer}
-          showsVerticalScrollIndicator={false}
-        >
-          <View>
-            {/* Categories */}
-            <FlatList
-              showsHorizontalScrollIndicator={false}
-              style={styles.categoriesContainer}
-              horizontal={true}
-              data={categories}
-              keyExtractor={(item) => item.categoryId.toString()}
-              renderItem={({ item }) => (
-                <CategoryBox
-                  category={item}
-                  onPress={() => onCategoryClicked(item)}
+              <View style={styles.latestCoursesContainer}>
+                <Text style={styles.latestCoursesTitle}>Latest Courses</Text>
+
+                {/* A carousel for showing the latest courses. */}
+                <CoursesCarousel
+                  courses={latestCourses}
+                  navigation={navigation}
+                  dotesColor={theme.color3}
                 />
-              )}
-            />
+              </View>
 
-            <View style={styles.latestCoursesContainer}>
-              <Text style={styles.latestCoursesTitle}>Latest Courses</Text>
+              <View style={styles.popularCoursesContainer}>
+                <Text style={styles.popularCoursesTitle}>Popular Courses</Text>
 
-              {/* A carousel for showing the latest courses. */}
-              <CoursesCarousel
-                courses={latestCourses}
-                navigation={navigation}
-                dotesColor={theme.color3}
-              />
+                {/* A carousel for showing the popular courses. */}
+                <CoursesCarousel
+                  courses={popularCorurses}
+                  navigation={navigation}
+                  dotesColor={theme.color3}
+                />
+              </View>
             </View>
+          </ScrollView>
 
-            <View style={styles.popularCoursesContainer}>
-              <Text style={styles.popularCoursesTitle}>Popular Courses</Text>
+          {/* When we open category bottom sheet, the screen will become dark. */}
+          <TouchableWithoutFeedback onPress={() => closeBottomSheet()}>
+            <View style={[darkScreen, styles.darkScreen]}></View>
+          </TouchableWithoutFeedback>
 
-              {/* A carousel for showing the popular courses. */}
-              <CoursesCarousel
-                courses={popularCorurses}
+          {/* Bottom Sheet for categories */}
+          <BottomSheet
+            ref={bottomSheetRef}
+            snapPoints={[0, "80%", "40%"]}
+            renderHeader={() => (
+              <BottomSheetHeader category={selectedCategory} />
+            )}
+            renderContent={() => (
+              <BottomSheetCategory
+                category={selectedCategory}
                 navigation={navigation}
-                dotesColor={theme.color3}
               />
-            </View>
-          </View>
-        </ScrollView>
-
-        {/* When we open category bottom sheet, the screen will become dark. */}
-        <TouchableWithoutFeedback onPress={() => closeBottomSheet()}>
-          <View style={[darkScreen, styles.darkScreen]}></View>
-        </TouchableWithoutFeedback>
-
-        {/* Bottom Sheet for categories */}
-        <BottomSheet
-          ref={bottomSheetRef}
-          snapPoints={[0, "80%", "40%"]}
-          renderHeader={() => <BottomSheetHeader category={selectedCategory} />}
-          renderContent={() => (
-            <BottomSheetCategory
-              category={selectedCategory}
-              navigation={navigation}
-            />
-          )}
-          enabledInnerScrolling={true}
-          enabledContentGestureInteraction={false}
-          onCloseEnd={() => setDarkScreen({ width: 0, height: 0 })}
-        />
+            )}
+            enabledInnerScrolling={true}
+            enabledContentGestureInteraction={false}
+            onCloseEnd={() => setDarkScreen({ width: 0, height: 0 })}
+          />
         </ImageBackground>
       </View>
     );
@@ -269,7 +272,7 @@ const styles = StyleSheet.create({
     opacity: 0.4,
   },
   image: {
-    flex: 1, 
+    flex: 1,
     justifyContent: "center",
-  }
+  },
 });
