@@ -4,7 +4,7 @@ import { MaterialIcons, Feather } from '@expo/vector-icons';
 import Lesson from './Lesson.js';
 import { globalStyles } from '../../shared/globalStyle.js';
 import {theme} from '../../Themes/theme';
-export default function Subject({ item, navigation }) {
+export default function Subject({ item, navigation, changeIconClicked }) {
     const [editable, setEditable] = useState(false);
     const [editIcon, setEditIcon] = useState('edit-2');
     const editSubject = () => {
@@ -30,7 +30,7 @@ export default function Subject({ item, navigation }) {
                 {/* Icon */}
                 <View style={styles.subjectIcon}>
                     <MaterialIcons name={item.icon} size={100} color={theme.color3} />
-                    {editable ? <TouchableOpacity style={styles.subjectEditIconButton}><Feather name="edit-2" size={35} color='white' style={styles.subjectEditIcon} /></TouchableOpacity> : null}
+                    {editable ? <TouchableOpacity style={styles.subjectEditIconButton} onPress={changeIconClicked}><Feather name="edit-2" size={35} color='white' style={styles.subjectEditIcon} /></TouchableOpacity> : null}
                 </View>
                 {/* Text */}
                 <TextInput editable={editable} style={{ borderBottomColor: editable ? '#A8DADC' : 'transparent', ...styles.subjectTitleText }}>{item.title}</TextInput>

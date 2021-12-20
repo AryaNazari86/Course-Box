@@ -297,6 +297,7 @@ def login():
 
 
 @app.route("/CreateCourse", methods=['POST'])
+@token_required
 def create_course():
     try:
         if request.is_json:

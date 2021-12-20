@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView, ImageBackground } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, ImageBackground, Modal } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import Header from '../shared/header';
 import { FAB } from 'react-native-paper';
 import Subject from '../components/CoursePreviewBlocks/Subjects.js';
-import {theme} from '../Themes/theme';
+import { theme } from '../Themes/theme';
+import CourseCreation from './courseCreation';
+import ChooseIcon from './chooseIcon';
 
 export default function CoursePreview(props) {
     const course = props.route.params.datas[0];
     const [content, setContent] = useState(course.content);
+    const [modalVisible, setModalVisible] = useState(false);
     const navigation = props.route.params.datas[1];
     return (
         <View style={{ backgroundColor: theme.color1, flex: 1 }}>
@@ -26,35 +29,72 @@ export default function CoursePreview(props) {
                         }
                     }
                 ]} />
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => {
+                    setModalVisible(!modalVisible);
+                }}
+            >
+                <View style={styles.centeredView}>
+                    <View style={styles.modalView}>
+                        <ChooseIcon
+                            closeFunc={() => setModalVisible(!modalVisible)}
+                        />
+                    </View>
+                </View>
+            </Modal>
+            <ImageBackground
+                source={require("../assets/Images/Backgrounds/wp2003036.jpg")}
+                resizeMode="cover"
+                style={styles.image}
+            >
+                <ScrollView >
+                    {content.map(
+                        (item, index) => {
+                            return (
+                                <Subject item={item} navigation={navigation} key={index} changeIconClicked={() => setModalVisible(true)} />
+                            )
+                        }
+                    )}
+                    <Text style={{ alignSelf: 'center', color: theme.color3, fontFamily: 'comfortaa-light' }}>Created by {course.author}</Text>
+                </ScrollView >
 
-        <ImageBackground
-          source={require("../assets/Images/Backgrounds/wp2003036.jpg")}
-          resizeMode="cover"
-          style={styles.image}
-        >
-            <ScrollView >
-                {content.map(
-                    (item, index) => {
-                        return (
-                            <Subject item={item} navigation={navigation} key={index} />
-                        )
-                    }
-
-                )}
-                <Text style={{ alignSelf: 'center', color: theme.color3, fontFamily: 'comfortaa-light' }}>Created by {course.author}</Text>
-            </ScrollView >
-
-            <FAB
-                color={theme.color3}
-                icon='information'
-                style={styles.infoButton}
-            />
+                <FAB
+                    color={theme.color3}
+                    icon='information'
+                    style={styles.infoButton}
+                />
             </ImageBackground>
         </View >
     )
 }
 
 const styles = StyleSheet.create({
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 22,
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: theme.color1,
+        borderRadius: 20,
+        borderColor: "#FFF",
+        borderWidth: 2,
+        padding: 35,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+    },
     subject: {
         marginVertical: 15,
         marginHorizontal: 30,
