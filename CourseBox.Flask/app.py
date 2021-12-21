@@ -335,6 +335,29 @@ def get_user_details(current_user):
 
     return jsonify(data)
 
+# Lesson Block adding
+
+
+@app.route("/Course/LessonBlock", methods=['POST'])
+def add_lesson_block():
+    try:
+        if request.is_json:
+            lesson_block = LessonBlock(
+                type=request.json["type"],
+                content=request.json["content"],
+                lesson_id=request.json["lesson_id"],
+            )
+            db.session.add(lesson_block)
+            db.session.commit()
+            status_code = Response(status=200, response="Lesson Block Added!")
+            return status_code
+        status_code = Response(status=404)
+        return status_code
+    except:
+        status_code = Response(
+            status=500, response="Something went wrong :(")
+        return status_code
+
 
 if __name__ == '__main__':
     db.create_all()

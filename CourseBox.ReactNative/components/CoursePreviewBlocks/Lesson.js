@@ -7,7 +7,7 @@ export default function Lesson( {item, navigation} ) {
             <TouchableOpacity style={styles.ql} onPress={() => navigation.navigate('Lesson')}>
                 {/* lesson's icon */}
                 <View style={styles.qlIconOut}>
-                    <MaterialIcons name={item.icon} size={50} color='#3D4751' style={{ ...styles.qlIconIn, backgroundColor: item.color }} />
+                    <MaterialIcons name={item.icon} size={50} color='#3D4751' style={styles.qlIconOut} />
                 </View>
                 {/* lesson's title */}
                 <Text style={styles.qlTitleText}>{item.title}</Text>
@@ -46,5 +46,6 @@ const styles = StyleSheet.create({
         borderRadius: 40,
         borderColor: '#3D4751',
         overflow: 'hidden',
+        backgroundColor: theme.color1
     },
 })
