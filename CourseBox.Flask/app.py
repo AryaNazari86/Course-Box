@@ -91,7 +91,7 @@ class Course(db.Model):
     description = db.Column(db.Text, nullable=False)
     participants_count = db.Column(db.Integer)
     likes = db.Column(db.Integer)
-    image = db.Column(db.String(200), nullable=False, unique=True)
+    image = db.Column(db.String(200), nullable=True)
     # Relations
     category_id = db.Column(db.Integer, db.ForeignKey(Category.id))
     author_id = db.Column(db.Integer, db.ForeignKey(User.id))
@@ -297,23 +297,21 @@ def login():
 
 
 @app.route("/CreateCourse", methods=['POST'])
-@token_required
 def create_course():
     try:
-        if request.is_json:
-            newCourse = Course(
-                title="Title",
-                description="Description",
-                participants_count=0,
-                likes=0,
-                category_id=1,
-                author_id=0,
-                image=None,
-            )
-            db.session.add(newCourse)
-            db.session.commit()
-            status_code = Response(status=200, response="Course Created!")
-            return status_code
+        newCourse = Course(
+            title=request.json["Title"],
+            description=request.json["Description"],
+            participants_count=0,
+            likes=0,
+            category_id=1,
+            author_id=0,
+            image=request.json["Image"],
+        )
+        db.session.add(newCourse)
+        db.session.commit()
+        status_code = Response(status=200, response="Course Created!")
+        return status_code
     except:
         status_code = Response(
             status=500, response="There is a problem with your information.")
