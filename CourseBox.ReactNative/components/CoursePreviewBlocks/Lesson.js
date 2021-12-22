@@ -4,8 +4,6 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  ScrollView,
-  ImageBackground,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { theme } from "../../Themes/theme";
@@ -14,7 +12,7 @@ export default function Lesson({ item, navigation }) {
   return (
     <TouchableOpacity
       style={styles.ql}
-      onPress={() => navigation.navigate("Lesson")}
+      onPress={() => navigation.navigate("Lesson", { datas: item.id })}
     >
       {/* lesson's icon */}
       <View style={styles.qlIconOut}>

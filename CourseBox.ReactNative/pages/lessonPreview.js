@@ -9,7 +9,7 @@ import { Video } from 'expo-av';
 import { AntDesign } from '@expo/vector-icons';
 import {theme} from '../Themes/theme';
 import * as ImagePicker from 'expo-image-picker';
-
+import {AddLessonBlock} from '../Services/courseService';
 export default function LessonPreview(props) {
     const [lessonContent, setLessonContent] = useState([
         { type: 'title', content: 'header', key: '1' },
@@ -19,6 +19,9 @@ export default function LessonPreview(props) {
         { type: 'video', content: require('../assets/Videos/ex.mp4'), key: '5' },
         { type: 'code', content: ['print()'] }
     ])
+
+    const lessonId = props.route.params.datas;
+    console.log(lessonId);
 
     // Visiblity Vars
     const [textVisible, setTextVisible] = useState(false);
@@ -108,7 +111,8 @@ export default function LessonPreview(props) {
                     <Button
                     title="add"
                     onPress={() => {
-                        setLessonContent([...lessonContent, {type: 'text', content: 'asdj'}])
+                        AddLessonBlock({type: 'text', content: text, lessonId});
+                        setLessonContent([...lessonContent, {type: 'text', content: 'asdj'}]);
                     }}/>
                 </View>
                 </View>
@@ -139,6 +143,7 @@ export default function LessonPreview(props) {
                     <Button
                     title="add"
                     onPress={() => {
+                        AddLessonBlock({type: 'title', content: text, lessonId});
                         setLessonContent([...lessonContent, {type: 'title', content: 'asdj'}])
                     }}/>
                 </View>
@@ -157,7 +162,6 @@ export default function LessonPreview(props) {
                     )
                 })}
             </ScrollView>
-            <Button title="Pick an image from camera roll" onPress={pickImage} />
 
             <FAB.Group
             open={open}

@@ -1,7 +1,7 @@
 import React from "react";
 import md5 from 'md5';
 
-const API_ADDRESS = "127.0.0.1";
+const API_ADDRESS = "127.0.0.1:5000";
 
 export async function SignUp(values) {
     try {
@@ -15,7 +15,7 @@ export async function SignUp(values) {
             successful: false,
             response: ""
         };
-        await fetch('http://' + API_ADDRESS + ':5000/User/Register', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(user) })
+        await fetch('http://' + API_ADDRESS + '/User/Register', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(user) })
             .then(response => {
                 result.response = response.statusText;
                 if (response.status == 200) {
@@ -48,7 +48,7 @@ export async function Login(values) {
             response: "",
             token: ""
         };
-        await fetch('http://' + API_ADDRESS + ':5000/User/Login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(user) })
+        await fetch('http://' + API_ADDRESS + '/User/Login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(user) })
             .then(response => {
                 if (response.status == 200) {
                     result.successful = true;
@@ -78,7 +78,7 @@ export async function GetUserDetails(token) {
             response: "",
             data: ""
         };
-        await fetch('http://' + API_ADDRESS + ':5000/User/Details', { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-access-tokens': token } })
+        await fetch('http://' + API_ADDRESS + '/User/Details', { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-access-tokens': token } })
             .then(response => {
                 if (response.status == 200) {
                     result.successful = true;

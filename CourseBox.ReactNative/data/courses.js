@@ -1,29 +1,32 @@
 var courses = [
     {
-        title: 'Dribbling', category: 'Sports', author: '@Arya', participants: '100', likes: '99', description: 'kjfskdfksdjhfbksjdhfbksjdhfbkjsdhbfksjdhfbskjdhfbskdjhb ...', image: require(`../assets/Images/earth.png`), key: '1', content: [
+        title: 'Dribbling', category: 'Sports', author: '@Arya', participants: '100', likes: '99', description: 'kjfskdfksdjhfbksjdhfbksjdhfbkjsdhbfksjdhfbskjdhfbskdjhb ...', image: require(`../assets/Images/earth.png`), id: '0', key: '1', content: [
             {
                 title: 'Low Dribble',
                 icon: 'sports-soccer',
                 content: [
-                    { title: 'how to', icon: 'class', color: 'red' },
-                    { title: 'examples', icon: 'analytics', color: 'red' },
+                    { title: 'how to', icon: 'class', color: 'red', id: 1 },
+                    { title: 'examples', icon: 'analytics', color: 'red', id: 2 },
                 ],
+                id: 1
             },
             {
                 title: 'Speed Dribble',
                 icon: 'sports-soccer',
                 content: [
-                    { title: 'how to', icon: 'class', color: 'red' },
-                    { title: 'examples', icon: 'analytics', color: 'red' },
+                    { title: 'how to', icon: 'class', color: 'red', id: 6 },
+                    { title: 'examples', icon: 'analytics', color: 'red', id: 3 },
                 ],
+                id: 2
             },
             {
                 title: 'Change-of-pace Dribble',
                 icon: 'sports-soccer',
                 content: [
-                    { title: 'how to', icon: 'class', color: 'red' },
-                    { title: 'examples', icon: 'analytics', color: 'red' },
+                    { title: 'how to', icon: 'class', color: 'red', id: 4 },
+                    { title: 'examples', icon: 'analytics', color: 'red', id: 5 },
                 ],
+                id: 3
             },
         ],
     },
