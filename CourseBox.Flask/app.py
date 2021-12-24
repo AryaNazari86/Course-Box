@@ -297,7 +297,7 @@ def login():
 
 
 @app.route("/CreateCourse", methods=['POST'])
-def create_course():
+def create_course(current_user):
     try:
         newCourse = Course(
             title=request.json["Title"],
@@ -305,7 +305,7 @@ def create_course():
             participants_count=0,
             likes=0,
             category_id=1,
-            author_id=0,
+            author_id=current_user.id,
             image=request.json["Image"],
         )
         db.session.add(newCourse)
