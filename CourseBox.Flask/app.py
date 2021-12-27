@@ -298,13 +298,26 @@ def login():
 
 @app.route("/CreateCourse", methods=['POST'])
 def create_course(current_user):
+    # Category ID
+    category_request = request.json["Category"]
+    if category_request == "Sport":
+        category_request = 1
+    elif category_request == "Math":
+        category_request = 2
+    elif category_request == "Code":
+        category_request = 3
+    elif category_request == "Paint":
+        category_request = 4
+    elif category_request == "Science":
+        category_request = 5
+
     try:
         newCourse = Course(
             title=request.json["Title"],
             description=request.json["Description"],
             participants_count=0,
             likes=0,
-            category_id=1,
+            category_id=category_request,
             author_id=current_user.id,
             image=request.json["Image"],
         )
