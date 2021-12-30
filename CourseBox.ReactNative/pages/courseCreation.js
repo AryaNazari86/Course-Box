@@ -18,6 +18,7 @@ import Header from "../shared/header";
 // Lottie Library
 import LottieView from "lottie-react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as UserService from "../Services/userService";
 
 import { Formik } from "formik";
 import * as yup from "yup";
