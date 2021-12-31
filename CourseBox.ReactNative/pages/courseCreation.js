@@ -41,20 +41,18 @@ export default function CourseCreation({ navigation, closeFunc }) {
   const [selectedCousePicture, setSelectedCoursePicture] = useState("");
   const [pictureError, setPictureError] = useState("");
 
-  const testFunc = () => {
-    if (selectedCourseCategory != "Math") {
-      setCategoryError("You should do math!");
-    } else {
-      setCategoryError("");
-      console.log(selectedCourseCategory);
-    }
-
-    if (selectedCousePicture != "HI") {
-      setPictureError("You should do HI!");
-    } else {
-      setPictureError("");
-      console.log(selectedCousePicture);
-    }
+  const testFunc = (values) => {
+    UserService.SignUp(
+      values,
+      selectedCourseCategory,
+      "DefaultMolayi.png"
+    ).then((result) => {
+      if (result.successful) {
+        console.log("YESSSSSSSS");
+      } else {
+        console.log(result.response);
+      }
+    });
   };
 
   // * Set of yup rules for the text input

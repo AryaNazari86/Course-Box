@@ -116,7 +116,7 @@ export async function CreateCourse(values, courseCategory, imageName) {
     await fetch("http://" + API_ADDRESS + "/CreateCourse", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(user),
+      body: JSON.stringify(course),
     }).then((response) => {
       result.response = response.statusText;
       if (response.status == 200) {
