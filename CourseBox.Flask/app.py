@@ -6,6 +6,7 @@ import datetime
 import jwt
 from functools import wraps
 from flask_marshmallow import Marshmallow
+from email.utils import parseaddr
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "C83D98E8-B23B-4325-A8F0-5C58106B9145"
@@ -299,20 +300,27 @@ def latest_courses():
 def signup():
     try:
         if request.is_json:
-            user = User(
-                username=request.json["username"],
-                name=request.json["name"],
-                email=request.json["email"],
-                password=request.json["password"],
-                avatar="default.png",
-                is_active=False,
-                register_date=datetime.datetime.now(),
-                bio=""
-            )
-            db.session.add(user)
-            db.session.commit()
-            status_code = Response(status=200, response="Account Created!")
-            return status_code
+            email = request.json["email"]
+            # Cheking if the email is valid
+            if parseaddr(email) != ('', ''):
+                user = User(
+                    username=request.json["username"],
+                    name=request.json["name"],
+                    email=email,
+                    password=request.json["password"],
+                    avatar="default.png",
+                    is_active=False,
+                    register_date=datetime.datetime.now(),
+                    bio=""
+                )
+                db.session.add(user)
+                db.session.commit()
+                status_code = Response(status=200, response="Account Created!")
+                return status_code
+            else:
+                status_code = Response(
+                    status=404, response="Not a valid email address :(")
+                return status_code
         status_code = Response(status=404)
         return status_code
     except:
