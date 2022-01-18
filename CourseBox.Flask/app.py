@@ -250,8 +250,8 @@ def popular_courses():
 @app.route("/LatestCourses", methods=['GET'])
 def latest_courses():
     all_courses = Course.query.all()
-
-    return jsonify(all_courses[-7:-1])
+    result = course_schema.dump(all_courses[-7:-1])
+    return jsonify(result)
 
 
 @app.route("/User/Register", methods=['POST'])
