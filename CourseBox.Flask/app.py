@@ -61,6 +61,11 @@ class Category(db.Model):
         self.title = title
         self.category_image = category_image
 
+class CategorySchema(ma.Schema):
+    class Meta:
+        fields = ('id','title', 'category_image')
+category_schema = CategorySchema()
+category_schema = CategorySchema(many=True)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
@@ -336,6 +341,13 @@ def create_course():
             status=500, response="There is a problem with your information.")
         return status_code
 
+@token_required
+@app.route("/GetCourse", methods=["POST"])
+def get_course(current_user):
+    course_id = request.form["course_id"]
+    course = Course.query.filter_by(id=course_id)
+    result = course_schema.dump(course)
+    return jsonify(result)
 
 @app.route("/User/Details", methods=['POST'])
 @token_required
@@ -375,6 +387,11 @@ def add_lesson_block():
             status=500, response="Something went wrong :(")
         return status_code
 
+@app.route("/Categories", methods=['GET'])
+def get_all_categories():
+    all_categories = Category.query.all()
+    result = category_schema.dump(all_categories)
+    return jsonify(result)
 
 if __name__ == '__main__':
     db.create_all()
