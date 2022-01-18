@@ -14,6 +14,7 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 
+
 def token_required(f):
     @wraps(f)
     def decorator(*args, **kwargs):
@@ -61,10 +62,14 @@ class Category(db.Model):
         self.title = title
         self.category_image = category_image
 
+
 class CategoryListSchema(ma.Schema):
     class Meta:
-        fields = ('id','title', 'category_image')
+        fields = ('id', 'title', 'category_image')
+
+
 category_list_schema = CategoryListSchema(many=True)
+
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
@@ -113,15 +118,24 @@ class Course(db.Model):
         self.author_id = author_id
         self.image = image
 
+
 class CourseListSchema(ma.Schema):
     class Meta:
-        fields = ('id','title','description','participants_count','likes', 'image', 'category_id', 'author_id')
+        fields = ('id', 'title', 'description', 'participants_count',
+                  'likes', 'image', 'category_id', 'author_id')
+
+
 course_list_schema = CourseListSchema(many=True)
+
 
 class CourseSchema(ma.Schema):
     class Meta:
-        fields = ('id','title','description','participants_count','likes', 'image', 'category_id', 'author_id')
+        fields = ('id', 'title', 'description', 'participants_count',
+                  'likes', 'image', 'category_id', 'author_id')
+
+
 course_schema = CourseSchema(many=False)
+
 
 class Subject(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
@@ -136,10 +150,14 @@ class Subject(db.Model):
         self.icon = icon
         self.content = content
 
+
 class SubjectListSchema(ma.Schema):
     class Meta:
-        fields = ('id','title','icon','course_id')
+        fields = ('id', 'title', 'icon', 'course_id')
+
+
 subject_list_schema = SubjectListSchema(many=True)
+
 
 class Lesson(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
@@ -156,10 +174,14 @@ class Lesson(db.Model):
         self.color = color
         self.course_content_id = course_content_id
 
+
 class LessonListSchema(ma.Schema):
     class Meta:
-        fields = ('id','title','icon','color','subject_id')
+        fields = ('id', 'title', 'icon', 'color', 'subject_id')
+
+
 lesson_list_schema = LessonListSchema(many=True)
+
 
 class LessonBlock(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
@@ -180,6 +202,8 @@ participants = db.Table('participants',
                         )
 
 # Change the profile avatar
+
+
 @app.route("/ChangeProfileAvatar", methods=["POST"])
 @token_required
 def change_profile_avatar(current_user):
@@ -352,6 +376,7 @@ def create_course():
             status=500, response="There is a problem with your information.")
         return status_code
 
+
 @token_required
 @app.route("/GetCourse", methods=["POST"])
 def get_course(current_user):
@@ -359,6 +384,7 @@ def get_course(current_user):
     course = Course.query.filter_by(id=course_id).first()
     result = course_schema.dump(course)
     return jsonify(result)
+
 
 @token_required
 @app.route("/GetCoursesByAuthorId", methods=["POST"])
@@ -368,6 +394,7 @@ def get_courses_by_author_id(current_user):
     result = course_list_schema.dump(courses)
     return jsonify(result)
 
+
 @token_required
 @app.route("/GetSubjects", methods=["POST"])
 def get_subjects_by_course_id(current_user):
@@ -376,6 +403,7 @@ def get_subjects_by_course_id(current_user):
     result = subject_list_schema.dump(subjects)
     return jsonify(result)
 
+
 @token_required
 @app.route("/GetLessons", methods=["POST"])
 def get_lessons_by_subject_id(current_user):
@@ -383,6 +411,7 @@ def get_lessons_by_subject_id(current_user):
     lessons = Lesson.query.filter_by(subject_id=subject_id).all()
     result = lesson_list_schema.dump(lessons)
     return jsonify(result)
+
 
 @app.route("/User/Details", methods=['POST'])
 @token_required
@@ -422,11 +451,21 @@ def add_lesson_block():
             status=500, response="Something went wrong :(")
         return status_code
 
+
 @app.route("/Categories", methods=['GET'])
 def get_all_categories():
     all_categories = Category.query.all()
     result = category_list_schema.dump(all_categories)
     return jsonify(result)
+
+
+@app.route("/GetParticipantCourses", methods=['POST'])
+def get_participant_courses():
+    user_id = request.form["user_id"]
+    user = User.query.filter_by(id=user_id).first()
+    result = course_list_schema.dump(user.courses)
+    return jsonify(result)
+
 
 if __name__ == '__main__':
     db.create_all()
