@@ -296,8 +296,9 @@ def login():
         return status_code
 
 
+@token_required
 @app.route("/CreateCourse", methods=['POST'])
-def create_course(current_user):
+def create_course():
     # Category ID
     category_request = request.json["Category"]
     if category_request == "Sport":
@@ -318,7 +319,7 @@ def create_course(current_user):
             participants_count=0,
             likes=0,
             category_id=category_request,
-            author_id=current_user.id,
+            author_id=78,
             image=request.json["Image"],
         )
         db.session.add(newCourse)

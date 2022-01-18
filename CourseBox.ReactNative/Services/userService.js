@@ -101,7 +101,7 @@ export async function GetUserDetails(token) {
   }
 }
 
-export async function CreateCourse(values, courseCategory, imageName) {
+export async function CreateCourse(values, courseCategory, imageName, token) {
   try {
     let course = {
       Title: values.courseName,
@@ -115,23 +115,23 @@ export async function CreateCourse(values, courseCategory, imageName) {
     };
     await fetch("http://" + API_ADDRESS + "/CreateCourse", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "x-access-tokens": token },
       body: JSON.stringify(course),
     }).then((response) => {
       result.response = response.statusText;
       if (response.status == 200) {
         result.successful = true;
       } else if (response.status == 500) {
-        result.response = "Error...";
+        result.response = "Error1...";
       } else if (response.status == 404) {
-        result.response = "Error...";
+        result.response = "Error2...";
       }
     });
     return result;
   } catch (error) {
     return {
       successful: false,
-      response: "Error...",
+      response: error.message,
     };
   }
 }

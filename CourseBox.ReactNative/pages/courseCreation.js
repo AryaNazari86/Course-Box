@@ -41,11 +41,24 @@ export default function CourseCreation({ navigation, closeFunc }) {
   const [selectedCousePicture, setSelectedCoursePicture] = useState("");
   const [pictureError, setPictureError] = useState("");
 
+  const [dataFetched, setDataFetched] = useState(false);
+  var storedDataParsed = null;
+
+  const fetchData = async () => {
+    const storedData = await AsyncStorage.getItem("userDetails");
+    storedDataParsed = JSON.parse(storedData);
+  };
+  if (!dataFetched) {
+    fetchData();
+    setDataFetched(true);
+  }
+
   const testFunc = (values) => {
-    UserService.SignUp(
+    UserService.CreateCourse(
       values,
       selectedCourseCategory,
-      "DefaultMolayi.png"
+      "DefaultMolayi2.png",
+      storedDataParsed
     ).then((result) => {
       if (result.successful) {
         console.log("YESSSSSSSS");
@@ -82,7 +95,7 @@ export default function CourseCreation({ navigation, closeFunc }) {
           }}
           validationSchema={ReviewSchema}
           onSubmit={(values, actions) => {
-            testFunc();
+            testFunc(values);
           }}
           style={globalStyles.container}
         >
