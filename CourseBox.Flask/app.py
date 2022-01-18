@@ -7,6 +7,8 @@ import jwt
 from functools import wraps
 from flask_marshmallow import Marshmallow
 from email.utils import parseaddr
+import hashlib
+
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "C83D98E8-B23B-4325-A8F0-5C58106B9145"
@@ -300,14 +302,27 @@ def latest_courses():
 def signup():
     try:
         if request.is_json:
-            email = request.json["email"]
             # Cheking if the email is valid
+            email = request.json["email"]
             if parseaddr(email) != ('', ''):
+                # Hashing the password
+                # salt = os.urandom(32)
+                salt = b'12345678912345678912345678999999'
+                password = request.json['password']
+
+                key = hashlib.pbkdf2_hmac(
+                    'sha256',  # The hash digest algorithm for HMAC
+                    password.encode('utf-8'),  # Convert the password to bytes
+                    salt,  # Provide the salt
+                    100000,  # It is recommended to use at least 100,000 iterations of SHA-256
+                    dklen=128  # Get a 128 byte key
+                )
+
                 user = User(
                     username=request.json["username"],
                     name=request.json["name"],
                     email=email,
-                    password=request.json["password"],
+                    password=salt + key,
                     avatar="default.png",
                     is_active=False,
                     register_date=datetime.datetime.now(),
@@ -334,7 +349,17 @@ def login():
     try:
         if request.is_json:
             email = request.json["email"]
+
+            # Hashing the input password
             password = request.json["password"]
+            salt = b'12345678912345678912345678999999'
+            password = salt + hashlib.pbkdf2_hmac(
+                'sha256',
+                password.encode('utf-8'),
+                salt,
+                100000
+            )
+
             user = User.query.filter_by(email=email, password=password).first()
             if user == None:
                 status_code = Response(
