@@ -156,6 +156,10 @@ class Lesson(db.Model):
         self.color = color
         self.course_content_id = course_content_id
 
+class LessonListSchema(ma.Schema):
+    class Meta:
+        fields = ('id','title','icon','color','subject_id')
+lesson_list_schema = LessonListSchema(many=True)
 
 class LessonBlock(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
@@ -360,10 +364,18 @@ def get_course(current_user):
 
 @token_required
 @app.route("/GetSubjects", methods=["POST"])
-def get_subjects_by_id(current_user):
+def get_subjects_by_course_id(current_user):
     course_id = request.form["course_id"]
     subjects = Subject.query.filter_by(course_id=course_id).all()
     result = subject_list_schema.dump(subjects)
+    return jsonify(result)
+
+@token_required
+@app.route("/GetLessons", methods=["POST"])
+def get_lessons_by_subject_id(current_user):
+    subject_id = request.form["subject_id"]
+    lessons = Lesson.query.filter_by(subject_id=subject_id).all()
+    result = lesson_list_schema.dump(lessons)
     return jsonify(result)
 
 @app.route("/User/Details", methods=['POST'])
