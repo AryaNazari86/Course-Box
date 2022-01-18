@@ -8,6 +8,7 @@ import {
   InteractionManager,
   Modal,
   TouchableOpacity,
+  ImageBackground,
 } from "react-native";
 import { globalStyles } from "../shared/globalStyle";
 import Header from "../shared/header";
@@ -87,174 +88,183 @@ export default function Profile({ navigation }) {
             </View>
           </View>
         </Modal>
+
         <ScrollView
-          style={globalStyles.appBackground}
           showsVerticalScrollIndicator={false}
+          style={globalStyles.appBackground}
         >
-          <View style={styles.accountBox}>
-            {/* Account Name And Icon Header */}
-            <View style={styles.profileAccountHeader}>
-              <Image
-                source={{
-                  uri:
-                    "http://192.168.1.101:5000/static/avatars/" +
-                    profilePageValues.avatar,
-                }}
-                style={styles.profileAccountImage}
-              ></Image>
+          <ImageBackground
+            source={require("../assets/Images/Backgrounds/b05ed9832a0663c2e80b846604e157d3.png")}
+            resizeMode="cover"
+            style={styles.image}
+            blurRadius={0}
+          >
+            <View style={styles.accountBox}>
+              {/* Account Name And Icon Header */}
+              <View style={styles.profileAccountHeader}>
+                <Image
+                  source={{
+                    uri:
+                      "http://192.168.1.101:5000/static/avatars/" +
+                      profilePageValues.avatar,
+                  }}
+                  style={styles.profileAccountImage}
+                ></Image>
+              </View>
+
+              <View style={styles.detailBox}>
+                <Text
+                  style={{
+                    ...styles.profileAccountName,
+                    ...globalStyles.TitleText,
+                  }}
+                >
+                  {profilePageValues.name}
+                </Text>
+
+                {/* Username */}
+                <View style={styles.userNameTag}>
+                  <Text
+                    style={{
+                      ...globalStyles.TitleText,
+                      ...globalStyles.normalText,
+                      ...styles.userName,
+                    }}
+                  >
+                    @{profilePageValues.username}
+                  </Text>
+                  <Text
+                    style={{
+                      ...globalStyles.TitleText,
+                      ...globalStyles.normalText,
+                      ...styles.userName,
+                    }}
+                  ></Text>
+                </View>
+              </View>
             </View>
 
-            <View style={styles.detailBox}>
+            {/* Account Description */}
+            <View style={styles.profileDescriptionHeader}>
               <Text
                 style={{
-                  ...styles.profileAccountName,
                   ...globalStyles.TitleText,
+                  ...globalStyles.normalText,
+                  ...styles.profileDescriptionText,
                 }}
               >
-                {profilePageValues.name}
+                {profilePageValues.bio}
               </Text>
-
-              {/* Username */}
-              <View style={styles.userNameTag}>
+            </View>
+            {/* Account Details */}
+            <View style={styles.profileDetailHeader}>
+              {/* Ammount of made courses */}
+              <View>
                 <Text
                   style={{
                     ...globalStyles.TitleText,
                     ...globalStyles.normalText,
-                    ...styles.userName,
+                    ...styles.profileDetailText,
                   }}
                 >
-                  @{profilePageValues.username}
+                  {/* {profilePageValues.accountCoursesVal} */}5
                 </Text>
                 <Text
                   style={{
                     ...globalStyles.TitleText,
                     ...globalStyles.normalText,
-                    ...styles.userName,
+                    ...styles.profileDetailText,
                   }}
-                ></Text>
+                >
+                  Courses
+                </Text>
+              </View>
+              {/* Ammount of followers */}
+              <View style={styles.profileDetail}>
+                <Text
+                  style={{
+                    ...globalStyles.TitleText,
+                    ...globalStyles.normalText,
+                    ...styles.profileDetailText,
+                  }}
+                >
+                  {/* {profilePageValues.accountFollowersVal} */}5
+                </Text>
+                <Text
+                  style={{
+                    ...globalStyles.TitleText,
+                    ...globalStyles.normalText,
+                    ...styles.profileDetailText,
+                  }}
+                >
+                  Followers
+                </Text>
+              </View>
+              {/* Ammount of made participated courses */}
+              <View style={styles.profileDetail}>
+                <Text
+                  style={{
+                    ...globalStyles.TitleText,
+                    ...globalStyles.normalText,
+                    ...styles.profileDetailText,
+                  }}
+                >
+                  {/* {profilePageValues.accountParticipatedVal} */}5
+                </Text>
+                <Text
+                  style={{
+                    ...globalStyles.TitleText,
+                    ...globalStyles.normalText,
+                    ...styles.profileDetailText,
+                  }}
+                >
+                  Participated
+                </Text>
               </View>
             </View>
-          </View>
 
-          {/* Account Description */}
-          <View style={styles.profileDescriptionHeader}>
-            <Text
-              style={{
-                ...globalStyles.TitleText,
-                ...globalStyles.normalText,
-                ...styles.profileDescriptionText,
-              }}
-            >
-              {profilePageValues.bio}
-            </Text>
-          </View>
-          {/* Account Details */}
-          <View style={styles.profileDetailHeader}>
-            {/* Ammount of made courses */}
-            <View>
-              <Text
-                style={{
-                  ...globalStyles.TitleText,
-                  ...globalStyles.normalText,
-                  ...styles.profileDetailText,
-                }}
-              >
-                {/* {profilePageValues.accountCoursesVal} */}5
-              </Text>
-              <Text
-                style={{
-                  ...globalStyles.TitleText,
-                  ...globalStyles.normalText,
-                  ...styles.profileDetailText,
-                }}
-              >
-                Courses
-              </Text>
-            </View>
-            {/* Ammount of followers */}
-            <View style={styles.profileDetail}>
-              <Text
-                style={{
-                  ...globalStyles.TitleText,
-                  ...globalStyles.normalText,
-                  ...styles.profileDetailText,
-                }}
-              >
-                {/* {profilePageValues.accountFollowersVal} */}5
-              </Text>
-              <Text
-                style={{
-                  ...globalStyles.TitleText,
-                  ...globalStyles.normalText,
-                  ...styles.profileDetailText,
-                }}
-              >
-                Followers
-              </Text>
-            </View>
-            {/* Ammount of made participated courses */}
-            <View style={styles.profileDetail}>
-              <Text
-                style={{
-                  ...globalStyles.TitleText,
-                  ...globalStyles.normalText,
-                  ...styles.profileDetailText,
-                }}
-              >
-                {/* {profilePageValues.accountParticipatedVal} */}5
-              </Text>
-              <Text
-                style={{
-                  ...globalStyles.TitleText,
-                  ...globalStyles.normalText,
-                  ...styles.profileDetailText,
-                }}
-              >
-                Participated
-              </Text>
-            </View>
-          </View>
+            <View style={styles.madeCoursesHeader}>
+              {/* Made Courses */}
+              <View>
+                <Text
+                  style={{
+                    ...styles.madeCoursesText,
+                    ...globalStyles.normalText,
+                    ...globalStyles.TitleText,
+                  }}
+                >
+                  Made Courses
+                </Text>
+                <CoursesCarousel
+                  courses={courses}
+                  navigation={navigation}
+                  dotesColor={theme.color3}
+                />
+              </View>
 
-          <View style={styles.madeCoursesHeader}>
-            {/* Made Courses */}
-            <View>
-              <Text
-                style={{
-                  ...styles.madeCoursesText,
-                  ...globalStyles.normalText,
-                  ...globalStyles.TitleText,
-                }}
-              >
-                Made Courses
-              </Text>
-              <CoursesCarousel
-                courses={courses}
-                navigation={navigation}
-                dotesColor={theme.color3}
-              />
+              {/* Participated Courses */}
+              <View>
+                <Text
+                  style={{
+                    ...styles.madeCoursesText,
+                    ...globalStyles.normalText,
+                    ...globalStyles.TitleText,
+                  }}
+                >
+                  Participated Courses
+                </Text>
+                <CoursesCarousel
+                  courses={courses}
+                  navigation={navigation}
+                  dotesColor={theme.color3}
+                />
+              </View>
             </View>
-
-            {/* Participated Courses */}
-            <View>
-              <Text
-                style={{
-                  ...styles.madeCoursesText,
-                  ...globalStyles.normalText,
-                  ...globalStyles.TitleText,
-                }}
-              >
-                Participated Courses
-              </Text>
-              <CoursesCarousel
-                courses={courses}
-                navigation={navigation}
-                dotesColor={theme.color3}
-              />
-            </View>
-          </View>
-          {/* Empty Spacer */}
-          <Text style={globalStyles.emptySpacer}>Code Rangers®</Text>
+            {/* Empty Spacer */}
+            <Text style={globalStyles.emptySpacer}>Code Rangers®</Text>
+          </ImageBackground>
         </ScrollView>
+
         <FAB
           color={theme.color3}
           icon="plus"
@@ -399,5 +409,10 @@ const styles = StyleSheet.create({
     marginTop: 25,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
+  },
+
+  image: {
+    flex: 1,
+    justifyContent: "center",
   },
 });

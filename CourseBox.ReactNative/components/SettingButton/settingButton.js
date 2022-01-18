@@ -175,7 +175,6 @@ const styles = StyleSheet.create({
   },
 
   editText: {
-    paddingTop: 5,
     fontSize: 16,
 
     top: 1,
