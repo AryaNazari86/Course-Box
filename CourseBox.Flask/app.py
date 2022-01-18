@@ -61,11 +61,10 @@ class Category(db.Model):
         self.title = title
         self.category_image = category_image
 
-class CategorySchema(ma.Schema):
+class CategoryListSchema(ma.Schema):
     class Meta:
         fields = ('id','title', 'category_image')
-category_schema = CategorySchema()
-category_schema = CategorySchema(many=True)
+category_list_schema = CategoryListSchema(many=True)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
@@ -113,11 +112,17 @@ class Course(db.Model):
         self.category_id = category_id
         self.author_id = author_id
         self.image = image
+
+class CourseListSchema(ma.Schema):
+    class Meta:
+        fields = ('id','title','description','participants_count','likes', 'image', 'category_id', 'author_id')
+course_list_schema = CourseListSchema(many=True)
+
 class CourseSchema(ma.Schema):
     class Meta:
         fields = ('id','title','description','participants_count','likes', 'image', 'category_id', 'author_id')
-course_schema = CourseSchema()
-course_schema = CourseSchema(many=True)
+course_schema = CourseSchema(many=False)
+
 class Subject(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
     title = db.Column(db.String(200))
@@ -131,6 +136,10 @@ class Subject(db.Model):
         self.icon = icon
         self.content = content
 
+class SubjectListSchema(ma.Schema):
+    class Meta:
+        fields = ('id','title','icon','course_id')
+subject_list_schema = SubjectListSchema(many=True)
 
 class Lesson(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
@@ -241,7 +250,7 @@ def search_course():
         if search_value in i.title.lower():
             search_result.append(i)
 
-    result = course_schema.dump(search_result)
+    result = course_list_schema.dump(search_result)
     return jsonify(result)
 
 
@@ -249,14 +258,14 @@ def search_course():
 def popular_courses():
     all_courses = Course.query.filter_by().all()
     all_courses.sort(key=lambda x: x.participants_count, reverse=True)
-    result = course_schema.dump(all_courses[0:6])
+    result = course_list_schema.dump(all_courses[0:6])
     return jsonify(result)
 
 
 @app.route("/LatestCourses", methods=['GET'])
 def latest_courses():
     all_courses = Course.query.all()
-    result = course_schema.dump(all_courses[-7:-1])
+    result = course_list_schema.dump(all_courses[-7:-1])
     return jsonify(result)
 
 
@@ -345,8 +354,16 @@ def create_course():
 @app.route("/GetCourse", methods=["POST"])
 def get_course(current_user):
     course_id = request.form["course_id"]
-    course = Course.query.filter_by(id=course_id)
+    course = Course.query.filter_by(id=course_id).first()
     result = course_schema.dump(course)
+    return jsonify(result)
+
+@token_required
+@app.route("/GetSubjects", methods=["POST"])
+def get_subjects_by_id(current_user):
+    course_id = request.form["course_id"]
+    subjects = Subject.query.filter_by(course_id=course_id).all()
+    result = subject_list_schema.dump(subjects)
     return jsonify(result)
 
 @app.route("/User/Details", methods=['POST'])
@@ -390,7 +407,7 @@ def add_lesson_block():
 @app.route("/Categories", methods=['GET'])
 def get_all_categories():
     all_categories = Category.query.all()
-    result = category_schema.dump(all_categories)
+    result = category_list_schema.dump(all_categories)
     return jsonify(result)
 
 if __name__ == '__main__':
