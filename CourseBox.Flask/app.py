@@ -180,8 +180,6 @@ participants = db.Table('participants',
                         )
 
 # Change the profile avatar
-
-
 @app.route("/ChangeProfileAvatar", methods=["POST"])
 @token_required
 def change_profile_avatar(current_user):
@@ -360,6 +358,14 @@ def get_course(current_user):
     course_id = request.form["course_id"]
     course = Course.query.filter_by(id=course_id).first()
     result = course_schema.dump(course)
+    return jsonify(result)
+
+@token_required
+@app.route("/GetCoursesByAuthorId", methods=["POST"])
+def get_courses_by_author_id(current_user):
+    author_id = request.form["author_id"]
+    courses = Course.query.filter_by(author_id=author_id).all()
+    result = course_list_schema.dump(courses)
     return jsonify(result)
 
 @token_required
