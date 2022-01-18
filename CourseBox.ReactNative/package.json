@@ -19,6 +19,7 @@
     "expo": "~42.0.1",
     "expo-app-loading": "^1.1.2",
     "expo-av": "~9.2.3",
+    "expo-image-picker": "~10.2.2",
     "expo-linear-gradient": "~9.2.0",
     "expo-status-bar": "~1.0.4",
     "formik": "^2.2.9",
@@ -26,9 +27,11 @@
     "md5": "^2.3.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-material-ui-icon-picker": "0.0.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
     "react-native-dropdown-picker": "^5.2.3",
     "react-native-gesture-handler": "^1.10.3",
+    "react-native-icon-picker": "^1.0.6",
     "react-native-material-dropdown-v2": "^0.11.1",
     "react-native-modest-checkbox": "^3.3.0",
     "react-native-paper": "^4.9.2",
@@ -52,8 +55,7 @@
     "styled-components": "^5.3.3",
     "yarn": "^1.22.11",
     "yet": "^0.1.0",
-    "yup": "^0.32.9",
-    "expo-image-picker": "~10.2.2"
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"

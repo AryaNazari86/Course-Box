@@ -7,6 +7,7 @@ import Subject from '../components/CoursePreviewBlocks/Subjects.js';
 import { theme } from '../Themes/theme';
 import CourseCreation from './courseCreation';
 import ChooseIcon from './chooseIcon';
+import IconPicker from "react-native-icon-picker";
 
 export default function CoursePreview(props) {
     const course = props.route.params.datas[0];
@@ -39,8 +40,22 @@ export default function CoursePreview(props) {
             >
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>
-                        <ChooseIcon
-                            closeFunc={() => setModalVisible(!modalVisible)}
+                        <IconPicker
+                            iconDetails={[
+                                { family: "AntDesign", color: "blue", icons: ["wallet"] },
+                                { family: "Entypo", icons: ["wallet"] },
+                                { family: "FontAwesome", icons: ["google-wallet"] },
+                                { family: "FontAwesome5", icons: ["wallet"] },
+                                { family: "Fontisto", icons: ["wallet"] },
+                                {
+                                    family: "MaterialCommunityIcons",
+                                    icons: ["wallet-membership"]
+                                },
+                                { family: "MaterialIcons", icons: ["wallet-travel"] }
+                            ]
+                            }
+                            onSelect={(icon) => console.log(icon)}
+                            content={<MaterialIcons name="category" size={32} />}
                         />
                     </View>
                 </View>

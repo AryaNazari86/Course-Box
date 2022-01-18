@@ -5,13 +5,14 @@ import uuid
 import datetime
 import jwt
 from functools import wraps
+from flask_marshmallow import Marshmallow
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "C83D98E8-B23B-4325-A8F0-5C58106B9145"
 app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///coursebox.sqlite3'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
-
+ma = Marshmallow(app)
 
 def token_required(f):
     @wraps(f)
@@ -107,8 +108,11 @@ class Course(db.Model):
         self.category_id = category_id
         self.author_id = author_id
         self.image = image
-
-
+class CourseSchema(ma.Schema):
+    class Meta:
+        fields = ('id','title','description','participants_count','likes', 'image', 'category_id', 'author_id')
+course_schema = CourseSchema()
+course_schema = CourseSchema(many=True)
 class Subject(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
     title = db.Column(db.String(200))
@@ -239,8 +243,8 @@ def search_course():
 def popular_courses():
     all_courses = Course.query.filter_by().all()
     all_courses.sort(key=lambda x: x.participants_count, reverse=True)
-
-    return jsonify(all_courses[0:6])
+    result = course_schema.dump(all_courses[0:6])
+    return jsonify(result)
 
 
 @app.route("/LatestCourses", methods=['GET'])
