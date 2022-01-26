@@ -106,6 +106,7 @@ export default function SettingButton({
             rowTextForSelection={(item, index) => {
               return item;
             }}
+            keyExtractor={(item) => item.index_id.toString()}
           />
         </View>
       </View>
