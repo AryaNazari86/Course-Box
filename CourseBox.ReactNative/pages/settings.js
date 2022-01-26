@@ -35,119 +35,107 @@ export default function SettingsPage({ navigation }) {
 
   if (loaded) {
     return (
-      <TouchableWithoutFeedback
-        onPress={Keyboard.dismiss}
-        style={globalStyles.container}
-      >
-        <View style={{ flex: 1 }}>
-          <Header title="Sign Up" height={60} />
-          <ImageBackground
-            source={require("../assets/Images/Backgrounds/acf4d023e1b9ff3a285d5cab92433f07.jpg")}
-            resizeMode="cover"
-            style={styles.image}
-            blurRadius={0}
+      <View>
+        <Header title="Settings" height={60} />
+        <ScrollView style={globalStyles.appBackground}>
+          {/* Profile Settings */}
+          <Text
+            style={{
+              ...styles.headerText,
+              ...globalStyles.normalText,
+              ...globalStyles.TitleText,
+            }}
           >
-            <View style={{ ...globalStyles.container, ...styles.container }}>
-              {/* Profile Settings */}
-              <Text
-                style={{
-                  ...styles.headerText,
-                  ...globalStyles.normalText,
-                  ...globalStyles.TitleText,
-                }}
-              >
-                Profile
-              </Text>
-              <View style={{ ...globalStyles.container, marginTop: -15 }}>
-                <SettingButton
-                  buttonText={"Profile Name"}
-                  buttonStyle="Edit"
-                  functionName={testFunc}
-                />
-                <SettingButton
-                  buttonText={"UserName"}
-                  buttonStyle="Edit"
-                  functionName={testFunc}
-                />
-                <SettingButton
-                  buttonText={"Profile Picture"}
-                  buttonStyle="Edit"
-                  functionName={testFunc}
-                />
-                {/* App theme */}
-                <Text
-                  style={{
-                    ...styles.headerText,
-                    ...globalStyles.normalText,
-                    ...globalStyles.TitleText,
-                  }}
-                >
-                  Theme
-                </Text>
-                <View style={globalStyles.container}>
-                  <SettingButton
-                    buttonText={"Theme"}
-                    buttonStyle="Dropdown"
-                    functionName={testFunc}
-                    dropDownList={themes}
-                  />
-                </View>
-                {/* Language */}
-                <Text
-                  style={{
-                    ...styles.headerText,
-                    ...globalStyles.normalText,
-                    ...globalStyles.TitleText,
-                    paddingTop: 20,
-                  }}
-                >
-                  Language
-                </Text>
-                <View style={globalStyles.container}>
-                  <SettingButton
-                    buttonText={"Language"}
-                    buttonStyle="Dropdown"
-                    functionName={testFunc}
-                    dropDownList={language}
-                  />
-                </View>
-                {/* Empty Spacer */}
-                {/* About */}
-                <Text
-                  style={{
-                    ...styles.headerText,
-                    ...globalStyles.normalText,
-                    ...globalStyles.TitleText,
-                    paddingTop: 20,
-                  }}
-                >
-                  About Us
-                </Text>
-                <View style={{ ...globalStyles.container, marginTop: -16 }}>
-                  <SettingButton
-                    buttonText={"About Code Rangers"}
-                    buttonStyle="Edit"
-                    functionName={testFunc}
-                    editButtonName="View"
-                  />
-                  <SettingButton
-                    buttonText={"Terms of service"}
-                    buttonStyle="Edit"
-                    functionName={testFunc}
-                    editButtonName="View"
-                  />
-                  <SettingButton
-                    buttonText={"Privacy Policy"}
-                    buttonStyle="Edit"
-                    functionName={testFunc}
-                    editButtonName="View"
-                  />
-                </View>
-              </View>
+            Profile
+          </Text>
+          <View style={{ ...globalStyles.container, marginTop: -15 }}>
+            <SettingButton
+              buttonText={"Profile Name"}
+              buttonStyle="Edit"
+              functionName={testFunc}
+            />
+            <SettingButton
+              buttonText={"UserName"}
+              buttonStyle="Edit"
+              functionName={testFunc}
+            />
+            <SettingButton
+              buttonText={"Profile Picture"}
+              buttonStyle="Edit"
+              functionName={testFunc}
+            />
+            {/* App theme */}
+            <Text
+              style={{
+                ...styles.headerText,
+                ...globalStyles.normalText,
+                ...globalStyles.TitleText,
+              }}
+            >
+              Theme
+            </Text>
+            <View style={globalStyles.container}>
+              <SettingButton
+                buttonText={"Theme"}
+                buttonStyle="Dropdown"
+                functionName={testFunc}
+                dropDownList={themes}
+              />
             </View>
-          </ImageBackground>
-        </View>
-      </TouchableWithoutFeedback>
+            {/* Language */}
+            <Text
+              style={{
+                ...styles.headerText,
+                ...globalStyles.normalText,
+                ...globalStyles.TitleText,
+                paddingTop: 20,
+              }}
+            >
+              Language
+            </Text>
+            <View style={globalStyles.container}>
+              <SettingButton
+                buttonText={"Language"}
+                buttonStyle="Dropdown"
+                functionName={testFunc}
+                dropDownList={language}
+              />
+            </View>
+            {/* Empty Spacer */}
+            {/* About */}
+            <Text
+              style={{
+                ...styles.headerText,
+                ...globalStyles.normalText,
+                ...globalStyles.TitleText,
+                paddingTop: 20,
+              }}
+            >
+              About Us
+            </Text>
+            <View style={{ ...globalStyles.container, marginTop: -16 }}>
+              <SettingButton
+                buttonText={"About Code Rangers"}
+                buttonStyle="Edit"
+                functionName={testFunc}
+                editButtonName="View"
+              />
+              <SettingButton
+                buttonText={"Terms of service"}
+                buttonStyle="Edit"
+                functionName={testFunc}
+                editButtonName="View"
+              />
+              <SettingButton
+                buttonText={"Privacy Policy"}
+                buttonStyle="Edit"
+                functionName={testFunc}
+                editButtonName="View"
+              />
+            </View>
+          </View>
+        </ScrollView>
+      </View>
     );
   } else {
     return (
