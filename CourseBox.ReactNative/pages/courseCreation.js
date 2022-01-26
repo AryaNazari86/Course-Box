@@ -59,6 +59,7 @@ export default function CourseCreation({ navigation, closeFunc }) {
       selectedCourseCategory,
       "DefaultMolayi2.png",
       storedDataParsed
+      // ! ََ---------------------------- Author ID here ----------------------------
     ).then((result) => {
       if (result.successful) {
         console.log("YESSSSSSSS");

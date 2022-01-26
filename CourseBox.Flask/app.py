@@ -255,9 +255,10 @@ def change_profile_avatar(current_user):
                 status_code = Response(
                     status=400, response="Last User Avatar Was Not Found!")
                 return status_code
-            # else:
-            # TODO : Check if avatar exists before deleting.
-            #     os.remove(f"/static/avatars/{last_avatar}")
+            else:
+                # Check if avatar exists before deleting.
+                if os.path.isfile(f"/static/avatars/{last_avatar}"):
+                    os.remove(f"/static/avatars/{last_avatar}")
 
         # Return sucessfull
         status_code = Response(status=200, response="Avatar Image Uploaded!")
@@ -389,6 +390,10 @@ def create_course():
         category_request = 4
     elif category_request == "Science":
         category_request = 5
+    else:
+        status_code = Response(
+            status=500, response="There is a problem with your selected Category.")
+        return status_code
 
     try:
         newCourse = Course(
@@ -397,7 +402,7 @@ def create_course():
             participants_count=0,
             likes=0,
             category_id=category_request,
-            author_id=78,
+            author_id=request.json["Author_ID"],
             image=request.json["Image"],
         )
         db.session.add(newCourse)
