@@ -214,8 +214,7 @@ def change_profile_avatar(current_user):
     avatar = request.files['avatar']
     if avatar == None:
         # Return error
-        status_code = Response(status=400, response="")
-        return status_code
+        return jsonify({'status': 'error'}), 400
     # Image extensions
     allowed_extensions = [".png", ".jpeg", ".jpg", ".webp", ".ico", ".svg"]
     file_extension = os.path.splitext(avatar.filename)[-1]
@@ -234,16 +233,13 @@ def change_profile_avatar(current_user):
 
         # Check for file size
         if avatar_size > size_limit:
-            status_code = Response(
-                status=400, response="Uploaded File Was Too Big!")
-            return status_code
+            return jsonify({'status': 'error'}), 404
         # Save avatar image
         # TODO: there is a problem with saving files.
         avatar.save('statics/avatars/' + str(
             user.id) + file_extension)
         if user == None:
-            status_code = Response(status=400, response="User Was Not Found!")
-            return status_code
+            return jsonify({'status': 'error'}), 404
         # Update avatar name in database
         user.avatar = str(user.id) + file_extension
         # Commit changes
@@ -252,23 +248,18 @@ def change_profile_avatar(current_user):
         if last_avatar != "default.png":
             if last_avatar == None:
                 # Return error
-                status_code = Response(
-                    status=400, response="Last User Avatar Was Not Found!")
-                return status_code
+                return jsonify({'status': 'error'}), 400
             else:
                 # Check if avatar exists before deleting.
                 if os.path.isfile(f"/static/avatars/{last_avatar}"):
                     os.remove(f"/static/avatars/{last_avatar}")
 
         # Return sucessfull
-        status_code = Response(status=200, response="Avatar Image Uploaded!")
-        return status_code
+        return jsonify({'status': 'error'}), 200
 
     else:
         # Return error
-        status_code = Response(
-            status=400, response="Uploaded File Must Be An Image!")
-        return status_code
+        return jsonify({'status': 'error'}), 400
 
 
 @app.route("/SearchCourses", methods=['POST'])
@@ -331,18 +322,12 @@ def signup():
                 )
                 db.session.add(user)
                 db.session.commit()
-                status_code = Response(status=200, response="Account Created!")
-                return status_code
+                return jsonify({'status': 'success'}), 200
             else:
-                status_code = Response(
-                    status=404, response="Not a valid email address :(")
-                return status_code
-        status_code = Response(status=404)
-        return status_code
+                return jsonify({'status': 'error'}), 404
+        return jsonify({'status': 'error'}), 404
     except:
-        status_code = Response(
-            status=500, response="There is a problem with your information.")
-        return status_code
+        return jsonify({'status': 'error'}), 500
 
 
 @app.route("/User/Login", methods=['POST'])
@@ -370,9 +355,7 @@ def login():
             ) + datetime.timedelta(days=30)}, app.config['SECRET_KEY'])
             return jsonify({'token': token})
     except:
-        status_code = Response(
-            status=500, response="There is a problem with server.")
-        return status_code
+        return jsonify({'status': 'error'}), 500
 
 
 @token_required
@@ -391,9 +374,7 @@ def create_course():
     elif category_request == "Science":
         category_request = 5
     else:
-        status_code = Response(
-            status=500, response="There is a problem with your selected Category.")
-        return status_code
+        return jsonify({'status': 'error'}), 404
 
     try:
         newCourse = Course(
@@ -407,12 +388,9 @@ def create_course():
         )
         db.session.add(newCourse)
         db.session.commit()
-        status_code = Response(status=200, response="Course Created!")
-        return status_code
+        return jsonify({'status': 'success'}), 200
     except:
-        status_code = Response(
-            status=500, response="There is a problem with your information.")
-        return status_code
+        return jsonify({'success': 'error'}), 500
 
 
 @token_required
@@ -480,14 +458,10 @@ def add_lesson_block():
             )
             db.session.add(lesson_block)
             db.session.commit()
-            status_code = Response(status=200, response="Lesson Block Added!")
-            return status_code
-        status_code = Response(status=404)
-        return status_code
+            return jsonify({'status': 'success'}), 200
+        return jsonify({'status': 'error'}), 400
     except:
-        status_code = Response(
-            status=500, response="Something went wrong :(")
-        return status_code
+        return jsonify({'status': 'error'}), 500
 
 
 @app.route("/Categories", methods=['GET'])
