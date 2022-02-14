@@ -55,25 +55,32 @@ export default function Home({ navigation }) {
   const [darkScreen, setDarkScreen] = useState({ width: 0, height: 0 });
 
   // Get Categories From API
-  const [latestCourses, setLatestCourses] = useState(courses);
-  const [popularCorurses, setPopularCourses] = useState(courses);
-  const fetchDatas = async () => {
+  const [latestCourses, setLatestCourses] = useState();
+  const [popularCorurses, setPopularCourses] = useState();
+
+  const [dataFetched, setDataFetched] = useState(false);
+
+  const fetchData = async () => {
     try {
-      const response = await fetch("http://192.168.199.22:5000/LatestCourses");
+      const response = await fetch("http://192.168.1.102:5000/LatestCourses");
       const courses = await response.json();
       setLatestCourses(courses);
-      const response1 = await fetch(
-        "http://192.168.199.22:5000/PopularCourses"
-      );
+      const response1 = await fetch("http://192.168.1.102:5000/PopularCourses");
       const courses1 = await response1.json();
       setPopularCourses(courses1);
     } catch (error) {
       console.log(error);
     }
   };
+  if (!dataFetched) {
+    fetchData();
+    setDataFetched(true);
+  }
+
+  console.log(latestCourses);
 
   useEffect(() => {
-    //fetchDatas();
+    // fetchDatas();
   }, []);
   const categories = [
     {
@@ -131,7 +138,7 @@ export default function Home({ navigation }) {
     setDarkScreen({ width: "0%", height: "0%" });
   };
 
-  if (loaded) {
+  if (loaded && dataFetched) {
     return (
       <View style={styles.container}>
         {/* Header */}

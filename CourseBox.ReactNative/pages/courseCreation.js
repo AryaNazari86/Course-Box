@@ -45,8 +45,10 @@ export default function CourseCreation({ navigation, closeFunc }) {
   var storedDataParsed = null;
 
   const fetchData = async () => {
-    const storedData = await AsyncStorage.getItem("userDetails");
-    storedDataParsed = JSON.parse(storedData);
+    const storedData = await AsyncStorage.getItem("token");
+    var a = { token: storedData };
+
+    storedDataParsed = JSON.parse(a);
   };
   if (!dataFetched) {
     fetchData();
@@ -57,9 +59,8 @@ export default function CourseCreation({ navigation, closeFunc }) {
     UserService.CreateCourse(
       values,
       selectedCourseCategory,
-      "DefaultMolayi2.png",
+      "MeowPlease.png",
       storedDataParsed
-      // ! ََ---------------------------- Author ID here ----------------------------
     ).then((result) => {
       if (result.successful) {
         console.log("YESSSSSSSS");
@@ -117,7 +118,7 @@ export default function CourseCreation({ navigation, closeFunc }) {
                   onBlur={props.handleBlur("courseName")}
                   placeholderTextColor={"black"}
                   placeholderTextColor={theme.textColor2}
-                  maxLength={10}
+                  maxLength={45}
                 />
               </View>
 
@@ -142,7 +143,7 @@ export default function CourseCreation({ navigation, closeFunc }) {
                   onBlur={props.handleBlur("courseDescription")}
                   placeholderTextColor={"black"}
                   placeholderTextColor={theme.textColor2}
-                  maxLength={80}
+                  maxLength={450}
                   textAlignVertical={"top"}
                 />
               </View>

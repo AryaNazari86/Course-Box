@@ -21,7 +21,7 @@ ma = Marshmallow(app)
 def token_required(f):
     @wraps(f)
     def decorator(*args, **kwargs):
-
+        print(1)
         token = None
         if 'x-access-tokens' in request.headers:
             token = request.headers['x-access-tokens']
@@ -39,6 +39,7 @@ def token_required(f):
             status_code = Response(status=401, response="Token is invalid.")
             return status_code
 
+        print(current_user.id)
         return f(current_user, *args, **kwargs)
     return decorator
 
@@ -295,7 +296,7 @@ def popular_courses():
 @app.route("/LatestCourses", methods=['GET'])
 def latest_courses():
     all_courses = Course.query.all()
-    result = course_list_schema.dump(all_courses[-7:-1])
+    result = course_list_schema.dump(all_courses)
     return jsonify(result)
 
 
@@ -375,9 +376,12 @@ def login():
         return status_code
 
 
-@token_required
 @app.route("/CreateCourse", methods=['POST'])
+@token_required
 def create_course():
+    # user_id = current_user.id
+    # print(user_id)
+
     # Category ID
     category_request = request.json["Category"]
     if category_request == "Sport":
@@ -402,7 +406,7 @@ def create_course():
             participants_count=0,
             likes=0,
             category_id=category_request,
-            author_id=request.json["Author_ID"],
+            author_id=87,
             image=request.json["Image"],
         )
         db.session.add(newCourse)
