@@ -49,7 +49,7 @@ export async function AddLessonBlock(values) {
                 else if (response.status == 500) {
                     result.response = "Error...";
                 }
-                else if (response.status == 404){
+                else if (response.status == 404) {
                     result.response = "Error...";
                 }
             });
@@ -59,6 +59,30 @@ export async function AddLessonBlock(values) {
             successful: false,
             response: "Error..."
         };
+    }
+}
+
+export async function GetLessonBlocks(lesson_id) {
+    try {
+        let data = {
+            lesson_id: lesson_id
+        }
+        let result = {
+            successful: false,
+            response: "",
+            data: ""
+        };
+        await fetch(API_ADDRESS + '/GetLessonBlocks/' + lesson_id, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+            .then(response => {
+                if (response.status == 200) {
+                    result.successful = true;
+                    result.data = response.json();
+                }
+                else {
+                    result.response = "Error...";
+                }
+            });
+        return result;
     }
 }
 
