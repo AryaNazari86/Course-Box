@@ -483,6 +483,24 @@ def get_participant_courses():
     return jsonify(result)
 
 
+@app.route('/CreateLessonBlock', methods=['POST'])
+# Creates A LessonBlock
+def create_lesson_block():
+    try:
+        if request.is_json:
+            lesson_block = LessonBlock(
+                type=request.json["type"],
+                content=request.json["content"],
+                lesson_id=request.json["lesson_id"],
+            )
+            db.session.add(lesson_block)
+            db.session.commit()
+            return jsonify({'status': 'success'}), 200
+        return jsonify({'status': 'error'}), 400
+    except:
+        return jsonify({'status': 'error'}), 500
+
+
 if __name__ == '__main__':
     db.create_all()
     app.run(debug=True, host="0.0.0.0")
