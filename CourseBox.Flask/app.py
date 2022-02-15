@@ -160,6 +160,11 @@ class SubjectListSchema(ma.Schema):
         fields = ('id', 'title', 'icon', 'course_id')
 
 
+class LessonBlockSchema(ma.Schema):
+    class Meta:
+        fields = ('content', 'type')
+
+
 subject_list_schema = SubjectListSchema(many=True)
 
 
@@ -208,8 +213,8 @@ participants = db.Table('participants',
 # Change the profile avatar
 
 
-@app.route("/ChangeProfileAvatar", methods=["POST"])
-@token_required
+@ app.route("/ChangeProfileAvatar", methods=["POST"])
+@ token_required
 def change_profile_avatar(current_user):
     user_id = current_user.id
     avatar = request.files['avatar']
@@ -263,7 +268,7 @@ def change_profile_avatar(current_user):
         return jsonify({'status': 'error'}), 400
 
 
-@app.route("/SearchCourses", methods=['POST'])
+@ app.route("/SearchCourses", methods=['POST'])
 def search_course():
     search_value = request.json['search_value']
     category_id = request.json['category_id']
@@ -276,7 +281,7 @@ def search_course():
     return jsonify(result)
 
 
-@app.route("/PopularCourses", methods=['GET'])
+@ app.route("/PopularCourses", methods=['GET'])
 def popular_courses():
     all_courses = Course.query.filter_by().all()
     all_courses.sort(key=lambda x: x.participants_count, reverse=True)
@@ -284,14 +289,14 @@ def popular_courses():
     return jsonify(result)
 
 
-@app.route("/LatestCourses", methods=['GET'])
+@ app.route("/LatestCourses", methods=['GET'])
 def latest_courses():
     all_courses = Course.query.all()
     result = course_list_schema.dump(all_courses)
     return jsonify(result)
 
 
-@app.route("/User/Register", methods=['POST'])
+@ app.route("/User/Register", methods=['POST'])
 def signup():
     try:
         if request.is_json:
@@ -496,6 +501,23 @@ def create_lesson_block():
             db.session.add(lesson_block)
             db.session.commit()
             return jsonify({'status': 'success'}), 200
+        return jsonify({'status': 'error'}), 400
+    except:
+        return jsonify({'status': 'error'}), 500
+
+
+lesson_block_list_schema = LessonBlockSchema(many=True)
+
+
+@app.route('/GetLessonBlocks', methods=['POST'])
+def get_lesson_blocks():
+    try:
+        if request.is_json:
+            lesson_id = request.json["lesson_id"]
+            lesson_blocks = LessonBlock.query.filter_by(
+                lesson_id=lesson_id).all()
+            result = lesson_block_list_schema.dump(lesson_blocks)
+            return jsonify(result)
         return jsonify({'status': 'error'}), 400
     except:
         return jsonify({'status': 'error'}), 500
