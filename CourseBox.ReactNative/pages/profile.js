@@ -24,6 +24,7 @@ import CourseCreation from "./courseCreation";
 
 // Theme colors
 import { theme } from "../Themes/theme";
+import { GetToken } from "../Services/userService";
 export default function Profile({ navigation }) {
   // If loaded is false, show a loader.
   const [loaded, setLoaded] = useState(false);
@@ -45,13 +46,9 @@ export default function Profile({ navigation }) {
   InteractionManager.runAfterInteractions(function () {
     setLoaded(true);
   });
-  const fetchData = async () => {
-    const storedData = await AsyncStorage.getItem("userDetails");
-    const storedDataParsed = JSON.parse(storedData);
-    setProfilePageValues(storedDataParsed);
-  };
   if (!dataFetched) {
-    fetchData();
+    const storedDataParsed = GetToken();
+    setProfilePageValues(storedDataParsed);
     setDataFetched(true);
   }
   if (loaded) {

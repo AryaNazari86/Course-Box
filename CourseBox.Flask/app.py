@@ -405,7 +405,7 @@ def create_course():
 @token_required
 @app.route("/GetCourse", methods=["POST"])
 def get_course(current_user):
-    course_id = request.form["course_id"]
+    course_id = request.json["course_id"]
     course = Course.query.filter_by(id=course_id).first()
     result = course_schema.dump(course)
     return jsonify(result)
@@ -414,7 +414,7 @@ def get_course(current_user):
 @token_required
 @app.route("/GetCoursesByAuthorId", methods=["POST"])
 def get_courses_by_author_id(current_user):
-    author_id = request.form["author_id"]
+    author_id = request.json["author_id"]
     courses = Course.query.filter_by(author_id=author_id).all()
     result = course_list_schema.dump(courses)
     return jsonify(result)
@@ -423,7 +423,7 @@ def get_courses_by_author_id(current_user):
 @token_required
 @app.route("/GetSubjects", methods=["POST"])
 def get_subjects_by_course_id(current_user):
-    course_id = request.form["course_id"]
+    course_id = request.json["course_id"]
     subjects = Subject.query.filter_by(course_id=course_id).all()
     result = subject_list_schema.dump(subjects)
     return jsonify(result)
@@ -432,7 +432,7 @@ def get_subjects_by_course_id(current_user):
 @token_required
 @app.route("/GetLessons", methods=["POST"])
 def get_lessons_by_subject_id(current_user):
-    subject_id = request.form["subject_id"]
+    subject_id = request.json["subject_id"]
     lessons = Lesson.query.filter_by(subject_id=subject_id).all()
     result = lesson_list_schema.dump(lessons)
     return jsonify(result)
@@ -482,7 +482,7 @@ def get_all_categories():
 
 @app.route("/GetParticipantCourses", methods=['POST'])
 def get_participant_courses():
-    user_id = request.form["user_id"]
+    user_id = request.json["user_id"]
     user = User.query.filter_by(id=user_id).first()
     result = course_list_schema.dump(user.courses)
     return jsonify(result)
