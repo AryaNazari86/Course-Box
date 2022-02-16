@@ -428,6 +428,16 @@ def get_subjects_by_course_id(current_user):
     result = subject_list_schema.dump(subjects)
     return jsonify(result)
 
+@token_required
+@app.route("/UpdateSubject", methods=["POST"])
+def update_subject(current_user):
+    subject_id = request.json["subject_id"]
+    subject = Subject.query.filter_by(id=subject_id).first()
+    if(subject.author_id == current_user.id):
+        subject.title = request.json["subject_title"]
+        subject.icon = request.json["subject_icon"]
+        db.session.commit()
+    return jsonify({'status': 'success'}), 200
 
 @token_required
 @app.route("/GetLessons", methods=["POST"])
