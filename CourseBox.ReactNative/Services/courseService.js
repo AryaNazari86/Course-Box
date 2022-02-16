@@ -117,3 +117,56 @@ export async function GetCourseSubjects(course_id) {
   catch(error) {
   }
 }
+
+export async function GetCourseSubjects(course_id) {
+    try {
+        let data = {
+            course_id: course_id
+        }
+        let result = {
+            successful: false,
+            response: "",
+            data: ""
+        };
+        await fetch(API_ADDRESS + '/GetSubjects/', { method: 'POST', headers: { 'Content-Type': 'application/json', "x-access-tokens": GetToken() }, body: JSON.stringify(data) })
+            .then(response => {
+                if (response.status == 200) {
+                    result.successful = true;
+                    result.data = response.json();
+                }
+                else {
+                    result.response = "Error...";
+                }
+            });
+        return result;
+    }
+    catch(error) {
+    }
+  }
+
+  export async function GetCategory(category_id) {
+    try {
+        let data = {
+            category_id: category_id
+        }
+        let result = {
+            successful: false,
+            response: "",
+            data: ""
+        };
+        await fetch(API_ADDRESS + '/GetCategory/', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+            .then(response => {
+                if (response.status == 200) {
+                    result.successful = true;
+                    result.data = response.json();
+                }
+                else {
+                    result.response = "Error...";
+                }
+            });
+        return result;
+    }
+    catch(error) {
+    }
+  }
+  
