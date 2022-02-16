@@ -1,7 +1,7 @@
 import React from "react";
 import md5 from "md5";
 
-const API_ADDRESS = "192.168.1.101:5000";
+const API_ADDRESS = "192.168.14.8:5000";
 
 export async function SignUp(values) {
   try {
@@ -134,4 +134,10 @@ export async function CreateCourse(values, courseCategory, imageName, token) {
       response: error.message,
     };
   }
+}
+
+export async function GetToken(){
+  const storedData = await AsyncStorage.getItem("userDetails");
+  const storedDataParsed = JSON.parse(storedData);
+  return storedDataParsed.token;
 }
