@@ -12,7 +12,8 @@ import { Chip, TouchableRipple } from "react-native-paper";
 import { theme } from "../../Themes/theme.js";
 import CategoryIcon from "./courseBoxIcon.js";
 import { FontAwesome } from "@expo/vector-icons";
-import * as CourseService from "../../services/courseService.js";
+
+import { GetCategory } from "../../Services/courseService";
 export default function CourseBox({ navigation, item }) {
   // If user likes this course. (Get this from api).
   const [isLiked, setIsLiked] = useState(false);
@@ -22,8 +23,8 @@ export default function CourseBox({ navigation, item }) {
   const [likeOpacity, setLikeOpacity] = useState(0.8);
 
   const titleArray = item.title.trim().split("");
-  
-  CourseService.GetCategory(item.category_id).then(async (result) => {
+
+  GetCategory(item.category_id).then(async (result) => {
     if (result.successful) {
       result.data.then(async (data) => {
         item.category = data;
