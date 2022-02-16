@@ -74,6 +74,7 @@ class CategoryListSchema(ma.Schema):
 
 category_list_schema = CategoryListSchema(many=True)
 
+
 class CategorySchema(ma.Schema):
     class Meta:
         fields = ('id', 'title', 'category_image')
@@ -169,8 +170,10 @@ class SubjectListSchema(ma.Schema):
 
 class LessonBlockSchema(ma.Schema):
     class Meta:
-        fields = ('content', 'type')
+        fields = ('id', 'content', 'type')
 
+
+lesson_block_list_schema = LessonBlockSchema(many=True)
 
 subject_list_schema = SubjectListSchema(many=True)
 
@@ -268,7 +271,7 @@ def change_profile_avatar(current_user):
                     os.remove(f"/static/avatars/{last_avatar}")
 
         # Return sucessfull
-        return jsonify({'status': 'error'}), 200
+        return jsonify({'status': 'success'}), 200
 
     else:
         # Return error
@@ -435,6 +438,7 @@ def get_subjects_by_course_id(current_user):
     result = subject_list_schema.dump(subjects)
     return jsonify(result)
 
+
 @token_required
 @app.route("/UpdateSubject", methods=["POST"])
 def update_subject(current_user):
@@ -446,6 +450,7 @@ def update_subject(current_user):
         db.session.commit()
     return jsonify({'status': 'success'}), 200
 
+
 @token_required
 @app.route("/GetLessons", methods=["POST"])
 def get_lessons_by_subject_id(current_user):
@@ -454,12 +459,14 @@ def get_lessons_by_subject_id(current_user):
     result = lesson_list_schema.dump(lessons)
     return jsonify(result)
 
+
 @app.route("/GetCategory", methods=["POST"])
 def get_category(current_user):
     category_id = request.json["category_id"]
     category = Category.query.filter_by(id=category_id).first()
     result = category_schema.dump(category)
     return jsonify(result)
+
 
 @app.route("/User/Details", methods=['POST'])
 @token_required
@@ -529,9 +536,6 @@ def create_lesson_block():
         return jsonify({'status': 'error'}), 500
 
 
-lesson_block_list_schema = LessonBlockSchema(many=True)
-
-
 @app.route('/GetLessonBlocks', methods=['POST'])
 def get_lesson_blocks():
     try:
@@ -544,6 +548,26 @@ def get_lesson_blocks():
         return jsonify({'status': 'error'}), 400
     except:
         return jsonify({'status': 'error'}), 500
+
+
+@app.route('/UploadFile', methods=['POST'])
+def upload_file():
+    image = request.files['image']
+    id = request.json["id"]
+    if image == None:
+        # Return error
+        return jsonify({'status': 'error'}), 400
+    # Image extensions
+    allowed_extensions = [".png", ".jpeg", ".jpg", ".webp", ".ico", ".svg"]
+    file_extension = os.path.splitext(image.filename)[-1]
+    image.save('statics/ImageBlocks/' + str(id) + file_extension)
+    return jsonify({'status': 'success', 'url': 'statics/ImageBlocks/' + str(id) + file_extension}), 200
+
+
+@app.route('/GetLessonBlockID', methods=['GET'])
+def get_lesson_block_id():
+    lesson_blocks = LessonBlock.query.all()
+    return jsonify({'id': str(len(lesson_blocks))})
 
 
 if __name__ == '__main__':

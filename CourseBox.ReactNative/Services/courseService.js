@@ -93,27 +93,87 @@ export async function GetLessonBlocks(lesson_id) {
 }
 
 export async function GetCourseSubjects(course_id) {
-  try {
-      let data = {
-          course_id: course_id
-      }
-      let result = {
-          successful: false,
-          response: "",
-          data: ""
-      };
-      await fetch(API_ADDRESS + '/GetSubjects/', { method: 'POST', headers: { 'Content-Type': 'application/json', "x-access-tokens": GetToken() }, body: JSON.stringify(data) })
-          .then(response => {
-              if (response.status == 200) {
-                  result.successful = true;
-                  result.data = response.json();
-              }
-              else {
-                  result.response = "Error...";
-              }
-          });
-      return result;
-  }
-  catch(error) {
-  }
+    try {
+        let data = {
+            course_id: course_id
+        }
+        let result = {
+            successful: false,
+            response: "",
+            data: ""
+        };
+        await fetch(API_ADDRESS + '/GetSubjects/', { method: 'POST', headers: { 'Content-Type': 'application/json', "x-access-tokens": GetToken() }, body: JSON.stringify(data) })
+            .then(response => {
+                if (response.status == 200) {
+                    result.successful = true;
+                    result.data = response.json();
+                }
+                else {
+                    result.response = "Error...";
+                }
+            });
+        return result;
+    }
+    catch (error) {
+    }
+}
+
+export async function UploadFile(file, id) {
+    try {
+        var data = new FormData()
+        data.append('file', file)
+        data.append('id', id)
+
+        let result = {
+            successful: false,
+            response: "",
+            data: ""
+        };
+        await fetch('http://' + API_ADDRESS + '/UploadFile', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(file) })
+            .then(response => {
+                if (response.status == 200) {
+                    result.successful = true;
+                    result.data = response.json();
+                }
+                else {
+                    result.response = "Error...";
+                }
+            });
+        return result.data.url;
+    } catch (error) {
+        return {
+            successful: false,
+            response: "Error..."
+        };
+    }
+}
+
+export async function GetLessonBlockID() {
+    try {
+        var data = new FormData()
+        data.append('file', file)
+        data.append('id', id)
+
+        let result = {
+            successful: false,
+            response: "",
+            data: ""
+        };
+        await fetch('http://' + API_ADDRESS + '/GetLessonBlockID', { method: 'GET', headers: { 'Content-Type': 'application/json' })
+            .then(response => {
+                if (response.status == 200) {
+                    result.successful = true;
+                    result.data = response.json();
+                }
+                else {
+                    result.response = "Error...";
+                }
+            });
+        return result.data.id;
+    } catch (error) {
+        return {
+            successful: false,
+            response: "Error..."
+        };
+    }
 }
