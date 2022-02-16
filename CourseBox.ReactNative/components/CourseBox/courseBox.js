@@ -21,6 +21,8 @@ export default function CourseBox({ navigation, item }) {
   const [likeOpacity, setLikeOpacity] = useState(0.8);
 
   const titleArray = item.title.trim().split("");
+  
+  
 
   return (
     <View style={styles.cover}>

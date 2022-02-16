@@ -55,8 +55,8 @@ export default function Home({ navigation }) {
   const [darkScreen, setDarkScreen] = useState({ width: 0, height: 0 });
 
   // Get Categories From API
-  const [latestCourses, setLatestCourses] = useState();
-  const [popularCorurses, setPopularCourses] = useState();
+  const [latestCourses, setLatestCourses] = useState([]);
+  const [popularCorurses, setPopularCourses] = useState([]);
 
   const [dataFetched, setDataFetched] = useState(false);
 

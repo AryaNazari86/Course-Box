@@ -74,6 +74,13 @@ class CategoryListSchema(ma.Schema):
 
 category_list_schema = CategoryListSchema(many=True)
 
+class CategorySchema(ma.Schema):
+    class Meta:
+        fields = ('id', 'title', 'category_image')
+
+
+category_schema = CategorySchema(many=False)
+
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
@@ -447,6 +454,12 @@ def get_lessons_by_subject_id(current_user):
     result = lesson_list_schema.dump(lessons)
     return jsonify(result)
 
+@app.route("/GetCategory", methods=["POST"])
+def get_category(current_user):
+    category_id = request.json["category_id"]
+    category = Category.query.filter_by(id=category_id).first()
+    result = category_schema.dump(category)
+    return jsonify(result)
 
 @app.route("/User/Details", methods=['POST'])
 @token_required
