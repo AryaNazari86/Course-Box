@@ -1,7 +1,7 @@
 import React from "react";
 import md5 from "md5";
 
-const API_ADDRESS = "192.168.14.8:5000";
+const API_ADDRESS = "192.168.24.252:5000";
 
 export async function SignUp(values) {
   try {
@@ -101,7 +101,7 @@ export async function GetUserDetails(token) {
   }
 }
 
-export async function CreateCourse(values, courseCategory, imageName, token) {
+export async function CreateCourse(values, courseCategory, imageName) {
   try {
     let course = {
       Title: values.courseName,
@@ -115,7 +115,10 @@ export async function CreateCourse(values, courseCategory, imageName, token) {
     };
     await fetch("http://" + API_ADDRESS + "/CreateCourse", {
       method: "POST",
-      headers: { "Content-Type": "application/json", "x-access-tokens": token },
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-tokens": GetToken(),
+      },
       body: JSON.stringify(course),
     }).then((response) => {
       result.response = response.statusText;
@@ -136,7 +139,7 @@ export async function CreateCourse(values, courseCategory, imageName, token) {
   }
 }
 
-export async function GetToken(){
+export async function GetToken() {
   const storedData = await AsyncStorage.getItem("userDetails");
   const storedDataParsed = JSON.parse(storedData);
   return storedDataParsed.token;

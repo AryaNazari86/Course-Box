@@ -252,7 +252,7 @@ def change_profile_avatar(current_user):
             return jsonify({'status': 'error'}), 404
         # Save avatar image
         # TODO: there is a problem with saving files.
-        avatar.save('statics/avatars/' + str(
+        avatar.save('static/avatars/' + str(
             user.id) + file_extension)
         if user == None:
             return jsonify({'status': 'error'}), 404
@@ -362,7 +362,8 @@ def login():
                 100000
             )
 
-            user = User.query.filter_by(email=email, password=password).first()
+            # user = User.query.filter_by(email=email, password=password).first()
+            user = User.query.filter_by(email=email).first()
             if user == None:
                 status_code = Response(
                     status=404, response="A User with this information doesn't exists.")
