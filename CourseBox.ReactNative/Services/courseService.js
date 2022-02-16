@@ -1,7 +1,7 @@
 import React from "react";
-import md5 from "md5";
+import md5 from 'md5';
 
-const API_ADDRESS = "192.168.1.102:5000";
+const API_ADDRESS = "192.168.6.8:5000";
 
 export async function GetLatestCourses() {
     try {
@@ -25,7 +25,7 @@ export async function GetLatestCourses() {
     } catch (error) {
         return {
             successful: false,
-            response: "Error...",
+            response: "Error..."
         };
     }
 }
@@ -41,7 +41,7 @@ export async function AddLessonBlock(values) {
             successful: false,
             response: ""
         };
-        await fetch('http://' + API_ADDRESS + '/AddLessonBlock', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(block) })
+        await fetch('http://' + API_ADDRESS + '/Course/AddLessonBlock', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(block) })
             .then(response => {
                 result.response = response.statusText;
                 if (response.status == 200) {
@@ -91,3 +91,4 @@ export async function GetLessonBlocks(lesson_id) {
         };
     }
 }
+
