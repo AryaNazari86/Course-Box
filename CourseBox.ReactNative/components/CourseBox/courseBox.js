@@ -24,20 +24,10 @@ export default function CourseBox({ navigation, item }) {
 
   const titleArray = item.title.trim().split("");
 
-  GetCategory(item.category_id).then(async (result) => {
-    if (result.successful) {
-      result.data.then(async (data) => {
-        item.category = data;
-      });
-    } else {
-      setResult(result.response);
-    }
-  });
-
   return (
     <View style={styles.cover}>
       <View style={styles.coursesBox}>
-        <CategoryIcon style={styles.courseImage} category={item.category} />
+        {/* <CategoryIcon style={styles.courseImage} category={item.category} /> */}
         <Animated.Text style={styles.courseTitle}>{item.title}</Animated.Text>
         <Text style={styles.courseDescription}>{item.description}</Text>
 

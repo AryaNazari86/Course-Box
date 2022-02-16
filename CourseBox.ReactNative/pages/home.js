@@ -62,10 +62,12 @@ export default function Home({ navigation }) {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("http://192.168.14.8:5000/LatestCourses");
+      const response = await fetch("http://192.168.24.252:5000/LatestCourses");
       const courses = await response.json();
       setLatestCourses(courses);
-      const response1 = await fetch("http://192.168.14.8:5000/PopularCourses");
+      const response1 = await fetch(
+        "http://192.168.24.252:5000/PopularCourses"
+      );
       const courses1 = await response1.json();
       setPopularCourses(courses1);
     } catch (error) {
