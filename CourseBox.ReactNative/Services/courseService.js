@@ -40,7 +40,7 @@ export async function AddLessonBlock(values) {
             successful: false,
             response: ""
         };
-        await fetch('http://' + API_ADDRESS + '/Course/AddLessonBlock', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(block) })
+        await fetch('http://' + API_ADDRESS + '/AddLessonBlock', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(block) })
             .then(response => {
                 result.response = response.statusText;
                 if (response.status == 200) {
@@ -72,7 +72,7 @@ export async function GetLessonBlocks(lesson_id) {
             response: "",
             data: ""
         };
-        await fetch(API_ADDRESS + '/GetLessonBlocks/' + lesson_id, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+        await fetch(API_ADDRESS + '/GetLessonBlocks', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
             .then(response => {
                 if (response.status == 200) {
                     result.successful = true;
@@ -83,6 +83,11 @@ export async function GetLessonBlocks(lesson_id) {
                 }
             });
         return result;
+    } catch (error) {
+        return {
+            successful: false,
+            response: "Error..."
+        };
     }
 }
 
