@@ -12,10 +12,10 @@ import { theme } from '../Themes/theme';
 import { GetLessonBlocks, AddLessonBlock, UploadFile, GetLessonBlockID } from '../Services/courseService';
 
 export default function LessonPreview(props) {
-    const [lessonContent, setLessonContent] = useState([])
+    const [lessonContent, setLessonContent] = useState([]);
     const lessonId = props.route.params.datas;
 
-    setLessonContent(GetLessonBlocks(lessonId));
+    //setLessonContent(GetLessonBlocks(lessonId));
 
     console.log(lessonId);
 

@@ -17,6 +17,7 @@ import coursesData from "../data/courses";
 // Lottie Library
 import LottieView from "lottie-react-native";
 import { theme } from "../Themes/theme";
+import SearchCourseBox from "../components/searchCourseBox";
 
 export default function Search({ navigation }) {
   // If loaded is false, show a loader.
@@ -104,7 +105,7 @@ export default function Search({ navigation }) {
                 mode="outlined"
                 label="Search"
                 onChangeText={(value) => {
-                  Search(value, selectedCategory);
+                  setCourses(coursesData)
                 }}
                 style={globalStyles.input}
                 left={
@@ -141,7 +142,7 @@ export default function Search({ navigation }) {
               </ScrollView>
               {/* Showing Search results */}
               {courses.map((item) => {
-                return <CourseBox navigation={navigation} item={item} />;
+                return <SearchCourseBox navigation={navigation} item={item} />;
               })}
 
               <Text style={globalStyles.emptySpacer}>Code Rangers®</Text>

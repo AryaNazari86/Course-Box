@@ -19,7 +19,7 @@ export default function Lesson({ item, navigation }) {
         <MaterialIcons
           name={item.icon}
           size={50}
-          color="#3D4751"
+          color={theme.color3}
           style={styles.qlIconOut}
         />
       </View>
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     alignSelf: "center",
     fontFamily: "comfortaa-bold",
-    color: "#A8DADC",
+    color: theme.color3,
   },
   qlIconIn: {
     padding: 8,
