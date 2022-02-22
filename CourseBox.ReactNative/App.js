@@ -24,6 +24,7 @@ import LessonPreview from "./pages/lessonPreview";
 import ProfileStack from "./routes/profileStack";
 import SplashStack from "./routes/splashStack";
 import CourseCreation from "./pages/courseCreation";
+import HomeStack from "./routes/homeStack";
 
 const getFonts = () =>
   Font.loadAsync({
@@ -52,7 +53,8 @@ export default function App() {
     if (isConnected) {
       return (
         <NavigationContainer>
-          <Tabs />
+          {/* <SplashStack /> */}
+          <HomeStack />
         </NavigationContainer>
       );
     } else {

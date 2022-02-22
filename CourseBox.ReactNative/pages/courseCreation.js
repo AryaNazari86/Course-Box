@@ -44,23 +44,11 @@ export default function CourseCreation({ navigation, closeFunc }) {
   const [dataFetched, setDataFetched] = useState(false);
   var storedDataParsed = null;
 
-  const fetchData = async () => {
-    const storedData = await AsyncStorage.getItem("token");
-    var a = { token: storedData };
-
-    storedDataParsed = JSON.parse(a);
-  };
-  if (!dataFetched) {
-    fetchData();
-    setDataFetched(true);
-  }
-
   const testFunc = (values) => {
     UserService.CreateCourse(
       values,
       selectedCourseCategory,
-      "MeowPlease.png",
-      storedDataParsed
+      "MeowPlease.png"
     ).then((result) => {
       if (result.successful) {
         console.log("YESSSSSSSS");

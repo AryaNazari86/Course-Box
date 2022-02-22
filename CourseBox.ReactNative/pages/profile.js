@@ -102,7 +102,7 @@ export default function Profile({ navigation }) {
                 <Image
                   source={{
                     uri:
-                      "http://192.168.1.101:5000/static/avatars/" +
+                      "http://192.168.24.252:5000/static/avatars/" +
                       profilePageValues.avatar,
                   }}
                   style={styles.profileAccountImage}

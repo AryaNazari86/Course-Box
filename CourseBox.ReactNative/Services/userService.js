@@ -1,5 +1,6 @@
 import React from "react";
 import md5 from "md5";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const API_ADDRESS = "192.168.24.252:5000";
 
@@ -103,32 +104,35 @@ export async function GetUserDetails(token) {
 
 export async function CreateCourse(values, courseCategory, imageName) {
   try {
-    let course = {
-      Title: values.courseName,
-      Description: values.courseDescription,
-      Category: courseCategory,
-      Image: imageName,
-    };
     let result = {
       successful: false,
       response: "",
     };
-    await fetch("http://" + API_ADDRESS + "/CreateCourse", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-access-tokens": GetToken(),
-      },
-      body: JSON.stringify(course),
-    }).then((response) => {
-      result.response = response.statusText;
-      if (response.status == 200) {
-        result.successful = true;
-      } else if (response.status == 500) {
-        result.response = "Error1...";
-      } else if (response.status == 404) {
-        result.response = "Error2...";
-      }
+    GetToken().then(async (r) => {
+      let course = {
+        Title: values.courseName,
+        Description: values.courseDescription,
+        Category: courseCategory,
+        Image: imageName,
+      };
+
+      await fetch("http://" + API_ADDRESS + "/CreateCourse", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-access-tokens": r,
+        },
+        body: JSON.stringify(course),
+      }).then((response) => {
+        result.response = response.statusText;
+        if (response.status == 200) {
+          result.successful = true;
+        } else if (response.status == 500) {
+          result.response = "Error1...";
+        } else if (response.status == 404) {
+          result.response = "Error2...";
+        }
+      });
     });
     return result;
   } catch (error) {
@@ -140,7 +144,8 @@ export async function CreateCourse(values, courseCategory, imageName) {
 }
 
 export async function GetToken() {
-  const storedData = await AsyncStorage.getItem("userDetails");
-  const storedDataParsed = JSON.parse(storedData);
-  return storedDataParsed.token;
+  const storedData = AsyncStorage.getItem("token");
+  // const storedDataParsed = JSON.parse(storedData);
+  console.log(storedData);
+  return storedData;
 }

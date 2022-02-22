@@ -40,6 +40,7 @@ export default function SignIn({ navigation }) {
         if (result.successful) {
           result.token.then(async (userToken) => {
             const token = userToken.token;
+            console.log(token);
             UserService.GetUserDetails(token).then(async (userDetails) => {
               if (userDetails.successful) {
                 userDetails.data.then(async (data) => {

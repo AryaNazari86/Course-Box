@@ -79,8 +79,6 @@ export default function Home({ navigation }) {
     setDataFetched(true);
   }
 
-  console.log(latestCourses);
-
   useEffect(() => {
     // fetchDatas();
   }, []);
