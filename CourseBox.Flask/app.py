@@ -462,7 +462,7 @@ def get_lessons_by_subject_id(current_user):
 
 
 @app.route("/GetCategory", methods=["POST"])
-def get_category(current_user):
+def get_category():
     category_id = request.json["category_id"]
     category = Category.query.filter_by(id=category_id).first()
     result = category_schema.dump(category)
