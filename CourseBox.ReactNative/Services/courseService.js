@@ -1,7 +1,7 @@
 import React from "react";
 import md5 from "md5";
 
-const API_ADDRESS = "127.0.0.1:5000/";
+const API_ADDRESS = "192.168.24.252:5000/";
 
 export async function GetCategory() {
   try {
@@ -152,7 +152,7 @@ export async function GetCourseSubjects(course_id) {
       }
     });
     return result;
-  } catch (error) { }
+  } catch (error) {}
 }
 
 export async function UploadFile(file, id) {
