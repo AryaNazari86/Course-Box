@@ -3,18 +3,17 @@ import React from "react";
 import { GetCategory } from "../../Services/courseService";
 import { useState } from "react";
 export default function CategoryIcon({ category, style }) {
-  const [categoryImage, setCategoryImage] = useState(
-    require("../../assets/3DIcons/Animated/Soccer.gif")
-  );
+  const [categoryImage, setCategoryImage] = useState("\Soccer.gif");
   const [categoryFetched, setCategoryFetched] = useState(false);
   if(!categoryFetched){
     GetCategory().then((result) => {
-      let imageAddress = "../../assets/3DIcons/Animated/" + result.data.category_image;
-      setCategoryImage(
-        require(imageAddress)
-      );
+      setCategoryImage(result.data.category_image);
     });
     setCategoryFetched(true);
   }
-  return <Image source={categoryImage} style={style} />;
+  return <Image source={{
+    uri:
+      "http://192.168.24.252:5000/static/category_image/" +
+      result.data.category_image,
+  }} style={style} />;
 }
