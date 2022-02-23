@@ -3,6 +3,37 @@ import md5 from "md5";
 
 const API_ADDRESS = "127.0.0.1:5000/";
 
+export async function GetCategory() {
+  try {
+    let data = {
+      category_id: category_id,
+    };
+    let result = {
+      successful: false,
+      response: "",
+      data: "",
+    };
+    await fetch("http://" + API_ADDRESS + "/GetCategory", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: data
+    }).then((response) => {
+      if (response.status == 200) {
+        result.successful = true;
+        result.data = response.json();
+      } else {
+        result.response = "Error...";
+      }
+    });
+    return result;
+  } catch (error) {
+    return {
+      successful: false,
+      response: "Error...",
+    };
+  }
+}
+
 export async function GetLatestCourses() {
   try {
     let result = {
