@@ -3,7 +3,7 @@ import md5 from "md5";
 
 const API_ADDRESS = "192.168.24.252:5000/";
 
-export async function GetCategory() {
+export async function GetCategory(category_id) {
   try {
     let data = {
       category_id: category_id,

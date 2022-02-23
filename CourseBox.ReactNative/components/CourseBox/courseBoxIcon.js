@@ -6,8 +6,10 @@ export default function CategoryIcon({ category, style }) {
   const [categoryImage, setCategoryImage] = useState("\Soccer.gif");
   const [categoryFetched, setCategoryFetched] = useState(false);
   const fetchImage = async () => {
-    GetCategory().then((result) => {
-      setCategoryImage(result.data.category_image);
+    GetCategory(category).then((result) => {
+      if(result.successful){
+        setCategoryImage(result.data.category_image);
+      }
     });
   };
   if(!categoryFetched){
@@ -17,6 +19,6 @@ export default function CategoryIcon({ category, style }) {
   return <Image source={{
     uri:
       "http://192.168.24.252:5000/static/category_image/" +
-      result.data.category_image,
+      categoryImage,
   }} style={style} />;
 }
