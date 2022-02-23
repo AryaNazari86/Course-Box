@@ -5,10 +5,13 @@ import { useState } from "react";
 export default function CategoryIcon({ category, style }) {
   const [categoryImage, setCategoryImage] = useState("\Soccer.gif");
   const [categoryFetched, setCategoryFetched] = useState(false);
-  if(!categoryFetched){
+  const fetchImage = async () => {
     GetCategory().then((result) => {
       setCategoryImage(result.data.category_image);
     });
+  };
+  if(!categoryFetched){
+    fetchImage();
     setCategoryFetched(true);
   }
   return <Image source={{
