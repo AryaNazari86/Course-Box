@@ -1,7 +1,7 @@
 import React from "react";
 import md5 from "md5";
 
-const API_ADDRESS = "192.168.24.252:5000/";
+const API_ADDRESS = "192.168.24.252:5000";
 
 export async function GetCategory(category_id) {
   try {
@@ -16,7 +16,7 @@ export async function GetCategory(category_id) {
     await fetch("http://" + API_ADDRESS + "/GetCategory", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: data
+      body: JSON.stringify(data),
     }).then((response) => {
       if (response.status == 200) {
         result.successful = true;
