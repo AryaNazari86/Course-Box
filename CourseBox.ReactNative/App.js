@@ -54,7 +54,7 @@ export default function App() {
       return (
         <NavigationContainer>
           {/* <SplashStack /> */}
-          <Tabs />
+          <SplashStack />
         </NavigationContainer>
       );
     } else {

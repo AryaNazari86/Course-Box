@@ -21,6 +21,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { FAB } from "react-native-paper";
 import CourseCreation from "./courseCreation";
+import API_ADDRESS from "../Services/userService";
+import * as UserService from "../Services/userService";
 
 // Theme colors
 import { theme } from "../Themes/theme";
@@ -30,9 +32,9 @@ export default function Profile({ navigation }) {
   const [loaded, setLoaded] = useState(false);
   const [profilePageValues, setProfilePageValues] = useState({
     avatar: "default.png",
-    name: "none",
-    username: "none",
-    bio: "No Description",
+    name: "Loading...",
+    username: "Loading...",
+    bio: "Loading...",
     accountCoursesVal: 0,
     accountFollowersVal: 0,
     accountParticipatedVal: 0,
@@ -46,11 +48,28 @@ export default function Profile({ navigation }) {
   InteractionManager.runAfterInteractions(function () {
     setLoaded(true);
   });
+
+  var userDetails;
+
+  const fetchData = async () => {
+    GetToken().then(async (r) => {
+      UserService.GetUserDetails(r).then(async (userDetails) => {
+        if (userDetails.successful) {
+          userDetails.data.then(async (data) => {
+            setProfilePageValues(data);
+          });
+        }
+      });
+    });
+  };
+
+  console.log(userDetails);
+
   if (!dataFetched) {
-    const storedDataParsed = GetToken();
-    setProfilePageValues(storedDataParsed);
+    fetchData();
     setDataFetched(true);
   }
+
   if (loaded) {
     return (
       <View>
@@ -102,7 +121,9 @@ export default function Profile({ navigation }) {
                 <Image
                   source={{
                     uri:
-                      "http://192.168.24.252:5000/static/avatars/" +
+                      "http://" +
+                      API_ADDRESS +
+                      "/static/avatars/" +
                       profilePageValues.avatar,
                   }}
                   style={styles.profileAccountImage}
