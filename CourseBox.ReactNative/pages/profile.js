@@ -27,6 +27,8 @@ import * as UserService from "../Services/userService";
 // Theme colors
 import { theme } from "../Themes/theme";
 import { GetToken } from "../Services/userService";
+
+import { GetMadeCourses } from "../Services/courseService";
 export default function Profile({ navigation }) {
   // If loaded is false, show a loader.
   const [loaded, setLoaded] = useState(false);
@@ -43,6 +45,8 @@ export default function Profile({ navigation }) {
   const [dataFetched, setDataFetched] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
+  const [madeCourses, setMadeCourses] = useState([]);
+
   // When app loads this function is called.
   // ! Problem here
   InteractionManager.runAfterInteractions(function () {
@@ -57,6 +61,14 @@ export default function Profile({ navigation }) {
         if (userDetails.successful) {
           userDetails.data.then(async (data) => {
             setProfilePageValues(data);
+          });
+        }
+      });
+
+      GetMadeCourses(r).then(async (courseList) => {
+        if (courseList.successful) {
+          courseList.data.then(async (data) => {
+            setMadeCourses(data);
           });
         }
       });
@@ -185,7 +197,7 @@ export default function Profile({ navigation }) {
                     ...styles.profileDetailText,
                   }}
                 >
-                  {/* {profilePageValues.accountCoursesVal} */}5
+                  {profilePageValues.madeCoursesNum}
                 </Text>
                 <Text
                   style={{
@@ -254,7 +266,7 @@ export default function Profile({ navigation }) {
                   Made Courses
                 </Text>
                 <CoursesCarousel
-                  courses={courses}
+                  courses={madeCourses}
                   navigation={navigation}
                   dotesColor={theme.color3}
                 />

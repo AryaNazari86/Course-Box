@@ -422,13 +422,19 @@ def get_course(current_user):
     return jsonify(result)
 
 
-@token_required
 @app.route("/GetCoursesByAuthorId", methods=["POST"])
+@token_required
 def get_courses_by_author_id(current_user):
-    author_id = request.json["author_id"]
+    author_id = current_user.id
     courses = Course.query.filter_by(author_id=author_id).all()
     result = course_list_schema.dump(courses)
     return jsonify(result)
+
+
+def get_number_courses_by_author_id(current_user):
+    author_id = current_user.id
+    courses = Course.query.filter_by(author_id=author_id).all()
+    return len(courses)
 
 
 @token_required
@@ -479,8 +485,11 @@ def get_user_details(current_user):
         'username': user.username,
         'email': user.username,
         'bio': user.bio,
-        'avatar': user.avatar
+        'avatar': user.avatar,
+        'madeCoursesNum': get_number_courses_by_author_id(current_user)
     }
+
+    print(data)
 
     return jsonify(data)
 

@@ -217,3 +217,32 @@ export async function GetLessonBlockID() {
     };
   }
 }
+
+export async function GetMadeCourses(token) {
+  try {
+    let result = {
+      successful: false,
+      response: "",
+      data: "",
+    };
+    await fetch("http://" + API_ADDRESS + "/GetCoursesByAuthorId", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "x-access-tokens": token },
+    }).then((response) => {
+      if (response.status == 200) {
+        result.successful = true;
+        result.data = response.json();
+      } else if (response.status == 500) {
+        result.response = "Error...";
+      } else if (response.status == 401) {
+        result.response = "Unauthorized...";
+      }
+    });
+    return result;
+  } catch (error) {
+    return {
+      successful: false,
+      response: "Error...",
+    };
+  }
+}
