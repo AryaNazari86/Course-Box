@@ -18,6 +18,7 @@ import coursesData from "../data/courses";
 import LottieView from "lottie-react-native";
 import { theme } from "../Themes/theme";
 import SearchCourseBox from "../components/searchCourseBox";
+import API_ADDRESS from "../Services/userService";
 
 export default function Search({ navigation }) {
   // If loaded is false, show a loader.
@@ -79,7 +80,7 @@ export default function Search({ navigation }) {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const Search = (searchValue, searchCategory) => {
-    fetch("http://192.168.0.147:5000/SearchCourses", {
+    fetch("http://" + API_ADDRESS + "/SearchCourses", {
       method: "POST",
       body: JSON.stringify({
         search_value: searchValue,
@@ -97,15 +98,16 @@ export default function Search({ navigation }) {
             title="Search"
             height={60}
             profileButton={true}
-            profileAction={() => navigation.navigate("ProfileStack")} />
-          <ScrollView >
+            profileAction={() => navigation.navigate("ProfileStack")}
+          />
+          <ScrollView>
             <View style={styles.container}>
               {/* Search Text input */}
               <TextInput
                 mode="outlined"
                 label="Search"
                 onChangeText={(value) => {
-                  setCourses(coursesData)
+                  setCourses(coursesData);
                 }}
                 style={globalStyles.input}
                 left={
