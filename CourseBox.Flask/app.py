@@ -95,6 +95,7 @@ class User(db.Model):
     bio = db.Column(db.String(255))
     # Relations
     created_courses = db.relationship('Course', backref='creator')
+    participated_courses = db.relationship('Course', backref='participant')
 
     def __init__(self, username, name, email, password, is_active, avatar, register_date, bio):
         self.username = username
@@ -437,6 +438,12 @@ def get_number_courses_by_author_id(current_user):
     return len(courses)
 
 
+@app.route("/GetCoursesByParticipant", methods=["POST"])
+@token_required
+def get_courses_by_participant(current_user):
+    participant_id = current_user.id
+
+
 @token_required
 @app.route("/GetSubjects", methods=["POST"])
 def get_subjects_by_course_id(current_user):
@@ -521,8 +528,9 @@ def get_all_categories():
 
 
 @app.route("/GetParticipantCourses", methods=['POST'])
-def get_participant_courses():
-    user_id = request.json["user_id"]
+@token_required
+def get_participant_courses(current_user):
+    user_id = current_user.id
     user = User.query.filter_by(id=user_id).first()
     result = course_list_schema.dump(user.courses)
     return jsonify(result)
