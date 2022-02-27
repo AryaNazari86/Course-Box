@@ -119,6 +119,7 @@ export default function Search({ navigation }) {
                 }
                 theme={{
                   colors: {
+                    text: theme.color3,
                     primary: theme.color3,
                     placeholder: theme.color3,
                   },
