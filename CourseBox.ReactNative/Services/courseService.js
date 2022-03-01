@@ -1,8 +1,28 @@
 import React from "react";
 import md5 from "md5";
 
-const API_ADDRESS = "192.168.1.102:5000";
+const API_ADDRESS = "127.0.0.1:5000";
 
+export async function GetSubjects(courseId) {
+  let data = { course_id: courseId };
+  console.log(JSON.stringify(data));
+  const response = await fetch(`https://${API_ADDRESS}/GetSubjects`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      //body: JSON.stringify(data),
+    }).then((response) => {
+      if (response.status == 200) {
+        result.successful = true;
+        result.data = response.json();
+      } else {
+        result.response = "Error...";
+      }
+    });
+  const result = await response.json();
+  console.log(result)
+  return result;
+}
 export async function GetCategory(category_id) {
   try {
     let data = {
@@ -25,7 +45,7 @@ export async function GetCategory(category_id) {
         result.response = "Error...";
       }
     });
-    return result;
+    return result.data;
   } catch (error) {
     return {
       successful: false,
@@ -152,7 +172,7 @@ export async function GetCourseSubjects(course_id) {
       }
     });
     return result;
-  } catch (error) {}
+  } catch (error) { }
 }
 
 export async function UploadFile(file, id) {

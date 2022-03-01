@@ -8,10 +8,12 @@ import { theme } from '../Themes/theme';
 import CourseCreation from './courseCreation';
 import ChooseIcon from './chooseIcon';
 import IconPicker from "react-native-icon-picker";
+import { GetSubjects } from '../Services/courseService';
 
 export default function CoursePreview(props) {
     const course = props.route.params.datas[0];
-    const [content, setContent] = useState(course.content);
+    const [content, setContent] = useState([]);
+    setContent(GetSubjects(course.id));
     const [modalVisible, setModalVisible] = useState(false);
     const navigation = props.route.params.datas[1];
     return (

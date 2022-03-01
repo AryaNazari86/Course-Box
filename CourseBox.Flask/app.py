@@ -108,6 +108,26 @@ class User(db.Model):
         self.bio = bio
 
 
+@app.route('Participate', methods=['POST'])
+def participate(current_user):
+    if not current_user:
+        return jsonify({"message": "Unauthorized"}), 401
+    if request.method == 'POST':
+        course_id = request.json['course_id']
+        course = Course.query.filter_by(id=course_id).first()
+        if not course:
+            return jsonify({"message": "Course not found"}), 404
+        if course.participant_id == current_user.id:
+            return jsonify({"message": "You are already participating in this course"}), 400
+        if not current_user in course.partipants:
+            current_user.participated_courses.append(course)
+            course.participants.append(current_user)
+            db.session.commit()
+            return jsonify({"message": "You have successfully participated in this course"}), 200
+        else:
+            return jsonify({'message': 'You are already participating in this course'}), 200
+
+
 class Course(db.Model):
     id = db.Column(db.Integer, primary_key=True, unique=True)
     title = db.Column(db.String(200), nullable=False)
@@ -446,8 +466,9 @@ def get_courses_by_participant(current_user):
 
 @token_required
 @app.route("/GetSubjects", methods=["POST"])
-def get_subjects_by_course_id(current_user):
+def get_subjects_by_course_id():
     course_id = request.json["course_id"]
+    print(course_id)
     subjects = Subject.query.filter_by(course_id=course_id).all()
     result = subject_list_schema.dump(subjects)
     return jsonify(result)
