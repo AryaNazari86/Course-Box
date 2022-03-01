@@ -20,6 +20,8 @@ import { GetSubjects } from "../Services/courseService";
 
 import LottieView from "lottie-react-native";
 import { globalStyles } from "../shared/globalStyle";
+import { DeleteCourse } from "../Services/courseService";
+import { fetchData } from "./home";
 
 export default function CoursePreview(props) {
   const course = props.route.params.datas[0];
@@ -61,6 +63,13 @@ export default function CoursePreview(props) {
                 course.content = content;
               },
             },
+            {
+              icon: "trash-can-outline",
+              onPress: () => {
+                DeleteCourse(course.id);
+                props.navigation.goBack();
+              },
+            },
           ]}
         />
         <Modal
@@ -73,7 +82,7 @@ export default function CoursePreview(props) {
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              <IconPicker
+              {/* <IconPicker
                 iconDetails={[
                   { family: "AntDesign", color: "blue", icons: ["wallet"] },
                   { family: "Entypo", icons: ["wallet"] },
@@ -88,7 +97,7 @@ export default function CoursePreview(props) {
                 ]}
                 onSelect={(icon) => console.log(icon)}
                 content={<MaterialIcons name="category" size={32} />}
-              />
+              /> */}
             </View>
           </View>
         </Modal>
