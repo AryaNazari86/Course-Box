@@ -18,6 +18,7 @@ export default function CategoryIcon({ category, style }) {
     fetchImage();
     setCategoryFetched(true);
   }
+
   return (
     <Image
       source={{

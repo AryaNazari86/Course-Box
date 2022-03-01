@@ -53,8 +53,8 @@ export default function App() {
     if (isConnected) {
       return (
         <NavigationContainer>
-          {/* <SplashStack /> */}
-          <Tabs />
+          <SplashStack />
+          {/* <Tabs /> */}
         </NavigationContainer>
       );
     } else {

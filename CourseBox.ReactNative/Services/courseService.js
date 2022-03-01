@@ -1,26 +1,29 @@
 import React from "react";
 import md5 from "md5";
 
-const API_ADDRESS = "127.0.0.1:5000";
+import { GetToken } from "./userService";
+
+const API_ADDRESS = "192.168.1.102:5000";
 
 export async function GetSubjects(courseId) {
   let data = { course_id: courseId };
-  console.log(JSON.stringify(data));
-  const response = await fetch(`https://${API_ADDRESS}/GetSubjects`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      //body: JSON.stringify(data),
-    }).then((response) => {
-      if (response.status == 200) {
-        result.successful = true;
-        result.data = response.json();
-      } else {
-        result.response = "Error...";
-      }
-    });
-  const result = await response.json();
-  console.log(result)
+  let result = {
+    successful: false,
+    response: "",
+    data: "",
+  };
+  await fetch("http://" + API_ADDRESS + "/GetSubjects", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  }).then((response) => {
+    if (response.status == 200) {
+      result.successful = true;
+      result.data = response.json();
+    } else {
+      result.response = "Error...";
+    }
+  });
   return result;
 }
 export async function GetCategory(category_id) {
@@ -45,7 +48,7 @@ export async function GetCategory(category_id) {
         result.response = "Error...";
       }
     });
-    return result.data;
+    return result;
   } catch (error) {
     return {
       successful: false,
@@ -172,7 +175,7 @@ export async function GetCourseSubjects(course_id) {
       }
     });
     return result;
-  } catch (error) { }
+  } catch (error) {}
 }
 
 export async function UploadFile(file, id) {
@@ -263,6 +266,44 @@ export async function GetMadeCourses(token) {
     return {
       successful: false,
       response: "Error...",
+    };
+  }
+}
+
+export async function DeleteCourse(courseID) {
+  try {
+    let result = {
+      successful: false,
+      response: "",
+    };
+    GetToken().then(async (r) => {
+      let course = {
+        course_id: courseID,
+      };
+
+      await fetch("http://" + API_ADDRESS + "/DeleteCourse", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-access-tokens": r,
+        },
+        body: JSON.stringify(course),
+      }).then((response) => {
+        result.response = response.statusText;
+        if (response.status == 200) {
+          result.successful = true;
+        } else if (response.status == 500) {
+          result.response = "Error1...";
+        } else if (response.status == 404) {
+          result.response = "Error2...";
+        }
+      });
+    });
+    return result;
+  } catch (error) {
+    return {
+      successful: false,
+      response: error.message,
     };
   }
 }

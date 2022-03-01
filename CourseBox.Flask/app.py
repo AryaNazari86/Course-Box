@@ -108,7 +108,7 @@ class User(db.Model):
         self.bio = bio
 
 
-@app.route('Participate', methods=['POST'])
+@app.route('/Participate', methods=['POST'])
 def participate(current_user):
     if not current_user:
         return jsonify({"message": "Unauthorized"}), 401
@@ -434,6 +434,17 @@ def create_course(current_user):
         return jsonify({'success': 'error'}), 500
 
 
+@app.route("/DeleteCourse", methods=["POST"])
+def delete_course():
+    course_id = request.json["course_id"]
+    course = Course.query.filter_by(id=course_id).one()
+
+    db.session.delete(course)
+    db.session.commit()
+
+    return "hi"
+
+
 @token_required
 @app.route("/GetCourse", methods=["POST"])
 def get_course(current_user):
@@ -464,7 +475,6 @@ def get_courses_by_participant(current_user):
     participant_id = current_user.id
 
 
-@token_required
 @app.route("/GetSubjects", methods=["POST"])
 def get_subjects_by_course_id():
     course_id = request.json["course_id"]
