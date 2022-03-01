@@ -56,6 +56,7 @@ export default function CourseCreation({ navigation, closeFunc }) {
         console.log(result.response);
       }
     });
+    closeFunc();
   };
 
   // * Set of yup rules for the text input
