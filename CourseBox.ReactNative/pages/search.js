@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -19,6 +19,8 @@ import LottieView from "lottie-react-native";
 import { theme } from "../Themes/theme";
 import SearchCourseBox from "../components/searchCourseBox";
 import API_ADDRESS from "../Services/userService";
+import { search } from '../Services/courseService';
+import { GetAllCategories } from "../Services/courseService";
 
 export default function Search({ navigation }) {
   // If loaded is false, show a loader.
@@ -29,23 +31,26 @@ export default function Search({ navigation }) {
     setLoaded(true);
   });
   const [courses, setCourses] = useState([]);
+
   const categorySearch = (item) => {
+    console.log(item);
+    var item = category[item];
     if (item.selected == false) {
       var newSelectedArray = [];
       for (var i = 0; i < category.length; i++) {
-        if (i + 1 == item.key) {
+        if (i == item.id) {
           newSelectedArray.push({
-            name: item.name,
+            title: item.title,
             selected: true,
-            key: item.key,
+            id: item.id,
           });
-          setSelectedCategory(item.name);
+          setSelectedCategory(item.id);
         } else {
           if (category[i].selected == true) {
             newSelectedArray.push({
-              name: category[i].name,
+              title: category[i].title,
               selected: false,
-              key: category[i].key,
+              id: category[i].id,
             });
           } else {
             newSelectedArray.push(category[i]);
@@ -56,15 +61,15 @@ export default function Search({ navigation }) {
     } else {
       var newSelectedArray = [];
       for (var i = 0; i < category.length; i++) {
-        if (i + 1 == item.key) {
+        if (i == item.id) {
           newSelectedArray.push({
-            name: item.name,
+            title: item.title,
             selected: false,
-            key: item.key,
+            id: item.id,
           });
         } else if (i == 0) {
-          newSelectedArray.push({ name: "All", selected: true, key: "1" });
-          setSelectedCategory("All");
+          newSelectedArray.push({ title: "All", selected: true, id: "1" });
+          setSelectedCategory(0);
         } else {
           newSelectedArray.push(category[i]);
         }
@@ -72,23 +77,35 @@ export default function Search({ navigation }) {
       setCategory(newSelectedArray);
     }
   };
-  const [category, setCategory] = useState([
-    { name: "All", selected: true, key: "1" },
-    { name: "Sports", selected: false, key: "2" },
-    { name: "Programming", selected: false, key: "3" },
-  ]);
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [category, setCategory] = useState([]);
+  const [categoryFetched, setCategoryFetched] = useState(false);
+  const fetchCategories = async () => {
+    GetAllCategories().then(async (result) => {
+      if (result.successful) {
+        let newCategory = [{ title: "All", selected: true, id: "0" }];
+        result.data.then((data) => { data.forEach((item) => newCategory.push({ ...item, selected: false })); setCategory(newCategory); console.log('a'); });
+      }
 
-  const Search = (searchValue, searchCategory) => {
+    });
+  }
+  if (categoryFetched == false) {
+    fetchCategories();
+    console.log(category);
+    setCategoryFetched(true);
+  }
+  const [selectedCategory, setSelectedCategory] = useState(0);
+
+  const Search = (searchValue) => {
     fetch("http://" + API_ADDRESS + "/SearchCourses", {
       method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         search_value: searchValue,
-        category_id: category.indexOf(searchCategory),
+        category_id: selectedCategory,
       }),
     })
       .then((response) => response.json())
-      .then((data) => setCourses(data));
+      .then((data) => { setCourses(data); });
   };
   if (loaded) {
     return (
@@ -107,7 +124,7 @@ export default function Search({ navigation }) {
                 mode="outlined"
                 label="Search"
                 onChangeText={(value) => {
-                  setCourses(coursesData);
+                  Search(value.toLowerCase());
                 }}
                 style={globalStyles.input}
                 left={
@@ -127,21 +144,21 @@ export default function Search({ navigation }) {
               />
               {/* Category filters */}
               <ScrollView horizontal={true}>
-                {category.map((item, index) => {
+                {category != undefined ? category.map((item, index) => {
                   return (
                     <Chip
                       mode="flat"
                       style={styles.chip}
                       selected={item.selected}
-                      onPress={() => categorySearch(item)}
+                      onPress={() => categorySearch(item.id)}
                       textStyle={styles.chipText}
                       selectedColor={theme.color3}
                       key={index}
                     >
-                      {item.name}
+                      {item.title}
                     </Chip>
                   );
-                })}
+                }) : <Text>No Categories</Text>}
               </ScrollView>
               {/* Showing Search results */}
               {courses.map((item) => {

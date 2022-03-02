@@ -304,10 +304,15 @@ def search_course():
     search_value = request.json['search_value']
     category_id = request.json['category_id']
     search_result = []
-    for i in Course.query.filter_by(category_id=category_id).all():
-        if search_value in i.title.lower():
-            search_result.append(i)
-
+    if category_id != 0:
+        for i in Course.query.filter_by(category_id=category_id).all():
+            if search_value in i.title.lower():
+                search_result.append(i)
+    else:
+        for i in Course.query.all():
+            if search_value in i.title.lower():
+                search_result.append(i)
+    #result = course_list_schema.dump(search_result)
     result = course_list_schema.dump(search_result)
     return jsonify(result)
 

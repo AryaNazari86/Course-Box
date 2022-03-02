@@ -1,20 +1,24 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView, FlatList, Image } from 'react-native';
 import { theme } from '../Themes/theme';
+import { API_ADDRESS } from '../Services/userService';
+import CategoryIcon from './CourseBox/courseBoxIcon';
 export default function SearchCourseBox({ navigation, item }) {
     return (
-        <TouchableOpacity style={styles.container}>
-            <Image style={styles.image} source={item.image}></Image>
+        <TouchableOpacity style={styles.container} onPress={() =>
+            navigation.navigate("CoursePreview", { datas: [item, navigation] })
+        }>
+            <CategoryIcon style={styles.image} source={'https://' + API_ADDRESS + '/static/' + item.image}></CategoryIcon>
             <View>
                 <Text style={styles.title}>{item.title}</Text>
                 <Text style={styles.description}>{item.description}</Text>
                 <View style={{ flexDirection: 'row' }}>
-                    <View style={styles.cont}><Text style={styles.category}>{item.category}</Text></View>
+                    <View style={styles.cont}><Text style={styles.category}>{item.category_id}</Text></View>
                     <View style={styles.cont}><Text style={styles.likes}>{item.likes} Likes</Text></View>
-                    <View style={styles.cont}><Text style={styles.author}>{item.author}</Text></View>
+                    <View style={styles.cont}><Text style={styles.author}>{item.author_id}</Text></View>
                 </View>
             </View>
-        </TouchableOpacity>
+        </TouchableOpacity >
     );
 }
 

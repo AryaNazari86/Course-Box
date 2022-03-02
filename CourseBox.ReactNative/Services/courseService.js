@@ -350,3 +350,49 @@ export async function AddSubject() {
     };
   }
 }
+
+export async function search(searchValue, category) {
+  try {
+    let data = {
+      search_value: searchValue,
+      category_id: category
+    };
+    await fetch("http://" + API_ADDRESS + "/SearchCourses", {
+      method: 'POST',
+      headers: { "Content-Type": "application/json", "x-access-tokens": token },
+      body: JSON.stringify(data),
+    }).then((response) => {
+      return response.json();
+    })
+  } catch (error) {
+    return {
+      successful: false,
+      response: error.message,
+    };
+
+  }
+}
+
+export async function GetAllCategories() {
+  try {
+    let result = {
+      successful: false,
+      response: "",
+      data: "",
+    };
+    await fetch("http://" + API_ADDRESS + "/Categories", { method: 'GET' }).then((response) => {
+      if (response.status == 200) {
+        result.successful = true;
+        result.data = response.json();
+      } else {
+        result.response = "Error...";
+      }
+    });
+    return result;
+  } catch (error) {
+    return {
+      successful: false,
+      response: "Error...",
+    };
+  }
+}
