@@ -3,7 +3,7 @@ import md5 from "md5";
 
 import { GetToken } from "./userService";
 
-const API_ADDRESS = "192.168.1.102:5000";
+const API_ADDRESS = "127.0.0.1:5000";
 
 export async function GetSubjects(courseId) {
   let data = { course_id: courseId };
@@ -175,7 +175,7 @@ export async function GetCourseSubjects(course_id) {
       }
     });
     return result;
-  } catch (error) {}
+  } catch (error) { }
 }
 
 export async function UploadFile(file, id) {
@@ -299,6 +299,49 @@ export async function DeleteCourse(courseID) {
         }
       });
     });
+    return result;
+  } catch (error) {
+    return {
+      successful: false,
+      response: error.message,
+    };
+  }
+}
+
+export async function AddSubject() {
+  let data = {
+    icon: icon,
+    title: title,
+    course_id: courseId
+  }
+
+  await fetch('https:')
+
+  try {
+    let data = {
+      icon: icon,
+      title: title,
+      course_id: courseId
+    }
+
+    await fetch("http://" + API_ADDRESS + "/AddSubject", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-tokens": r,
+      },
+      body: JSON.stringify(data),
+    }).then((response) => {
+      result.response = response.statusText;
+      if (response.status == 200) {
+        result.successful = true;
+      } else if (response.status == 500) {
+        result.response = "Error1...";
+      } else if (response.status == 404) {
+        result.response = "Error2...";
+      }
+    });
+    console.log(result);
     return result;
   } catch (error) {
     return {

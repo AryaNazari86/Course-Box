@@ -619,6 +619,23 @@ def get_lesson_block_id():
     return jsonify({'id': str(len(lesson_blocks))})
 
 
+@app.route('/AddSubject', methods=['POST'])
+def add_subject():
+    try:
+        if request.is_json:
+            subject = Subject(
+                title=request.json["title"],
+                icon=request.json["icon"],
+                course_id=request.json["course_id"],
+            )
+            db.session.add(subject)
+            db.session.commit()
+            return jsonify({'status': 'success'}), 200
+        return jsonify({'status': 'error'}), 400
+    except:
+        return jsonify({'status': 'error'}), 500
+
+
 if __name__ == '__main__':
     db.create_all()
     app.run(debug=True, host="0.0.0.0")
