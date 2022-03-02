@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { theme } from "../../Themes/theme";
+import { deleteLesson } from "../../Services/courseService";
 
 export default function Lesson({ item, navigation }) {
   return (
@@ -18,8 +19,12 @@ export default function Lesson({ item, navigation }) {
             size={5}
             color={theme.color3}
             style={styles.qlIconOut}
-            onPress={() => {
-              console.log("delete lesson!");
+            onPress={async () => {
+              deleteLesson(item.id).then(res => {
+                if(res.successful){
+                  navigation.goBack();
+                }
+              });
             }}
           />
         </TouchableOpacity>

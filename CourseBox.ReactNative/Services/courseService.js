@@ -28,6 +28,7 @@ export async function participate(course_id) {
     };
   }
 }
+
 export async function GetSubjects(courseId) {
   let data = { course_id: courseId };
   let result = {
@@ -49,6 +50,7 @@ export async function GetSubjects(courseId) {
   });
   return result;
 }
+
 export async function GetCategory(category_id) {
   try {
     let data = {

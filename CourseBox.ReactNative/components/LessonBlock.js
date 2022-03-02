@@ -15,6 +15,7 @@ import { FAB } from "react-native-paper";
 import { globalStyles } from "../shared/globalStyle";
 import { user } from "../assets/Icons/user.png";
 import { Video } from "expo-av";
+import { deleteLessonBlock } from "../Services/courseService";
 export default function LessonBlock({ type, content }) {
   if (type == "text") {
     {
@@ -29,9 +30,13 @@ export default function LessonBlock({ type, content }) {
             size={5}
             color={theme.color3}
             style={styles.qlIconOut}
-            onPress={() => {
-              console.log("delete lesson block!");
-            }}
+            // onPress={async () => {
+            //   // deleteLessonBlock(item.id).then(res => {
+            //   //   if(res.successful){
+            //   //     navigation.goBack();
+            //   //   }
+            //   // });
+            // }}
           />
         </TouchableOpacity>
         <Text style={styles.text}>{content}</Text>
