@@ -96,6 +96,7 @@ class User(db.Model):
     bio = db.Column(db.String(255))
     # Relations
     created_courses = db.relationship('Course', backref='creator')
+    participated_courses = db.relationship('Course', backref='participant')
 
     def __init__(self, username, name, email, password, is_active, avatar, register_date, bio):
         self.username = username
@@ -106,6 +107,26 @@ class User(db.Model):
         self.avatar = avatar
         self.register_date = register_date
         self.bio = bio
+
+
+@app.route('/Participate', methods=['POST'])
+def participate(current_user):
+    if not current_user:
+        return jsonify({"message": "Unauthorized"}), 401
+    if request.method == 'POST':
+        course_id = request.json['course_id']
+        course = Course.query.filter_by(id=course_id).first()
+        if not course:
+            return jsonify({"message": "Course not found"}), 404
+        if course.participant_id == current_user.id:
+            return jsonify({"message": "You are already participating in this course"}), 400
+        if not current_user in course.partipants:
+            current_user.participated_courses.append(course)
+            course.participants.append(current_user)
+            db.session.commit()
+            return jsonify({"message": "You have successfully participated in this course"}), 200
+        else:
+            return jsonify({'message': 'You are already participating in this course'}), 200
 
 
 class Course(db.Model):
@@ -414,6 +435,17 @@ def create_course(current_user):
         return jsonify({'success': 'error'}), 500
 
 
+@app.route("/DeleteCourse", methods=["POST"])
+def delete_course():
+    course_id = request.json["course_id"]
+    course = Course.query.filter_by(id=course_id).one()
+
+    db.session.delete(course)
+    db.session.commit()
+
+    return "hi"
+
+
 @token_required
 @app.route("/GetCourse", methods=["POST"])
 def get_course(current_user):
@@ -423,19 +455,31 @@ def get_course(current_user):
     return jsonify(result)
 
 
-@token_required
 @app.route("/GetCoursesByAuthorId", methods=["POST"])
+@token_required
 def get_courses_by_author_id(current_user):
-    author_id = request.json["author_id"]
+    author_id = current_user.id
     courses = Course.query.filter_by(author_id=author_id).all()
     result = course_list_schema.dump(courses)
     return jsonify(result)
 
 
+def get_number_courses_by_author_id(current_user):
+    author_id = current_user.id
+    courses = Course.query.filter_by(author_id=author_id).all()
+    return len(courses)
+
+
+@app.route("/GetCoursesByParticipant", methods=["POST"])
 @token_required
+def get_courses_by_participant(current_user):
+    participant_id = current_user.id
+
+
 @app.route("/GetSubjects", methods=["POST"])
-def get_subjects_by_course_id(current_user):
+def get_subjects_by_course_id():
     course_id = request.json["course_id"]
+    print(course_id)
     subjects = Subject.query.filter_by(course_id=course_id).all()
     result = subject_list_schema.dump(subjects)
     return jsonify(result)
@@ -480,8 +524,11 @@ def get_user_details(current_user):
         'username': user.username,
         'email': user.username,
         'bio': user.bio,
-        'avatar': user.avatar
+        'avatar': user.avatar,
+        'madeCoursesNum': get_number_courses_by_author_id(current_user)
     }
+
+    print(data)
 
     return jsonify(data)
 
@@ -513,8 +560,9 @@ def get_all_categories():
 
 
 @app.route("/GetParticipantCourses", methods=['POST'])
-def get_participant_courses():
-    user_id = request.json["user_id"]
+@token_required
+def get_participant_courses(current_user):
+    user_id = current_user.id
     user = User.query.filter_by(id=user_id).first()
     result = course_list_schema.dump(user.courses)
     return jsonify(result)
@@ -598,6 +646,23 @@ def change_user_details_form(current_user):
     except:
         status_code = Response(status=401, response="Token is invalid.")
         return status_code
+
+@app.route('/AddSubject', methods=['POST'])
+def add_subject():
+    try:
+        if request.is_json:
+            subject = Subject(
+                title=request.json["title"],
+                icon=request.json["icon"],
+                course_id=request.json["course_id"],
+            )
+            db.session.add(subject)
+            db.session.commit()
+            return jsonify({'status': 'success'}), 200
+        return jsonify({'status': 'error'}), 400
+    except:
+        return jsonify({'status': 'error'}), 500
+
 
 if __name__ == '__main__':
     db.create_all()

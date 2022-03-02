@@ -12,7 +12,6 @@ import { Chip, TouchableRipple } from "react-native-paper";
 import { theme } from "../../Themes/theme.js";
 import CategoryIcon from "./courseBoxIcon.js";
 import { FontAwesome } from "@expo/vector-icons";
-
 import { GetCategory } from "../../Services/courseService";
 export default function CourseBox({ navigation, item }) {
   // If user likes this course. (Get this from api).

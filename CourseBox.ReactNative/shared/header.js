@@ -3,7 +3,9 @@ import { Image, Pressable, TouchableOpacity, Text } from "react-native";
 import { Appbar, TouchableRipple } from "react-native-paper";
 import LottieView from "lottie-react-native";
 import { globalStyles } from "../shared/globalStyle";
-import { theme } from '../Themes/theme';
+import { theme } from "../Themes/theme";
+import API_ADDRESS from "../Services/userService";
+
 export default function Header({
   title,
   backButton = false,
@@ -16,17 +18,22 @@ export default function Header({
   height = 45,
   buttons = [],
   titleAlignment = "left",
-  backgroundColor = theme.color2
+  backgroundColor = theme.color2,
 }) {
-
   return (
-    <Appbar.Header style={[{ height: height, backgroundColor: backgroundColor, }, globalStyles.header]}>
-      {backButton ? (<Appbar.BackAction onPress={() => backAction()} />) : null}
-      {headerIcon ?
-        (<Image
+    <Appbar.Header
+      style={[
+        { height: height, backgroundColor: backgroundColor },
+        globalStyles.header,
+      ]}
+    >
+      {backButton ? <Appbar.BackAction onPress={() => backAction()} /> : null}
+      {headerIcon ? (
+        <Image
           source={headerIconSource}
-          style={[{ marginEnd: -15 }, globalStyles.headerIcon]} />)
-        : null}
+          style={[{ marginEnd: -15 }, globalStyles.headerIcon]}
+        />
+      ) : null}
       <Appbar.Content
         title={title}
         color="#14213D"
@@ -37,19 +44,23 @@ export default function Header({
       />
       {buttons.map((value, index) => {
         return (
-          <Appbar.Action icon={value.icon} onPress={value.onPress} key={index} />
+          <Appbar.Action
+            icon={value.icon}
+            onPress={value.onPress}
+            key={index}
+          />
         );
       })}
-      {profileButton ?
-        (<TouchableOpacity onPress={profileAction}>
+      {profileButton ? (
+        <TouchableOpacity onPress={profileAction}>
           <Image
             source={{
-              uri: "http://192.168.125.22:5000/static/avatars/default.png",
+              uri: "http://" + API_ADDRESS + "/static/avatars/default.png",
             }}
-            style={[{ marginEnd: 5 }, globalStyles.headerIcon]} />
-        </TouchableOpacity>)
-        : null}
-
+            style={[{ marginEnd: 5 }, globalStyles.headerIcon]}
+          />
+        </TouchableOpacity>
+      ) : null}
     </Appbar.Header>
   );
 }

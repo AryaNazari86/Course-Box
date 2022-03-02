@@ -38,6 +38,7 @@ import { globalStyles, Theme } from "../shared/globalStyle";
 
 // Theme colors
 import { theme } from "../Themes/theme";
+import API_ADDRESS from "../Services/userService";
 
 export default function Home({ navigation }) {
   // If loaded is false, show a loader.
@@ -62,11 +63,11 @@ export default function Home({ navigation }) {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("http://192.168.24.252:5000/LatestCourses");
+      const response = await fetch("http://" + API_ADDRESS + "/LatestCourses");
       const courses = await response.json();
       setLatestCourses(courses);
       const response1 = await fetch(
-        "http://192.168.24.252:5000/PopularCourses"
+        "http://" + API_ADDRESS + "/PopularCourses"
       );
       const courses1 = await response1.json();
       setPopularCourses(courses1);

@@ -21,18 +21,22 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { FAB } from "react-native-paper";
 import CourseCreation from "./courseCreation";
+import API_ADDRESS from "../Services/userService";
+import * as UserService from "../Services/userService";
 
 // Theme colors
 import { theme } from "../Themes/theme";
 import { GetToken } from "../Services/userService";
+
+import { GetMadeCourses } from "../Services/courseService";
 export default function Profile({ navigation }) {
   // If loaded is false, show a loader.
   const [loaded, setLoaded] = useState(false);
   const [profilePageValues, setProfilePageValues] = useState({
     avatar: "default.png",
-    name: "none",
-    username: "none",
-    bio: "No Description",
+    name: "Loading...",
+    username: "Loading...",
+    bio: "Loading...",
     accountCoursesVal: 0,
     accountFollowersVal: 0,
     accountParticipatedVal: 0,
@@ -41,16 +45,43 @@ export default function Profile({ navigation }) {
   const [dataFetched, setDataFetched] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
+  const [madeCourses, setMadeCourses] = useState([]);
+
   // When app loads this function is called.
   // ! Problem here
   InteractionManager.runAfterInteractions(function () {
     setLoaded(true);
   });
+
+  var userDetails;
+
+  const fetchData = async () => {
+    GetToken().then(async (r) => {
+      UserService.GetUserDetails(r).then(async (userDetails) => {
+        if (userDetails.successful) {
+          userDetails.data.then(async (data) => {
+            setProfilePageValues(data);
+          });
+        }
+      });
+
+      GetMadeCourses(r).then(async (courseList) => {
+        if (courseList.successful) {
+          courseList.data.then(async (data) => {
+            setMadeCourses(data);
+          });
+        }
+      });
+    });
+  };
+
+  console.log(userDetails);
+
   if (!dataFetched) {
-    const storedDataParsed = GetToken();
-    setProfilePageValues(storedDataParsed);
+    fetchData();
     setDataFetched(true);
   }
+
   if (loaded) {
     return (
       <View>
@@ -102,7 +133,9 @@ export default function Profile({ navigation }) {
                 <Image
                   source={{
                     uri:
-                      "http://192.168.24.252:5000/static/avatars/" +
+                      "http://" +
+                      API_ADDRESS +
+                      "/static/avatars/" +
                       profilePageValues.avatar,
                   }}
                   style={styles.profileAccountImage}
@@ -164,7 +197,7 @@ export default function Profile({ navigation }) {
                     ...styles.profileDetailText,
                   }}
                 >
-                  {/* {profilePageValues.accountCoursesVal} */}5
+                  {profilePageValues.madeCoursesNum}
                 </Text>
                 <Text
                   style={{
@@ -233,7 +266,7 @@ export default function Profile({ navigation }) {
                   Made Courses
                 </Text>
                 <CoursesCarousel
-                  courses={courses}
+                  courses={madeCourses}
                   navigation={navigation}
                   dotesColor={theme.color3}
                 />

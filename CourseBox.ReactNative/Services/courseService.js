@@ -1,8 +1,31 @@
 import React from "react";
 import md5 from "md5";
 
-const API_ADDRESS = "192.168.24.252:5000";
+import { GetToken } from "./userService";
 
+const API_ADDRESS = "127.0.0.1:5000";
+
+export async function GetSubjects(courseId) {
+  let data = { course_id: courseId };
+  let result = {
+    successful: false,
+    response: "",
+    data: "",
+  };
+  await fetch("http://" + API_ADDRESS + "/GetSubjects", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  }).then((response) => {
+    if (response.status == 200) {
+      result.successful = true;
+      result.data = response.json();
+    } else {
+      result.response = "Error...";
+    }
+  });
+  return result;
+}
 export async function GetCategory(category_id) {
   try {
     let data = {
@@ -152,7 +175,7 @@ export async function GetCourseSubjects(course_id) {
       }
     });
     return result;
-  } catch (error) {}
+  } catch (error) { }
 }
 
 export async function UploadFile(file, id) {
@@ -214,6 +237,116 @@ export async function GetLessonBlockID() {
     return {
       successful: false,
       response: "Error...",
+    };
+  }
+}
+
+export async function GetMadeCourses(token) {
+  try {
+    let result = {
+      successful: false,
+      response: "",
+      data: "",
+    };
+    await fetch("http://" + API_ADDRESS + "/GetCoursesByAuthorId", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "x-access-tokens": token },
+    }).then((response) => {
+      if (response.status == 200) {
+        result.successful = true;
+        result.data = response.json();
+      } else if (response.status == 500) {
+        result.response = "Error...";
+      } else if (response.status == 401) {
+        result.response = "Unauthorized...";
+      }
+    });
+    return result;
+  } catch (error) {
+    return {
+      successful: false,
+      response: "Error...",
+    };
+  }
+}
+
+export async function DeleteCourse(courseID) {
+  try {
+    let result = {
+      successful: false,
+      response: "",
+    };
+    GetToken().then(async (r) => {
+      let course = {
+        course_id: courseID,
+      };
+
+      await fetch("http://" + API_ADDRESS + "/DeleteCourse", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-access-tokens": r,
+        },
+        body: JSON.stringify(course),
+      }).then((response) => {
+        result.response = response.statusText;
+        if (response.status == 200) {
+          result.successful = true;
+        } else if (response.status == 500) {
+          result.response = "Error1...";
+        } else if (response.status == 404) {
+          result.response = "Error2...";
+        }
+      });
+    });
+    return result;
+  } catch (error) {
+    return {
+      successful: false,
+      response: error.message,
+    };
+  }
+}
+
+export async function AddSubject() {
+  let data = {
+    icon: icon,
+    title: title,
+    course_id: courseId
+  }
+
+  await fetch('https:')
+
+  try {
+    let data = {
+      icon: icon,
+      title: title,
+      course_id: courseId
+    }
+
+    await fetch("http://" + API_ADDRESS + "/AddSubject", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-tokens": r,
+      },
+      body: JSON.stringify(data),
+    }).then((response) => {
+      result.response = response.statusText;
+      if (response.status == 200) {
+        result.successful = true;
+      } else if (response.status == 500) {
+        result.response = "Error1...";
+      } else if (response.status == 404) {
+        result.response = "Error2...";
+      }
+    });
+    console.log(result);
+    return result;
+  } catch (error) {
+    return {
+      successful: false,
+      response: error.message,
     };
   }
 }
