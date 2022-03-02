@@ -671,6 +671,66 @@ def add_subject():
         return jsonify({'status': 'error'}), 500
 
 
+@app.route('/DeleteSubject', methods=['POST'])
+def delete_subject():
+    try:
+        subject_id = request.json["course_id"]
+        subject = Subject.query.filter_by(id=subject_id).one()
+
+        db.session.delete(subject)
+        db.session.commit()
+
+        return jsonify({'status': 'successfull'}), 200
+    except:
+        return jsonify({'status': 'error'}), 500
+
+
+@app.route('/AddLesson', methods=['POST'])
+def add_lesson():
+    try:
+        if request.is_json:
+            lesson = Lesson(
+                title=request.json["title"],
+                icon=request.json["icon"],
+                subject_id=request.json["subject_id"],
+                color=request.json["color"],
+            )
+            db.session.add(lesson)
+            db.session.commit()
+            return jsonify({'status': 'success'}), 200
+        return jsonify({'status': 'error'}), 400
+    except:
+        return jsonify({'status': 'error'}), 500
+
+
+@app.route('/DeleteLesson', methods=['POST'])
+def delete_lesson():
+    try:
+        lesson_id = request.json["lesson_id"]
+        lesson = Lesson.query.filter_by(id=lesson_id).one()
+
+        db.session.delete(lesson)
+        db.session.commit()
+
+        return jsonify({'status': 'successfull'}), 200
+    except:
+        return jsonify({'status': 'error'}), 500
+
+
+@app.route('/DeleteLessonBlock', methods=['POST'])
+def delete_lesson_block():
+    try:
+        lesson_block_id = request.json["lesson_block_id"]
+        lesson_block = LessonBlock.query.filter_by(id=lesson_block_id).one()
+
+        db.session.delete(lesson_block)
+        db.session.commit()
+
+        return jsonify({'status': 'successfull'}), 200
+    except:
+        return jsonify({'status': 'error'}), 500
+
+
 if __name__ == '__main__':
     db.create_all()
     app.run(debug=True, host="0.0.0.0")
