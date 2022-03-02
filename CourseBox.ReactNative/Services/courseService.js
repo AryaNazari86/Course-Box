@@ -4,7 +4,30 @@ import md5 from "md5";
 import { GetToken } from "./userService";
 
 const API_ADDRESS = "192.168.1.102:5000";
-
+export async function participate(course_id) {
+  try {
+    await fetch("http://" + API_ADDRESS + "/Participate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-tokens": GetToken(),
+      },
+      body: JSON.stringify({ course_id }),
+    }).then((response) => {
+      if (response.status == 200) {
+        result.successful = true;
+        result.data = response.json();
+      } else {
+        result.response = "Error...";
+      }
+    });
+  } catch (error) {
+    return {
+      successful: false,
+      response: "Error...",
+    };
+  }
+}
 export async function GetSubjects(courseId) {
   let data = { course_id: courseId };
   let result = {

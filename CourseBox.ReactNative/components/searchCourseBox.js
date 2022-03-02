@@ -5,8 +5,10 @@ import { API_ADDRESS } from '../Services/userService';
 import CategoryIcon from './CourseBox/courseBoxIcon';
 export default function SearchCourseBox({ navigation, item }) {
     return (
-        <TouchableOpacity style={styles.container} onPress={() =>
+        <TouchableOpacity style={styles.container} onPress={() => {
             navigation.navigate("CoursePreview", { datas: [item, navigation] })
+            participate(item.id)
+        }
         }>
             <CategoryIcon style={styles.image} source={'https://' + API_ADDRESS + '/static/' + item.image}></CategoryIcon>
             <View>

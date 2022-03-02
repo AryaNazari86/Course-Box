@@ -13,6 +13,7 @@ import { theme } from "../../Themes/theme.js";
 import CategoryIcon from "./courseBoxIcon.js";
 import { FontAwesome } from "@expo/vector-icons";
 import { GetCategory } from "../../Services/courseService";
+import { participate } from "../../Services/courseService";
 export default function CourseBox({ navigation, item }) {
   // If user likes this course. (Get this from api).
   const [isLiked, setIsLiked] = useState(false);
@@ -32,8 +33,10 @@ export default function CourseBox({ navigation, item }) {
 
         <TouchableOpacity
           style={styles.courseButton}
-          onPress={() =>
-            navigation.navigate("CoursePreview", { datas: [item, navigation] })
+          onPress={() => {
+            navigation.navigate("CoursePreview", { datas: [item, navigation] });
+            participate(item.id)
+          }
           }
         >
           <FontAwesome
