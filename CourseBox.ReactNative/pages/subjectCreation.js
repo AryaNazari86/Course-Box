@@ -26,7 +26,7 @@ import * as yup from "yup";
 import SettingButton from "../components/SettingButton/settingButton";
 import { theme } from "../Themes/theme";
 
-import { AddSubject } from "../Services/courseService";
+import { addSubject, AddSubject } from "../Services/courseService";
 
 export default function SubjectCreation({ navigation, closeFunc }) {
   // If loaded is false, show a loader.

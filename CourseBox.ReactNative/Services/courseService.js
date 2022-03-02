@@ -28,6 +28,7 @@ export async function participate(course_id) {
     };
   }
 }
+
 export async function GetSubjects(courseId) {
   let data = { course_id: courseId };
   let result = {
@@ -49,6 +50,7 @@ export async function GetSubjects(courseId) {
   });
   return result;
 }
+
 export async function GetCategory(category_id) {
   try {
     let data = {
@@ -152,6 +154,37 @@ export async function GetLessonBlocks(lesson_id) {
       data: "",
     };
     await fetch(API_ADDRESS + "/GetLessonBlocks", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    }).then((response) => {
+      if (response.status == 200) {
+        result.successful = true;
+        result.data = response.json();
+      } else {
+        result.response = "Error...";
+      }
+    });
+    return result;
+  } catch (error) {
+    return {
+      successful: false,
+      response: "Error...",
+    };
+  }
+}
+
+export async function GetLessonsBySubjectId(subject_id) {
+  try {
+    let data = {
+      subject_id: subject_id,
+    };
+    let result = {
+      successful: false,
+      response: "",
+      data: "",
+    };
+    await fetch(API_ADDRESS + "/GetLessons", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),

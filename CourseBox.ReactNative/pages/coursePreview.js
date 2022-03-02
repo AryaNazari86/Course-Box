@@ -16,7 +16,7 @@ import { theme } from "../Themes/theme";
 import CourseCreation from "./courseCreation";
 import ChooseIcon from "./chooseIcon";
 import IconPicker from "react-native-icon-picker";
-import { GetSubjects } from "../Services/courseService";
+import { GetSubjects, participate } from "../Services/courseService";
 
 import LottieView from "lottie-react-native";
 import { globalStyles } from "../shared/globalStyle";
@@ -41,6 +41,19 @@ export default function CoursePreview(props) {
   if (!contentFetched) {
     fetchContent();
     setContentFetched(true);
+  }
+
+  const [participantFetched, setParticipantFetched] = useState(false);
+  const fetchParticipate = async () => {
+    participate(course.id).then(async (result) => {
+      if (result.successful) {
+        
+      }
+    });
+  };
+  if(!participantFetched){
+    fetchParticipate();
+    setParticipantFetched(true);
   }
 
   const [modalVisible, setModalVisible] = useState(false);
@@ -69,9 +82,12 @@ export default function CoursePreview(props) {
             },
             {
               icon: "trash-can-outline",
-              onPress: () => {
-                DeleteCourse(course.id);
-                props.navigation.goBack();
+              onPress: async () => {
+                DeleteCourse(course.id).then(res => {
+                  if (res.successful) {
+                    props.navigation.goBack();
+                  }
+                });
               },
             },
           ]}

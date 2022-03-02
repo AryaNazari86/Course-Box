@@ -1,8 +1,10 @@
 import React from "react";
 import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import API_ADDRESS from "../../Services/userService";
+
 // Theme colors
-import {theme} from '../../Themes/theme';
+import { theme } from '../../Themes/theme';
 export default function CategoryBox({ category, onPress }) {
   return (
     // Category Box
@@ -10,14 +12,17 @@ export default function CategoryBox({ category, onPress }) {
       {/* Icon Container */}
       <View
         style={[
-          { backgroundColor: category.categoryBgColor },
+          { backgroundColor: theme.color1 },
           styles.iconContainer,
         ]}>
-        <MaterialCommunityIcons
-          name={category.categoryIcon}
-          size={24}
-          color={category.categoryIconColor}
-        />
+        <Image
+          source={{
+            uri:
+              "http://" + API_ADDRESS + "/static/category_image/" + categoryImage,
+          }}
+          style={{width:24, height: 24,}}>
+
+        </Image>
       </View>
       {/* Text Container */}
       <View>

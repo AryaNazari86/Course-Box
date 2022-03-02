@@ -62,7 +62,20 @@ export default function Home({ navigation }) {
   const [popularCorurses, setPopularCourses] = useState([]);
 
   const [dataFetched, setDataFetched] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [categoryFetched, setCategoryFetched] = useState(false);
+  const fetchCategories = async () => {
+    CourseService.GetAllCategories().then(async (result) => {
+      if (result.successful) {
+        result.data.then((data) => { setCategories(data) });
+      }
 
+    });
+  }
+  if (categoryFetched == false) {
+    fetchCategories();
+    setCategoryFetched(true);
+  }
   const fetchData = async () => {
     try {
       const response = await fetch("http://" + API_ADDRESS + "/LatestCourses");
@@ -102,43 +115,6 @@ export default function Home({ navigation }) {
   useEffect(() => {
     // fetchDatas();
   }, []);
-  const categories = [
-    {
-      categoryId: 1,
-      categoryTitle: "Maths",
-      categoryIcon: "math-compass",
-      categoryIconColor: "#323ca8",
-      categoryBgColor: "#9ba4f2",
-    },
-    {
-      categoryId: 2,
-      categoryTitle: "Computer",
-      categoryIcon: "code-tags",
-      categoryIconColor: "#8c4f15",
-      categoryBgColor: "#ff9736",
-    },
-    {
-      categoryId: 3,
-      categoryTitle: "Sports",
-      categoryIcon: "volleyball",
-      categoryIconColor: "#5e1532",
-      categoryBgColor: "#ff3686",
-    },
-    {
-      categoryId: 4,
-      categoryTitle: "Science",
-      categoryIcon: "atom-variant",
-      categoryIconColor: "#166958",
-      categoryBgColor: "#36ffd7",
-    },
-    {
-      categoryId: 5,
-      categoryTitle: "Art",
-      categoryIcon: "palette",
-      categoryIconColor: "#942700",
-      categoryBgColor: "#ffa787",
-    },
-  ];
 
   // Clicked CategoryId will be here.
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
@@ -187,7 +163,7 @@ export default function Home({ navigation }) {
                 style={styles.categoriesContainer}
                 horizontal={true}
                 data={categories}
-                keyExtractor={(item) => item.categoryId.toString()}
+                keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
                   <CategoryBox
                     category={item}
