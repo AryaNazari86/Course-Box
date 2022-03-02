@@ -7,7 +7,6 @@ import {
   ScrollView,
   FlatList,
   Image,
-  TouchableOpacity,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import Header from "../shared/header";
