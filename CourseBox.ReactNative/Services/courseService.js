@@ -481,4 +481,30 @@ export async function deleteLesson(lessonID) {
       response: "Error...",
     };
   }
-};
+}
+
+export async function deleteLessonBlock(lessonBlockID) {
+  try {
+    await fetch("http://" + API_ADDRESS + "/DeleteLessonBlock", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ lesson_block_id: lessonBlockID })
+    }).then((response) => {
+      result.response = response.statusText;
+      if (response.status == 200) {
+        result.successful = true;
+      } else if (response.status == 500) {
+        result.response = "Error...";
+      } else if (response.status == 404) {
+        result.response = "Error...";
+      }
+    });
+    return result;
+  }
+  catch (error) {
+    return {
+      successful: false,
+      response: "Error...",
+    };
+  }
+}
