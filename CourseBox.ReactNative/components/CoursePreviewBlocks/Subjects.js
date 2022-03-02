@@ -3,74 +3,74 @@ import { View, Text, TouchableOpacity, StyleSheet, ScrollView, ImageBackground, 
 import { MaterialIcons, Feather } from '@expo/vector-icons';
 import Lesson from './Lesson.js';
 import { globalStyles } from '../../shared/globalStyle.js';
-import {theme} from '../../Themes/theme';
+import { theme } from '../../Themes/theme';
 import { GetLessonsBySubjectId } from '../../Services/courseService.js';
 export default function Subject({ item, navigation, changeIconClicked }) {
-    const [editable, setEditable] = useState(false);
-    const [editIcon, setEditIcon] = useState('edit-2');
-    const editSubject = () => {
-        if (editable) {
-            setEditable(false);
-            setEditIcon("edit-2");
-        }
-        else {
-            setEditable(true);
-            setEditIcon("check");
-        }
-    };
-    const [lessons, setLessons] = useState([]);
-    const [lessonsFetched, setLessonsFetched] = useState(false);
-    const fetchContent = async () => {
-        GetLessonsBySubjectId(item.id).then(async (result) => {
-          if (result.successful) {
-            result.data.then((data) => setLessons(data));
-          }
-        });
-      };
-      if (!lessonsFetched) {
-        fetchContent();
-        setLessonsFetched(true);
+  const [editable, setEditable] = useState(false);
+  const [editIcon, setEditIcon] = useState('edit-2');
+  const editSubject = () => {
+    if (editable) {
+      setEditable(false);
+      setEditIcon("edit-2");
+    }
+    else {
+      setEditable(true);
+      setEditIcon("check");
+    }
+  };
+  const [lessons, setLessons] = useState([]);
+  const [lessonsFetched, setLessonsFetched] = useState(false);
+  const fetchContent = async () => {
+    GetLessonsBySubjectId(item.id).then(async (result) => {
+      if (result.successful) {
+        result.data.then((data) => setLessons(data));
       }
-    return (
-        <View style={styles.subject}>
-            <TouchableOpacity style={styles.editIcon} onPress={editSubject}>
-                <Feather
-                    name={editIcon}
-                    size={24}
-                    color={theme.color3} />
-            </TouchableOpacity>
-            {/* Subject's title */}
-            <View style={styles.subjectTitle}>
-                {/* Icon */}
-                <View style={styles.subjectIcon}>
-                    <MaterialIcons name={item.icon} size={100} color={theme.color3} />
-                    {editable ? <TouchableOpacity style={styles.subjectEditIconButton} onPress={changeIconClicked}><Feather name="edit-2" size={35} color='white' style={styles.subjectEditIcon} /></TouchableOpacity> : null}
-                </View>
-                {/* Text */}
-                <TextInput editable={editable} style={{ borderBottomColor: editable ? '#A8DADC' : 'transparent', ...styles.subjectTitleText }}>{item.title}</TextInput>
-            </View>
-            <View style={styles.subjectQls}>
-                {lessons.map(
-                    (item, index) => {
-                        {/* Each lesson of the subject  */ }
-                        return (
-                            <Lesson item={item} navigation={navigation} key={index} />
-                        )
-                    }
-                )}
-            </View>
+    });
+  };
+  if (!lessonsFetched) {
+    fetchContent();
+    setLessonsFetched(true);
+  }
+  return (
+    <View style={styles.subject}>
+      <TouchableOpacity style={styles.editIcon} onPress={editSubject}>
+        <Feather
+          name={editIcon}
+          size={24}
+          color={theme.color3} />
+      </TouchableOpacity>
+      {/* Subject's title */}
+      <View style={styles.subjectTitle}>
+        {/* Icon */}
+        <View style={styles.subjectIcon}>
+          <MaterialIcons name={item.icon} size={100} color={theme.color3} />
+          {editable ? <TouchableOpacity style={styles.subjectEditIconButton} onPress={changeIconClicked}><Feather name="edit-2" size={35} color='white' style={styles.subjectEditIcon} /></TouchableOpacity> : null}
         </View>
         {/* Text */}
-        <TextInput
-          editable={editable}
-          style={{
-            borderBottomColor: editable ? "#A8DADC" : "transparent",
-            ...styles.subjectTitleText,
-          }}
-        >
-          {item.title}
-        </TextInput>
+        <TextInput editable={editable} style={{ borderBottomColor: editable ? '#A8DADC' : 'transparent', ...styles.subjectTitleText }}>{item.title}</TextInput>
       </View>
+      <View style={styles.subjectQls}>
+        {lessons.map(
+          (item, index) => {
+            {/* Each lesson of the subject  */ }
+            return (
+              <Lesson item={item} navigation={navigation} key={index} />
+            )
+          }
+        )}
+      </View>
+
+      {/* Text */}
+      <TextInput
+        editable={editable}
+        style={{
+          borderBottomColor: editable ? "#A8DADC" : "transparent",
+          ...styles.subjectTitleText,
+        }}
+      >
+        {item.title}
+      </TextInput>
+
       <View style={styles.subjectQls}>
         {item.content.map((item, index) => {
           {
@@ -78,7 +78,7 @@ export default function Subject({ item, navigation, changeIconClicked }) {
           }
           return <Lesson item={item} navigation={navigation} key={index} />;
         })}
-      </View>
+      </View >
     </View>
   );
 }
