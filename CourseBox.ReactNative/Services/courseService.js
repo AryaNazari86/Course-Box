@@ -308,48 +308,6 @@ export async function DeleteCourse(courseID) {
   }
 }
 
-export async function AddSubject() {
-  let data = {
-    icon: icon,
-    title: title,
-    course_id: courseId
-  }
-
-  await fetch('https:')
-
-  try {
-    let data = {
-      icon: icon,
-      title: title,
-      course_id: courseId
-    }
-
-    await fetch("http://" + API_ADDRESS + "/AddSubject", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-access-tokens": r,
-      },
-      body: JSON.stringify(data),
-    }).then((response) => {
-      result.response = response.statusText;
-      if (response.status == 200) {
-        result.successful = true;
-      } else if (response.status == 500) {
-        result.response = "Error1...";
-      } else if (response.status == 404) {
-        result.response = "Error2...";
-      }
-    });
-    console.log(result);
-    return result;
-  } catch (error) {
-    return {
-      successful: false,
-      response: error.message,
-    };
-  }
-}
 
 export async function search(searchValue, category) {
   try {
@@ -385,6 +343,69 @@ export async function GetAllCategories() {
         result.successful = true;
         result.data = response.json();
       } else {
+        result.response = "Error...";
+      }
+    });
+    return result;
+  } catch (error) {
+    return {
+      successful: false,
+      response: "Error...",
+    };
+  }
+}
+
+export async function addSubject(title, icon, courseID) {
+  try {
+    let data = {
+      title: title,
+      icon: icon,
+      course_id: courseID,
+    };
+    let result = {
+      successful: false,
+      response: "",
+    };
+    await fetch("http://" + API_ADDRESS + "/AddSubject", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    }).then((response) => {
+      result.response = response.statusText;
+      if (response.status == 200) {
+        result.successful = true;
+      } else if (response.status == 500) {
+        result.response = "Error...";
+      } else if (response.status == 404) {
+        result.response = "Error...";
+      }
+    });
+    return result;
+  } catch (error) {
+    return {
+      successful: false,
+      response: "Error...",
+    };
+  }
+}
+
+export async function deleteSubject(subjectID) {
+  try {
+    let result = {
+      successful: false,
+      response: "",
+    };
+    await fetch("http://" + API_ADDRESS + "/DeleteSubject", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ subject_id: subjectID }),
+    }).then((response) => {
+      result.response = response.statusText;
+      if (response.status == 200) {
+        result.successful = true;
+      } else if (response.status == 500) {
+        result.response = "Error...";
+      } else if (response.status == 404) {
         result.response = "Error...";
       }
     });

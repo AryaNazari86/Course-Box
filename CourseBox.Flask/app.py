@@ -685,6 +685,7 @@ def delete_subject():
         return jsonify({'status': 'error'}), 500
 
 
+
 @app.route('/AddLesson', methods=['POST'])
 def add_lesson():
     try:
