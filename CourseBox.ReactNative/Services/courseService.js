@@ -417,3 +417,68 @@ export async function deleteSubject(subjectID) {
     };
   }
 }
+
+export async function addLesson(title, icon, subjectID, color) {
+  try {
+    let data = {
+      title: title,
+      icon: icon,
+      subject_id: subjectID,
+      color: color,
+    };
+    let result = {
+      successful: false,
+      response: "",
+    };
+    await fetch("http://" + API_ADDRESS + "/AddLesson", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    }).then((response) => {
+      result.response = response.statusText;
+      if (response.status == 200) {
+        result.successful = true;
+      } else if (response.status == 500) {
+        result.response = "Error...";
+      } else if (response.status == 404) {
+        result.response = "Error...";
+      }
+    });
+    return result;
+  } catch (error) {
+    return {
+      successful: false,
+      response: "Error...",
+    };
+  }
+}
+
+export async function deleteLesson(lessonID) {
+  try {
+    let result = {
+      successful: false,
+      response: "",
+    };
+    await fetch("http://" + API_ADDRESS + "/DeleteLesson", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ lesson_id: lessonID }),
+    }).then((response) => {
+      result.response = response.statusText;
+      if (response.status == 200) {
+        result.successful = true;
+      } else if (response.status == 500) {
+        result.response = "Error...";
+      } else if (response.status == 404) {
+        result.response = "Error...";
+      }
+    });
+    return result;
+  }
+  catch (error) {
+    return {
+      successful: false,
+      response: "Error...",
+    };
+  }
+};
