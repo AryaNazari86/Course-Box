@@ -26,9 +26,9 @@ import * as yup from "yup";
 import SettingButton from "../components/SettingButton/settingButton";
 import { theme } from "../Themes/theme";
 
-import { AddSubject } from "../Services/courseService";
+import { addLesson } from "../Services/courseService";
 
-export default function SubjectCreation({ navigation, closeFunc }) {
+export default function LessonCreation({ navigation, closeFunc }) {
   // If loaded is false, show a loader.
   const [loaded, setLoaded] = useState(false);
 
@@ -38,7 +38,10 @@ export default function SubjectCreation({ navigation, closeFunc }) {
   });
 
   const [selectedIcon, setSelectedIcon] = useState("");
+  const [selectedColor, setSelectedColor] = useState("");
+
   const [categoryError, setCategoryError] = useState("");
+  const [colorError, setColorError] = useState("");
 
   const [selectedCousePicture, setSelectedCoursePicture] = useState("");
   const [pictureError, setPictureError] = useState("");
@@ -48,10 +51,16 @@ export default function SubjectCreation({ navigation, closeFunc }) {
 
   const testFunc = (values) => {
     if (selectedIcon) {
+      // ! Do somthing with the data
       AddSubject(values, selectedIcon);
       closeFunc();
     } else {
-      setCategoryError("Select an Icon");
+      if (!selectedIcon) {
+        setCategoryError("Select an Icon");
+      }
+      if (!selectedColor) {
+        setColorError("Select a Color");
+      }
     }
   };
 
@@ -86,7 +95,7 @@ export default function SubjectCreation({ navigation, closeFunc }) {
         >
           {(props) => (
             <View style={globalStyles.container}>
-              {/* Course Name */}
+              {/* Title */}
               <View
                 style={{
                   ...globalStyles.textInputView,
@@ -109,6 +118,7 @@ export default function SubjectCreation({ navigation, closeFunc }) {
                 {props.touched.Title && props.errors.Title}
               </Text>
 
+              {/* Icon */}
               <View style={{ ...globalStyles.container, ...styles.category }}>
                 <SettingButton
                   buttonText={"Icon"}
@@ -120,6 +130,20 @@ export default function SubjectCreation({ navigation, closeFunc }) {
 
               <Text style={{ ...globalStyles.errorText, ...styles.error }}>
                 {categoryError}
+              </Text>
+
+              {/* Color */}
+              <View style={{ ...globalStyles.container, ...styles.category }}>
+                <SettingButton
+                  buttonText={"Color"}
+                  buttonStyle="Dropdown"
+                  dropDownList={["Red", "Blue", "Green"]}
+                  selectedVar={setSelectedColor}
+                />
+              </View>
+
+              <Text style={{ ...globalStyles.errorText, ...styles.error }}>
+                {colorError}
               </Text>
 
               <TouchableOpacity
