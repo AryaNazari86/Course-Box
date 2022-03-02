@@ -1,4 +1,4 @@
-from flask import Flask, request, Response, jsonify
+from flask import Flask, render_template, request, Response, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import os
 import uuid
@@ -622,6 +622,36 @@ def upload_file():
 def get_lesson_block_id():
     lesson_blocks = LessonBlock.query.all()
     return jsonify({'id': str(len(lesson_blocks))})
+
+
+@token_required
+@app.route('/ChangeUserDetails', methods=['POST'])
+def change_user_details(current_user):
+    return render_template("changeuserdetails.html", token=request.headers['x-access-tokens'], user=current_user)
+
+
+@app.route('/ChangeUserDetailsForm', method=['POST'])
+def change_user_details_form(current_user):
+    token = None
+    if 'token' in request.form:
+        token = request.form['token']
+
+    if not token:
+        status_code = Response(
+            status=500, response="A valid token is missing.")
+        return status_code
+
+    try:
+        data = jwt.decode(
+            token, app.config["SECRET_KEY"], algorithms="HS256")
+        current_user = User.query.filter_by(id=data['id']).first()
+        current_user.name = request.form['name']
+        current_user.email = request.form['email']
+        current_user.bio = request.form['bio']
+        db.session.commit()
+    except:
+        status_code = Response(status=401, response="Token is invalid.")
+        return status_code
 
 
 @app.route('/AddSubject', methods=['POST'])

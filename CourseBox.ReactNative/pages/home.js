@@ -40,6 +40,8 @@ import { globalStyles, Theme } from "../shared/globalStyle";
 import { theme } from "../Themes/theme";
 import API_ADDRESS from "../Services/userService";
 
+let sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 export default function Home({ navigation }) {
   // If loaded is false, show a loader.
   const [loaded, setLoaded] = useState(false);
@@ -79,6 +81,23 @@ export default function Home({ navigation }) {
     fetchData();
     setDataFetched(true);
   }
+
+  const [showCourses, setShowCourses] = useState(false);
+
+  function CheckForCourses() {
+    if (latestCourses.length > 0) {
+      setShowCourses(true);
+      console.log("Hi");
+    }
+  }
+
+  if (latestCourses.length > 0) {
+    if (!showCourses) {
+      CheckForCourses();
+    }
+  }
+
+  console.log(latestCourses.length > 0);
 
   useEffect(() => {
     // fetchDatas();
@@ -181,22 +200,52 @@ export default function Home({ navigation }) {
                 <Text style={styles.latestCoursesTitle}>Latest Courses</Text>
 
                 {/* A carousel for showing the latest courses. */}
-                <CoursesCarousel
-                  courses={latestCourses}
-                  navigation={navigation}
-                  dotesColor={theme.color3}
-                />
+                {showCourses == true ? (
+                  <CoursesCarousel
+                    courses={latestCourses}
+                    navigation={navigation}
+                    dotesColor={theme.color3}
+                  />
+                ) : (
+                  <Text
+                    style={{
+                      ...globalStyles.normalText,
+                      ...globalStyles.TitleText,
+                      textAlign: "center",
+                      paddingBottom: 50,
+                    }}
+                  >
+                    Loading...
+                  </Text>
+                )}
               </View>
 
-              <View style={styles.popularCoursesContainer}>
+              <View
+                style={{
+                  ...styles.popularCoursesContainer,
+                }}
+              >
                 <Text style={styles.popularCoursesTitle}>Popular Courses</Text>
 
                 {/* A carousel for showing the popular courses. */}
-                <CoursesCarousel
-                  courses={popularCorurses}
-                  navigation={navigation}
-                  dotesColor={theme.color3}
-                />
+                {showCourses == true ? (
+                  <CoursesCarousel
+                    courses={popularCorurses}
+                    navigation={navigation}
+                    dotesColor={theme.color3}
+                  />
+                ) : (
+                  <Text
+                    style={{
+                      ...globalStyles.normalText,
+                      ...globalStyles.TitleText,
+                      textAlign: "center",
+                      paddingBottom: 50,
+                    }}
+                  >
+                    Loading...
+                  </Text>
+                )}
               </View>
             </View>
           </ScrollView>
