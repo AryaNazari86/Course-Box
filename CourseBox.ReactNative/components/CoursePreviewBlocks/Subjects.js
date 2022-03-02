@@ -60,75 +60,95 @@ export default function Subject({ item, navigation, changeIconClicked }) {
                 )}
             </View>
         </View>
-    );
+        {/* Text */}
+        <TextInput
+          editable={editable}
+          style={{
+            borderBottomColor: editable ? "#A8DADC" : "transparent",
+            ...styles.subjectTitleText,
+          }}
+        >
+          {item.title}
+        </TextInput>
+      </View>
+      <View style={styles.subjectQls}>
+        {item.content.map((item, index) => {
+          {
+            /* Each lesson of the subject  */
+          }
+          return <Lesson item={item} navigation={navigation} key={index} />;
+        })}
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    subject: {
-        marginVertical: 15,
-        marginHorizontal: 30,
-        borderWidth: 3,
-        borderRadius: 50,
-        borderColor: theme.color3,
-        paddingBottom: 10,
-    },
-    subjectIcon: {
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    subjectEditIconButton: {
-        position: 'absolute',
-    },
-    subjectEditIcon: {
-        opacity: 0.6
-    },
-    subjectTitle: {
-        alignSelf: 'center',
-    },
-    subjectTitleText: {
-        alignSelf: 'center',
-        fontSize: 25,
-        color: theme.color3,
-        fontWeight: '100',
-        fontFamily: 'comfortaa-bold',
-        borderBottomLeftRadius: 5,
-        borderBottomRightRadius: 5,
-        borderBottomWidth: 2,
-    },
-    subjectQls: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-    },
-    ql: {
-        marginHorizontal: 5,
-        marginTop: 10,
-        height: 100,
-        width: 100,
-        borderColor: theme.color2,
-        alignItems: 'center',
-    },
-    qlTitleText: {
-        marginBottom: 10,
-        alignSelf: 'center',
-        fontFamily: 'comfortaa-bold',
-        color: theme.color3,
-    },
-    qlIconIn: {
-        padding: 8,
-        borderRadius: 33,
-        overflow: 'hidden',
-    },
-    qlIconOut: {
-        width: 85,
-        borderWidth: 4,
-        padding: 5,
-        borderRadius: 40,
-        borderColor: theme.color3,
-        overflow: 'hidden',
-    },
-    editIcon: {
-        position: 'absolute',
-        top: 15,
-        right: 15,
-    }
+  subject: {
+    marginVertical: 15,
+    marginHorizontal: 30,
+    borderWidth: 3,
+    borderRadius: 50,
+    borderColor: theme.color3,
+    paddingBottom: 10,
+  },
+  subjectIcon: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  subjectEditIconButton: {
+    position: "absolute",
+  },
+  subjectEditIcon: {
+    opacity: 0.6,
+  },
+  subjectTitle: {
+    alignSelf: "center",
+  },
+  subjectTitleText: {
+    alignSelf: "center",
+    fontSize: 25,
+    color: theme.color3,
+    fontWeight: "100",
+    fontFamily: "comfortaa-bold",
+    borderBottomLeftRadius: 5,
+    borderBottomRightRadius: 5,
+    borderBottomWidth: 2,
+  },
+  subjectQls: {
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  ql: {
+    marginHorizontal: 5,
+    marginTop: 10,
+    height: 100,
+    width: 100,
+    borderColor: theme.color2,
+    alignItems: "center",
+  },
+  qlTitleText: {
+    marginBottom: 10,
+    alignSelf: "center",
+    fontFamily: "comfortaa-bold",
+    color: theme.color3,
+  },
+  qlIconIn: {
+    padding: 8,
+    borderRadius: 33,
+    overflow: "hidden",
+  },
+  qlIconOut: {
+    width: 85,
+    borderWidth: 4,
+    padding: 5,
+    borderRadius: 40,
+    borderColor: theme.color3,
+    overflow: "hidden",
+  },
+  editIcon: {
+    position: "absolute",
+    top: 15,
+    right: 15,
+  },
 });

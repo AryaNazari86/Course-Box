@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-} from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { theme } from "../../Themes/theme";
 
@@ -16,6 +11,19 @@ export default function Lesson({ item, navigation }) {
     >
       {/* lesson's icon */}
       <View style={styles.qlIconOut}>
+        {/* Delete subject button */}
+        <TouchableOpacity>
+          <MaterialIcons
+            name={"delete"}
+            size={5}
+            color={theme.color3}
+            style={styles.qlIconOut}
+            onPress={() => {
+              console.log("delete lesson!");
+            }}
+          />
+        </TouchableOpacity>
+
         <MaterialIcons
           name={item.icon}
           size={50}
