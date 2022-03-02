@@ -3,7 +3,7 @@ import md5 from "md5";
 
 import { GetToken } from "./userService";
 
-const API_ADDRESS = "127.0.0.1:5000";
+const API_ADDRESS = "192.168.1.102:5000";
 
 export async function GetSubjects(courseId) {
   let data = { course_id: courseId };
@@ -175,7 +175,7 @@ export async function GetCourseSubjects(course_id) {
       }
     });
     return result;
-  } catch (error) { }
+  } catch (error) {}
 }
 
 export async function UploadFile(file, id) {
@@ -308,26 +308,24 @@ export async function DeleteCourse(courseID) {
   }
 }
 
-
 export async function search(searchValue, category) {
   try {
     let data = {
       search_value: searchValue,
-      category_id: category
+      category_id: category,
     };
     await fetch("http://" + API_ADDRESS + "/SearchCourses", {
-      method: 'POST',
+      method: "POST",
       headers: { "Content-Type": "application/json", "x-access-tokens": token },
       body: JSON.stringify(data),
     }).then((response) => {
       return response.json();
-    })
+    });
   } catch (error) {
     return {
       successful: false,
       response: error.message,
     };
-
   }
 }
 
@@ -338,7 +336,9 @@ export async function GetAllCategories() {
       response: "",
       data: "",
     };
-    await fetch("http://" + API_ADDRESS + "/Categories", { method: 'GET' }).then((response) => {
+    await fetch("http://" + API_ADDRESS + "/Categories", {
+      method: "GET",
+    }).then((response) => {
       if (response.status == 200) {
         result.successful = true;
         result.data = response.json();

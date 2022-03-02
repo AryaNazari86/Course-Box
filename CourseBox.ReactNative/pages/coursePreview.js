@@ -23,6 +23,7 @@ import { globalStyles } from "../shared/globalStyle";
 import { DeleteCourse } from "../Services/courseService";
 import { fetchData } from "./home";
 import { AddLessonBlock } from "../Services/courseService";
+import SubjectCreation from "./subjectCreation";
 
 export default function CoursePreview(props) {
   const course = props.route.params.datas[0];
@@ -43,6 +44,7 @@ export default function CoursePreview(props) {
   }
 
   const [modalVisible, setModalVisible] = useState(false);
+  const [subjectModalVisible, setSubjectModalVisible] = useState(false);
   const navigation = props.route.params.datas[1];
 
   if (contentFetched) {
@@ -57,11 +59,12 @@ export default function CoursePreview(props) {
             {
               icon: "plus",
               onPress: () => {
-                AddLessonBlock({
-                  title: "New Subject",
-                  icon: "book",
-                  content: [],
-                });
+                // AddLessonBlock({
+                //   title: "New Subject",
+                //   icon: "book",
+                //   content: [],
+                // });
+                setSubjectModalVisible(!subjectModalVisible);
               },
             },
             {
@@ -73,6 +76,26 @@ export default function CoursePreview(props) {
             },
           ]}
         />
+
+        {/* Create subject modal */}
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={subjectModalVisible}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+            setSubjectModalVisible(!subjectModalVisible);
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <SubjectCreation
+                closeFunc={() => setSubjectModalVisible(!subjectModalVisible)}
+              />
+            </View>
+          </View>
+        </Modal>
+
         <Modal
           animationType="fade"
           transparent={true}
