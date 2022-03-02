@@ -4,6 +4,7 @@ import { MaterialIcons, Feather } from '@expo/vector-icons';
 import Lesson from './Lesson.js';
 import { globalStyles } from '../../shared/globalStyle.js';
 import {theme} from '../../Themes/theme';
+import { GetLessonsBySubjectId } from '../../Services/courseService.js';
 export default function Subject({ item, navigation, changeIconClicked }) {
     const [editable, setEditable] = useState(false);
     const [editIcon, setEditIcon] = useState('edit-2');
@@ -17,6 +18,19 @@ export default function Subject({ item, navigation, changeIconClicked }) {
             setEditIcon("check");
         }
     };
+    const [lessons, setLessons] = useState([]);
+    const [lessonsFetched, setLessonsFetched] = useState(false);
+    const fetchContent = async () => {
+        GetLessonsBySubjectId(item.id).then(async (result) => {
+          if (result.successful) {
+            result.data.then((data) => setLessons(data));
+          }
+        });
+      };
+      if (!lessonsFetched) {
+        fetchContent();
+        setLessonsFetched(true);
+      }
     return (
         <View style={styles.subject}>
             <TouchableOpacity style={styles.editIcon} onPress={editSubject}>
@@ -36,7 +50,7 @@ export default function Subject({ item, navigation, changeIconClicked }) {
                 <TextInput editable={editable} style={{ borderBottomColor: editable ? '#A8DADC' : 'transparent', ...styles.subjectTitleText }}>{item.title}</TextInput>
             </View>
             <View style={styles.subjectQls}>
-                {item.content.map(
+                {lessons.map(
                     (item, index) => {
                         {/* Each lesson of the subject  */ }
                         return (
