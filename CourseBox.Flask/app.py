@@ -630,7 +630,7 @@ def change_user_details(current_user):
     return render_template("changeuserdetails.html", token=request.headers['x-access-tokens'], user=current_user)
 
 
-@app.route('/ChangeUserDetailsForm', method=['POST'])
+@app.route('/ChangeUserDetailsForm', methods=['POST'])
 def change_user_details_form(current_user):
     token = None
     if 'token' in request.form:
