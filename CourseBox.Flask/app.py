@@ -1,4 +1,3 @@
-from crypt import methods
 from flask import Flask, render_template, request, Response, jsonify
 from flask_sqlalchemy import SQLAlchemy
 import os
@@ -619,10 +618,12 @@ def get_lesson_block_id():
     lesson_blocks = LessonBlock.query.all()
     return jsonify({'id': str(len(lesson_blocks))})
 
+
 @token_required
 @app.route('/ChangeUserDetails', methods=['POST'])
 def change_user_details(current_user):
-    return render_template("changeuserdetails.html", token = request.headers['x-access-tokens'], user = current_user)
+    return render_template("changeuserdetails.html", token=request.headers['x-access-tokens'], user=current_user)
+
 
 @app.route('/ChangeUserDetailsForm', method=['POST'])
 def change_user_details_form(current_user):
@@ -646,6 +647,7 @@ def change_user_details_form(current_user):
     except:
         status_code = Response(status=401, response="Token is invalid.")
         return status_code
+
 
 @app.route('/AddSubject', methods=['POST'])
 def add_subject():

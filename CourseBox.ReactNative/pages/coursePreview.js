@@ -22,6 +22,7 @@ import LottieView from "lottie-react-native";
 import { globalStyles } from "../shared/globalStyle";
 import { DeleteCourse } from "../Services/courseService";
 import { fetchData } from "./home";
+import { AddLessonBlock } from "../Services/courseService";
 
 export default function CoursePreview(props) {
   const course = props.route.params.datas[0];
@@ -56,11 +57,11 @@ export default function CoursePreview(props) {
             {
               icon: "plus",
               onPress: () => {
-                setContent([
-                  ...content,
-                  { title: "New Subject", icon: "book", content: [] },
-                ]);
-                course.content = content;
+                AddLessonBlock({
+                  title: "New Subject",
+                  icon: "book",
+                  content: [],
+                });
               },
             },
             {
