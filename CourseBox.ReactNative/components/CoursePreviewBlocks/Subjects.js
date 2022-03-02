@@ -54,15 +54,32 @@ export default function Subject({ item, navigation, changeIconClicked }) {
       </TouchableOpacity>
       {/* Subject's title */}
       <View style={styles.subjectTitle}>
+        {/* Add leson button */}
         <TouchableOpacity>
           <MaterialIcons
             name={"add"}
             size={5}
             color={theme.color3}
             style={styles.qlIconOut}
-            onPress={() => console.log("hi")}
+            onPress={() => {
+              setLessonModalVisible(!lessonModalVisible);
+            }}
           />
         </TouchableOpacity>
+
+        {/* Delete subject button */}
+        <TouchableOpacity>
+          <MaterialIcons
+            name={"delete"}
+            size={5}
+            color={theme.color3}
+            style={styles.qlIconOut}
+            onPress={() => {
+              console.log("delete subject!");
+            }}
+          />
+        </TouchableOpacity>
+
         {/* Icon */}
         <View style={styles.subjectIcon}>
           <MaterialIcons name={item.icon} size={100} color={theme.color3} />
