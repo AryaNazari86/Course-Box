@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function Header({ category }) {
+  console.log(category);
   return (
     <View>
       <View style={styles.header}>

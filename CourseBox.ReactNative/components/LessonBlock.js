@@ -15,6 +15,8 @@ import { globalStyles } from "../shared/globalStyle";
 import { user } from "../assets/Icons/user.png";
 import { Video } from "expo-av";
 import { deleteLessonBlock } from "../Services/courseService";
+import { theme } from "../Themes/theme";
+
 export default function LessonBlock({ type, content }) {
   if (type == "text") {
     {

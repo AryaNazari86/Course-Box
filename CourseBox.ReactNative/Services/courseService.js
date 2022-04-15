@@ -231,7 +231,7 @@ export async function GetCourseSubjects(course_id) {
       }
     });
     return result;
-  } catch (error) { }
+  } catch (error) {}
 }
 
 export async function UploadFile(file, id) {
@@ -543,7 +543,7 @@ export async function deleteLessonBlock(lessonBlockID) {
     await fetch("http://" + API_ADDRESS + "/DeleteLessonBlock", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ lesson_block_id: lessonBlockID })
+      body: JSON.stringify({ lesson_block_id: lessonBlockID }),
     }).then((response) => {
       result.response = response.statusText;
       if (response.status == 200) {
@@ -555,8 +555,7 @@ export async function deleteLessonBlock(lessonBlockID) {
       }
     });
     return result;
-  }
-  catch (error) {
+  } catch (error) {
     return {
       successful: false,
       response: "Error...",

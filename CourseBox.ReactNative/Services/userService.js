@@ -2,7 +2,7 @@ import React from "react";
 import md5 from "md5";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const API_ADDRESS = "coderangersilia.pythonanywhere.com";
+const API_ADDRESS = "192.168.1.102:5000";
 export default API_ADDRESS;
 
 export async function SignUp(values) {

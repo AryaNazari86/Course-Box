@@ -67,11 +67,12 @@ export default function Home({ navigation }) {
   const fetchCategories = async () => {
     CourseService.GetAllCategories().then(async (result) => {
       if (result.successful) {
-        result.data.then((data) => { setCategories(data) });
+        result.data.then((data) => {
+          setCategories(data);
+        });
       }
-
     });
-  }
+  };
   if (categoryFetched == false) {
     fetchCategories();
     setCategoryFetched(true);
@@ -133,6 +134,7 @@ export default function Home({ navigation }) {
 
     setDarkScreen({ width: "0%", height: "0%" });
   };
+  console.log(categories);
 
   if (loaded && dataFetched) {
     return (
@@ -232,7 +234,7 @@ export default function Home({ navigation }) {
           </TouchableWithoutFeedback>
 
           {/* Bottom Sheet for categories */}
-          <BottomSheet
+          {/* <BottomSheet
             ref={bottomSheetRef}
             snapPoints={[0, "80%", "40%"]}
             renderHeader={() => (
@@ -247,7 +249,7 @@ export default function Home({ navigation }) {
             enabledInnerScrolling={true}
             enabledContentGestureInteraction={false}
             onCloseEnd={() => setDarkScreen({ width: 0, height: 0 })}
-          />
+          /> */}
         </ImageBackground>
       </View>
     );

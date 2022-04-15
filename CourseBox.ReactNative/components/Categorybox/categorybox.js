@@ -1,32 +1,31 @@
 import React from "react";
-import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
+import { TouchableOpacity, View, Text, StyleSheet, Image } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import API_ADDRESS from "../../Services/userService";
 
 // Theme colors
-import { theme } from '../../Themes/theme';
+import { theme } from "../../Themes/theme";
 export default function CategoryBox({ category, onPress }) {
+  console.log(category.categoryImage);
   return (
     // Category Box
     <TouchableOpacity style={styles.container} onPress={onPress}>
       {/* Icon Container */}
-      <View
-        style={[
-          { backgroundColor: theme.color1 },
-          styles.iconContainer,
-        ]}>
+      <View style={[{ backgroundColor: theme.color1 }, styles.iconContainer]}>
         <Image
           source={{
             uri:
-              "http://" + API_ADDRESS + "/static/category_image/" + categoryImage,
+              "http://" +
+              API_ADDRESS +
+              "/static/category_image/" +
+              category.category_image,
           }}
-          style={{width:24, height: 24,}}>
-
-        </Image>
+          style={{ width: 24, height: 24 }}
+        ></Image>
       </View>
       {/* Text Container */}
       <View>
-        <Text style={styles.categoryTitle}>{category.categoryTitle}</Text>
+        <Text style={styles.categoryTitle}>{category.title}</Text>
       </View>
     </TouchableOpacity>
   );
