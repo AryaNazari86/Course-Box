@@ -89,14 +89,16 @@ export default function Profile({ navigation }) {
         <Header
           title="Profile"
           height={60}
-          buttons={[
-            {
-              icon: "cog-outline",
-              onPress: () => {
-                navigation.push("Settings");
-              },
-            },
-          ]}
+          buttons={
+            [
+              // {
+              //   icon: "cog-outline",
+              //   onPress: () => {
+              //     navigation.push("Settings");
+              //   },
+              // },
+            ]
+          }
           profileButton={false}
         />
         <Modal
