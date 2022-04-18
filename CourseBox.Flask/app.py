@@ -468,6 +468,14 @@ def get_courses_by_author_id(current_user):
     return jsonify(result)
 
 
+@app.route("/GetCoursesByCategory", methods=["Post"])
+def get_courses_by_category():
+    category = request.json["category_id"]
+    courses = Course.query.filter_by(category_id=category)
+    result = course_list_schema.dump(courses)
+    return jsonify(result)
+
+
 def get_number_courses_by_author_id(current_user):
     author_id = current_user.id
     courses = Course.query.filter_by(author_id=author_id).all()
@@ -683,7 +691,6 @@ def delete_subject():
         return jsonify({'status': 'successfull'}), 200
     except:
         return jsonify({'status': 'error'}), 500
-
 
 
 @app.route('/AddLesson', methods=['POST'])

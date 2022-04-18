@@ -110,6 +110,37 @@ export async function GetLatestCourses() {
   }
 }
 
+export async function GetCoursesByCategory(CategoryID) {
+  try {
+    let data = {
+      category_id: CategoryID,
+    };
+    let result = {
+      successful: false,
+      response: "",
+      data: "",
+    };
+    await fetch("http://" + API_ADDRESS + "/GetCoursesByCategory", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    }).then((response) => {
+      if (response.status == 200) {
+        result.successful = true;
+        result.data = response.json();
+      } else {
+        result.response = "Error...";
+      }
+    });
+    return result;
+  } catch (error) {
+    return {
+      successful: false,
+      response: "Error...",
+    };
+  }
+}
+
 export async function AddLessonBlock(values) {
   try {
     let block = {
