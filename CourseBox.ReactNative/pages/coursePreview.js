@@ -36,6 +36,7 @@ export default function CoursePreview(props) {
         result.data.then((data) => setContent(data));
       }
     });
+
     console.log(content);
   };
   if (!contentFetched) {
@@ -47,11 +48,10 @@ export default function CoursePreview(props) {
   const fetchParticipate = async () => {
     participate(course.id).then(async (result) => {
       if (result.successful) {
-        
       }
     });
   };
-  if(!participantFetched){
+  if (!participantFetched) {
     fetchParticipate();
     setParticipantFetched(true);
   }
@@ -83,7 +83,7 @@ export default function CoursePreview(props) {
             {
               icon: "trash-can-outline",
               onPress: async () => {
-                DeleteCourse(course.id).then(res => {
+                DeleteCourse(course.id).then((res) => {
                   if (res.successful) {
                     props.navigation.goBack();
                   }
@@ -107,6 +107,7 @@ export default function CoursePreview(props) {
             <View style={styles.modalView}>
               <SubjectCreation
                 closeFunc={() => setSubjectModalVisible(!subjectModalVisible)}
+                courseID={course.id}
               />
             </View>
           </View>

@@ -3,7 +3,7 @@ import md5 from "md5";
 
 import { GetToken } from "./userService";
 
-const API_ADDRESS = "192.168.1.102:5000";
+const API_ADDRESS = "192.168.196.252:5000";
 export async function participate(course_id) {
   try {
     await fetch("http://" + API_ADDRESS + "/Participate", {
@@ -48,6 +48,7 @@ export async function GetSubjects(courseId) {
       result.response = "Error...";
     }
   });
+  console.log(data);
   return result;
 }
 
@@ -422,20 +423,24 @@ export async function addSubject(title, icon, courseID) {
       successful: false,
       response: "",
     };
-    await fetch("http://" + API_ADDRESS + "/AddSubject", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    }).then((response) => {
-      result.response = response.statusText;
-      if (response.status == 200) {
-        result.successful = true;
-      } else if (response.status == 500) {
-        result.response = "Error...";
-      } else if (response.status == 404) {
-        result.response = "Error...";
-      }
+    console.log(data);
+    GetToken().then(async (r) => {
+      await fetch("http://" + API_ADDRESS + "/AddSubject", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "x-access-tokens": r },
+        body: JSON.stringify(data),
+      }).then((response) => {
+        result.response = response.statusText;
+        if (response.status == 200) {
+          result.successful = true;
+        } else if (response.status == 500) {
+          result.response = "Error...";
+        } else if (response.status == 404) {
+          result.response = "Error...";
+        }
+      });
     });
+
     return result;
   } catch (error) {
     return {

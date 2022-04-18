@@ -28,7 +28,7 @@ import { theme } from "../Themes/theme";
 
 import { addSubject, AddSubject } from "../Services/courseService";
 
-export default function SubjectCreation({ navigation, closeFunc }) {
+export default function SubjectCreation({ navigation, closeFunc, courseID }) {
   // If loaded is false, show a loader.
   const [loaded, setLoaded] = useState(false);
 
@@ -48,7 +48,7 @@ export default function SubjectCreation({ navigation, closeFunc }) {
 
   const testFunc = (values) => {
     if (selectedIcon) {
-      AddSubject(values, selectedIcon);
+      addSubject(values.Title, selectedIcon, courseID);
       closeFunc();
     } else {
       setCategoryError("Select an Icon");
