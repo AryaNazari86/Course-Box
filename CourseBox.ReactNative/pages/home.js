@@ -22,8 +22,8 @@ import CategoryBox from "../components/Categorybox/categorybox";
 // Bottom Sheet Imports
 import Animated from "react-native-reanimated";
 import BottomSheet from "reanimated-bottom-sheet";
-import BottomSheetHeader from "../components/BottomSheet/Header/header";
 import BottomSheetCategory from "../components/BottomSheet/Category/category";
+import BottomSheetHeader from "../components/BottomSheet/Header/header";
 import getLang from "../lang/lang";
 // Carousel Imports
 import CoursesCarousel from "../components/Carousel/coursesCarousel";
@@ -101,7 +101,6 @@ export default function Home({ navigation }) {
   function CheckForCourses() {
     if (latestCourses.length > 0) {
       setShowCourses(true);
-      console.log("Hi");
     }
   }
 
@@ -111,14 +110,12 @@ export default function Home({ navigation }) {
     }
   }
 
-  console.log(latestCourses.length > 0);
-
   useEffect(() => {
     // fetchDatas();
   }, []);
 
   // Clicked CategoryId will be here.
-  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+  const [selectedCategory, setSelectedCategory] = useState([]);
 
   // When user click on a category.
   const onCategoryClicked = (category) => {
@@ -134,7 +131,6 @@ export default function Home({ navigation }) {
 
     setDarkScreen({ width: "0%", height: "0%" });
   };
-  console.log(categories);
 
   if (loaded && dataFetched) {
     return (
@@ -169,7 +165,9 @@ export default function Home({ navigation }) {
                 renderItem={({ item }) => (
                   <CategoryBox
                     category={item}
-                    onPress={() => onCategoryClicked(item)}
+                    onPress={() => {
+                      onCategoryClicked(item);
+                    }}
                   />
                 )}
               />
@@ -232,9 +230,8 @@ export default function Home({ navigation }) {
           <TouchableWithoutFeedback onPress={() => closeBottomSheet()}>
             <View style={[darkScreen, styles.darkScreen]}></View>
           </TouchableWithoutFeedback>
-
           {/* Bottom Sheet for categories */}
-          {/* <BottomSheet
+          <BottomSheet
             ref={bottomSheetRef}
             snapPoints={[0, "80%", "40%"]}
             renderHeader={() => (
@@ -249,7 +246,7 @@ export default function Home({ navigation }) {
             enabledInnerScrolling={true}
             enabledContentGestureInteraction={false}
             onCloseEnd={() => setDarkScreen({ width: 0, height: 0 })}
-          /> */}
+          />
         </ImageBackground>
       </View>
     );

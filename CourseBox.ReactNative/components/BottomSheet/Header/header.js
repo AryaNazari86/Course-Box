@@ -1,9 +1,11 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import API_ADDRESS from "../../../Services/userService";
 
-export default function Header({ category }) {
-  console.log(category);
+export default function BottomSheetHeader({ category }) {
+  // console.log("Meow 2");
+  // console.log(category);
   return (
     <View>
       <View style={styles.header}>
@@ -12,19 +14,20 @@ export default function Header({ category }) {
         </View>
       </View>
 
-      <View
-        style={[{ backgroundColor: category.categoryBgColor }, styles.panel]}
-      >
+      <View style={[{ backgroundColor: "#ff9736" }, styles.panel]}>
         <View style={styles.panelTop}>
-          <MaterialCommunityIcons
-            name={category.categoryIcon}
-            size={28}
-            color={category.categoryIconColor}
-          />
-          <Text
-            style={[{ color: category.categoryIconColor }, styles.panelTitle]}
-          >
-            {category.categoryTitle}
+          <Image
+            source={{
+              uri:
+                "http://" +
+                API_ADDRESS +
+                "/static/category_image/" +
+                category.category_image,
+            }}
+            style={{ width: 28, height: 28 }}
+          ></Image>
+          <Text style={[{ color: "#fff" }, styles.panelTitle]}>
+            {category.title}
           </Text>
         </View>
       </View>

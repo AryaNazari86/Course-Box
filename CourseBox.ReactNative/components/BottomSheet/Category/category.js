@@ -3,11 +3,9 @@ import { View, FlatList, StyleSheet } from "react-native";
 import courses from "../../../data/courses";
 import CourseBox from "../../CourseBox/courseBox";
 
-export default function Category({ category, navigation }) {
+export default function BottomSheetCategory({ category, navigation }) {
   return (
-    <View
-      style={[{ backgroundColor: category.categoryBgColor }, styles.content]}
-    >
+    <View style={[{ backgroundColor: "#ff9736" }, styles.content]}>
       <FlatList
         data={courses}
         renderItem={({ item }) => (
