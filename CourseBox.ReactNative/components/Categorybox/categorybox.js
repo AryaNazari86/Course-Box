@@ -6,7 +6,6 @@ import API_ADDRESS from "../../Services/userService";
 // Theme colors
 import { theme } from "../../Themes/theme";
 export default function CategoryBox({ category, onPress }) {
-  console.log(category.categoryImage);
   return (
     // Category Box
     <TouchableOpacity style={styles.container} onPress={onPress}>

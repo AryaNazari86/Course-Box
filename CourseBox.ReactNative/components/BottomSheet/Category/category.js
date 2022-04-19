@@ -2,39 +2,31 @@ import React, { useState } from "react";
 import { View, FlatList, StyleSheet } from "react-native";
 import CourseBox from "../../CourseBox/courseBox";
 import { GetCoursesByCategory } from "../../../Services/courseService";
+import { theme } from "../../../Themes/theme";
 
 export default function BottomSheetCategory({ category, navigation }) {
   const [courses, setCourses] = useState([]);
-  const [categoryID, setCategoryID] = useState(category.id);
-  const fetchCategoryID = () => {
-    setCategoryID(category.id);
-  };
-
+  const [lastCategory, setLastCategory] = useState(category.id);
   const [dataFetched, setDataFetched] = useState(false);
-  const fetchData = async () => {
-    try {
-      fetchCategoryID();
-      console.log("Category:");
-      console.log(categoryID);
-      GetCoursesByCategory(categoryID).then(async (result) => {
+  const fetchData = async() => {
+      GetCoursesByCategory(category.id).then(async (result) => {
         if (result.successful) {
-          result.data.then((data) => {
-            setCourses(data);
+          result.data.then((result) => {
+            setCourses(result);
+            setDataFetched(true);
           });
         }
       });
-    } catch (error) {
-      console.log(error);
-    }
   };
-  if (!dataFetched) {
+  
+  if (!dataFetched && lastCategory != category.id) {
     fetchData();
-    setDataFetched(true);
   }
   return (
-    <View style={[{ backgroundColor: "#ff9736" }, styles.content]}>
+    <View style={[{ backgroundColor: theme.color2 }, styles.content]}>
       <FlatList
         data={courses}
+        keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <CourseBox item={item} navigation={navigation} />
         )}

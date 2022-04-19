@@ -3,7 +3,7 @@ import md5 from "md5";
 
 import { GetToken } from "./userService";
 
-const API_ADDRESS = "192.168.196.252:5000";
+const API_ADDRESS = "192.168.214.8:5000";
 export async function participate(course_id) {
   try {
     await fetch("http://" + API_ADDRESS + "/Participate", {
@@ -48,7 +48,6 @@ export async function GetSubjects(courseId) {
       result.response = "Error...";
     }
   });
-  console.log(data);
   return result;
 }
 
@@ -128,6 +127,7 @@ export async function GetCoursesByCategory(CategoryID) {
       if (response.status == 200) {
         result.successful = true;
         result.data = response.json();
+        
       } else {
         result.response = "Error...";
       }
@@ -486,7 +486,6 @@ export async function addSubject(title, icon, courseID) {
       successful: false,
       response: "",
     };
-    console.log(data);
     GetToken().then(async (r) => {
       await fetch("http://" + API_ADDRESS + "/AddSubject", {
         method: "POST",

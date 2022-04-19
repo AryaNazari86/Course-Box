@@ -2,10 +2,9 @@ import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import API_ADDRESS from "../../../Services/userService";
+import { theme } from "../../../Themes/theme";
 
 export default function BottomSheetHeader({ category }) {
-  // console.log("Meow 2");
-  // console.log(category);
   return (
     <View>
       <View style={styles.header}>
@@ -14,7 +13,7 @@ export default function BottomSheetHeader({ category }) {
         </View>
       </View>
 
-      <View style={[{ backgroundColor: "#ff9736" }, styles.panel]}>
+      <View style={[{ backgroundColor: theme.color2 }, styles.panel]}>
         <View style={styles.panelTop}>
           <Image
             source={{
@@ -24,7 +23,7 @@ export default function BottomSheetHeader({ category }) {
                 "/static/category_image/" +
                 category.category_image,
             }}
-            style={{ width: 28, height: 28 }}
+            style={{ width: 100, height: 100 }}
           ></Image>
           <Text style={[{ color: "#fff" }, styles.panelTitle]}>
             {category.title}
@@ -60,6 +59,8 @@ const styles = StyleSheet.create({
   panelTop: {
     alignItems: "center",
     justifyContent: "center",
+    flex:1,
+    flexDirection: "row",
   },
   panelTitle: {
     fontFamily: "rubik-regular",

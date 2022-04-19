@@ -95,7 +95,6 @@ export default function Home({ navigation }) {
     fetchData();
     setDataFetched(true);
   }
-
   const [showCourses, setShowCourses] = useState(false);
 
   function CheckForCourses() {

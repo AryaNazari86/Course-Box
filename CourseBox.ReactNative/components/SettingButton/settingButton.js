@@ -26,7 +26,7 @@ export default function SettingButton({
       switchStateFunc(1);
     }
 
-    console.log(switchStateVar);
+    //console.log(switchStateVar);
   };
 
   if (buttonStyle == "Edit") {
