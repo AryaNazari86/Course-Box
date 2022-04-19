@@ -28,7 +28,10 @@ import * as UserService from "../Services/userService";
 import { theme } from "../Themes/theme";
 import { GetToken } from "../Services/userService";
 
-import { GetMadeCourses } from "../Services/courseService";
+import {
+  GetMadeCourses,
+  GetCoursesByParticipant,
+} from "../Services/courseService";
 export default function Profile({ navigation }) {
   // If loaded is false, show a loader.
   const [loaded, setLoaded] = useState(false);
@@ -46,6 +49,7 @@ export default function Profile({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
 
   const [madeCourses, setMadeCourses] = useState([]);
+  const [participatedCourses, setParticipatedCourses] = useState([]);
 
   // When app loads this function is called.
   // ! Problem here
@@ -69,6 +73,14 @@ export default function Profile({ navigation }) {
         if (courseList.successful) {
           courseList.data.then(async (data) => {
             setMadeCourses(data);
+          });
+        }
+      });
+
+      GetCoursesByParticipant().then(async (courseList) => {
+        if (courseList.successful) {
+          courseList.data.then(async (data) => {
+            setParticipatedCourses(data);
           });
         }
       });
@@ -286,7 +298,7 @@ export default function Profile({ navigation }) {
                   Participated Courses
                 </Text>
                 <CoursesCarousel
-                  courses={courses}
+                  courses={participatedCourses}
                   navigation={navigation}
                   dotesColor={theme.color3}
                 />

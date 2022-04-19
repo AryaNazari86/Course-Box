@@ -141,6 +141,38 @@ export async function GetCoursesByCategory(CategoryID) {
   }
 }
 
+export async function GetCoursesByParticipant() {
+  try {
+    let result = {
+      successful: false,
+      response: "",
+    };
+    GetToken().then(async (r) => {
+      await fetch("http://" + API_ADDRESS + "/GetParticipantCourses", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-access-tokens": r,
+        },
+      }).then((response) => {
+        result.response = response.statusText;
+        if (response.status == 200) {
+          result.successful = true;
+        } else if (response.status == 500) {
+          result.response = "Error1...";
+        } else if (response.status == 404) {
+          result.response = "Error2...";
+        }
+      });
+    });
+    return result;
+  } catch (error) {
+    return {
+      successful: false,
+      response: error.message,
+    };
+  }
+}
 export async function AddLessonBlock(values) {
   try {
     let block = {
