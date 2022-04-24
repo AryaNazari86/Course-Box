@@ -126,7 +126,7 @@ export default function SubjectCreation({ navigation, closeFunc, courseID }) {
                 style={{ ...globalStyles.button, ...styles.button }}
                 onPress={props.handleSubmit}
               >
-                <Text style={globalStyles.buttonText}>Create Course</Text>
+                <Text style={globalStyles.buttonText}>Create Subject</Text>
               </TouchableOpacity>
             </View>
           )}

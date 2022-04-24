@@ -24,20 +24,31 @@ import { DeleteCourse } from "../Services/courseService";
 import { fetchData } from "./home";
 import { AddLessonBlock } from "../Services/courseService";
 import SubjectCreation from "./subjectCreation";
+import { GetUserName } from "../Services/userService";
 
 export default function CoursePreview(props) {
   const course = props.route.params.datas[0];
   const [content, setContent] = useState([]);
+  const [autherName, setAutherName] = useState([]);
 
   const [contentFetched, setContentFetched] = useState(false);
   const fetchContent = async () => {
     GetSubjects(course.id).then(async (result) => {
       if (result.successful) {
-        result.data.then((data) => setContent(data));
+        result.data.then((data) => {
+          setContent(data);
+          console.log(data);
+        });
       }
     });
 
-    console.log(content);
+    GetUserName(course.author_id).then(async (courseList) => {
+      if (courseList.successful) {
+        courseList.data.then(async (data) => {
+          setAutherName(data);
+        });
+      }
+    });
   };
   if (!contentFetched) {
     fetchContent();
@@ -177,7 +188,7 @@ export default function CoursePreview(props) {
                 fontFamily: "comfortaa-light",
               }}
             >
-              Created by {course.author}
+              Created by {autherName}
             </Text>
           </ScrollView>
 

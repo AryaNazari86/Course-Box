@@ -469,7 +469,7 @@ def get_courses_by_author_id(current_user):
     return jsonify(result)
 
 
-@app.route("/GetCoursesByCategory", methods=["Post"])
+@app.route("/GetCoursesByCategory", methods=["POST"])
 def get_courses_by_category():
     category = request.json["category_id"]
     courses = Course.query.filter_by(category_id=category)
@@ -481,12 +481,6 @@ def get_number_courses_by_author_id(current_user):
     author_id = current_user.id
     courses = Course.query.filter_by(author_id=author_id).all()
     return len(courses)
-
-
-@app.route("/GetCoursesByParticipant", methods=["POST"])
-@token_required
-def get_courses_by_participant(current_user):
-    participant_id = current_user.id
 
 
 @app.route("/GetSubjects", methods=["POST"])
@@ -535,7 +529,7 @@ def get_user_details(current_user):
     data = {
         'name': user.name,
         'username': user.username,
-        'email': user.username,
+        'email': user.email,
         'bio': user.bio,
         'avatar': user.avatar,
         'madeCoursesNum': get_number_courses_by_author_id(current_user)
@@ -545,6 +539,15 @@ def get_user_details(current_user):
 
     return jsonify(data)
 
+
+@app.route("/GetUserName", methods=["POST"])
+def get_user_name():
+    userID = request.json["user_id"]
+    users = User.query.filter_by(id=userID).first()
+    data = {
+        'username': users.username
+    }
+    return jsonify(data)
 # Lesson Block adding
 
 

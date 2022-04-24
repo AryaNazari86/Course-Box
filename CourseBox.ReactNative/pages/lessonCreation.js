@@ -150,7 +150,7 @@ export default function LessonCreation({ navigation, closeFunc }) {
                 style={{ ...globalStyles.button, ...styles.button }}
                 onPress={props.handleSubmit}
               >
-                <Text style={globalStyles.buttonText}>Create Course</Text>
+                <Text style={globalStyles.buttonText}>Create Lesson</Text>
               </TouchableOpacity>
             </View>
           )}

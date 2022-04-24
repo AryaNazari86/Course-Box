@@ -2,7 +2,7 @@ import React from "react";
 import md5 from "md5";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const API_ADDRESS = "192.168.214.8:5000";
+const API_ADDRESS = "192.168.196.252:5000";
 export default API_ADDRESS;
 
 export async function SignUp(values) {
@@ -124,6 +124,43 @@ export async function CreateCourse(values, courseCategory, imageName) {
           "x-access-tokens": r,
         },
         body: JSON.stringify(course),
+      }).then((response) => {
+        result.response = response.statusText;
+        if (response.status == 200) {
+          result.successful = true;
+        } else if (response.status == 500) {
+          result.response = "Error1...";
+        } else if (response.status == 404) {
+          result.response = "Error2...";
+        }
+      });
+    });
+    return result;
+  } catch (error) {
+    return {
+      successful: false,
+      response: error.message,
+    };
+  }
+}
+
+export async function GetUserName(user_id) {
+  try {
+    let result = {
+      successful: false,
+      response: "",
+    };
+    GetToken().then(async (r) => {
+      let user_data = {
+        user_id: user_id,
+      };
+
+      await fetch("http://" + API_ADDRESS + "/GetUserName", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user_data),
       }).then((response) => {
         result.response = response.statusText;
         if (response.status == 200) {
