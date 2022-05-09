@@ -344,6 +344,7 @@ def signup():
                 # salt = os.urandom(32)
                 salt = b'12345678912345678912345678999999'
                 password = request.json['password']
+                print(password)
 
                 key = hashlib.pbkdf2_hmac(
                     'sha256',  # The hash digest algorithm for HMAC
@@ -357,7 +358,7 @@ def signup():
                     username=request.json["username"],
                     name=request.json["name"],
                     email=email,
-                    password=salt + key,
+                    password=str(key),
                     avatar="default.png",
                     is_active=False,
                     register_date=datetime.datetime.now(),
@@ -382,15 +383,17 @@ def login():
             # Hashing the input password
             password = request.json["password"]
             salt = b'12345678912345678912345678999999'
-            password = salt + hashlib.pbkdf2_hmac(
-                'sha256',
-                password.encode('utf-8'),
-                salt,
-                100000
+            key = hashlib.pbkdf2_hmac(
+                'sha256',  # The hash digest algorithm for HMAC
+                password.encode('utf-8'),  # Convert the password to bytes
+                salt,  # Provide the salt
+                100000,  # It is recommended to use at least 100,000 iterations of SHA-256
+                dklen=128  # Get a 128 byte key
             )
 
-            # user = User.query.filter_by(email=email, password=password).first()
-            user = User.query.filter_by(email=email).first()
+            print(password, key, type(key))
+            user = User.query.filter_by(email=email, password=str(key)).first()
+            # user = User.query.filter_by(email=email).first()
             if user == None:
                 status_code = Response(
                     status=404, response="A User with this information doesn't exists.")
