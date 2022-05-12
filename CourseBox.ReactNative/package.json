@@ -32,6 +32,7 @@
     "react-native-dropdown-picker": "^5.2.3",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-icon-picker": "^1.0.6",
+    "react-native-keyboard-aware-scroll-view": "^0.9.5",
     "react-native-material-dropdown-v2": "^0.11.1",
     "react-native-modest-checkbox": "^3.3.0",
     "react-native-paper": "^4.9.2",
