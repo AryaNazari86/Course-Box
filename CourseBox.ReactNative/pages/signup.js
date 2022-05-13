@@ -10,6 +10,7 @@ import {
   BackHandler,
   Image,
   ImageBackground,
+  KeyboardAvoidingView,
 } from "react-native";
 import { globalStyles } from "../shared/globalStyle";
 import Header from "../shared/header";
@@ -22,6 +23,8 @@ import { Snackbar } from "react-native-paper";
 
 import { Dimensions } from "react-native";
 import { theme } from "../Themes/theme";
+import { ScrollView } from "react-native-gesture-handler";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
@@ -99,7 +102,10 @@ export default function SignUp({ makeUser, navigation }) {
             style={globalStyles.container}
           >
             {(props) => (
-              <View style={{ ...globalStyles.container, ...styles.container }}>
+              <KeyboardAvoidingView
+                behavior="padding"
+                style={{ ...globalStyles.container, ...styles.container }}
+              >
                 {/* Username */}
                 <View style={{ ...globalStyles.textInputView, marginTop: 20 }}>
                   <TextInput
@@ -173,19 +179,34 @@ export default function SignUp({ makeUser, navigation }) {
                   </TouchableOpacity>
                 </View>
 
-                <Text style={globalStyles.errorText}>
+                <Text style={{ ...globalStyles.errorText, marginBottom: 0 }}>
                   {props.touched.password && props.errors.password}
                 </Text>
 
                 {/* Sign Up Button */}
                 <TouchableOpacity
-                  style={globalStyles.button}
+                  style={{
+                    ...globalStyles.button,
+                    flexDirection: "row",
+                    marginTop: 0,
+                    marginBottom: 10,
+                  }}
                   onPress={props.handleSubmit}
                 >
+                  <MaterialIcons
+                    name="account-circle"
+                    size={40}
+                    color={theme.color2}
+                    style={{ marginRight: 5 }}
+                  />
                   <Text style={globalStyles.buttonText}>Sign Up</Text>
                 </TouchableOpacity>
 
-                <View style={globalStyles.normalAndHighlightContainer}>
+                <View
+                  style={{
+                    ...globalStyles.normalAndHighlightContainer,
+                  }}
+                >
                   <Text
                     style={{
                       ...globalStyles.normalAndHighlightContainer,
@@ -198,7 +219,7 @@ export default function SignUp({ makeUser, navigation }) {
                     <Text style={globalStyles.highlitedText}>Sign In</Text>
                   </TouchableOpacity>
                 </View>
-              </View>
+              </KeyboardAvoidingView>
             )}
           </Formik>
           <Snackbar style={styles.result} visible={showResult}>
@@ -227,6 +248,7 @@ const styles = StyleSheet.create({
 
   container: {
     width: 370,
+    height: 480,
     alignSelf: "center",
     borderRadius: 20,
     // borderColor: "black",
