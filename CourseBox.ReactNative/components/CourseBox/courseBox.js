@@ -24,24 +24,31 @@ export default function CourseBox({ navigation, item }) {
 
   const titleArray = item.title.trim().split("");
 
+  let desc = null;
+  if (item.description.length > 60) {
+    desc = item.description.substring(0, 60) + "...";
+  } else {
+    desc = item.description;
+  }
+
   return (
     <View style={styles.cover}>
       <View style={styles.coursesBox}>
         <CategoryIcon style={styles.courseImage} category={item.category_id} />
         <Animated.Text style={styles.courseTitle}>{item.title}</Animated.Text>
-        <Text style={styles.courseDescription}>{item.description}</Text>
+        <Text style={styles.courseDescription}>{desc}</Text>
 
         <TouchableOpacity
-          style={styles.courseButton}
+          style={{ ...styles.courseButton }}
           onPress={() => {
             navigation.navigate("CoursePreview", { datas: [item, navigation] });
-            participate(item.id)
-          }
-          }
+            participate(item.id);
+          }}
         >
           <FontAwesome
             name="arrow-circle-right"
             size={90}
+            style={{ paddingLeft: 5, paddingTop: 3 }}
             color={theme.color2}
           />
         </TouchableOpacity>
@@ -76,12 +83,14 @@ const styles = StyleSheet.create({
   courseTitle: {
     color: theme.color2,
     fontFamily: "rubik-bold",
-    height: 35,
-    fontSize: 25,
+    // height: 35,
+    maxWidth: 230,
+    fontSize: 23,
     marginLeft: 10,
     alignSelf: "flex-start",
     flexWrap: "wrap",
     top: -50,
+    textAlign: "center",
   },
   courseButton: {
     backgroundColor: theme.color3,
@@ -89,13 +98,14 @@ const styles = StyleSheet.create({
     height: 90,
     borderRadius: 50,
     overflow: "visible",
-    top: -50,
-    alignItems: "center",
+    top: -70,
+    // alignItems: "center",
+    justifyContent: "center",
   },
   courseDescription: {
     color: theme.color2,
     fontFamily: "rubik-light",
-    fontSize: 20,
+    fontSize: 15,
     marginLeft: 10,
     alignSelf: "flex-start",
     top: -50,

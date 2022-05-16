@@ -269,7 +269,7 @@ export default function Profile({ navigation }) {
 
             <View style={styles.madeCoursesHeader}>
               {/* Made Courses */}
-              <View>
+              <View style={{ minHeight: 300 }}>
                 <Text
                   style={{
                     ...styles.madeCoursesText,
@@ -287,7 +287,7 @@ export default function Profile({ navigation }) {
               </View>
 
               {/* Participated Courses */}
-              <View>
+              <View style={{ minHeight: 300 }}>
                 <Text
                   style={{
                     ...styles.madeCoursesText,
