@@ -145,40 +145,25 @@ export async function CreateCourse(values, courseCategory, imageName) {
 }
 
 export async function GetUserName(user_id) {
-  try {
-    let result = {
-      successful: false,
-      response: "",
-    };
-    GetToken().then(async (r) => {
-      let user_data = {
-        user_id: user_id,
-      };
-
-      await fetch("http://" + API_ADDRESS + "/GetUserName", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user_data),
-      }).then((response) => {
-        result.response = response.statusText;
-        if (response.status == 200) {
-          result.successful = true;
-        } else if (response.status == 500) {
-          result.response = "Error1...";
-        } else if (response.status == 404) {
-          result.response = "Error2...";
-        }
-      });
-    });
-    return result;
-  } catch (error) {
-    return {
-      successful: false,
-      response: error.message,
-    };
-  }
+  let data = { id: user_id };
+  let result = {
+    successful: false,
+    response: "",
+    data: "",
+  };
+  await fetch("http://" + API_ADDRESS + "/GetUserName", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  }).then((response) => {
+    if (response.status == 200) {
+      result.successful = true;
+      result.data = response.json();
+    } else {
+      result.response = "Error...";
+    }
+  });
+  return result;
 }
 
 export async function GetToken() {
