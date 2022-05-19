@@ -37,14 +37,12 @@ export default function CoursePreview(props) {
       if (result.successful) {
         result.data.then((data) => {
           setContent(data);
-          console.log(data);
         });
       }
     });
-
-    GetUserName(course.author_id).then(async (courseList) => {
-      if (courseList.successful) {
-        courseList.data.then(async (data) => {
+    GetUserName(course.author_id).then(async (result) => {
+      if (result.successful) {
+        result.data.then((data) => {
           setAutherName(data);
         });
       }

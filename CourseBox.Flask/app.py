@@ -545,12 +545,13 @@ def get_user_details(current_user):
 
 @app.route("/GetUserName", methods=["POST"])
 def get_user_name():
-    userID = request.json["user_id"]
+    userID = request.json["id"]
     users = User.query.filter_by(id=userID).first()
-    data = {
-        'username': users.username
-    }
-    return jsonify(data)
+    dataList = []
+    data = users.username
+    dataList.append(data)
+    print("DATA:::::", dataList)
+    return jsonify(dataList)
 # Lesson Block adding
 
 
