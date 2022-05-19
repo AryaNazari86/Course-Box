@@ -18,12 +18,21 @@ export default function CategoryIcon({ category, style }) {
     fetchImage();
     setCategoryFetched(true);
   }
+  let customCategoryImage = "";
+  if (categoryImage == "Math.gif") {
+    customCategoryImage = "NewMath.gif";
+  } else {
+    customCategoryImage = categoryImage;
+  }
 
   return (
     <Image
       source={{
         uri:
-          "http://" + API_ADDRESS + "/static/category_image/" + categoryImage,
+          "http://" +
+          API_ADDRESS +
+          "/static/category_image/" +
+          customCategoryImage,
       }}
       style={style}
     />
