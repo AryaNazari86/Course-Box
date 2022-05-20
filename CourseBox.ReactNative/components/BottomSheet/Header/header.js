@@ -5,6 +5,13 @@ import API_ADDRESS from "../../../Services/userService";
 import { theme } from "../../../Themes/theme";
 
 export default function BottomSheetHeader({ category }) {
+  let CustomCategoryImage = "";
+  if (category.category_image == "Math.gif") {
+    CustomCategoryImage = "NewMath.gif";
+  } else {
+    CustomCategoryImage = category.category_image;
+  }
+
   return (
     <View>
       <View style={styles.header}>
@@ -21,7 +28,7 @@ export default function BottomSheetHeader({ category }) {
                 "http://" +
                 API_ADDRESS +
                 "/static/category_image/" +
-                category.category_image,
+                CustomCategoryImage,
             }}
             style={{ width: 100, height: 100 }}
           ></Image>
@@ -59,12 +66,12 @@ const styles = StyleSheet.create({
   panelTop: {
     alignItems: "center",
     justifyContent: "center",
-    flex:1,
+    flex: 1,
     flexDirection: "row",
   },
   panelTitle: {
     fontFamily: "rubik-regular",
     fontSize: 27,
-    height: 35,
+    height: 40,
   },
 });

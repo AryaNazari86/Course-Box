@@ -6,6 +6,13 @@ import API_ADDRESS from "../../Services/userService";
 // Theme colors
 import { theme } from "../../Themes/theme";
 export default function CategoryBox({ category, onPress }) {
+  let CustomCategoryImage = "";
+  if (category.category_image == "Math.gif") {
+    CustomCategoryImage = "NewMath.gif";
+  } else {
+    CustomCategoryImage = category.category_image;
+  }
+
   return (
     // Category Box
     <TouchableOpacity style={styles.container} onPress={onPress}>
@@ -17,7 +24,7 @@ export default function CategoryBox({ category, onPress }) {
               "http://" +
               API_ADDRESS +
               "/static/category_image/" +
-              category.category_image,
+              CustomCategoryImage,
           }}
           style={{ width: 24, height: 24 }}
         ></Image>

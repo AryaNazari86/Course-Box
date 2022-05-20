@@ -8,17 +8,17 @@ export default function BottomSheetCategory({ category, navigation }) {
   const [courses, setCourses] = useState([]);
   const [lastCategory, setLastCategory] = useState(category.id);
   const [dataFetched, setDataFetched] = useState(false);
-  const fetchData = async() => {
-      GetCoursesByCategory(category.id).then(async (result) => {
-        if (result.successful) {
-          result.data.then((result) => {
-            setCourses(result);
-            setDataFetched(true);
-          });
-        }
-      });
+  const fetchData = async () => {
+    GetCoursesByCategory(category.id).then(async (result) => {
+      if (result.successful) {
+        result.data.then((result) => {
+          setCourses(result);
+          setDataFetched(true);
+        });
+      }
+    });
   };
-  
+
   if (!dataFetched && lastCategory != category.id) {
     fetchData();
   }
