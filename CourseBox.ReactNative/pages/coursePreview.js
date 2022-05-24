@@ -25,6 +25,7 @@ import { fetchData } from "./home";
 import { AddLessonBlock } from "../Services/courseService";
 import SubjectCreation from "./subjectCreation";
 import { GetUserName } from "../Services/userService";
+import CategoryIcon from "../components/CourseBox/courseBoxIcon";
 
 export default function CoursePreview(props) {
   const course = props.route.params.datas[0];
@@ -157,6 +158,35 @@ export default function CoursePreview(props) {
           style={styles.image}
         >
           <ScrollView>
+            <View style={{ alignItems: "center" }}>
+              <CategoryIcon
+                style={styles.courseImage}
+                category={course.category_id}
+              />
+            </View>
+            <Text
+              style={{
+                ...globalStyles.normalText,
+                ...globalStyles.TitleText,
+                textAlign: "center",
+              }}
+            >
+              Course Description
+            </Text>
+
+            <Text
+              style={{
+                ...globalStyles.normalText,
+                fontSize: 15,
+                paddingBottom: 30,
+                paddingTop: 5,
+                textAlign: "center",
+                paddingRight: 5,
+                paddingLeft: 5,
+              }}
+            >
+              {course.description}
+            </Text>
             {content == undefined ? (
               content.map((item, index) => {
                 return (
@@ -176,7 +206,7 @@ export default function CoursePreview(props) {
                   textAlign: "center",
                 }}
               >
-                There is no subject
+                There is no subject in this course
               </Text>
             )}
             <Text
@@ -213,6 +243,14 @@ export default function CoursePreview(props) {
 }
 
 const styles = StyleSheet.create({
+  courseImage: {
+    width: 200,
+    height: 200,
+    marginTop: 30,
+    marginBottom: 30,
+    // overflow: "visible",
+    // top: -50,
+  },
   centeredView: {
     flex: 1,
     justifyContent: "center",
