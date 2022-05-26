@@ -15,7 +15,7 @@ import ForgetPassword_Email from "./pages/Forget Password/forgetPassword-Email";
 import ForgetPassword_Code from "./pages/Forget Password/forgetPassword-Code";
 import ForgetPassword_Password from "./pages/Forget Password/forgetPassword-Password";
 import Search from "./pages/search";
-import { InteractionManager } from "react-native";
+import { InteractionManager, StatusBar } from "react-native";
 import { Snackbar } from "react-native-paper";
 import Splash from "./pages/splash";
 import SettingsPage from "./pages/settings";
@@ -25,6 +25,8 @@ import ProfileStack from "./routes/profileStack";
 import SplashStack from "./routes/splashStack";
 import CourseCreation from "./pages/courseCreation";
 import HomeStack from "./routes/homeStack";
+
+import { theme } from "./Themes/theme";
 
 const getFonts = () =>
   Font.loadAsync({
@@ -53,8 +55,9 @@ export default function App() {
     if (isConnected) {
       return (
         <NavigationContainer>
+          <StatusBar backgroundColor={theme.color2} barStyle="light-content" />
           <SplashStack />
-          {/* <Tabs /> */}
+          {/* <HomeStack /> */}
         </NavigationContainer>
       );
     } else {
