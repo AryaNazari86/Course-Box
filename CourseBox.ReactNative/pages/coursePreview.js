@@ -114,7 +114,7 @@ export default function CoursePreview(props) {
           }}
         >
           <View style={styles.centeredView}>
-            <View style={styles.modalView}>
+            <View style={{ ...styles.modalView }}>
               <SubjectCreation
                 closeFunc={() => setSubjectModalVisible(!subjectModalVisible)}
                 courseID={course.id}
@@ -264,6 +264,8 @@ const styles = StyleSheet.create({
     borderColor: "#FFF",
     borderWidth: 2,
     padding: 35,
+    paddingRight: 25,
+    paddingLeft: 25,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {

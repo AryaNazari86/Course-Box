@@ -201,7 +201,11 @@ export default function Profile({ navigation }) {
               </Text>
             </View>
             {/* Account Details */}
-            <View style={styles.profileDetailHeader}>
+            <View
+              style={{
+                ...styles.profileDetailHeader,
+              }}
+            >
               {/* Ammount of made courses */}
               <View>
                 <Text
@@ -293,6 +297,7 @@ export default function Profile({ navigation }) {
                     ...styles.madeCoursesText,
                     ...globalStyles.normalText,
                     ...globalStyles.TitleText,
+                    flex: 1,
                   }}
                 >
                   Participated Courses
@@ -305,7 +310,7 @@ export default function Profile({ navigation }) {
               </View>
             </View>
             {/* Empty Spacer */}
-            <Text style={globalStyles.emptySpacer}>Code Rangers®</Text>
+            {/* <Text style={globalStyles.emptySpacer}>Code Rangers®</Text> */}
           </ImageBackground>
         </ScrollView>
 
@@ -385,7 +390,7 @@ const styles = StyleSheet.create({
   },
   profileDetailText: {
     textAlign: "center",
-    fontSize: 18,
+    fontSize: 17,
   },
 
   // * Courses
@@ -437,6 +442,8 @@ const styles = StyleSheet.create({
     borderColor: "#FFF",
     borderWidth: 2,
     padding: 35,
+    paddingRight: 25,
+    paddingLeft: 25,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -446,7 +453,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
-    width: 400,
+    // width: 400,
   },
 
   madeCoursesHeader: {

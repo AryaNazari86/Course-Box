@@ -19,7 +19,7 @@ import LottieView from "lottie-react-native";
 import { theme } from "../Themes/theme";
 import SearchCourseBox from "../components/searchCourseBox";
 import API_ADDRESS from "../Services/userService";
-import { search } from '../Services/courseService';
+import { search } from "../Services/courseService";
 import { GetAllCategories } from "../Services/courseService";
 
 export default function Search({ navigation }) {
@@ -83,11 +83,16 @@ export default function Search({ navigation }) {
     GetAllCategories().then(async (result) => {
       if (result.successful) {
         let newCategory = [{ title: "All", selected: true, id: "0" }];
-        result.data.then((data) => { data.forEach((item) => newCategory.push({ ...item, selected: false })); setCategory(newCategory); console.log('a'); });
+        result.data.then((data) => {
+          data.forEach((item) =>
+            newCategory.push({ ...item, selected: false })
+          );
+          setCategory(newCategory);
+          console.log("a");
+        });
       }
-
     });
-  }
+  };
   if (categoryFetched == false) {
     fetchCategories();
     console.log(category);
@@ -105,7 +110,9 @@ export default function Search({ navigation }) {
       }),
     })
       .then((response) => response.json())
-      .then((data) => { setCourses(data); });
+      .then((data) => {
+        setCourses(data);
+      });
   };
   if (loaded) {
     return (
@@ -143,22 +150,30 @@ export default function Search({ navigation }) {
                 }}
               />
               {/* Category filters */}
-              <ScrollView horizontal={true}>
-                {category != undefined ? category.map((item, index) => {
-                  return (
-                    <Chip
-                      mode="flat"
-                      style={styles.chip}
-                      selected={item.selected}
-                      onPress={() => categorySearch(item.id)}
-                      textStyle={styles.chipText}
-                      selectedColor={theme.color3}
-                      key={index}
-                    >
-                      {item.title}
-                    </Chip>
-                  );
-                }) : <Text>No Categories</Text>}
+              <ScrollView
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+                style={{ marginRight: 5, marginLeft: 5 }}
+              >
+                {category != undefined ? (
+                  category.map((item, index) => {
+                    return (
+                      <Chip
+                        mode="flat"
+                        style={styles.chip}
+                        selected={item.selected}
+                        onPress={() => categorySearch(item.id)}
+                        textStyle={styles.chipText}
+                        selectedColor={theme.color3}
+                        key={index}
+                      >
+                        {item.title}
+                      </Chip>
+                    );
+                  })
+                ) : (
+                  <Text>No Categories</Text>
+                )}
               </ScrollView>
               {/* Showing Search results */}
               {courses.map((item) => {

@@ -23,7 +23,7 @@ export default function Header({
   return (
     <Appbar.Header
       style={[
-        { height: height, backgroundColor: backgroundColor },
+        { height: height, backgroundColor: backgroundColor, marginTop: -5 },
         globalStyles.header,
       ]}
     >
