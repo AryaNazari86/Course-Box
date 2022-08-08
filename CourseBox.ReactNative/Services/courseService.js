@@ -3,7 +3,7 @@ import md5 from "md5";
 
 import { GetToken } from "./userService";
 
-const API_ADDRESS = "192.168.118.252:5000";
+const API_ADDRESS = "192.168.1.5:5000";
 export async function participate(course_id) {
   try {
     await fetch("http://" + API_ADDRESS + "/Participate", {
